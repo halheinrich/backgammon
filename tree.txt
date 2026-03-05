@@ -1,0 +1,1638 @@
+Folder PATH listing for volume Data Drive
+Volume serial number is C2D0-197B
+D:.
+|   .gitattributes
+|   .gitmodules
+|   tree.txt
+|   VISION.md
+|   
++---.github
+|   \---workflows
++---ConvertXgToJson_Lib
+|   |   .gitattributes
+|   |   .gitignore
+|   |   ConvertXgToJson_Lib.slnx
+|   |   LICENSE.txt
+|   |   README.md
+|   |   
+|   +---ConvertXgToJson_Lib
+|   |   |   ConvertXgToJson_Lib.csproj
+|   |   |   XgDecisionIterator.cs
+|   |   |   XgFileReader.cs
+|   |   |   XgidEncoder.cs
+|   |   |   
+|   |   +---bin
+|   |   |   \---Debug
+|   |   |       \---net10.0
+|   |   |               ConvertXgToJson_Lib.deps.json
+|   |   |               ConvertXgToJson_Lib.dll
+|   |   |               ConvertXgToJson_Lib.pdb
+|   |   |               
+|   |   +---Json
+|   |   |       XgJsonOptions.cs
+|   |   |       
+|   |   +---Models
+|   |   |       DecisionRow.cs
+|   |   |       Models.cs
+|   |   |       
+|   |   +---obj
+|   |   |   |   ConvertXgToJson_Lib.csproj.nuget.dgspec.json
+|   |   |   |   ConvertXgToJson_Lib.csproj.nuget.g.props
+|   |   |   |   ConvertXgToJson_Lib.csproj.nuget.g.targets
+|   |   |   |   project.assets.json
+|   |   |   |   project.nuget.cache
+|   |   |   |   
+|   |   |   \---Debug
+|   |   |       \---net10.0
+|   |   |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+|   |   |           |   ConvertXgToJson_Lib.AssemblyInfo.cs
+|   |   |           |   ConvertXgToJson_Lib.AssemblyInfoInputs.cache
+|   |   |           |   ConvertXgToJson_Lib.assets.cache
+|   |   |           |   ConvertXgToJson_Lib.csproj.BuildWithSkipAnalyzers
+|   |   |           |   ConvertXgToJson_Lib.csproj.CoreCompileInputs.cache
+|   |   |           |   ConvertXgToJson_Lib.csproj.FileListAbsolute.txt
+|   |   |           |   ConvertXgToJson_Lib.dll
+|   |   |           |   ConvertXgToJson_Lib.GeneratedMSBuildEditorConfig.editorconfig
+|   |   |           |   ConvertXgToJson_Lib.GlobalUsings.g.cs
+|   |   |           |   ConvertXgToJson_Lib.pdb
+|   |   |           |   ConvertXgToJson_Lib.sourcelink.json
+|   |   |           |   
+|   |   |           +---ref
+|   |   |           |       ConvertXgToJson_Lib.dll
+|   |   |           |       
+|   |   |           \---refint
+|   |   |                   ConvertXgToJson_Lib.dll
+|   |   |                   
+|   |   \---Parsing
+|   |           CommentParser.cs
+|   |           PascalBinaryReader.cs
+|   |           RichGameHeaderParser.cs
+|   |           RolloutContextParser.cs
+|   |           SaveRecordParser.cs
+|   |           XgDecompressor.cs
+|   |           
+|   \---ConvertXgToJson_Lib.Tests
+|       |   ConvertXgToJson_Lib.Tests.csproj
+|       |   DecisionCsvTests.cs
+|       |   DecompressionTests.cs
+|       |   GameAndMoveRecordTests.cs
+|       |   GlobalUsings.cs
+|       |   JsonOutputTests.cs
+|       |   MatchHeaderRecordTests.cs
+|       |   PascalAlignmentTests.cs
+|       |   PascalBinaryReaderTests.cs
+|       |   RealFileTests.cs
+|       |   RichGameHeaderTests.cs
+|       |   RolloutContextTests.cs
+|       |   TestPaths.cs
+|       |   
+|       +---bin
+|       |   \---Debug
+|       |       \---net10.0
+|       |           |   .msCoverageSourceRootsMapping_ConvertXgToJson_Lib.Tests
+|       |           |   ConvertXgToJson_Lib.dll
+|       |           |   ConvertXgToJson_Lib.pdb
+|       |           |   ConvertXgToJson_Lib.Tests.deps.json
+|       |           |   ConvertXgToJson_Lib.Tests.dll
+|       |           |   ConvertXgToJson_Lib.Tests.pdb
+|       |           |   ConvertXgToJson_Lib.Tests.runtimeconfig.json
+|       |           |   FluentAssertions.dll
+|       |           |   Microsoft.TestPlatform.CommunicationUtilities.dll
+|       |           |   Microsoft.TestPlatform.CoreUtilities.dll
+|       |           |   Microsoft.TestPlatform.CrossPlatEngine.dll
+|       |           |   Microsoft.TestPlatform.PlatformAbstractions.dll
+|       |           |   Microsoft.TestPlatform.Utilities.dll
+|       |           |   Microsoft.VisualStudio.CodeCoverage.Shim.dll
+|       |           |   Microsoft.VisualStudio.TestPlatform.Common.dll
+|       |           |   Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
+|       |           |   Newtonsoft.Json.dll
+|       |           |   System.Configuration.ConfigurationManager.dll
+|       |           |   System.Security.Cryptography.ProtectedData.dll
+|       |           |   testhost.dll
+|       |           |   testhost.exe
+|       |           |   xunit.abstractions.dll
+|       |           |   xunit.assert.dll
+|       |           |   xunit.core.dll
+|       |           |   xunit.execution.dotnet.dll
+|       |           |   xunit.runner.reporters.netcoreapp10.dll
+|       |           |   xunit.runner.utility.netcoreapp10.dll
+|       |           |   xunit.runner.visualstudio.testadapter.dll
+|       |           |   
+|       |           +---cs
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---de
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---es
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---fr
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---it
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---ja
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---ko
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---pl
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---pt-BR
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---ru
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---runtimes
+|       |           |   \---win
+|       |           |       \---lib
+|       |           |           \---netstandard2.0
+|       |           |                   System.Security.Cryptography.ProtectedData.dll
+|       |           |                   
+|       |           +---TestData
+|       |           |   +---Csv
+|       |           |   |       2026-02-16_ABC_m.adel-halheinrich_11pt_SCL6KH-fromjson.csv
+|       |           |   |       2026-02-16_ABC_m.adel-halheinrich_11pt_SCL6KH.csv
+|       |           |   |       2026-02-20_ABC_halheinrich-Tornane_13pt_Y1633Q-fromjson.csv
+|       |           |   |       2026-02-20_ABC_halheinrich-Tornane_13pt_Y1633Q.csv
+|       |           |   |       2026-03-01_ABC_halheinrich-Mahmoud_11pt_I3FK3C-fromjson.csv
+|       |           |   |       2026-03-01_ABC_halheinrich-Mahmoud_11pt_I3FK3C.csv
+|       |           |   |       JROC4653 - halheinrich 13pt Backgammon Studio 2026_03_03 19_11_48-fromjson.csv
+|       |           |   |       JROC4653 - halheinrich 13pt Backgammon Studio 2026_03_03 19_11_48.csv
+|       |           |   |       match33275569-fromjson.csv
+|       |           |   |       match33275569.csv
+|       |           |   |       match33327933-fromjson.csv
+|       |           |   |       match33327933.csv
+|       |           |   |       match33328289-fromjson.csv
+|       |           |   |       match33328289.csv
+|       |           |   |       match33329187.csv
+|       |           |   |       match33380699.csv
+|       |           |   |       match33832693.csv
+|       |           |   |       match33834758.csv
+|       |           |   |       match33835373.csv
+|       |           |   |       match33836140.csv
+|       |           |   |       match33887729.csv
+|       |           |   |       match33887839.csv
+|       |           |   |       match33887906.csv
+|       |           |   |       match33888420.csv
+|       |           |   |       match34001315.csv
+|       |           |   |       match34058685.csv
+|       |           |   |       match34060480.csv
+|       |           |   |       match34061189.csv
+|       |           |   |       match34062526.csv
+|       |           |   |       match34063791.csv
+|       |           |   |       match34065130.csv
+|       |           |   |       
+|       |           |   +---Output
+|       |           |   |       2026-02-16_ABC_m.adel-halheinrich_11pt_SCL6KH.json
+|       |           |   |       2026-02-20_ABC_halheinrich-Tornane_13pt_Y1633Q.json
+|       |           |   |       2026-03-01_ABC_halheinrich-Mahmoud_11pt_I3FK3C.json
+|       |           |   |       JROC4653 - halheinrich 13pt Backgammon Studio 2026_03_03 19_11_48.json
+|       |           |   |       match33275569.json
+|       |           |   |       match33327933.json
+|       |           |   |       match33328289.json
+|       |           |   |       match33329187.json
+|       |           |   |       match33380699.json
+|       |           |   |       match33832693.json
+|       |           |   |       match33834758.json
+|       |           |   |       match33835373.json
+|       |           |   |       match33836140.json
+|       |           |   |       match33887729.json
+|       |           |   |       match33887839.json
+|       |           |   |       match33887906.json
+|       |           |   |       match33888420.json
+|       |           |   |       match34001315.json
+|       |           |   |       match34058685.json
+|       |           |   |       match34060480.json
+|       |           |   |       match34061189.json
+|       |           |   |       match34062526.json
+|       |           |   |       match34063791.json
+|       |           |   |       match34065130.json
+|       |           |   |       
+|       |           |   +---xg
+|       |           |   |       .gitkeep
+|       |           |   |       2026-02-16_ABC_m.adel-halheinrich_11pt_SCL6KH.xg
+|       |           |   |       2026-02-20_ABC_halheinrich-Tornane_13pt_Y1633Q.xg
+|       |           |   |       2026-03-01_ABC_halheinrich-Mahmoud_11pt_I3FK3C.xg
+|       |           |   |       JROC4653 - halheinrich 13pt Backgammon Studio 2026_03_03 19_11_48.xg
+|       |           |   |       match33275569.xg
+|       |           |   |       match33327933.xg
+|       |           |   |       match33328289.xg
+|       |           |   |       match33329187.xg
+|       |           |   |       match33380699.xg
+|       |           |   |       match33832693.xg
+|       |           |   |       match33834758.xg
+|       |           |   |       match33835373.xg
+|       |           |   |       match33836140.xg
+|       |           |   |       match33887729.xg
+|       |           |   |       match33887839.xg
+|       |           |   |       match33887906.xg
+|       |           |   |       match33888420.xg
+|       |           |   |       match34001315.xg
+|       |           |   |       match34058685.xg
+|       |           |   |       match34060480.xg
+|       |           |   |       match34061189.xg
+|       |           |   |       match34062526.xg
+|       |           |   |       match34063791.xg
+|       |           |   |       match34065130.xg
+|       |           |   |       
+|       |           |   \---xgp
+|       |           |           .gitkeep
+|       |           |           
+|       |           +---tr
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---zh-Hans
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           \---zh-Hant
+|       |                   Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |                   Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |                   Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |                   Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |                   Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |                   
+|       +---Helpers
+|       |       BinaryBuilder.cs
+|       |       
+|       +---obj
+|       |   |   ConvertXgToJson_Lib.Tests.csproj.nuget.dgspec.json
+|       |   |   ConvertXgToJson_Lib.Tests.csproj.nuget.g.props
+|       |   |   ConvertXgToJson_Lib.Tests.csproj.nuget.g.targets
+|       |   |   project.assets.json
+|       |   |   project.nuget.cache
+|       |   |   
+|       |   \---Debug
+|       |       \---net10.0
+|       |           |   .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+|       |           |   ConvertX.6ABFB7F9.Up2Date
+|       |           |   ConvertXgToJson_Lib.Tests.AssemblyInfo.cs
+|       |           |   ConvertXgToJson_Lib.Tests.AssemblyInfoInputs.cache
+|       |           |   ConvertXgToJson_Lib.Tests.assets.cache
+|       |           |   ConvertXgToJson_Lib.Tests.csproj.AssemblyReference.cache
+|       |           |   ConvertXgToJson_Lib.Tests.csproj.BuildWithSkipAnalyzers
+|       |           |   ConvertXgToJson_Lib.Tests.csproj.CoreCompileInputs.cache
+|       |           |   ConvertXgToJson_Lib.Tests.csproj.FileListAbsolute.txt
+|       |           |   ConvertXgToJson_Lib.Tests.dll
+|       |           |   ConvertXgToJson_Lib.Tests.GeneratedMSBuildEditorConfig.editorconfig
+|       |           |   ConvertXgToJson_Lib.Tests.genruntimeconfig.cache
+|       |           |   ConvertXgToJson_Lib.Tests.GlobalUsings.g.cs
+|       |           |   ConvertXgToJson_Lib.Tests.pdb
+|       |           |   ConvertXgToJson_Lib.Tests.sourcelink.json
+|       |           |   
+|       |           +---ref
+|       |           |       ConvertXgToJson_Lib.Tests.dll
+|       |           |       
+|       |           \---refint
+|       |                   ConvertXgToJson_Lib.Tests.dll
+|       |                   
+|       \---TestData
+|           +---Csv
+|           |       2026-02-16_ABC_m.adel-halheinrich_11pt_SCL6KH-fromjson.csv
+|           |       2026-02-16_ABC_m.adel-halheinrich_11pt_SCL6KH.csv
+|           |       2026-02-20_ABC_halheinrich-Tornane_13pt_Y1633Q-fromjson.csv
+|           |       2026-02-20_ABC_halheinrich-Tornane_13pt_Y1633Q.csv
+|           |       2026-03-01_ABC_halheinrich-Mahmoud_11pt_I3FK3C-fromjson.csv
+|           |       2026-03-01_ABC_halheinrich-Mahmoud_11pt_I3FK3C.csv
+|           |       JROC4653 - halheinrich 13pt Backgammon Studio 2026_03_03 19_11_48-fromjson.csv
+|           |       JROC4653 - halheinrich 13pt Backgammon Studio 2026_03_03 19_11_48.csv
+|           |       match33275569-fromjson.csv
+|           |       match33275569.csv
+|           |       match33327933-fromjson.csv
+|           |       match33327933.csv
+|           |       match33328289-fromjson.csv
+|           |       match33328289.csv
+|           |       match33329187-fromjson.csv
+|           |       match33329187.csv
+|           |       match33380699-fromjson.csv
+|           |       match33380699.csv
+|           |       match33832693-fromjson.csv
+|           |       match33832693.csv
+|           |       match33834758-fromjson.csv
+|           |       match33834758.csv
+|           |       match33835373-fromjson.csv
+|           |       match33835373.csv
+|           |       match33836140-fromjson.csv
+|           |       match33836140.csv
+|           |       match33887729-fromjson.csv
+|           |       match33887729.csv
+|           |       match33887839-fromjson.csv
+|           |       match33887839.csv
+|           |       match33887906-fromjson.csv
+|           |       match33887906.csv
+|           |       match33888420-fromjson.csv
+|           |       match33888420.csv
+|           |       match34001315-fromjson.csv
+|           |       match34001315.csv
+|           |       match34058685-fromjson.csv
+|           |       match34058685.csv
+|           |       match34060480-fromjson.csv
+|           |       match34060480.csv
+|           |       match34061189-fromjson.csv
+|           |       match34061189.csv
+|           |       match34062526-fromjson.csv
+|           |       match34062526.csv
+|           |       match34063791-fromjson.csv
+|           |       match34063791.csv
+|           |       match34065130-fromjson.csv
+|           |       match34065130.csv
+|           |       
+|           +---Output
+|           |       2026-02-16_ABC_m.adel-halheinrich_11pt_SCL6KH.json
+|           |       2026-02-20_ABC_halheinrich-Tornane_13pt_Y1633Q.json
+|           |       2026-03-01_ABC_halheinrich-Mahmoud_11pt_I3FK3C.json
+|           |       JROC4653 - halheinrich 13pt Backgammon Studio 2026_03_03 19_11_48.json
+|           |       match33275569.json
+|           |       match33327933.json
+|           |       match33328289.json
+|           |       match33329187.json
+|           |       match33380699.json
+|           |       match33832693.json
+|           |       match33834758.json
+|           |       match33835373.json
+|           |       match33836140.json
+|           |       match33887729.json
+|           |       match33887839.json
+|           |       match33887906.json
+|           |       match33888420.json
+|           |       match34001315.json
+|           |       match34058685.json
+|           |       match34060480.json
+|           |       match34061189.json
+|           |       match34062526.json
+|           |       match34063791.json
+|           |       match34065130.json
+|           |       
+|           +---xg
+|           |       .gitkeep
+|           |       2026-02-16_ABC_m.adel-halheinrich_11pt_SCL6KH.xg
+|           |       2026-02-20_ABC_halheinrich-Tornane_13pt_Y1633Q.xg
+|           |       2026-03-01_ABC_halheinrich-Mahmoud_11pt_I3FK3C.xg
+|           |       JROC4653 - halheinrich 13pt Backgammon Studio 2026_03_03 19_11_48.xg
+|           |       match33275569.xg
+|           |       match33327933.xg
+|           |       match33328289.xg
+|           |       match33329187.xg
+|           |       match33380699.xg
+|           |       match33832693.xg
+|           |       match33834758.xg
+|           |       match33835373.xg
+|           |       match33836140.xg
+|           |       match33887729.xg
+|           |       match33887839.xg
+|           |       match33887906.xg
+|           |       match33888420.xg
+|           |       match34001315.xg
+|           |       match34058685.xg
+|           |       match34060480.xg
+|           |       match34061189.xg
+|           |       match34062526.xg
+|           |       match34063791.xg
+|           |       match34065130.xg
+|           |       
+|           \---xgp
+|                   .gitkeep
+|                   
+\---ExtractFromXgToCsv
+    |   .gitignore
+    |   ExtractFromXgToCsv.slnx
+    |   README.md
+    |   
+    +---ExtractFromXgToCsv
+    |   |   appsettings.Development.json
+    |   |   appsettings.json
+    |   |   ExtractFromXgToCsv.csproj
+    |   |   Program.cs
+    |   |   
+    |   +---bin
+    |   |   \---Debug
+    |   |       \---net9.0
+    |   |           |   appsettings.Development.json
+    |   |           |   appsettings.json
+    |   |           |   ExtractFromXgToCsv.Client.dll
+    |   |           |   ExtractFromXgToCsv.Client.pdb
+    |   |           |   ExtractFromXgToCsv.Client.staticwebassets.endpoints.json
+    |   |           |   ExtractFromXgToCsv.Client.staticwebassets.runtime.json
+    |   |           |   ExtractFromXgToCsv.deps.json
+    |   |           |   ExtractFromXgToCsv.dll
+    |   |           |   ExtractFromXgToCsv.exe
+    |   |           |   ExtractFromXgToCsv.pdb
+    |   |           |   ExtractFromXgToCsv.runtimeconfig.json
+    |   |           |   ExtractFromXgToCsv.staticwebassets.endpoints.json
+    |   |           |   ExtractFromXgToCsv.staticwebassets.runtime.json
+    |   |           |   Microsoft.AspNetCore.Components.WebAssembly.dll
+    |   |           |   Microsoft.AspNetCore.Components.WebAssembly.Server.dll
+    |   |           |   Microsoft.JSInterop.WebAssembly.dll
+    |   |           |   
+    |   |           \---BlazorDebugProxy
+    |   |                   BrowserDebugHost.dll
+    |   |                   BrowserDebugHost.runtimeconfig.json
+    |   |                   BrowserDebugProxy.dll
+    |   |                   Microsoft.CodeAnalysis.CSharp.dll
+    |   |                   Microsoft.CodeAnalysis.CSharp.Scripting.dll
+    |   |                   Microsoft.CodeAnalysis.dll
+    |   |                   Microsoft.CodeAnalysis.Scripting.dll
+    |   |                   Microsoft.FileFormats.dll
+    |   |                   Microsoft.NET.WebAssembly.Webcil.dll
+    |   |                   Microsoft.SymbolStore.dll
+    |   |                   Newtonsoft.Json.dll
+    |   |                   
+    |   +---Components
+    |   |   |   App.razor
+    |   |   |   Routes.razor
+    |   |   |   _Imports.razor
+    |   |   |   
+    |   |   +---Layout
+    |   |   |       MainLayout.razor
+    |   |   |       
+    |   |   \---Pages
+    |   |           Error.razor
+    |   |           Home.razor
+    |   |           
+    |   +---Models
+    |   |       DecisionRow.cs
+    |   |       
+    |   +---obj
+    |   |   |   ExtractFromXgToCsv.csproj.nuget.dgspec.json
+    |   |   |   ExtractFromXgToCsv.csproj.nuget.g.props
+    |   |   |   ExtractFromXgToCsv.csproj.nuget.g.targets
+    |   |   |   project.assets.json
+    |   |   |   project.nuget.cache
+    |   |   |   
+    |   |   \---Debug
+    |   |       \---net9.0
+    |   |           |   .NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+    |   |           |   apphost.exe
+    |   |           |   ExtractF.A43B422D.Up2Date
+    |   |           |   ExtractFromXgToCsv.AssemblyInfo.cs
+    |   |           |   ExtractFromXgToCsv.AssemblyInfoInputs.cache
+    |   |           |   ExtractFromXgToCsv.assets.cache
+    |   |           |   ExtractFromXgToCsv.csproj.AssemblyReference.cache
+    |   |           |   ExtractFromXgToCsv.csproj.CoreCompileInputs.cache
+    |   |           |   ExtractFromXgToCsv.csproj.FileListAbsolute.txt
+    |   |           |   ExtractFromXgToCsv.dll
+    |   |           |   ExtractFromXgToCsv.GeneratedMSBuildEditorConfig.editorconfig
+    |   |           |   ExtractFromXgToCsv.genruntimeconfig.cache
+    |   |           |   ExtractFromXgToCsv.GlobalUsings.g.cs
+    |   |           |   ExtractFromXgToCsv.MvcApplicationPartsAssemblyInfo.cache
+    |   |           |   ExtractFromXgToCsv.pdb
+    |   |           |   ExtractFromXgToCsv.sourcelink.json
+    |   |           |   rjsmcshtml.dswa.cache.json
+    |   |           |   rjsmrazor.dswa.cache.json
+    |   |           |   rpswa.dswa.cache.json
+    |   |           |   staticwebassets.build.endpoints.json
+    |   |           |   staticwebassets.build.json
+    |   |           |   staticwebassets.build.json.cache
+    |   |           |   staticwebassets.development.json
+    |   |           |   staticwebassets.references.upToDateCheck.txt
+    |   |           |   staticwebassets.removed.txt
+    |   |           |   swae.build.ex.cache
+    |   |           |   
+    |   |           +---ref
+    |   |           |       ExtractFromXgToCsv.dll
+    |   |           |       
+    |   |           +---refint
+    |   |           |       ExtractFromXgToCsv.dll
+    |   |           |       
+    |   |           \---staticwebassets
+    |   +---Properties
+    |   |       launchSettings.json
+    |   |       
+    |   \---Services
+    |           CsvDownloadService.cs
+    |           XgProcessingService.cs
+    |           
+    +---ExtractFromXgToCsv.Client
+    |   |   ExtractFromXgToCsv.Client.csproj
+    |   |   Program.cs
+    |   |   _Imports.razor
+    |   |   
+    |   +---bin
+    |   |   \---Debug
+    |   |       \---net9.0
+    |   |           |   dotnet.js
+    |   |           |   dotnet.js.map
+    |   |           |   dotnet.native.js
+    |   |           |   dotnet.native.wasm
+    |   |           |   dotnet.runtime.js
+    |   |           |   dotnet.runtime.js.map
+    |   |           |   ExtractFromXgToCsv.Client.dll
+    |   |           |   ExtractFromXgToCsv.Client.pdb
+    |   |           |   ExtractFromXgToCsv.Client.staticwebassets.endpoints.json
+    |   |           |   ExtractFromXgToCsv.Client.staticwebassets.runtime.json
+    |   |           |   icudt_CJK.dat
+    |   |           |   icudt_EFIGS.dat
+    |   |           |   icudt_no_CJK.dat
+    |   |           |   Microsoft.AspNetCore.Authorization.dll
+    |   |           |   Microsoft.AspNetCore.Components.dll
+    |   |           |   Microsoft.AspNetCore.Components.Forms.dll
+    |   |           |   Microsoft.AspNetCore.Components.Web.dll
+    |   |           |   Microsoft.AspNetCore.Components.WebAssembly.dll
+    |   |           |   Microsoft.AspNetCore.Metadata.dll
+    |   |           |   Microsoft.CSharp.dll
+    |   |           |   Microsoft.Extensions.Configuration.Abstractions.dll
+    |   |           |   Microsoft.Extensions.Configuration.Binder.dll
+    |   |           |   Microsoft.Extensions.Configuration.dll
+    |   |           |   Microsoft.Extensions.Configuration.FileExtensions.dll
+    |   |           |   Microsoft.Extensions.Configuration.Json.dll
+    |   |           |   Microsoft.Extensions.DependencyInjection.Abstractions.dll
+    |   |           |   Microsoft.Extensions.DependencyInjection.dll
+    |   |           |   Microsoft.Extensions.FileProviders.Abstractions.dll
+    |   |           |   Microsoft.Extensions.FileProviders.Physical.dll
+    |   |           |   Microsoft.Extensions.FileSystemGlobbing.dll
+    |   |           |   Microsoft.Extensions.Logging.Abstractions.dll
+    |   |           |   Microsoft.Extensions.Logging.dll
+    |   |           |   Microsoft.Extensions.Options.dll
+    |   |           |   Microsoft.Extensions.Primitives.dll
+    |   |           |   Microsoft.JSInterop.dll
+    |   |           |   Microsoft.JSInterop.WebAssembly.dll
+    |   |           |   Microsoft.VisualBasic.Core.dll
+    |   |           |   Microsoft.VisualBasic.dll
+    |   |           |   Microsoft.Win32.Primitives.dll
+    |   |           |   Microsoft.Win32.Registry.dll
+    |   |           |   mscorlib.dll
+    |   |           |   netstandard.dll
+    |   |           |   segmentation-rules.json
+    |   |           |   System.AppContext.dll
+    |   |           |   System.Buffers.dll
+    |   |           |   System.Collections.Concurrent.dll
+    |   |           |   System.Collections.dll
+    |   |           |   System.Collections.Immutable.dll
+    |   |           |   System.Collections.NonGeneric.dll
+    |   |           |   System.Collections.Specialized.dll
+    |   |           |   System.ComponentModel.Annotations.dll
+    |   |           |   System.ComponentModel.DataAnnotations.dll
+    |   |           |   System.ComponentModel.dll
+    |   |           |   System.ComponentModel.EventBasedAsync.dll
+    |   |           |   System.ComponentModel.Primitives.dll
+    |   |           |   System.ComponentModel.TypeConverter.dll
+    |   |           |   System.Configuration.dll
+    |   |           |   System.Console.dll
+    |   |           |   System.Core.dll
+    |   |           |   System.Data.Common.dll
+    |   |           |   System.Data.DataSetExtensions.dll
+    |   |           |   System.Data.dll
+    |   |           |   System.Diagnostics.Contracts.dll
+    |   |           |   System.Diagnostics.Debug.dll
+    |   |           |   System.Diagnostics.DiagnosticSource.dll
+    |   |           |   System.Diagnostics.FileVersionInfo.dll
+    |   |           |   System.Diagnostics.Process.dll
+    |   |           |   System.Diagnostics.StackTrace.dll
+    |   |           |   System.Diagnostics.TextWriterTraceListener.dll
+    |   |           |   System.Diagnostics.Tools.dll
+    |   |           |   System.Diagnostics.TraceSource.dll
+    |   |           |   System.Diagnostics.Tracing.dll
+    |   |           |   System.dll
+    |   |           |   System.Drawing.dll
+    |   |           |   System.Drawing.Primitives.dll
+    |   |           |   System.Dynamic.Runtime.dll
+    |   |           |   System.Formats.Asn1.dll
+    |   |           |   System.Formats.Tar.dll
+    |   |           |   System.Globalization.Calendars.dll
+    |   |           |   System.Globalization.dll
+    |   |           |   System.Globalization.Extensions.dll
+    |   |           |   System.IO.Compression.Brotli.dll
+    |   |           |   System.IO.Compression.dll
+    |   |           |   System.IO.Compression.FileSystem.dll
+    |   |           |   System.IO.Compression.ZipFile.dll
+    |   |           |   System.IO.dll
+    |   |           |   System.IO.FileSystem.AccessControl.dll
+    |   |           |   System.IO.FileSystem.dll
+    |   |           |   System.IO.FileSystem.DriveInfo.dll
+    |   |           |   System.IO.FileSystem.Primitives.dll
+    |   |           |   System.IO.FileSystem.Watcher.dll
+    |   |           |   System.IO.IsolatedStorage.dll
+    |   |           |   System.IO.MemoryMappedFiles.dll
+    |   |           |   System.IO.Pipelines.dll
+    |   |           |   System.IO.Pipes.AccessControl.dll
+    |   |           |   System.IO.Pipes.dll
+    |   |           |   System.IO.UnmanagedMemoryStream.dll
+    |   |           |   System.Linq.dll
+    |   |           |   System.Linq.Expressions.dll
+    |   |           |   System.Linq.Parallel.dll
+    |   |           |   System.Linq.Queryable.dll
+    |   |           |   System.Memory.dll
+    |   |           |   System.Net.dll
+    |   |           |   System.Net.Http.dll
+    |   |           |   System.Net.Http.Json.dll
+    |   |           |   System.Net.HttpListener.dll
+    |   |           |   System.Net.Mail.dll
+    |   |           |   System.Net.NameResolution.dll
+    |   |           |   System.Net.NetworkInformation.dll
+    |   |           |   System.Net.Ping.dll
+    |   |           |   System.Net.Primitives.dll
+    |   |           |   System.Net.Quic.dll
+    |   |           |   System.Net.Requests.dll
+    |   |           |   System.Net.Security.dll
+    |   |           |   System.Net.ServicePoint.dll
+    |   |           |   System.Net.Sockets.dll
+    |   |           |   System.Net.WebClient.dll
+    |   |           |   System.Net.WebHeaderCollection.dll
+    |   |           |   System.Net.WebProxy.dll
+    |   |           |   System.Net.WebSockets.Client.dll
+    |   |           |   System.Net.WebSockets.dll
+    |   |           |   System.Numerics.dll
+    |   |           |   System.Numerics.Vectors.dll
+    |   |           |   System.ObjectModel.dll
+    |   |           |   System.Private.CoreLib.dll
+    |   |           |   System.Private.DataContractSerialization.dll
+    |   |           |   System.Private.Uri.dll
+    |   |           |   System.Private.Xml.dll
+    |   |           |   System.Private.Xml.Linq.dll
+    |   |           |   System.Reflection.DispatchProxy.dll
+    |   |           |   System.Reflection.dll
+    |   |           |   System.Reflection.Emit.dll
+    |   |           |   System.Reflection.Emit.ILGeneration.dll
+    |   |           |   System.Reflection.Emit.Lightweight.dll
+    |   |           |   System.Reflection.Extensions.dll
+    |   |           |   System.Reflection.Metadata.dll
+    |   |           |   System.Reflection.Primitives.dll
+    |   |           |   System.Reflection.TypeExtensions.dll
+    |   |           |   System.Resources.Reader.dll
+    |   |           |   System.Resources.ResourceManager.dll
+    |   |           |   System.Resources.Writer.dll
+    |   |           |   System.Runtime.CompilerServices.Unsafe.dll
+    |   |           |   System.Runtime.CompilerServices.VisualC.dll
+    |   |           |   System.Runtime.dll
+    |   |           |   System.Runtime.Extensions.dll
+    |   |           |   System.Runtime.Handles.dll
+    |   |           |   System.Runtime.InteropServices.dll
+    |   |           |   System.Runtime.InteropServices.JavaScript.dll
+    |   |           |   System.Runtime.InteropServices.RuntimeInformation.dll
+    |   |           |   System.Runtime.Intrinsics.dll
+    |   |           |   System.Runtime.Loader.dll
+    |   |           |   System.Runtime.Numerics.dll
+    |   |           |   System.Runtime.Serialization.dll
+    |   |           |   System.Runtime.Serialization.Formatters.dll
+    |   |           |   System.Runtime.Serialization.Json.dll
+    |   |           |   System.Runtime.Serialization.Primitives.dll
+    |   |           |   System.Runtime.Serialization.Xml.dll
+    |   |           |   System.Security.AccessControl.dll
+    |   |           |   System.Security.Claims.dll
+    |   |           |   System.Security.Cryptography.Algorithms.dll
+    |   |           |   System.Security.Cryptography.Cng.dll
+    |   |           |   System.Security.Cryptography.Csp.dll
+    |   |           |   System.Security.Cryptography.dll
+    |   |           |   System.Security.Cryptography.Encoding.dll
+    |   |           |   System.Security.Cryptography.OpenSsl.dll
+    |   |           |   System.Security.Cryptography.Primitives.dll
+    |   |           |   System.Security.Cryptography.X509Certificates.dll
+    |   |           |   System.Security.dll
+    |   |           |   System.Security.Principal.dll
+    |   |           |   System.Security.Principal.Windows.dll
+    |   |           |   System.Security.SecureString.dll
+    |   |           |   System.ServiceModel.Web.dll
+    |   |           |   System.ServiceProcess.dll
+    |   |           |   System.Text.Encoding.CodePages.dll
+    |   |           |   System.Text.Encoding.dll
+    |   |           |   System.Text.Encoding.Extensions.dll
+    |   |           |   System.Text.Encodings.Web.dll
+    |   |           |   System.Text.Json.dll
+    |   |           |   System.Text.RegularExpressions.dll
+    |   |           |   System.Threading.Channels.dll
+    |   |           |   System.Threading.dll
+    |   |           |   System.Threading.Overlapped.dll
+    |   |           |   System.Threading.Tasks.Dataflow.dll
+    |   |           |   System.Threading.Tasks.dll
+    |   |           |   System.Threading.Tasks.Extensions.dll
+    |   |           |   System.Threading.Tasks.Parallel.dll
+    |   |           |   System.Threading.Thread.dll
+    |   |           |   System.Threading.ThreadPool.dll
+    |   |           |   System.Threading.Timer.dll
+    |   |           |   System.Transactions.dll
+    |   |           |   System.Transactions.Local.dll
+    |   |           |   System.ValueTuple.dll
+    |   |           |   System.Web.dll
+    |   |           |   System.Web.HttpUtility.dll
+    |   |           |   System.Windows.dll
+    |   |           |   System.Xml.dll
+    |   |           |   System.Xml.Linq.dll
+    |   |           |   System.Xml.ReaderWriter.dll
+    |   |           |   System.Xml.Serialization.dll
+    |   |           |   System.Xml.XDocument.dll
+    |   |           |   System.Xml.XmlDocument.dll
+    |   |           |   System.Xml.XmlSerializer.dll
+    |   |           |   System.Xml.XPath.dll
+    |   |           |   System.Xml.XPath.XDocument.dll
+    |   |           |   WindowsBase.dll
+    |   |           |   
+    |   |           \---wwwroot
+    |   |               \---_framework
+    |   |                       blazor.boot.json
+    |   |                       blazor.boot.json.gz
+    |   |                       blazor.webassembly.js
+    |   |                       blazor.webassembly.js.gz
+    |   |                       dotnet.js
+    |   |                       dotnet.js.gz
+    |   |                       dotnet.js.map
+    |   |                       dotnet.js.map.gz
+    |   |                       dotnet.native.6m0hb3g78a.js
+    |   |                       dotnet.native.6m0hb3g78a.js.gz
+    |   |                       dotnet.native.zw8ib5pvmp.wasm
+    |   |                       dotnet.native.zw8ib5pvmp.wasm.gz
+    |   |                       dotnet.runtime.7laf4z0i7i.js
+    |   |                       dotnet.runtime.7laf4z0i7i.js.gz
+    |   |                       dotnet.runtime.js.map
+    |   |                       dotnet.runtime.js.map.gz
+    |   |                       ExtractFromXgToCsv.Client.cs3zock36j.pdb
+    |   |                       ExtractFromXgToCsv.Client.cs3zock36j.pdb.gz
+    |   |                       ExtractFromXgToCsv.Client.dh2txzjv3q.wasm
+    |   |                       ExtractFromXgToCsv.Client.dh2txzjv3q.wasm.gz
+    |   |                       icudt_CJK.tjcz0u77k5.dat
+    |   |                       icudt_CJK.tjcz0u77k5.dat.gz
+    |   |                       icudt_EFIGS.tptq2av103.dat
+    |   |                       icudt_EFIGS.tptq2av103.dat.gz
+    |   |                       icudt_no_CJK.lfu7j35m59.dat
+    |   |                       icudt_no_CJK.lfu7j35m59.dat.gz
+    |   |                       Microsoft.AspNetCore.Authorization.qe23mgxr71.wasm
+    |   |                       Microsoft.AspNetCore.Authorization.qe23mgxr71.wasm.gz
+    |   |                       Microsoft.AspNetCore.Components.flveird317.wasm
+    |   |                       Microsoft.AspNetCore.Components.flveird317.wasm.gz
+    |   |                       Microsoft.AspNetCore.Components.Forms.thhw8cz9wu.wasm
+    |   |                       Microsoft.AspNetCore.Components.Forms.thhw8cz9wu.wasm.gz
+    |   |                       Microsoft.AspNetCore.Components.Web.cx40wf47rk.wasm
+    |   |                       Microsoft.AspNetCore.Components.Web.cx40wf47rk.wasm.gz
+    |   |                       Microsoft.AspNetCore.Components.WebAssembly.5cygu8f0zf.wasm
+    |   |                       Microsoft.AspNetCore.Components.WebAssembly.5cygu8f0zf.wasm.gz
+    |   |                       Microsoft.AspNetCore.Metadata.8r1tzxyzhv.wasm
+    |   |                       Microsoft.AspNetCore.Metadata.8r1tzxyzhv.wasm.gz
+    |   |                       Microsoft.CSharp.mondxmv6tn.wasm
+    |   |                       Microsoft.CSharp.mondxmv6tn.wasm.gz
+    |   |                       Microsoft.Extensions.Configuration.Abstractions.pvxa4wu5tg.wasm
+    |   |                       Microsoft.Extensions.Configuration.Abstractions.pvxa4wu5tg.wasm.gz
+    |   |                       Microsoft.Extensions.Configuration.Binder.7aji9488co.wasm
+    |   |                       Microsoft.Extensions.Configuration.Binder.7aji9488co.wasm.gz
+    |   |                       Microsoft.Extensions.Configuration.FileExtensions.42czujeagm.wasm
+    |   |                       Microsoft.Extensions.Configuration.FileExtensions.42czujeagm.wasm.gz
+    |   |                       Microsoft.Extensions.Configuration.ic45gpxjv4.wasm
+    |   |                       Microsoft.Extensions.Configuration.ic45gpxjv4.wasm.gz
+    |   |                       Microsoft.Extensions.Configuration.Json.5osbqvurog.wasm
+    |   |                       Microsoft.Extensions.Configuration.Json.5osbqvurog.wasm.gz
+    |   |                       Microsoft.Extensions.DependencyInjection.Abstractions.kvh8zhhe4g.wasm
+    |   |                       Microsoft.Extensions.DependencyInjection.Abstractions.kvh8zhhe4g.wasm.gz
+    |   |                       Microsoft.Extensions.DependencyInjection.qmftfeg8ce.wasm
+    |   |                       Microsoft.Extensions.DependencyInjection.qmftfeg8ce.wasm.gz
+    |   |                       Microsoft.Extensions.FileProviders.Abstractions.4ewk3ipqll.wasm
+    |   |                       Microsoft.Extensions.FileProviders.Abstractions.4ewk3ipqll.wasm.gz
+    |   |                       Microsoft.Extensions.FileProviders.Physical.qnaw45f7ij.wasm
+    |   |                       Microsoft.Extensions.FileProviders.Physical.qnaw45f7ij.wasm.gz
+    |   |                       Microsoft.Extensions.FileSystemGlobbing.q5if44af42.wasm
+    |   |                       Microsoft.Extensions.FileSystemGlobbing.q5if44af42.wasm.gz
+    |   |                       Microsoft.Extensions.Logging.Abstractions.w8ltos2ii6.wasm
+    |   |                       Microsoft.Extensions.Logging.Abstractions.w8ltos2ii6.wasm.gz
+    |   |                       Microsoft.Extensions.Logging.f89dlchogn.wasm
+    |   |                       Microsoft.Extensions.Logging.f89dlchogn.wasm.gz
+    |   |                       Microsoft.Extensions.Options.olt0jsk54c.wasm
+    |   |                       Microsoft.Extensions.Options.olt0jsk54c.wasm.gz
+    |   |                       Microsoft.Extensions.Primitives.3sx0y6ui4u.wasm
+    |   |                       Microsoft.Extensions.Primitives.3sx0y6ui4u.wasm.gz
+    |   |                       Microsoft.JSInterop.sk08br83jz.wasm
+    |   |                       Microsoft.JSInterop.sk08br83jz.wasm.gz
+    |   |                       Microsoft.JSInterop.WebAssembly.fkdz83fr0b.wasm
+    |   |                       Microsoft.JSInterop.WebAssembly.fkdz83fr0b.wasm.gz
+    |   |                       Microsoft.VisualBasic.3yqm0i13lh.wasm
+    |   |                       Microsoft.VisualBasic.3yqm0i13lh.wasm.gz
+    |   |                       Microsoft.VisualBasic.Core.hdyncmbvxt.wasm
+    |   |                       Microsoft.VisualBasic.Core.hdyncmbvxt.wasm.gz
+    |   |                       Microsoft.Win32.Primitives.2yw1hycnx9.wasm
+    |   |                       Microsoft.Win32.Primitives.2yw1hycnx9.wasm.gz
+    |   |                       Microsoft.Win32.Registry.g78cp6xw3m.wasm
+    |   |                       Microsoft.Win32.Registry.g78cp6xw3m.wasm.gz
+    |   |                       mscorlib.l7xs6zruqy.wasm
+    |   |                       mscorlib.l7xs6zruqy.wasm.gz
+    |   |                       netstandard.97to7qusgy.wasm
+    |   |                       netstandard.97to7qusgy.wasm.gz
+    |   |                       segmentation-rules.json
+    |   |                       segmentation-rules.json.gz
+    |   |                       System.16952b37je.wasm
+    |   |                       System.16952b37je.wasm.gz
+    |   |                       System.AppContext.u50zn7pole.wasm
+    |   |                       System.AppContext.u50zn7pole.wasm.gz
+    |   |                       System.Buffers.iddihsnz08.wasm
+    |   |                       System.Buffers.iddihsnz08.wasm.gz
+    |   |                       System.Collections.Concurrent.1ee8sg4mrw.wasm
+    |   |                       System.Collections.Concurrent.1ee8sg4mrw.wasm.gz
+    |   |                       System.Collections.Immutable.txqb5r0slq.wasm
+    |   |                       System.Collections.Immutable.txqb5r0slq.wasm.gz
+    |   |                       System.Collections.l79o82jqtp.wasm
+    |   |                       System.Collections.l79o82jqtp.wasm.gz
+    |   |                       System.Collections.NonGeneric.pe42eqbhca.wasm
+    |   |                       System.Collections.NonGeneric.pe42eqbhca.wasm.gz
+    |   |                       System.Collections.Specialized.5iopgzl6yh.wasm
+    |   |                       System.Collections.Specialized.5iopgzl6yh.wasm.gz
+    |   |                       System.ComponentModel.Annotations.3k4o2x29mq.wasm
+    |   |                       System.ComponentModel.Annotations.3k4o2x29mq.wasm.gz
+    |   |                       System.ComponentModel.DataAnnotations.ukzo8g2ie5.wasm
+    |   |                       System.ComponentModel.DataAnnotations.ukzo8g2ie5.wasm.gz
+    |   |                       System.ComponentModel.EventBasedAsync.j63fzm096x.wasm
+    |   |                       System.ComponentModel.EventBasedAsync.j63fzm096x.wasm.gz
+    |   |                       System.ComponentModel.gttjmwl02g.wasm
+    |   |                       System.ComponentModel.gttjmwl02g.wasm.gz
+    |   |                       System.ComponentModel.Primitives.j40p001lax.wasm
+    |   |                       System.ComponentModel.Primitives.j40p001lax.wasm.gz
+    |   |                       System.ComponentModel.TypeConverter.lsxbxz4s19.wasm
+    |   |                       System.ComponentModel.TypeConverter.lsxbxz4s19.wasm.gz
+    |   |                       System.Configuration.qskii005so.wasm
+    |   |                       System.Configuration.qskii005so.wasm.gz
+    |   |                       System.Console.qphg0mrx1s.wasm
+    |   |                       System.Console.qphg0mrx1s.wasm.gz
+    |   |                       System.Core.8qonr1hqn0.wasm
+    |   |                       System.Core.8qonr1hqn0.wasm.gz
+    |   |                       System.Data.Common.d916kyzq6z.wasm
+    |   |                       System.Data.Common.d916kyzq6z.wasm.gz
+    |   |                       System.Data.DataSetExtensions.pfydokjfw7.wasm
+    |   |                       System.Data.DataSetExtensions.pfydokjfw7.wasm.gz
+    |   |                       System.Data.phit3t724g.wasm
+    |   |                       System.Data.phit3t724g.wasm.gz
+    |   |                       System.Diagnostics.Contracts.uyvi5lva9w.wasm
+    |   |                       System.Diagnostics.Contracts.uyvi5lva9w.wasm.gz
+    |   |                       System.Diagnostics.Debug.4f1sz0w8yt.wasm
+    |   |                       System.Diagnostics.Debug.4f1sz0w8yt.wasm.gz
+    |   |                       System.Diagnostics.DiagnosticSource.srip3vvczc.wasm
+    |   |                       System.Diagnostics.DiagnosticSource.srip3vvczc.wasm.gz
+    |   |                       System.Diagnostics.FileVersionInfo.ml1ettzal5.wasm
+    |   |                       System.Diagnostics.FileVersionInfo.ml1ettzal5.wasm.gz
+    |   |                       System.Diagnostics.Process.m71adlxutl.wasm
+    |   |                       System.Diagnostics.Process.m71adlxutl.wasm.gz
+    |   |                       System.Diagnostics.StackTrace.r4epeot9z9.wasm
+    |   |                       System.Diagnostics.StackTrace.r4epeot9z9.wasm.gz
+    |   |                       System.Diagnostics.TextWriterTraceListener.47sr6llx5n.wasm
+    |   |                       System.Diagnostics.TextWriterTraceListener.47sr6llx5n.wasm.gz
+    |   |                       System.Diagnostics.Tools.itzgu0fee6.wasm
+    |   |                       System.Diagnostics.Tools.itzgu0fee6.wasm.gz
+    |   |                       System.Diagnostics.TraceSource.xw9ws5j28h.wasm
+    |   |                       System.Diagnostics.TraceSource.xw9ws5j28h.wasm.gz
+    |   |                       System.Diagnostics.Tracing.0ngxe0ebvb.wasm
+    |   |                       System.Diagnostics.Tracing.0ngxe0ebvb.wasm.gz
+    |   |                       System.Drawing.mrxfbyk2fa.wasm
+    |   |                       System.Drawing.mrxfbyk2fa.wasm.gz
+    |   |                       System.Drawing.Primitives.f2b9g75qpg.wasm
+    |   |                       System.Drawing.Primitives.f2b9g75qpg.wasm.gz
+    |   |                       System.Dynamic.Runtime.uzzfvypzpj.wasm
+    |   |                       System.Dynamic.Runtime.uzzfvypzpj.wasm.gz
+    |   |                       System.Formats.Asn1.32vzsg1nt0.wasm
+    |   |                       System.Formats.Asn1.32vzsg1nt0.wasm.gz
+    |   |                       System.Formats.Tar.1l2k5ffzyj.wasm
+    |   |                       System.Formats.Tar.1l2k5ffzyj.wasm.gz
+    |   |                       System.Globalization.aqldquwaqo.wasm
+    |   |                       System.Globalization.aqldquwaqo.wasm.gz
+    |   |                       System.Globalization.Calendars.9ri6aym15i.wasm
+    |   |                       System.Globalization.Calendars.9ri6aym15i.wasm.gz
+    |   |                       System.Globalization.Extensions.xq2yv8lsza.wasm
+    |   |                       System.Globalization.Extensions.xq2yv8lsza.wasm.gz
+    |   |                       System.IO.Compression.7h4gc2tiuc.wasm
+    |   |                       System.IO.Compression.7h4gc2tiuc.wasm.gz
+    |   |                       System.IO.Compression.Brotli.fueeqlu2dr.wasm
+    |   |                       System.IO.Compression.Brotli.fueeqlu2dr.wasm.gz
+    |   |                       System.IO.Compression.FileSystem.pu8uh50c4g.wasm
+    |   |                       System.IO.Compression.FileSystem.pu8uh50c4g.wasm.gz
+    |   |                       System.IO.Compression.ZipFile.xao9fb421h.wasm
+    |   |                       System.IO.Compression.ZipFile.xao9fb421h.wasm.gz
+    |   |                       System.IO.FileSystem.AccessControl.94gv6vkm0d.wasm
+    |   |                       System.IO.FileSystem.AccessControl.94gv6vkm0d.wasm.gz
+    |   |                       System.IO.FileSystem.DriveInfo.tud7q0oqcn.wasm
+    |   |                       System.IO.FileSystem.DriveInfo.tud7q0oqcn.wasm.gz
+    |   |                       System.IO.FileSystem.pjyw5vav0f.wasm
+    |   |                       System.IO.FileSystem.pjyw5vav0f.wasm.gz
+    |   |                       System.IO.FileSystem.Primitives.ey1w6dnicb.wasm
+    |   |                       System.IO.FileSystem.Primitives.ey1w6dnicb.wasm.gz
+    |   |                       System.IO.FileSystem.Watcher.hk8m74z4e6.wasm
+    |   |                       System.IO.FileSystem.Watcher.hk8m74z4e6.wasm.gz
+    |   |                       System.IO.fllqij239o.wasm
+    |   |                       System.IO.fllqij239o.wasm.gz
+    |   |                       System.IO.IsolatedStorage.f9j8z9bew7.wasm
+    |   |                       System.IO.IsolatedStorage.f9j8z9bew7.wasm.gz
+    |   |                       System.IO.MemoryMappedFiles.jrtu5r3qmr.wasm
+    |   |                       System.IO.MemoryMappedFiles.jrtu5r3qmr.wasm.gz
+    |   |                       System.IO.Pipelines.i0x0haisnv.wasm
+    |   |                       System.IO.Pipelines.i0x0haisnv.wasm.gz
+    |   |                       System.IO.Pipes.1u28lmydhl.wasm
+    |   |                       System.IO.Pipes.1u28lmydhl.wasm.gz
+    |   |                       System.IO.Pipes.AccessControl.00rxfgnxnh.wasm
+    |   |                       System.IO.Pipes.AccessControl.00rxfgnxnh.wasm.gz
+    |   |                       System.IO.UnmanagedMemoryStream.m9rubsfaxk.wasm
+    |   |                       System.IO.UnmanagedMemoryStream.m9rubsfaxk.wasm.gz
+    |   |                       System.Linq.Expressions.801a15xquu.wasm
+    |   |                       System.Linq.Expressions.801a15xquu.wasm.gz
+    |   |                       System.Linq.hy4lkm0vqg.wasm
+    |   |                       System.Linq.hy4lkm0vqg.wasm.gz
+    |   |                       System.Linq.Parallel.81rvs50hyn.wasm
+    |   |                       System.Linq.Parallel.81rvs50hyn.wasm.gz
+    |   |                       System.Linq.Queryable.zd2af0obpr.wasm
+    |   |                       System.Linq.Queryable.zd2af0obpr.wasm.gz
+    |   |                       System.Memory.00t450idjl.wasm
+    |   |                       System.Memory.00t450idjl.wasm.gz
+    |   |                       System.Net.Http.Json.ep4rwsoiwm.wasm
+    |   |                       System.Net.Http.Json.ep4rwsoiwm.wasm.gz
+    |   |                       System.Net.Http.ljvu2ag6vq.wasm
+    |   |                       System.Net.Http.ljvu2ag6vq.wasm.gz
+    |   |                       System.Net.HttpListener.7huq5keul8.wasm
+    |   |                       System.Net.HttpListener.7huq5keul8.wasm.gz
+    |   |                       System.Net.Mail.z43129bhbm.wasm
+    |   |                       System.Net.Mail.z43129bhbm.wasm.gz
+    |   |                       System.Net.NameResolution.4nm9mpnue8.wasm
+    |   |                       System.Net.NameResolution.4nm9mpnue8.wasm.gz
+    |   |                       System.Net.NetworkInformation.c8ktbqtt2g.wasm
+    |   |                       System.Net.NetworkInformation.c8ktbqtt2g.wasm.gz
+    |   |                       System.Net.Ping.1lge0ymw9i.wasm
+    |   |                       System.Net.Ping.1lge0ymw9i.wasm.gz
+    |   |                       System.Net.Primitives.376omgnlba.wasm
+    |   |                       System.Net.Primitives.376omgnlba.wasm.gz
+    |   |                       System.Net.Quic.ywlya3trvo.wasm
+    |   |                       System.Net.Quic.ywlya3trvo.wasm.gz
+    |   |                       System.Net.Requests.pxmv41py7c.wasm
+    |   |                       System.Net.Requests.pxmv41py7c.wasm.gz
+    |   |                       System.Net.Security.f9da3k95nv.wasm
+    |   |                       System.Net.Security.f9da3k95nv.wasm.gz
+    |   |                       System.Net.ServicePoint.kur16ribny.wasm
+    |   |                       System.Net.ServicePoint.kur16ribny.wasm.gz
+    |   |                       System.Net.Sockets.6trszf5len.wasm
+    |   |                       System.Net.Sockets.6trszf5len.wasm.gz
+    |   |                       System.Net.WebClient.2hx3h65q50.wasm
+    |   |                       System.Net.WebClient.2hx3h65q50.wasm.gz
+    |   |                       System.Net.WebHeaderCollection.l8pev2jr8t.wasm
+    |   |                       System.Net.WebHeaderCollection.l8pev2jr8t.wasm.gz
+    |   |                       System.Net.WebProxy.gv5nmmy9am.wasm
+    |   |                       System.Net.WebProxy.gv5nmmy9am.wasm.gz
+    |   |                       System.Net.WebSockets.Client.i441v03kux.wasm
+    |   |                       System.Net.WebSockets.Client.i441v03kux.wasm.gz
+    |   |                       System.Net.WebSockets.iadgrsxif5.wasm
+    |   |                       System.Net.WebSockets.iadgrsxif5.wasm.gz
+    |   |                       System.Net.zht3tjj6ex.wasm
+    |   |                       System.Net.zht3tjj6ex.wasm.gz
+    |   |                       System.Numerics.fxfqrdwxtv.wasm
+    |   |                       System.Numerics.fxfqrdwxtv.wasm.gz
+    |   |                       System.Numerics.Vectors.s4cpv3hzyi.wasm
+    |   |                       System.Numerics.Vectors.s4cpv3hzyi.wasm.gz
+    |   |                       System.ObjectModel.07sxoiddwj.wasm
+    |   |                       System.ObjectModel.07sxoiddwj.wasm.gz
+    |   |                       System.Private.CoreLib.7gmqe04hm6.wasm
+    |   |                       System.Private.CoreLib.7gmqe04hm6.wasm.gz
+    |   |                       System.Private.DataContractSerialization.l6qt3ia6vr.wasm
+    |   |                       System.Private.DataContractSerialization.l6qt3ia6vr.wasm.gz
+    |   |                       System.Private.Uri.i9msylxekj.wasm
+    |   |                       System.Private.Uri.i9msylxekj.wasm.gz
+    |   |                       System.Private.Xml.jr7e2xj3js.wasm
+    |   |                       System.Private.Xml.jr7e2xj3js.wasm.gz
+    |   |                       System.Private.Xml.Linq.08qwbeklqa.wasm
+    |   |                       System.Private.Xml.Linq.08qwbeklqa.wasm.gz
+    |   |                       System.Reflection.7zd59dp0ok.wasm
+    |   |                       System.Reflection.7zd59dp0ok.wasm.gz
+    |   |                       System.Reflection.DispatchProxy.6njn3nehel.wasm
+    |   |                       System.Reflection.DispatchProxy.6njn3nehel.wasm.gz
+    |   |                       System.Reflection.Emit.fjqki6r8do.wasm
+    |   |                       System.Reflection.Emit.fjqki6r8do.wasm.gz
+    |   |                       System.Reflection.Emit.ILGeneration.k0e124oruz.wasm
+    |   |                       System.Reflection.Emit.ILGeneration.k0e124oruz.wasm.gz
+    |   |                       System.Reflection.Emit.Lightweight.39zm8y4f8h.wasm
+    |   |                       System.Reflection.Emit.Lightweight.39zm8y4f8h.wasm.gz
+    |   |                       System.Reflection.Extensions.3xmlx8dode.wasm
+    |   |                       System.Reflection.Extensions.3xmlx8dode.wasm.gz
+    |   |                       System.Reflection.Metadata.bzzef5cvh0.wasm
+    |   |                       System.Reflection.Metadata.bzzef5cvh0.wasm.gz
+    |   |                       System.Reflection.Primitives.myk7ghmbim.wasm
+    |   |                       System.Reflection.Primitives.myk7ghmbim.wasm.gz
+    |   |                       System.Reflection.TypeExtensions.9supxv2xnq.wasm
+    |   |                       System.Reflection.TypeExtensions.9supxv2xnq.wasm.gz
+    |   |                       System.Resources.Reader.doea1trlh9.wasm
+    |   |                       System.Resources.Reader.doea1trlh9.wasm.gz
+    |   |                       System.Resources.ResourceManager.uw8rtixe33.wasm
+    |   |                       System.Resources.ResourceManager.uw8rtixe33.wasm.gz
+    |   |                       System.Resources.Writer.xofgmu0rz9.wasm
+    |   |                       System.Resources.Writer.xofgmu0rz9.wasm.gz
+    |   |                       System.Runtime.CompilerServices.Unsafe.5inxy2ljek.wasm
+    |   |                       System.Runtime.CompilerServices.Unsafe.5inxy2ljek.wasm.gz
+    |   |                       System.Runtime.CompilerServices.VisualC.bcjbqlo1yy.wasm
+    |   |                       System.Runtime.CompilerServices.VisualC.bcjbqlo1yy.wasm.gz
+    |   |                       System.Runtime.Extensions.ry18ir894y.wasm
+    |   |                       System.Runtime.Extensions.ry18ir894y.wasm.gz
+    |   |                       System.Runtime.Handles.lbdemd2ibv.wasm
+    |   |                       System.Runtime.Handles.lbdemd2ibv.wasm.gz
+    |   |                       System.Runtime.InteropServices.JavaScript.t8op22gcyo.wasm
+    |   |                       System.Runtime.InteropServices.JavaScript.t8op22gcyo.wasm.gz
+    |   |                       System.Runtime.InteropServices.RuntimeInformation.v0odrlv8q1.wasm
+    |   |                       System.Runtime.InteropServices.RuntimeInformation.v0odrlv8q1.wasm.gz
+    |   |                       System.Runtime.InteropServices.s3ncm09bl1.wasm
+    |   |                       System.Runtime.InteropServices.s3ncm09bl1.wasm.gz
+    |   |                       System.Runtime.Intrinsics.qa73rbmtmp.wasm
+    |   |                       System.Runtime.Intrinsics.qa73rbmtmp.wasm.gz
+    |   |                       System.Runtime.Loader.iwqa2el2jz.wasm
+    |   |                       System.Runtime.Loader.iwqa2el2jz.wasm.gz
+    |   |                       System.Runtime.Numerics.kfd3fz4f8f.wasm
+    |   |                       System.Runtime.Numerics.kfd3fz4f8f.wasm.gz
+    |   |                       System.Runtime.Serialization.2l6bybcbi4.wasm
+    |   |                       System.Runtime.Serialization.2l6bybcbi4.wasm.gz
+    |   |                       System.Runtime.Serialization.Formatters.xsvgse1870.wasm
+    |   |                       System.Runtime.Serialization.Formatters.xsvgse1870.wasm.gz
+    |   |                       System.Runtime.Serialization.Json.0kluc7blk4.wasm
+    |   |                       System.Runtime.Serialization.Json.0kluc7blk4.wasm.gz
+    |   |                       System.Runtime.Serialization.Primitives.sv6p44k9s7.wasm
+    |   |                       System.Runtime.Serialization.Primitives.sv6p44k9s7.wasm.gz
+    |   |                       System.Runtime.Serialization.Xml.pw0k1burus.wasm
+    |   |                       System.Runtime.Serialization.Xml.pw0k1burus.wasm.gz
+    |   |                       System.Runtime.w8jgk52q8x.wasm
+    |   |                       System.Runtime.w8jgk52q8x.wasm.gz
+    |   |                       System.Security.AccessControl.bun7q8b6no.wasm
+    |   |                       System.Security.AccessControl.bun7q8b6no.wasm.gz
+    |   |                       System.Security.Claims.23m6iliulu.wasm
+    |   |                       System.Security.Claims.23m6iliulu.wasm.gz
+    |   |                       System.Security.Cryptography.0zuehbvuvd.wasm
+    |   |                       System.Security.Cryptography.0zuehbvuvd.wasm.gz
+    |   |                       System.Security.Cryptography.Algorithms.u9mkg5oclb.wasm
+    |   |                       System.Security.Cryptography.Algorithms.u9mkg5oclb.wasm.gz
+    |   |                       System.Security.Cryptography.Cng.g9pnx15f45.wasm
+    |   |                       System.Security.Cryptography.Cng.g9pnx15f45.wasm.gz
+    |   |                       System.Security.Cryptography.Csp.z6oi0881a8.wasm
+    |   |                       System.Security.Cryptography.Csp.z6oi0881a8.wasm.gz
+    |   |                       System.Security.Cryptography.Encoding.8nbq2g1afa.wasm
+    |   |                       System.Security.Cryptography.Encoding.8nbq2g1afa.wasm.gz
+    |   |                       System.Security.Cryptography.OpenSsl.ct4j877pzl.wasm
+    |   |                       System.Security.Cryptography.OpenSsl.ct4j877pzl.wasm.gz
+    |   |                       System.Security.Cryptography.Primitives.vxg3vojssl.wasm
+    |   |                       System.Security.Cryptography.Primitives.vxg3vojssl.wasm.gz
+    |   |                       System.Security.Cryptography.X509Certificates.cxt8q88drg.wasm
+    |   |                       System.Security.Cryptography.X509Certificates.cxt8q88drg.wasm.gz
+    |   |                       System.Security.pd5f8c3i3q.wasm
+    |   |                       System.Security.pd5f8c3i3q.wasm.gz
+    |   |                       System.Security.Principal.hbpq7p4yq5.wasm
+    |   |                       System.Security.Principal.hbpq7p4yq5.wasm.gz
+    |   |                       System.Security.Principal.Windows.02v1nb35z4.wasm
+    |   |                       System.Security.Principal.Windows.02v1nb35z4.wasm.gz
+    |   |                       System.Security.SecureString.y8cy2ljeae.wasm
+    |   |                       System.Security.SecureString.y8cy2ljeae.wasm.gz
+    |   |                       System.ServiceModel.Web.0g16r325wv.wasm
+    |   |                       System.ServiceModel.Web.0g16r325wv.wasm.gz
+    |   |                       System.ServiceProcess.fn1pqe6tpg.wasm
+    |   |                       System.ServiceProcess.fn1pqe6tpg.wasm.gz
+    |   |                       System.Text.Encoding.CodePages.94co19auxe.wasm
+    |   |                       System.Text.Encoding.CodePages.94co19auxe.wasm.gz
+    |   |                       System.Text.Encoding.Extensions.l98y9zrmrn.wasm
+    |   |                       System.Text.Encoding.Extensions.l98y9zrmrn.wasm.gz
+    |   |                       System.Text.Encoding.i6lgcrqgpu.wasm
+    |   |                       System.Text.Encoding.i6lgcrqgpu.wasm.gz
+    |   |                       System.Text.Encodings.Web.ovvtoa6q69.wasm
+    |   |                       System.Text.Encodings.Web.ovvtoa6q69.wasm.gz
+    |   |                       System.Text.Json.i4h299ya7u.wasm
+    |   |                       System.Text.Json.i4h299ya7u.wasm.gz
+    |   |                       System.Text.RegularExpressions.tsdn1ohham.wasm
+    |   |                       System.Text.RegularExpressions.tsdn1ohham.wasm.gz
+    |   |                       System.Threading.Channels.4to8vwxrmr.wasm
+    |   |                       System.Threading.Channels.4to8vwxrmr.wasm.gz
+    |   |                       System.Threading.Overlapped.9j7ol8174w.wasm
+    |   |                       System.Threading.Overlapped.9j7ol8174w.wasm.gz
+    |   |                       System.Threading.Tasks.Dataflow.cii8p8j2n9.wasm
+    |   |                       System.Threading.Tasks.Dataflow.cii8p8j2n9.wasm.gz
+    |   |                       System.Threading.Tasks.Extensions.wzy22t7vf7.wasm
+    |   |                       System.Threading.Tasks.Extensions.wzy22t7vf7.wasm.gz
+    |   |                       System.Threading.Tasks.icasegwp28.wasm
+    |   |                       System.Threading.Tasks.icasegwp28.wasm.gz
+    |   |                       System.Threading.Tasks.Parallel.i32hqt9rvw.wasm
+    |   |                       System.Threading.Tasks.Parallel.i32hqt9rvw.wasm.gz
+    |   |                       System.Threading.Thread.i7km7q8nu7.wasm
+    |   |                       System.Threading.Thread.i7km7q8nu7.wasm.gz
+    |   |                       System.Threading.ThreadPool.ej1vae9d7y.wasm
+    |   |                       System.Threading.ThreadPool.ej1vae9d7y.wasm.gz
+    |   |                       System.Threading.Timer.0z1qzsesq8.wasm
+    |   |                       System.Threading.Timer.0z1qzsesq8.wasm.gz
+    |   |                       System.Threading.y4hgzinnhd.wasm
+    |   |                       System.Threading.y4hgzinnhd.wasm.gz
+    |   |                       System.Transactions.Local.ocfz84q5o3.wasm
+    |   |                       System.Transactions.Local.ocfz84q5o3.wasm.gz
+    |   |                       System.Transactions.o80i0cdgq2.wasm
+    |   |                       System.Transactions.o80i0cdgq2.wasm.gz
+    |   |                       System.ValueTuple.t4ardn8qql.wasm
+    |   |                       System.ValueTuple.t4ardn8qql.wasm.gz
+    |   |                       System.Web.HttpUtility.2gmk4gkpyh.wasm
+    |   |                       System.Web.HttpUtility.2gmk4gkpyh.wasm.gz
+    |   |                       System.Web.xfhkeex3ln.wasm
+    |   |                       System.Web.xfhkeex3ln.wasm.gz
+    |   |                       System.Windows.8l7t5zuk7x.wasm
+    |   |                       System.Windows.8l7t5zuk7x.wasm.gz
+    |   |                       System.Xml.e18ygl3t62.wasm
+    |   |                       System.Xml.e18ygl3t62.wasm.gz
+    |   |                       System.Xml.Linq.ge4yv1ojwa.wasm
+    |   |                       System.Xml.Linq.ge4yv1ojwa.wasm.gz
+    |   |                       System.Xml.ReaderWriter.aypqhw8npa.wasm
+    |   |                       System.Xml.ReaderWriter.aypqhw8npa.wasm.gz
+    |   |                       System.Xml.Serialization.yo6k8yt007.wasm
+    |   |                       System.Xml.Serialization.yo6k8yt007.wasm.gz
+    |   |                       System.Xml.XDocument.oknl4vi9ng.wasm
+    |   |                       System.Xml.XDocument.oknl4vi9ng.wasm.gz
+    |   |                       System.Xml.XmlDocument.8fqwo7rmho.wasm
+    |   |                       System.Xml.XmlDocument.8fqwo7rmho.wasm.gz
+    |   |                       System.Xml.XmlSerializer.2qgo9dwlkd.wasm
+    |   |                       System.Xml.XmlSerializer.2qgo9dwlkd.wasm.gz
+    |   |                       System.Xml.XPath.158zra77m0.wasm
+    |   |                       System.Xml.XPath.158zra77m0.wasm.gz
+    |   |                       System.Xml.XPath.XDocument.0t0d0qvp1f.wasm
+    |   |                       System.Xml.XPath.XDocument.0t0d0qvp1f.wasm.gz
+    |   |                       WindowsBase.g3ep9asl8e.wasm
+    |   |                       WindowsBase.g3ep9asl8e.wasm.gz
+    |   |                       
+    |   +---obj
+    |   |   |   ExtractFromXgToCsv.Client.csproj.nuget.dgspec.json
+    |   |   |   ExtractFromXgToCsv.Client.csproj.nuget.g.props
+    |   |   |   ExtractFromXgToCsv.Client.csproj.nuget.g.targets
+    |   |   |   project.assets.json
+    |   |   |   project.nuget.cache
+    |   |   |   
+    |   |   \---Debug
+    |   |       \---net9.0
+    |   |           |   .NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+    |   |           |   blazor.boot.json
+    |   |           |   blazor.build.boot-extension.json
+    |   |           |   ExtractF.CBEC1C9D.Up2Date
+    |   |           |   ExtractFromXgToCsv.Client.AssemblyInfo.cs
+    |   |           |   ExtractFromXgToCsv.Client.AssemblyInfoInputs.cache
+    |   |           |   ExtractFromXgToCsv.Client.assets.cache
+    |   |           |   ExtractFromXgToCsv.Client.csproj.AssemblyReference.cache
+    |   |           |   ExtractFromXgToCsv.Client.csproj.CoreCompileInputs.cache
+    |   |           |   ExtractFromXgToCsv.Client.csproj.FileListAbsolute.txt
+    |   |           |   ExtractFromXgToCsv.Client.dll
+    |   |           |   ExtractFromXgToCsv.Client.GeneratedMSBuildEditorConfig.editorconfig
+    |   |           |   ExtractFromXgToCsv.Client.GlobalUsings.g.cs
+    |   |           |   ExtractFromXgToCsv.Client.MvcApplicationPartsAssemblyInfo.cache
+    |   |           |   ExtractFromXgToCsv.Client.pdb
+    |   |           |   ExtractFromXgToCsv.Client.sourcelink.json
+    |   |           |   rbcswa.dswa.cache.json
+    |   |           |   rjsmcshtml.dswa.cache.json
+    |   |           |   rjsmrazor.dswa.cache.json
+    |   |           |   rpswa.dswa.cache.json
+    |   |           |   staticwebassets.build.endpoints.json
+    |   |           |   staticwebassets.build.json
+    |   |           |   staticwebassets.build.json.cache
+    |   |           |   staticwebassets.development.json
+    |   |           |   staticwebassets.references.upToDateCheck.txt
+    |   |           |   staticwebassets.removed.txt
+    |   |           |   swae.build.ex.cache
+    |   |           |   
+    |   |           +---compressed
+    |   |           |       005floa6bc-{0}-5iopgzl6yh-5iopgzl6yh.gz
+    |   |           |       01apr3g0hw-{0}-jrtu5r3qmr-jrtu5r3qmr.gz
+    |   |           |       0922jjof8u-{0}-qskii005so-qskii005so.gz
+    |   |           |       0dyqdyt8ze-{0}-6trszf5len-6trszf5len.gz
+    |   |           |       0ycxe2f418-{0}-ep4rwsoiwm-ep4rwsoiwm.gz
+    |   |           |       13v95l30jn-{0}-q5if44af42-q5if44af42.gz
+    |   |           |       1d89okwqtb-{0}-sk08br83jz-sk08br83jz.gz
+    |   |           |       1m2d7gyzvg-{0}-32vzsg1nt0-32vzsg1nt0.gz
+    |   |           |       1z3btcxkh2-{0}-icasegwp28-icasegwp28.gz
+    |   |           |       1zt5r0amsg-{0}-pu8uh50c4g-pu8uh50c4g.gz
+    |   |           |       2d5qpeps6d-{0}-0g16r325wv-0g16r325wv.gz
+    |   |           |       2k1fdec21p-{0}-c8ktbqtt2g-c8ktbqtt2g.gz
+    |   |           |       2k3nypgrtk-{0}-ry18ir894y-ry18ir894y.gz
+    |   |           |       2r1badweuu-{0}-ct4j877pzl-ct4j877pzl.gz
+    |   |           |       2z8i9pkzxx-{0}-7gmqe04hm6-7gmqe04hm6.gz
+    |   |           |       2zrdsev8cv-{0}-5cygu8f0zf-5cygu8f0zf.gz
+    |   |           |       361pgmcd9b-{0}-ljvu2ag6vq-ljvu2ag6vq.gz
+    |   |           |       39ovydhiyk-{0}-ocfz84q5o3-ocfz84q5o3.gz
+    |   |           |       3d0dmx1rut-{0}-1u28lmydhl-1u28lmydhl.gz
+    |   |           |       3qio3ss37q-{0}-xofgmu0rz9-xofgmu0rz9.gz
+    |   |           |       3x135gn6mi-{0}-0zuehbvuvd-0zuehbvuvd.gz
+    |   |           |       42a44r6f5d-{0}-i9msylxekj-i9msylxekj.gz
+    |   |           |       4fiey8iil8-{0}-dl97l32vi0-dl97l32vi0.gz
+    |   |           |       4fo33nebhq-{0}-ml1ettzal5-ml1ettzal5.gz
+    |   |           |       4wxf0av86k-{0}-tsdn1ohham-tsdn1ohham.gz
+    |   |           |       58xm8le997-{0}-pjyw5vav0f-pjyw5vav0f.gz
+    |   |           |       592eeoxvc1-{0}-ey1w6dnicb-ey1w6dnicb.gz
+    |   |           |       5i1hufeuwb-{0}-lbdemd2ibv-lbdemd2ibv.gz
+    |   |           |       5j66ocp1c7-{0}-f9j8z9bew7-f9j8z9bew7.gz
+    |   |           |       5lbgwj4q2y-{0}-r4epeot9z9-r4epeot9z9.gz
+    |   |           |       5ywnldurjo-{0}-uw8rtixe33-uw8rtixe33.gz
+    |   |           |       66qkec4um7-{0}-8r1tzxyzhv-8r1tzxyzhv.gz
+    |   |           |       679xc0hq58-{0}-iwqa2el2jz-iwqa2el2jz.gz
+    |   |           |       69qa94z30d-{0}-ovvtoa6q69-ovvtoa6q69.gz
+    |   |           |       6h70ryyrce-{0}-158zra77m0-158zra77m0.gz
+    |   |           |       6hmp56w1oq-{0}-9supxv2xnq-9supxv2xnq.gz
+    |   |           |       6moq5aktqb-{0}-i32hqt9rvw-i32hqt9rvw.gz
+    |   |           |       6qix8zb258-{0}-3sx0y6ui4u-3sx0y6ui4u.gz
+    |   |           |       6yusgac9bi-{0}-zht3tjj6ex-zht3tjj6ex.gz
+    |   |           |       70vanxt0p5-{0}-zw8ib5pvmp-zw8ib5pvmp.gz
+    |   |           |       7oj9d86vzx-{0}-mrxfbyk2fa-mrxfbyk2fa.gz
+    |   |           |       7p06afvt43-{0}-3xmlx8dode-3xmlx8dode.gz
+    |   |           |       7rkn7ylwzb-{0}-dh2txzjv3q-dh2txzjv3q.gz
+    |   |           |       7ugd1qsrpv-{0}-z6oi0881a8-z6oi0881a8.gz
+    |   |           |       7xm09xrwxz-{0}-gdkzxj1nbq-gdkzxj1nbq.gz
+    |   |           |       85qb84iasg-{0}-yiodnjoszm-yiodnjoszm.gz
+    |   |           |       8es9w75zqb-{0}-2gmk4gkpyh-2gmk4gkpyh.gz
+    |   |           |       8fyyzerqun-{0}-1lge0ymw9i-1lge0ymw9i.gz
+    |   |           |       8lnbgeqzsv-{0}-6njn3nehel-6njn3nehel.gz
+    |   |           |       8voouux2an-{0}-fjqki6r8do-fjqki6r8do.gz
+    |   |           |       94g8xfch72-{0}-pd5f8c3i3q-pd5f8c3i3q.gz
+    |   |           |       972aur6emf-{0}-iadgrsxif5-iadgrsxif5.gz
+    |   |           |       9pw4oc7kwi-{0}-23m6iliulu-23m6iliulu.gz
+    |   |           |       9tvyqynip4-{0}-j63fzm096x-j63fzm096x.gz
+    |   |           |       9ww4cmqtyx-{0}-3k4o2x29mq-3k4o2x29mq.gz
+    |   |           |       a697jdxuef-{0}-iddihsnz08-iddihsnz08.gz
+    |   |           |       a7yfguensp-{0}-olt0jsk54c-olt0jsk54c.gz
+    |   |           |       abtqbpeu7z-{0}-cx40wf47rk-cx40wf47rk.gz
+    |   |           |       af1kph0mbz-{0}-g9pnx15f45-g9pnx15f45.gz
+    |   |           |       aflbahpzic-{0}-y4hgzinnhd-y4hgzinnhd.gz
+    |   |           |       akx7w0dcuv-{0}-1l2k5ffzyj-1l2k5ffzyj.gz
+    |   |           |       arvna9hr8k-{0}-ej1vae9d7y-ej1vae9d7y.gz
+    |   |           |       atqa3eddvu-{0}-xsvgse1870-xsvgse1870.gz
+    |   |           |       awxl9r5636-{0}-94gv6vkm0d-94gv6vkm0d.gz
+    |   |           |       b2c3npq41i-{0}-t4ardn8qql-t4ardn8qql.gz
+    |   |           |       b77cx8an6t-{0}-gqjxfj8wo6-gqjxfj8wo6.gz
+    |   |           |       bdege1z76u-{0}-5osbqvurog-5osbqvurog.gz
+    |   |           |       bfx8j2b588-{0}-kur16ribny-kur16ribny.gz
+    |   |           |       bhyf81b2yg-{0}-kvh8zhhe4g-kvh8zhhe4g.gz
+    |   |           |       bka5njkcfe-{0}-gv5nmmy9am-gv5nmmy9am.gz
+    |   |           |       bscc3nkq3b-{0}-6m0hb3g78a-6m0hb3g78a.gz
+    |   |           |       bu624vjo5a-{0}-doea1trlh9-doea1trlh9.gz
+    |   |           |       c1dn72fd6t-{0}-uyvi5lva9w-uyvi5lva9w.gz
+    |   |           |       c68lts8xa7-{0}-u50zn7pole-u50zn7pole.gz
+    |   |           |       cbf3gchddf-{0}-81rvs50hyn-81rvs50hyn.gz
+    |   |           |       cgouoskif5-{0}-k0e124oruz-k0e124oruz.gz
+    |   |           |       cwd5trzy7d-{0}-pw0k1burus-pw0k1burus.gz
+    |   |           |       cyccid2bj3-{0}-uzzfvypzpj-uzzfvypzpj.gz
+    |   |           |       d1tzrp5oht-{0}-bzzef5cvh0-bzzef5cvh0.gz
+    |   |           |       d3vnos1xp6-{0}-y8cy2ljeae-y8cy2ljeae.gz
+    |   |           |       d6cnmegmdy-{0}-gttjmwl02g-gttjmwl02g.gz
+    |   |           |       dbx735apx4-{0}-ec9yy67949-ec9yy67949.gz
+    |   |           |       ddun2vwxe4-{0}-2qgo9dwlkd-2qgo9dwlkd.gz
+    |   |           |       deps9oxl4q-{0}-8qonr1hqn0-8qonr1hqn0.gz
+    |   |           |       dnopj05lcs-{0}-cs3zock36j-cs3zock36j.gz
+    |   |           |       dns5pvu9pd-{0}-ge4yv1ojwa-ge4yv1ojwa.gz
+    |   |           |       dr25ngolfq-{0}-9j7ol8174w-9j7ol8174w.gz
+    |   |           |       edy5z30eqx-{0}-4f1sz0w8yt-4f1sz0w8yt.gz
+    |   |           |       ejlp4yhk2s-{0}-fxfqrdwxtv-fxfqrdwxtv.gz
+    |   |           |       ejo7oh9e9a-{0}-376omgnlba-376omgnlba.gz
+    |   |           |       f4kf62x6t8-{0}-97to7qusgy-97to7qusgy.gz
+    |   |           |       faih03ebjc-{0}-16952b37je-16952b37je.gz
+    |   |           |       fj0znxe2tr-{0}-t8op22gcyo-t8op22gcyo.gz
+    |   |           |       fmvn778yn0-{0}-hbpq7p4yq5-hbpq7p4yq5.gz
+    |   |           |       fvsofcms2v-{0}-39zm8y4f8h-39zm8y4f8h.gz
+    |   |           |       g246eoqguu-{0}-00t450idjl-00t450idjl.gz
+    |   |           |       hcelq2yx7c-{0}-thhw8cz9wu-thhw8cz9wu.gz
+    |   |           |       hd5486xq02-{0}-5inxy2ljek-5inxy2ljek.gz
+    |   |           |       hgegbr670j-{0}-g3ep9asl8e-g3ep9asl8e.gz
+    |   |           |       hp3x4x2f3p-{0}-l79o82jqtp-l79o82jqtp.gz
+    |   |           |       hqi9cijg7c-{0}-m9rubsfaxk-m9rubsfaxk.gz
+    |   |           |       hqvevp3xtq-{0}-hk8m74z4e6-hk8m74z4e6.gz
+    |   |           |       htbxxr3d6q-{0}-pfydokjfw7-pfydokjfw7.gz
+    |   |           |       hxlzbhqlbp-{0}-d916kyzq6z-d916kyzq6z.gz
+    |   |           |       i0yn38ch8u-{0}-srip3vvczc-srip3vvczc.gz
+    |   |           |       i17mb9ktxo-{0}-qa73rbmtmp-qa73rbmtmp.gz
+    |   |           |       i5vz0v20v5-{0}-4ewk3ipqll-4ewk3ipqll.gz
+    |   |           |       idc0qjzwck-{0}-7aji9488co-7aji9488co.gz
+    |   |           |       ii9asuge6k-{0}-o80i0cdgq2-o80i0cdgq2.gz
+    |   |           |       iij47qe51j-{0}-07sxoiddwj-07sxoiddwj.gz
+    |   |           |       iyc73cj8et-{0}-3yqm0i13lh-3yqm0i13lh.gz
+    |   |           |       j6w3z01jb0-{0}-fllqij239o-fllqij239o.gz
+    |   |           |       j9zyjzv0q3-{0}-ywlya3trvo-ywlya3trvo.gz
+    |   |           |       jai2bpy1x8-{0}-phit3t724g-phit3t724g.gz
+    |   |           |       jey0yul0ee-{0}-1ee8sg4mrw-1ee8sg4mrw.gz
+    |   |           |       jmlxgjwixz-{0}-cii8p8j2n9-cii8p8j2n9.gz
+    |   |           |       jpz3bmbqkn-{0}-f2b9g75qpg-f2b9g75qpg.gz
+    |   |           |       jrekq9nqzy-{0}-pe42eqbhca-pe42eqbhca.gz
+    |   |           |       jsksahifee-{0}-l98y9zrmrn-l98y9zrmrn.gz
+    |   |           |       jtwknmqida-{0}-ukzo8g2ie5-ukzo8g2ie5.gz
+    |   |           |       jvuml5vwol-{0}-xao9fb421h-xao9fb421h.gz
+    |   |           |       k2b7k3iabj-{0}-4to8vwxrmr-4to8vwxrmr.gz
+    |   |           |       k4s9yzoes5-{0}-08qwbeklqa-08qwbeklqa.gz
+    |   |           |       klj1ih5lpk-{0}-l7xs6zruqy-l7xs6zruqy.gz
+    |   |           |       krutiwyp0l-{0}-4nm9mpnue8-4nm9mpnue8.gz
+    |   |           |       l0fic56dhj-{0}-v0odrlv8q1-v0odrlv8q1.gz
+    |   |           |       l0vb10pwp1-{0}-xw9ws5j28h-xw9ws5j28h.gz
+    |   |           |       l322n7b89v-{0}-qphg0mrx1s-qphg0mrx1s.gz
+    |   |           |       lfaidcuu6s-{0}-i4h299ya7u-i4h299ya7u.gz
+    |   |           |       liiox1nh5x-{0}-i6lgcrqgpu-i6lgcrqgpu.gz
+    |   |           |       lk512n7fls-{0}-xq2yv8lsza-xq2yv8lsza.gz
+    |   |           |       ltyfkvgoln-{0}-flveird317-flveird317.gz
+    |   |           |       ly42j9x8px-{0}-qnaw45f7ij-qnaw45f7ij.gz
+    |   |           |       m2m5n49fs7-{0}-47sr6llx5n-47sr6llx5n.gz
+    |   |           |       mnae02ryhm-{0}-wzy22t7vf7-wzy22t7vf7.gz
+    |   |           |       n9o7jcu9gi-{0}-8nbq2g1afa-8nbq2g1afa.gz
+    |   |           |       nc6i3e2c1f-{0}-7laf4z0i7i-7laf4z0i7i.gz
+    |   |           |       npflmcuzs9-{0}-w8jgk52q8x-w8jgk52q8x.gz
+    |   |           |       nw3d9w5vad-{0}-tud7q0oqcn-tud7q0oqcn.gz
+    |   |           |       o3uy3cho9u-{0}-02v1nb35z4-02v1nb35z4.gz
+    |   |           |       og92zkjw4b-{0}-8l7t5zuk7x-8l7t5zuk7x.gz
+    |   |           |       ooh2ls8yts-{0}-0ngxe0ebvb-0ngxe0ebvb.gz
+    |   |           |       oqhpb4ty3b-{0}-cxt8q88drg-cxt8q88drg.gz
+    |   |           |       oqr03j0cou-{0}-94co19auxe-94co19auxe.gz
+    |   |           |       oxourgrww1-{0}-i7km7q8nu7-i7km7q8nu7.gz
+    |   |           |       ozxnfgineq-{0}-itzgu0fee6-itzgu0fee6.gz
+    |   |           |       p62ynok7q2-{0}-i0x0haisnv-i0x0haisnv.gz
+    |   |           |       p6lk3qb2nd-{0}-s3ncm09bl1-s3ncm09bl1.gz
+    |   |           |       pse35gz7py-{0}-i441v03kux-i441v03kux.gz
+    |   |           |       pwmk0gcz95-{0}-7zd59dp0ok-7zd59dp0ok.gz
+    |   |           |       q227w2n8f0-{0}-s4cpv3hzyi-s4cpv3hzyi.gz
+    |   |           |       q6uqhjtdyg-{0}-ic45gpxjv4-ic45gpxjv4.gz
+    |   |           |       q7a6o7p6t1-{0}-hdyncmbvxt-hdyncmbvxt.gz
+    |   |           |       q8xzjh85wl-{0}-e18ygl3t62-e18ygl3t62.gz
+    |   |           |       qbbrit2wcd-{0}-00rxfgnxnh-00rxfgnxnh.gz
+    |   |           |       qgoiq8sktc-{0}-bcjbqlo1yy-bcjbqlo1yy.gz
+    |   |           |       qi7tzqy97w-{0}-qe23mgxr71-qe23mgxr71.gz
+    |   |           |       qj8iecv8ko-{0}-yo6k8yt007-yo6k8yt007.gz
+    |   |           |       qk78lnihd3-{0}-kfd3fz4f8f-kfd3fz4f8f.gz
+    |   |           |       queyob2g89-{0}-myk7ghmbim-myk7ghmbim.gz
+    |   |           |       qyk5uyedtf-{0}-pvxa4wu5tg-pvxa4wu5tg.gz
+    |   |           |       rh79aqqgqu-{0}-j40p001lax-j40p001lax.gz
+    |   |           |       rhtzvwpovj-{0}-fueeqlu2dr-fueeqlu2dr.gz
+    |   |           |       rsiilsqhep-{0}-vxg3vojssl-vxg3vojssl.gz
+    |   |           |       s203fneh4e-{0}-ici6i3f2tx-ici6i3f2tx.gz
+    |   |           |       s3brrw2bmr-{0}-lsxbxz4s19-lsxbxz4s19.gz
+    |   |           |       sb8ymffhtr-{0}-lfu7j35m59-lfu7j35m59.gz
+    |   |           |       seo7bzpml8-{0}-txqb5r0slq-txqb5r0slq.gz
+    |   |           |       snd749dz13-{0}-0z1qzsesq8-0z1qzsesq8.gz
+    |   |           |       so1gnrvvo6-{0}-tjcz0u77k5-tjcz0u77k5.gz
+    |   |           |       t5vzh73mq6-{0}-2l6bybcbi4-2l6bybcbi4.gz
+    |   |           |       th09xi24fl-{0}-oknl4vi9ng-oknl4vi9ng.gz
+    |   |           |       tsx3xronfl-{0}-l6qt3ia6vr-l6qt3ia6vr.gz
+    |   |           |       tu0pgjp9ik-{0}-zd2af0obpr-zd2af0obpr.gz
+    |   |           |       uaks9g2101-{0}-f9da3k95nv-f9da3k95nv.gz
+    |   |           |       uhb2nx035a-{0}-u9mkg5oclb-u9mkg5oclb.gz
+    |   |           |       uwqmfl5x13-{0}-7h4gc2tiuc-7h4gc2tiuc.gz
+    |   |           |       v621myhjj3-{0}-xfhkeex3ln-xfhkeex3ln.gz
+    |   |           |       vaeh2me5ml-{0}-f89dlchogn-f89dlchogn.gz
+    |   |           |       vf76793xc6-{0}-pxmv41py7c-pxmv41py7c.gz
+    |   |           |       vkrv68vx1u-{0}-z43129bhbm-z43129bhbm.gz
+    |   |           |       vqkie34u59-{0}-qmftfeg8ce-qmftfeg8ce.gz
+    |   |           |       vrpf8ltqlz-{0}-mondxmv6tn-mondxmv6tn.gz
+    |   |           |       vwshgnu9gz-{0}-801a15xquu-801a15xquu.gz
+    |   |           |       w3dve0ww5e-{0}-9ri6aym15i-9ri6aym15i.gz
+    |   |           |       wdri4ta893-{0}-42czujeagm-42czujeagm.gz
+    |   |           |       wvsb93inm1-{0}-sv6p44k9s7-sv6p44k9s7.gz
+    |   |           |       x0ndxonrpe-{0}-aqldquwaqo-aqldquwaqo.gz
+    |   |           |       x7se126fji-{0}-aypqhw8npa-aypqhw8npa.gz
+    |   |           |       xela2gpqyf-{0}-fn1pqe6tpg-fn1pqe6tpg.gz
+    |   |           |       xfhn8jwotn-{0}-bun7q8b6no-bun7q8b6no.gz
+    |   |           |       xleiaqs77g-{0}-2yw1hycnx9-2yw1hycnx9.gz
+    |   |           |       xncezspxwn-{0}-tptq2av103-tptq2av103.gz
+    |   |           |       xvcnpxd4qv-{0}-w8ltos2ii6-w8ltos2ii6.gz
+    |   |           |       xvilif94n0-{0}-m71adlxutl-m71adlxutl.gz
+    |   |           |       y9ddxuq7g9-{0}-7huq5keul8-7huq5keul8.gz
+    |   |           |       yivwtef9qw-{0}-2hx3h65q50-2hx3h65q50.gz
+    |   |           |       yyomhxflom-{0}-8fqwo7rmho-8fqwo7rmho.gz
+    |   |           |       zabunpheau-{0}-0t0d0qvp1f-0t0d0qvp1f.gz
+    |   |           |       zdtnb2lvub-{0}-g78cp6xw3m-g78cp6xw3m.gz
+    |   |           |       zo80iojmzu-{0}-hy4lkm0vqg-hy4lkm0vqg.gz
+    |   |           |       zqsiyrojzj-{0}-fkdz83fr0b-fkdz83fr0b.gz
+    |   |           |       zwm42fqjhi-{0}-0kluc7blk4-0kluc7blk4.gz
+    |   |           |       zy7ccz65e8-{0}-jr7e2xj3js-jr7e2xj3js.gz
+    |   |           |       zychtgac9g-{0}-l8pev2jr8t-l8pev2jr8t.gz
+    |   |           |       
+    |   |           +---ref
+    |   |           |       ExtractFromXgToCsv.Client.dll
+    |   |           |       
+    |   |           +---refint
+    |   |           |       ExtractFromXgToCsv.Client.dll
+    |   |           |       
+    |   |           +---staticwebassets
+    |   |           +---tmp-webcil
+    |   |           +---wasm
+    |   |           |   \---for-build
+    |   |           \---webcil
+    |   |                   ExtractFromXgToCsv.Client.wasm
+    |   |                   Microsoft.AspNetCore.Authorization.wasm
+    |   |                   Microsoft.AspNetCore.Components.Forms.wasm
+    |   |                   Microsoft.AspNetCore.Components.wasm
+    |   |                   Microsoft.AspNetCore.Components.Web.wasm
+    |   |                   Microsoft.AspNetCore.Components.WebAssembly.wasm
+    |   |                   Microsoft.AspNetCore.Metadata.wasm
+    |   |                   Microsoft.CSharp.wasm
+    |   |                   Microsoft.Extensions.Configuration.Abstractions.wasm
+    |   |                   Microsoft.Extensions.Configuration.Binder.wasm
+    |   |                   Microsoft.Extensions.Configuration.FileExtensions.wasm
+    |   |                   Microsoft.Extensions.Configuration.Json.wasm
+    |   |                   Microsoft.Extensions.Configuration.wasm
+    |   |                   Microsoft.Extensions.DependencyInjection.Abstractions.wasm
+    |   |                   Microsoft.Extensions.DependencyInjection.wasm
+    |   |                   Microsoft.Extensions.FileProviders.Abstractions.wasm
+    |   |                   Microsoft.Extensions.FileProviders.Physical.wasm
+    |   |                   Microsoft.Extensions.FileSystemGlobbing.wasm
+    |   |                   Microsoft.Extensions.Logging.Abstractions.wasm
+    |   |                   Microsoft.Extensions.Logging.wasm
+    |   |                   Microsoft.Extensions.Options.wasm
+    |   |                   Microsoft.Extensions.Primitives.wasm
+    |   |                   Microsoft.JSInterop.wasm
+    |   |                   Microsoft.JSInterop.WebAssembly.wasm
+    |   |                   Microsoft.VisualBasic.Core.wasm
+    |   |                   Microsoft.VisualBasic.wasm
+    |   |                   Microsoft.Win32.Primitives.wasm
+    |   |                   Microsoft.Win32.Registry.wasm
+    |   |                   mscorlib.wasm
+    |   |                   netstandard.wasm
+    |   |                   System.AppContext.wasm
+    |   |                   System.Buffers.wasm
+    |   |                   System.Collections.Concurrent.wasm
+    |   |                   System.Collections.Immutable.wasm
+    |   |                   System.Collections.NonGeneric.wasm
+    |   |                   System.Collections.Specialized.wasm
+    |   |                   System.Collections.wasm
+    |   |                   System.ComponentModel.Annotations.wasm
+    |   |                   System.ComponentModel.DataAnnotations.wasm
+    |   |                   System.ComponentModel.EventBasedAsync.wasm
+    |   |                   System.ComponentModel.Primitives.wasm
+    |   |                   System.ComponentModel.TypeConverter.wasm
+    |   |                   System.ComponentModel.wasm
+    |   |                   System.Configuration.wasm
+    |   |                   System.Console.wasm
+    |   |                   System.Core.wasm
+    |   |                   System.Data.Common.wasm
+    |   |                   System.Data.DataSetExtensions.wasm
+    |   |                   System.Data.wasm
+    |   |                   System.Diagnostics.Contracts.wasm
+    |   |                   System.Diagnostics.Debug.wasm
+    |   |                   System.Diagnostics.DiagnosticSource.wasm
+    |   |                   System.Diagnostics.FileVersionInfo.wasm
+    |   |                   System.Diagnostics.Process.wasm
+    |   |                   System.Diagnostics.StackTrace.wasm
+    |   |                   System.Diagnostics.TextWriterTraceListener.wasm
+    |   |                   System.Diagnostics.Tools.wasm
+    |   |                   System.Diagnostics.TraceSource.wasm
+    |   |                   System.Diagnostics.Tracing.wasm
+    |   |                   System.Drawing.Primitives.wasm
+    |   |                   System.Drawing.wasm
+    |   |                   System.Dynamic.Runtime.wasm
+    |   |                   System.Formats.Asn1.wasm
+    |   |                   System.Formats.Tar.wasm
+    |   |                   System.Globalization.Calendars.wasm
+    |   |                   System.Globalization.Extensions.wasm
+    |   |                   System.Globalization.wasm
+    |   |                   System.IO.Compression.Brotli.wasm
+    |   |                   System.IO.Compression.FileSystem.wasm
+    |   |                   System.IO.Compression.wasm
+    |   |                   System.IO.Compression.ZipFile.wasm
+    |   |                   System.IO.FileSystem.AccessControl.wasm
+    |   |                   System.IO.FileSystem.DriveInfo.wasm
+    |   |                   System.IO.FileSystem.Primitives.wasm
+    |   |                   System.IO.FileSystem.wasm
+    |   |                   System.IO.FileSystem.Watcher.wasm
+    |   |                   System.IO.IsolatedStorage.wasm
+    |   |                   System.IO.MemoryMappedFiles.wasm
+    |   |                   System.IO.Pipelines.wasm
+    |   |                   System.IO.Pipes.AccessControl.wasm
+    |   |                   System.IO.Pipes.wasm
+    |   |                   System.IO.UnmanagedMemoryStream.wasm
+    |   |                   System.IO.wasm
+    |   |                   System.Linq.Expressions.wasm
+    |   |                   System.Linq.Parallel.wasm
+    |   |                   System.Linq.Queryable.wasm
+    |   |                   System.Linq.wasm
+    |   |                   System.Memory.wasm
+    |   |                   System.Net.Http.Json.wasm
+    |   |                   System.Net.Http.wasm
+    |   |                   System.Net.HttpListener.wasm
+    |   |                   System.Net.Mail.wasm
+    |   |                   System.Net.NameResolution.wasm
+    |   |                   System.Net.NetworkInformation.wasm
+    |   |                   System.Net.Ping.wasm
+    |   |                   System.Net.Primitives.wasm
+    |   |                   System.Net.Quic.wasm
+    |   |                   System.Net.Requests.wasm
+    |   |                   System.Net.Security.wasm
+    |   |                   System.Net.ServicePoint.wasm
+    |   |                   System.Net.Sockets.wasm
+    |   |                   System.Net.wasm
+    |   |                   System.Net.WebClient.wasm
+    |   |                   System.Net.WebHeaderCollection.wasm
+    |   |                   System.Net.WebProxy.wasm
+    |   |                   System.Net.WebSockets.Client.wasm
+    |   |                   System.Net.WebSockets.wasm
+    |   |                   System.Numerics.Vectors.wasm
+    |   |                   System.Numerics.wasm
+    |   |                   System.ObjectModel.wasm
+    |   |                   System.Private.CoreLib.wasm
+    |   |                   System.Private.DataContractSerialization.wasm
+    |   |                   System.Private.Uri.wasm
+    |   |                   System.Private.Xml.Linq.wasm
+    |   |                   System.Private.Xml.wasm
+    |   |                   System.Reflection.DispatchProxy.wasm
+    |   |                   System.Reflection.Emit.ILGeneration.wasm
+    |   |                   System.Reflection.Emit.Lightweight.wasm
+    |   |                   System.Reflection.Emit.wasm
+    |   |                   System.Reflection.Extensions.wasm
+    |   |                   System.Reflection.Metadata.wasm
+    |   |                   System.Reflection.Primitives.wasm
+    |   |                   System.Reflection.TypeExtensions.wasm
+    |   |                   System.Reflection.wasm
+    |   |                   System.Resources.Reader.wasm
+    |   |                   System.Resources.ResourceManager.wasm
+    |   |                   System.Resources.Writer.wasm
+    |   |                   System.Runtime.CompilerServices.Unsafe.wasm
+    |   |                   System.Runtime.CompilerServices.VisualC.wasm
+    |   |                   System.Runtime.Extensions.wasm
+    |   |                   System.Runtime.Handles.wasm
+    |   |                   System.Runtime.InteropServices.JavaScript.wasm
+    |   |                   System.Runtime.InteropServices.RuntimeInformation.wasm
+    |   |                   System.Runtime.InteropServices.wasm
+    |   |                   System.Runtime.Intrinsics.wasm
+    |   |                   System.Runtime.Loader.wasm
+    |   |                   System.Runtime.Numerics.wasm
+    |   |                   System.Runtime.Serialization.Formatters.wasm
+    |   |                   System.Runtime.Serialization.Json.wasm
+    |   |                   System.Runtime.Serialization.Primitives.wasm
+    |   |                   System.Runtime.Serialization.wasm
+    |   |                   System.Runtime.Serialization.Xml.wasm
+    |   |                   System.Runtime.wasm
+    |   |                   System.Security.AccessControl.wasm
+    |   |                   System.Security.Claims.wasm
+    |   |                   System.Security.Cryptography.Algorithms.wasm
+    |   |                   System.Security.Cryptography.Cng.wasm
+    |   |                   System.Security.Cryptography.Csp.wasm
+    |   |                   System.Security.Cryptography.Encoding.wasm
+    |   |                   System.Security.Cryptography.OpenSsl.wasm
+    |   |                   System.Security.Cryptography.Primitives.wasm
+    |   |                   System.Security.Cryptography.wasm
+    |   |                   System.Security.Cryptography.X509Certificates.wasm
+    |   |                   System.Security.Principal.wasm
+    |   |                   System.Security.Principal.Windows.wasm
+    |   |                   System.Security.SecureString.wasm
+    |   |                   System.Security.wasm
+    |   |                   System.ServiceModel.Web.wasm
+    |   |                   System.ServiceProcess.wasm
+    |   |                   System.Text.Encoding.CodePages.wasm
+    |   |                   System.Text.Encoding.Extensions.wasm
+    |   |                   System.Text.Encoding.wasm
+    |   |                   System.Text.Encodings.Web.wasm
+    |   |                   System.Text.Json.wasm
+    |   |                   System.Text.RegularExpressions.wasm
+    |   |                   System.Threading.Channels.wasm
+    |   |                   System.Threading.Overlapped.wasm
+    |   |                   System.Threading.Tasks.Dataflow.wasm
+    |   |                   System.Threading.Tasks.Extensions.wasm
+    |   |                   System.Threading.Tasks.Parallel.wasm
+    |   |                   System.Threading.Tasks.wasm
+    |   |                   System.Threading.Thread.wasm
+    |   |                   System.Threading.ThreadPool.wasm
+    |   |                   System.Threading.Timer.wasm
+    |   |                   System.Threading.wasm
+    |   |                   System.Transactions.Local.wasm
+    |   |                   System.Transactions.wasm
+    |   |                   System.ValueTuple.wasm
+    |   |                   System.wasm
+    |   |                   System.Web.HttpUtility.wasm
+    |   |                   System.Web.wasm
+    |   |                   System.Windows.wasm
+    |   |                   System.Xml.Linq.wasm
+    |   |                   System.Xml.ReaderWriter.wasm
+    |   |                   System.Xml.Serialization.wasm
+    |   |                   System.Xml.wasm
+    |   |                   System.Xml.XDocument.wasm
+    |   |                   System.Xml.XmlDocument.wasm
+    |   |                   System.Xml.XmlSerializer.wasm
+    |   |                   System.Xml.XPath.wasm
+    |   |                   System.Xml.XPath.XDocument.wasm
+    |   |                   WindowsBase.wasm
+    |   |                   
+    |   \---Properties
+    |           launchSettings.json
+    |           
+    \---{ExtractFromXgToCsv,ExtractFromXgToCsv.Client}
+        \---{Components
+            \---Pages,Services,Models}
