@@ -2,3 +2,6 @@
 	path = ConvertXgToJson_Lib
 	url = https://github.com/halheinrich/ConvertXgToJson_Lib.git
 	branch = main
+[submodule "ExtractFromXgToCsv"]
+	path = ExtractFromXgToCsv
+	url = https://github.com/halheinrich/ExtractFromXgToCsv
