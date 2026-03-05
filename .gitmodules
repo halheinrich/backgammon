@@ -1,3 +1,4 @@
 [submodule "ConvertXgToJson_Lib"]
 	path = ConvertXgToJson_Lib
 	url = https://github.com/halheinrich/ConvertXgToJson_Lib.git
+	branch = main
