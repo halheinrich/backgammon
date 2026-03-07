@@ -5,3 +5,6 @@
 [submodule "ExtractFromXgToCsv"]
 	path = ExtractFromXgToCsv
 	url = https://github.com/halheinrich/ExtractFromXgToCsv
+[submodule "XgFilter_Lib"]
+	path = XgFilter_Lib
+	url = https://github.com/halheinrich/XgFilter_Lib.git
