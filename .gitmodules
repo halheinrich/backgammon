@@ -8,3 +8,6 @@
 [submodule "XgFilter_Lib"]
 	path = XgFilter_Lib
 	url = https://github.com/halheinrich/XgFilter_Lib.git
+[submodule "XgAnalytics"]
+	path = XgAnalytics
+	url = https://github.com/halheinrich/XgAnalytics
