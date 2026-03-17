@@ -11,3 +11,6 @@
 [submodule "XgAnalytics"]
 	path = XgAnalytics
 	url = https://github.com/halheinrich/XgAnalytics
+[submodule "BackgammonDiagram_Lib"]
+	path = BackgammonDiagram_Lib
+	url = https://github.com/halheinrich/BackgammonDiagram_Lib.git
