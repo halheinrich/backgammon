@@ -14,3 +14,6 @@
 [submodule "BackgammonDiagram_Lib"]
 	path = BackgammonDiagram_Lib
 	url = https://github.com/halheinrich/BackgammonDiagram_Lib.git
+[submodule "BgRLEngine"]
+	path = BgRLEngine
+	url = https://github.com/halheinrich/BgRLEngine
