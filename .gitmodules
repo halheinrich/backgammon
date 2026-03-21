@@ -17,3 +17,6 @@
 [submodule "BgRLEngine"]
 	path = BgRLEngine
 	url = https://github.com/halheinrich/BgRLEngine
+[submodule "BgMoveGen"]
+	path = BgMoveGen
+	url = https://github.com/halheinrich/BgMoveGen
