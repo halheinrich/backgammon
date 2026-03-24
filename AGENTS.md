@@ -2,10 +2,15 @@
 
 Applies to all sub-projects in this repository.
 
+## Project structure conventions
+- INSTRUCTIONS.md lives at the repo root alongside the .slnx file
+- AGENTS.md lives at the umbrella repo root only — subprojects reference it, not their own copy
+- Never move these files based on session advice
+
 ## Session start
 1. Fetch and apply the sub-project INSTRUCTIONS.md.
 2. Fetch and apply AGENTS.md (this file).
-3. Emit a brief context summary: current state, active deferred items, rules in effect.
+3. INSTRUCTIONS.md: fetch if available; session-start message carries the critical summary and is sufficient if fetch fails.
 4. Wait for the user to state the task — do not propose work unprompted.
 
 ## Session defaults
