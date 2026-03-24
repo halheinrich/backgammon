@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `cc307bf`
+**Current umbrella commit:** `34c2230`
 
 ## Stack (all subprojects)
 
@@ -26,7 +26,7 @@ Current submodule pinned commits:
 | `ConvertXgToJson_Lib` | https://github.com/halheinrich/ConvertXgToJson_Lib | `f25850d` |
 | `XgFilter_Lib` | https://github.com/halheinrich/XgFilter_Lib | `4af20df` |
 | `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `132a723` |
-| `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `f706afc` |
+| `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
 | `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `fbfdf4a` |
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `5365dc7` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `ab52cd3` |
@@ -53,7 +53,7 @@ Always specify which Program.cs is being modified:
 ### 1. ConvertXgToJson\_Lib
 
 **Repo:** https://github.com/halheinrich/ConvertXgToJson_Lib
-**Branch:** master
+**Branch:** main
 **Purpose:** Reads .xg and .xgp files; produces DecisionRow records.
 **Solution:** `ConvertXgToJson_Lib\ConvertXgToJson_Lib.slnx`
 **Current commit:** `f25850d`
