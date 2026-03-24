@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `4cb49a0`
+**Current umbrella commit:** `9ebe5ab`
 
 ## Stack (all subprojects)
 
