@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `9ebe5ab`
+**Current umbrella commit:** `5cb5209`
 
 ## Stack (all subprojects)
 
@@ -29,7 +29,7 @@ Current submodule pinned commits:
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
 | `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `fbfdf4a` |
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `5365dc7` |
-| `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `ab52cd3` |
+| `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `5cb5209` |
 
 ## Naming convention
 
@@ -246,17 +246,17 @@ Key facts:
 **Branch:** main
 **Purpose:** C# move generation library for backgammon and all variants. Used by BgRLEngine.
 **Solution:** `BgMoveGen\BgMoveGen.slnx`
-**Current commit:** `ab52cd3`
+**Current commit:** `5cb5209`
 
 Key files:
 
-* BgMoveGen.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/ab52cd3/BgMoveGen/BgMoveGen.csproj
-* BoardState.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/ab52cd3/BgMoveGen/BoardState.cs
-* Move.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/ab52cd3/BgMoveGen/Move.cs
-* MoveGenerator.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/ab52cd3/BgMoveGen/MoveGenerator.cs
-* Play.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/ab52cd3/BgMoveGen/Play.cs
-* Tests.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/ab52cd3/BgMoveGen.Tests/BgMoveGen.Tests.csproj
-* Tests/MoveGeneratorTests.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/ab52cd3/BgMoveGen.Tests/MoveGeneratorTests.cs
+* BgMoveGen.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen/BgMoveGen.csproj
+* BoardState.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen/BoardState.cs
+* Move.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen/Move.cs
+* MoveGenerator.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen/MoveGenerator.cs
+* Play.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen/Play.cs
+* Tests.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen.Tests/BgMoveGen.Tests.csproj
+* Tests/MoveGeneratorTests.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen.Tests/MoveGeneratorTests.cs
 
 Key facts:
 
