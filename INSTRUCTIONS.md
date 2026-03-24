@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `5cb5209`
+**Current umbrella commit:** `e1d8a6c`
 
 ## Stack (all subprojects)
 
@@ -29,7 +29,7 @@ Current submodule pinned commits:
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
 | `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `fbfdf4a` |
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `5365dc7` |
-| `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `5cb5209` |
+| `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `b5c4103` |
 
 ## Naming convention
 
@@ -107,7 +107,7 @@ Key files:
 * Filtering/PlayerFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/PlayerFilter.cs
 * Filtering/DecisionTypeFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/DecisionTypeFilter.cs
 * Filtering/MatchScoreFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/MatchScoreFilter.cs
-* Filtering/ErrorRangeFilter.cs: https://raw.githubusercontent.com/halheinkich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/ErrorRangeFilter.cs
+* Filtering/ErrorRangeFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/ErrorRangeFilter.cs
 * Filtering/PositionTypeFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/PositionTypeFilter.cs
 * Filtering/PlayTypeFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/PlayTypeFilter.cs
 * Classification/IPositionClassifier.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/IPositionClassifier.cs
@@ -115,7 +115,7 @@ Key files:
 * Classification/ContactClassifier.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/ContactClassifier.cs
 * Classification/InnerBoard631Classifier.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/InnerBoard631Classifier.cs
 * Projection/ColumnSelector.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Projection/ColumnSelector.cs
-* FilteredDecisionIterator.cs: https://raw.githubusercontent.com/halheinreich/XgFilter_Lib/4af20df/XgFilter_Lib/FilteredDecisionIterator.cs
+* FilteredDecisionIterator.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/FilteredDecisionIterator.cs
 * Tests/Helpers/DecisionRowBuilder.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/Helpers/DecisionRowBuilder.cs
 * Tests/Classification/RaceClassifierTests.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/Classification/RaceClassifierTests.cs
 * Tests/FilteredDecisionIteratorTests.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/FilteredDecisionIteratorTests.cs
@@ -246,17 +246,17 @@ Key facts:
 **Branch:** main
 **Purpose:** C# move generation library for backgammon and all variants. Used by BgRLEngine.
 **Solution:** `BgMoveGen\BgMoveGen.slnx`
-**Current commit:** `5cb5209`
+**Current commit:** `b5c4103`
 
 Key files:
 
-* BgMoveGen.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen/BgMoveGen.csproj
-* BoardState.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen/BoardState.cs
-* Move.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen/Move.cs
-* MoveGenerator.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen/MoveGenerator.cs
-* Play.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen/Play.cs
-* Tests.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen.Tests/BgMoveGen.Tests.csproj
-* Tests/MoveGeneratorTests.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/5cb5209/BgMoveGen.Tests/MoveGeneratorTests.cs
+* BgMoveGen.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen/BgMoveGen.csproj
+* BoardState.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen/BoardState.cs
+* Move.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen/Move.cs
+* MoveGenerator.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen/MoveGenerator.cs
+* Play.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen/Play.cs
+* Tests.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen.Tests/BgMoveGen.Tests.csproj
+* Tests/MoveGeneratorTests.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen.Tests/MoveGeneratorTests.cs
 
 Key facts:
 
