@@ -1,6 +1,6 @@
 # Backgammon — Shared Rules
 
-Applies to all sub-projects: BgRLEngine, BgMoveGen, and any future additions.
+Applies to all sub-projects in this repository.
 
 ## Session defaults
 - Default to plan mode: propose before writing code or files, wait for explicit approval.
