@@ -2,17 +2,27 @@
 
 Applies to all sub-projects in this repository.
 
+## Session start
+1. Fetch and apply the sub-project INSTRUCTIONS.md.
+2. Fetch and apply AGENTS.md (this file).
+3. Emit a brief context summary: current state, active deferred items, rules in effect.
+4. Wait for the user to state the task — do not propose work unprompted.
+
 ## Session defaults
 - Default to plan mode: propose before writing code or files, wait for explicit approval.
 - To proceed: say "go", "proceed", or "implement it".
 - To skip plan mode for a specific task: say "just do it" or "no plan needed".
 
+## Profiling and benchmarks
+- Always use targeted microbenchmarks, never cProfile runs.
+- Time phases in isolation (move gen, state construction, encoding, forward pass).
+- Output: a clean table — phase, calls/sec, ms/call, % of total. Fits in a terminal.
+- Decision-useful: enough to identify the bottleneck and compare before/after. No noise.
+
 ## Output discipline
-- Profiling and benchmarks: write targeted microbenchmarks that time phases in isolation.
-  Output should be decision-useful — enough to identify the bottleneck and compare before/after.
-  Not a cProfile dump; not artificially compressed.
 - Code output: prefer focused diffs over full-file reprints when changing existing files.
 - Console/log output from tools and scripts: surface what's needed to act, suppress noise.
+- Don't paste long log dumps into chat — describe what you need instead.
 
 ## Commit protocol
 After committing in any sub-project:
@@ -23,8 +33,6 @@ After committing in any sub-project:
 ## Token hygiene
 - Avoid re-summarizing context already in the instructions doc.
 - Don't reprint large code blocks unless directly editing them.
-- Long cProfile / log dumps: don't paste into chat — describe what you need instead,
-  or use the microbenchmark approach.
 
 ## Fetching source files
 GitHub raw URLs are blocked in Claude's container. Standard pattern:
