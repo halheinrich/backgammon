@@ -60,15 +60,15 @@ Always specify which Program.cs is being modified:
 
 Key files:
 
-* DecisionRow.cs: https://raw.githubusercontent.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/Models/DecisionRow.cs
-* XgDecisionIterator.cs: https://raw.githubusercontent.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/XgDecisionIterator.cs
-* XgMatchInfo.cs: https://raw.githubusercontent.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/XgMatchInfo.cs
-* XgGameInfo.cs: https://raw.githubusercontent.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/XgGameInfo.cs
-* XgFileReader.cs: https://raw.githubusercontent.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/XgFileReader.cs
-* BackgammonConstants.cs: https://raw.githubusercontent.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/BackgammonConstants.cs
-* ConvertXgToJson\_Lib.csproj: https://raw.githubusercontent.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/ConvertXgToJson_Lib.csproj
-* Tests.csproj: https://raw.githubusercontent.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib.Tests/ConvertXgToJson_Lib.Tests.csproj
-* GlobalUsings.cs: https://raw.githubusercontent.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib.Tests/GlobalUsings.cs
+* DecisionRow.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/Models/DecisionRow.cs
+* XgDecisionIterator.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/XgDecisionIterator.cs
+* XgMatchInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/XgMatchInfo.cs
+* XgGameInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/XgGameInfo.cs
+* XgFileReader.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/XgFileReader.cs
+* BackgammonConstants.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/BackgammonConstants.cs
+* ConvertXgToJson\_Lib.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib/ConvertXgToJson_Lib.csproj
+* Tests.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib.Tests/ConvertXgToJson_Lib.Tests.csproj
+* GlobalUsings.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f25850d/ConvertXgToJson_Lib.Tests/GlobalUsings.cs
 
 Key facts:
 
@@ -96,29 +96,29 @@ Key facts:
 
 Key files:
 
-* XgFilter\_Lib.csproj: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/XgFilter_Lib.csproj
-* Tests.csproj: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/XgFilter_Lib.Tests.csproj
-* GlobalUsings.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/GlobalUsings.cs
-* Enums/PositionType.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Enums/PositionType.cs
-* Enums/PlayType.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Enums/PlayType.cs
-* Filtering/IDecisionFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/IDecisionFilter.cs
-* Filtering/IMatchFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/IMatchFilter.cs
-* Filtering/DecisionFilterSet.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/DecisionFilterSet.cs
-* Filtering/PlayerFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/PlayerFilter.cs
-* Filtering/DecisionTypeFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/DecisionTypeFilter.cs
-* Filtering/MatchScoreFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/MatchScoreFilter.cs
-* Filtering/ErrorRangeFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/ErrorRangeFilter.cs
-* Filtering/PositionTypeFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/PositionTypeFilter.cs
-* Filtering/PlayTypeFilter.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/PlayTypeFilter.cs
-* Classification/IPositionClassifier.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/IPositionClassifier.cs
-* Classification/RaceClassifier.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/RaceClassifier.cs
-* Classification/ContactClassifier.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/ContactClassifier.cs
-* Classification/InnerBoard631Classifier.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/InnerBoard631Classifier.cs
-* Projection/ColumnSelector.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Projection/ColumnSelector.cs
-* FilteredDecisionIterator.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/FilteredDecisionIterator.cs
-* Tests/Helpers/DecisionRowBuilder.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/Helpers/DecisionRowBuilder.cs
-* Tests/Classification/RaceClassifierTests.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/Classification/RaceClassifierTests.cs
-* Tests/FilteredDecisionIteratorTests.cs: https://raw.githubusercontent.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/FilteredDecisionIteratorTests.cs
+* XgFilter\_Lib.csproj: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/XgFilter_Lib.csproj
+* Tests.csproj: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/XgFilter_Lib.Tests.csproj
+* GlobalUsings.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/GlobalUsings.cs
+* Enums/PositionType.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Enums/PositionType.cs
+* Enums/PlayType.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Enums/PlayType.cs
+* Filtering/IDecisionFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/IDecisionFilter.cs
+* Filtering/IMatchFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/IMatchFilter.cs
+* Filtering/DecisionFilterSet.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/DecisionFilterSet.cs
+* Filtering/PlayerFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/PlayerFilter.cs
+* Filtering/DecisionTypeFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/DecisionTypeFilter.cs
+* Filtering/MatchScoreFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/MatchScoreFilter.cs
+* Filtering/ErrorRangeFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/ErrorRangeFilter.cs
+* Filtering/PositionTypeFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/PositionTypeFilter.cs
+* Filtering/PlayTypeFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/PlayTypeFilter.cs
+* Classification/IPositionClassifier.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/IPositionClassifier.cs
+* Classification/RaceClassifier.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/RaceClassifier.cs
+* Classification/ContactClassifier.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/ContactClassifier.cs
+* Classification/InnerBoard631Classifier.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/InnerBoard631Classifier.cs
+* Projection/ColumnSelector.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Projection/ColumnSelector.cs
+* FilteredDecisionIterator.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/FilteredDecisionIterator.cs
+* Tests/Helpers/DecisionRowBuilder.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/Helpers/DecisionRowBuilder.cs
+* Tests/Classification/RaceClassifierTests.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/Classification/RaceClassifierTests.cs
+* Tests/FilteredDecisionIteratorTests.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/FilteredDecisionIteratorTests.cs
 
 Key facts:
 
@@ -146,14 +146,14 @@ Key facts:
 
 Key files:
 
-* ExtractFromXgToCsv.csproj: https://raw.githubusercontent.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/ExtractFromXgToCsv.csproj
-* Program.cs (server): https://raw.githubusercontent.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Program.cs
-* Program.cs (client): https://raw.githubusercontent.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv.Client/Program.cs
-* Services/XgProcessingService.cs: https://raw.githubusercontent.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Services/XgProcessingService.cs
-* Services/JobStore.cs: https://raw.githubusercontent.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Services/JobStore.cs
-* Controllers/ShutdownController.cs: https://raw.githubusercontent.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Controllers/ShutdownController.cs
-* Components/Pages/Home.razor: https://raw.githubusercontent.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Components/Pages/Home.razor
-* Components/FilterPanel.razor: https://raw.githubusercontent.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Components/FilterPanel.razor
+* ExtractFromXgToCsv.csproj: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/ExtractFromXgToCsv.csproj
+* Program.cs (server): https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Program.cs
+* Program.cs (client): https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv.Client/Program.cs
+* Services/XgProcessingService.cs: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Services/XgProcessingService.cs
+* Services/JobStore.cs: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Services/JobStore.cs
+* Controllers/ShutdownController.cs: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Controllers/ShutdownController.cs
+* Components/Pages/Home.razor: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Components/Pages/Home.razor
+* Components/FilterPanel.razor: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Components/FilterPanel.razor
 
 Key facts:
 
@@ -171,7 +171,7 @@ Key facts:
 **Repo:** https://github.com/halheinrich/XgAnalytics
 **Branch:** main
 **Purpose:** Ad-hoc analysis tools and queries against .xg/.xgp files.
-**Current commit:** `f706afc`
+**Current commit:** `a53089f`
 
 Current analyses:
 
@@ -192,17 +192,17 @@ Current analyses:
 
 Key files:
 
-* BackgammonDiagram\_Lib.csproj: https://raw.githubusercontent.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/BackgammonDiagram_Lib.csproj
-* Models/DiagramRequest.cs: https://raw.githubusercontent.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Models/DiagramRequest.cs
-* Rendering/DiagramRenderer.cs: https://raw.githubusercontent.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Rendering/DiagramRenderer.cs
-* Rendering/BoardLayout.cs: https://raw.githubusercontent.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Rendering/BoardLayout.cs
-* Rendering/ISvgRasterizer.cs: https://raw.githubusercontent.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Rendering/ISvgRasterizer.cs
-* Rendering/SkiaSharpRasterizer.cs: https://raw.githubusercontent.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Rendering/SkiaSharpRasterizer.cs
-* Themes/ThemeRegistry.cs: https://raw.githubusercontent.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Themes/ThemeRegistry.cs
-* Themes/GreyscaleTheme.cs: https://raw.githubusercontent.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Themes/GreyscaleTheme.cs
-* Tests.csproj: https://raw.githubusercontent.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib.Tests/BackgammonDiagram_Lib.Tests.csproj
-* Tests/DiagramRendererTests.cs: https://raw.githubusercontent.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib.Tests/DiagramRendererTests.cs
-* Tests/TestPaths.cs: https://raw.githubusercontent.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib.Tests/TestPaths.cs
+* BackgammonDiagram\_Lib.csproj: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/BackgammonDiagram_Lib.csproj
+* Models/DiagramRequest.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Models/DiagramRequest.cs
+* Rendering/DiagramRenderer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Rendering/DiagramRenderer.cs
+* Rendering/BoardLayout.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Rendering/BoardLayout.cs
+* Rendering/ISvgRasterizer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Rendering/ISvgRasterizer.cs
+* Rendering/SkiaSharpRasterizer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Rendering/SkiaSharpRasterizer.cs
+* Themes/ThemeRegistry.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Themes/ThemeRegistry.cs
+* Themes/GreyscaleTheme.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Themes/GreyscaleTheme.cs
+* Tests.csproj: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib.Tests/BackgammonDiagram_Lib.Tests.csproj
+* Tests/DiagramRendererTests.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib.Tests/DiagramRendererTests.cs
+* Tests/TestPaths.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib.Tests/TestPaths.cs
 
 Key decisions:
 
@@ -222,6 +222,22 @@ Key decisions:
 **Branch:** main
 **Purpose:** Reinforcement learning engine for backgammon and variants. Trained via self-play (tabula rasa). Portfolio of specialist sub-engines coordinated by a router.
 **Current commit:** `4eb6d10`
+
+Key files:
+
+* main.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/main.py
+* engine/state.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/engine/state.py
+* engine/network.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/engine/network.py
+* engine/dice.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/engine/dice.py
+* engine/game.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/engine/game.py
+* engine/setup_generator.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/engine/setup_generator.py
+* training/td_trainer.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/training/td_trainer.py
+* utils/sprt.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/utils/sprt.py
+* configs/default.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/configs/default.yaml
+* configs/dmp.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/configs/dmp.yaml
+* configs/gammon_avoiding.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/configs/gammon_avoiding.yaml
+* configs/gammon_seeking.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/configs/gammon_seeking.yaml
+* configs/money.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/configs/money.yaml
 
 Key facts:
 
@@ -250,13 +266,13 @@ Key facts:
 
 Key files:
 
-* BgMoveGen.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/BgMoveGen.csproj
-* BoardState.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/BoardState.cs
-* Move.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/Move.cs
-* MoveGenerator.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/MoveGenerator.cs
-* Play.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/Play.cs
-* Tests.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen.Tests/BgMoveGen.Tests.csproj
-* Tests/MoveGeneratorTests.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen.Tests/MoveGeneratorTests.cs
+* BgMoveGen.csproj: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/BgMoveGen.csproj
+* BoardState.cs: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/BoardState.cs
+* Move.cs: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/Move.cs
+* MoveGenerator.cs: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/MoveGenerator.cs
+* Play.cs: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/Play.cs
+* Tests.csproj: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen.Tests/BgMoveGen.Tests.csproj
+* Tests/MoveGeneratorTests.cs: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen.Tests/MoveGeneratorTests.cs
 
 Key facts:
 
@@ -266,6 +282,7 @@ Key facts:
 * 3.4 μs/call, avoidance-based dedup, no HashSet
 * Three public entry points: GenerateStates, EnumerateStates, NextMove iterator
 * 59 tests green
+* Pass returns flipped state; get_starting_position export added
 
 ---
 
@@ -278,7 +295,7 @@ Key facts:
 | ExtractFromXgToCsv | 🔧 In progress — polling-based progress display working end-to-end; 951,973 rows from 6,660 files in 447s; exit button, InnerBoard631 filter added |
 | XgAnalytics | 🔧 In progress — player match count, NonStandardStarts, MatchScoreDistribution complete |
 | BackgammonDiagram\_Lib | 🔧 In progress — BoardLayout, DiagramRenderer geometry, test scaffold; PNG rendering, greyscale theme added |
-| BgRLEngine | 🔧 In progress — DMP long run: 88% throughput improvement via BgMoveGen NativeAOT integration |
+| BgRLEngine | 🔧 In progress — 88% throughput improvement via BgMoveGen NativeAOT integration |
 | BgMoveGen | ✅ Complete — Pass returns flipped state; get_starting_position export added; 59 tests passing |
 
 ### In progress
@@ -292,6 +309,7 @@ Key facts:
 * Priming, Blitz, HoldingGame classifiers
 * PlayTypeFilter
 * ExtractFromXgToCsv gets 0 rows after XGID fix — to be diagnosed from ExtractFromXgToCsv project
+* XgAnalytics — add key files section to INSTRUCTIONS.md
 
 ### Key decisions
 
@@ -306,6 +324,7 @@ Key facts:
 * Home.razor applies DecisionFilterSet to `_rows` before CSV output and displays filtered/total row count
 * WASM refactor: all .xg parsing, filtering, and CSV generation moved to client; server is thin host only
 * JobStore.cs added for polling-based progress display
+* raw.githack.com adopted as standard URL format for all source file fetches
 
 ---
 
@@ -338,9 +357,9 @@ This project (Backgammon Umbrella) is the **coordination layer** only. Heads-dow
 
 After every GitHub commit:
 
-1. **Submodule commit** — run `git rev-parse HEAD` in the submodule dir; update the short hash in the subproject header and in every raw URL for that submodule
+1. **Submodule commit** — run `git rev-parse --short HEAD` in the submodule dir; update the short hash in the subproject header and in every raw URL for that submodule
 2. **Umbrella commit** — `cd` to umbrella dir, `git add <folder>`, commit, update **Current umbrella commit** and the submodule table
-3. **Key files** — add raw GitHub URLs for any new files created this session
+3. **Key files** — add raw.githack.com URLs for any new files created this session
 4. **Current status table** — update subproject status
 5. **In progress / Deferred** — move items as appropriate
 6. **Key decisions** — append any new decisions made this session
@@ -352,4 +371,4 @@ After every GitHub commit:
 
 ## GitHub fetch workaround
 
-See AGENTS.md. Raw URLs are DNS-blocked in Claude's container; blob URLs work as fallback. Always paste URLs into chat for Claude to fetch.
+See AGENTS.md. Use `raw.githack.com` URLs exclusively — raw.githubusercontent.com is blocked, blob URLs are flaky.

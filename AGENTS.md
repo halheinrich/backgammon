@@ -31,7 +31,7 @@ Applies to all sub-projects in this repository.
 
 ## Commit protocol
 After committing in any sub-project:
-1. Note the short hash (`git rev-parse HEAD`)
+1. Note the short hash (`git rev-parse --short HEAD`)
 2. Update the commit hash and any raw URLs in that sub-project's instructions doc
 3. Return to the umbrella project and update hashes + umbrella INSTRUCTIONS.md
 
@@ -40,14 +40,12 @@ After committing in any sub-project:
 - Don't reprint large code blocks unless directly editing them.
 
 ## Fetching source files
-GitHub raw URLs are blocked in Claude's container. Standard pattern:
-1. Ask Claude: "Give me the URLs I need to fetch"
-2. Claude lists the raw GitHub URLs
-3. Paste those URLs back into the chat
-4. Claude calls web_fetch on each URL
+Standard URL format for all source file links:
+`https://raw.githack.com/halheinrich/{repo}/{hash}/{path}`
 
-If a raw URL returns 404, use the blob URL as fallback:
-- Raw: `https://raw.githubusercontent.com/halheinrich/REPO/main/FILE`
-- Blob: `https://github.com/halheinrich/REPO/blob/main/FILE`
+Use the pinned commit hash from the submodule table — not `main`.
 
-Blob URLs work but return HTML with navigation chrome — raw is preferred when available.
+- `raw.githack.com` — plain text, no CDN caching, always current for the hash
+- `cdn.githack.com` — CDN-cached, faster but may lag on fresh commits; avoid for session fetches
+
+`raw.githubusercontent.com` is blocked in Claude's container. `github.com` blob URLs are flaky (robots.txt + rate limiting). Use `raw.githack.com` exclusively.
