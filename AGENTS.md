@@ -6,6 +6,8 @@ Applies to all sub-projects in this repository.
 - INSTRUCTIONS.md lives at the repo root alongside the .slnx file
 - AGENTS.md lives at the umbrella repo root only — subprojects reference it, not their own copy
 - Never move these files based on session advice
+- VS solution layout: `.slnx` at repo root, source files under `{ProjectName}/{path}`. All repo-relative source file paths require a `{ProjectName}/` prefix.
+
 
 ## Session start
 1. Fetch and apply the sub-project INSTRUCTIONS.md.
