@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `4b90fd1`
+**Current umbrella commit:** `62bdafb`
 
 ## Stack (all subprojects)
 
@@ -28,7 +28,7 @@ Current submodule pinned commits:
 | `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `132a723` |
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
 | `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `fbfdf4a` |
-| `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `4eb6d10` |
+| `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `1e790ac` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `cecc1f8` |
 
 ## Naming convention
@@ -229,23 +229,23 @@ Key decisions:
 **Repo:** https://github.com/halheinrich/BgRLEngine
 **Branch:** main
 **Purpose:** Reinforcement learning engine for backgammon and variants. Trained via self-play (tabula rasa). Portfolio of specialist sub-engines coordinated by a router.
-**Current commit:** `4eb6d10`
+**Current commit:** `1e790ac`
 
 Key files:
 
-* main.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/main.py
-* engine/state.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/engine/state.py
-* engine/network.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/engine/network.py
-* engine/dice.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/engine/dice.py
-* engine/game.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/engine/game.py
-* engine/setup_generator.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/engine/setup_generator.py
-* training/td_trainer.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/training/td_trainer.py
-* utils/sprt.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/utils/sprt.py
-* configs/default.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/configs/default.yaml
-* configs/dmp.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/configs/dmp.yaml
-* configs/gammon_avoiding.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/configs/gammon_avoiding.yaml
-* configs/gammon_seeking.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/configs/gammon_seeking.yaml
-* configs/money.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/configs/money.yaml
+* main.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/main.py
+* engine/state.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/engine/state.py
+* engine/network.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/engine/network.py
+* engine/dice.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/engine/dice.py
+* engine/game.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/engine/game.py
+* engine/setup_generator.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/engine/setup_generator.py
+* training/td_trainer.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/training/td_trainer.py
+* utils/sprt.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/utils/sprt.py
+* configs/default.yaml: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/configs/default.yaml
+* configs/dmp.yaml: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/configs/dmp.yaml
+* configs/gammon_avoiding.yaml: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/configs/gammon_avoiding.yaml
+* configs/gammon_seeking.yaml: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/configs/gammon_seeking.yaml
+* configs/money.yaml: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/configs/money.yaml
 
 Key facts:
 
@@ -303,7 +303,7 @@ Key facts:
 | ExtractFromXgToCsv | 🔧 In progress — polling-based progress display working end-to-end; 951,973 rows from 6,660 files in 447s; exit button, InnerBoard631 filter added |
 | XgAnalytics | 🔧 In progress — player match count, NonStandardStarts, MatchScoreDistribution complete |
 | BackgammonDiagram\_Lib | 🔧 In progress — BoardLayout, DiagramRenderer geometry, test scaffold; PNG rendering, greyscale theme added |
-| BgRLEngine | 🔧 In progress — 88% throughput improvement via BgMoveGen NativeAOT integration |
+| BgRLEngine | 🔧 encode_board_batch added (7.5x speedup, 2.4x games/s); SPRT reset bug fixed; DMP long run in progress |
 | BgMoveGen | ✅ Complete — Pass returns flipped state; get_starting_position export added; 59 tests passing |
 
 ### In progress
