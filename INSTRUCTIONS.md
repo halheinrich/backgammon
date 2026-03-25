@@ -233,19 +233,19 @@ Key decisions:
 
 Key files:
 
-* main.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/main.py
-* engine/state.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/engine/state.py
-* engine/network.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/engine/network.py
-* engine/dice.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/engine/dice.py
-* engine/game.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/engine/game.py
-* engine/setup_generator.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/engine/setup_generator.py
-* training/td_trainer.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/training/td_trainer.py
-* utils/sprt.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/utils/sprt.py
-* configs/default.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/configs/default.yaml
-* configs/dmp.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/configs/dmp.yaml
-* configs/gammon_avoiding.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/configs/gammon_avoiding.yaml
-* configs/gammon_seeking.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/configs/gammon_seeking.yaml
-* configs/money.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/configs/money.yaml
+* main.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/main.py
+* engine/state.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/engine/state.py
+* engine/network.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/engine/network.py
+* engine/dice.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/engine/dice.py
+* engine/game.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/engine/game.py
+* engine/setup_generator.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/engine/setup_generator.py
+* training/td_trainer.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/training/td_trainer.py
+* utils/sprt.py: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/utils/sprt.py
+* configs/default.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/configs/default.yaml
+* configs/dmp.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/configs/dmp.yaml
+* configs/gammon_avoiding.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/configs/gammon_avoiding.yaml
+* configs/gammon_seeking.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/configs/gammon_seeking.yaml
+* configs/money.yaml: https://raw.githack.com/halheinrich/BgRLEngine/4eb6d10/BgRLEngine/configs/money.yaml
 
 Key facts:
 
