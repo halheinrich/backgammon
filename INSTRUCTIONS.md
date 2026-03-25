@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `e1d8a6c`
+**Current umbrella commit:** `4b90fd1`
 
 ## Stack (all subprojects)
 
@@ -28,8 +28,8 @@ Current submodule pinned commits:
 | `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `132a723` |
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
 | `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `fbfdf4a` |
-| `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `5365dc7` |
-| `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `b5c4103` |
+| `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `4eb6d10` |
+| `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `cecc1f8` |
 
 ## Naming convention
 
@@ -221,7 +221,7 @@ Key decisions:
 **Repo:** https://github.com/halheinrich/BgRLEngine
 **Branch:** main
 **Purpose:** Reinforcement learning engine for backgammon and variants. Trained via self-play (tabula rasa). Portfolio of specialist sub-engines coordinated by a router.
-**Current commit:** `5365dc7`
+**Current commit:** `4eb6d10`
 
 Key facts:
 
@@ -246,17 +246,17 @@ Key facts:
 **Branch:** main
 **Purpose:** C# move generation library for backgammon and all variants. Used by BgRLEngine.
 **Solution:** `BgMoveGen\BgMoveGen.slnx`
-**Current commit:** `b5c4103`
+**Current commit:** `cecc1f8`
 
 Key files:
 
-* BgMoveGen.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen/BgMoveGen.csproj
-* BoardState.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen/BoardState.cs
-* Move.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen/Move.cs
-* MoveGenerator.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen/MoveGenerator.cs
-* Play.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen/Play.cs
-* Tests.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen.Tests/BgMoveGen.Tests.csproj
-* Tests/MoveGeneratorTests.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/b5c4103/BgMoveGen.Tests/MoveGeneratorTests.cs
+* BgMoveGen.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/BgMoveGen.csproj
+* BoardState.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/BoardState.cs
+* Move.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/Move.cs
+* MoveGenerator.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/MoveGenerator.cs
+* Play.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/Play.cs
+* Tests.csproj: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen.Tests/BgMoveGen.Tests.csproj
+* Tests/MoveGeneratorTests.cs: https://raw.githubusercontent.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen.Tests/MoveGeneratorTests.cs
 
 Key facts:
 
@@ -265,7 +265,7 @@ Key facts:
 * BgRLEngine depends on BgMoveGen
 * 3.4 μs/call, avoidance-based dedup, no HashSet
 * Three public entry points: GenerateStates, EnumerateStates, NextMove iterator
-* 50 tests green
+* 59 tests green
 
 ---
 
@@ -278,8 +278,8 @@ Key facts:
 | ExtractFromXgToCsv | 🔧 In progress — polling-based progress display working end-to-end; 951,973 rows from 6,660 files in 447s; exit button, InnerBoard631 filter added |
 | XgAnalytics | 🔧 In progress — player match count, NonStandardStarts, MatchScoreDistribution complete |
 | BackgammonDiagram\_Lib | 🔧 In progress — BoardLayout, DiagramRenderer geometry, test scaffold; PNG rendering, greyscale theme added |
-| BgRLEngine | 🔧 In progress — DMP long run: level 4 in 100K games; equity comparison script added; config-specific metrics next |
-| BgMoveGen | ✅ Complete — move generation library, all tests passing |
+| BgRLEngine | 🔧 In progress — DMP long run: 88% throughput improvement via BgMoveGen NativeAOT integration |
+| BgMoveGen | ✅ Complete — Pass returns flipped state; get_starting_position export added; 59 tests passing |
 
 ### In progress
 
