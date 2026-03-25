@@ -173,6 +173,14 @@ Key facts:
 **Purpose:** Ad-hoc analysis tools and queries against .xg/.xgp files.
 **Current commit:** `a53089f`
 
+Key files:
+
+* XgAnalytics.slnx: https://raw.githack.com/halheinrich/XgAnalytics/a53089f/XgAnalytics.slnx
+* Analyses.cs: https://raw.githack.com/halheinrich/XgAnalytics/a53089f/XgAnalytics/Analyses.cs
+* XgAnalytics.csproj: https://raw.githack.com/halheinrich/XgAnalytics/a53089f/XgAnalytics/XgAnalytics.csproj
+* Tests/AnalysesTests.cs: https://raw.githack.com/halheinrich/XgAnalytics/a53089f/XgAnalytics.Tests/AnalysesTests.cs
+* Tests/XgAnalytics.Tests.csproj: https://raw.githack.com/halheinrich/XgAnalytics/a53089f/XgAnalytics.Tests/XgAnalytics.Tests.csproj
+
 Current analyses:
 
 * Player match count — scans .xg/.xgp files, outputs CSV of players and match counts
