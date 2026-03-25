@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `62bdafb`
+**Current umbrella commit:** `42f471f`
 
 ## Stack (all subprojects)
 
@@ -28,8 +28,8 @@ Current submodule pinned commits:
 | `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `132a723` |
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
 | `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `fbfdf4a` |
-| `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `1e790ac` |
-| `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `cecc1f8` |
+| `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `b1367bf` |
+| `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
 
 ## Naming convention
 
@@ -229,23 +229,23 @@ Key decisions:
 **Repo:** https://github.com/halheinrich/BgRLEngine
 **Branch:** main
 **Purpose:** Reinforcement learning engine for backgammon and variants. Trained via self-play (tabula rasa). Portfolio of specialist sub-engines coordinated by a router.
-**Current commit:** `1e790ac`
+**Current commit:** `b1367bf`
 
 Key files:
 
-* main.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/main.py
-* engine/state.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/engine/state.py
-* engine/network.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/engine/network.py
-* engine/dice.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/engine/dice.py
-* engine/game.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/engine/game.py
-* engine/setup_generator.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/engine/setup_generator.py
-* training/td_trainer.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/training/td_trainer.py
-* utils/sprt.py: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/utils/sprt.py
-* configs/default.yaml: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/configs/default.yaml
-* configs/dmp.yaml: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/configs/dmp.yaml
-* configs/gammon_avoiding.yaml: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/configs/gammon_avoiding.yaml
-* configs/gammon_seeking.yaml: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/configs/gammon_seeking.yaml
-* configs/money.yaml: https://raw.githack.com/halheinrich/BgRLEngine/1e790ac/BgRLEngine/configs/money.yaml
+* main.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/main.py
+* engine/state.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/engine/state.py
+* engine/network.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/engine/network.py
+* engine/dice.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/engine/dice.py
+* engine/game.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/engine/game.py
+* engine/setup_generator.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/engine/setup_generator.py
+* training/td_trainer.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/training/td_trainer.py
+* utils/sprt.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/utils/sprt.py
+* configs/default.yaml: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/configs/default.yaml
+* configs/dmp.yaml: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/configs/dmp.yaml
+* configs/gammon_avoiding.yaml: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/configs/gammon_avoiding.yaml
+* configs/gammon_seeking.yaml: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/configs/gammon_seeking.yaml
+* configs/money.yaml: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/configs/money.yaml
 
 Key facts:
 
@@ -270,17 +270,18 @@ Key facts:
 **Branch:** main
 **Purpose:** C# move generation library for backgammon and all variants. Used by BgRLEngine.
 **Solution:** `BgMoveGen\BgMoveGen.slnx`
-**Current commit:** `cecc1f8`
+**Current commit:** `e8e8d06`
 
 Key files:
 
-* BgMoveGen.csproj: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/BgMoveGen.csproj
-* BoardState.cs: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/BoardState.cs
-* Move.cs: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/Move.cs
-* MoveGenerator.cs: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/MoveGenerator.cs
-* Play.cs: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen/Play.cs
-* Tests.csproj: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen.Tests/BgMoveGen.Tests.csproj
-* Tests/MoveGeneratorTests.cs: https://raw.githack.com/halheinrich/BgMoveGen/cecc1f8/BgMoveGen.Tests/MoveGeneratorTests.cs
+* BgMoveGen.csproj: https://raw.githack.com/halheinrich/BgMoveGen/e8e8d06/BgMoveGen/BgMoveGen.csproj
+* BoardState.cs: https://raw.githack.com/halheinrich/BgMoveGen/e8e8d06/BgMoveGen/BoardState.cs
+* Move.cs: https://raw.githack.com/halheinrich/BgMoveGen/e8e8d06/BgMoveGen/Move.cs
+* MoveGenerator.cs: https://raw.githack.com/halheinrich/BgMoveGen/e8e8d06/BgMoveGen/MoveGenerator.cs
+* Play.cs: https://raw.githack.com/halheinrich/BgMoveGen/e8e8d06/BgMoveGen/Play.cs
+* Tests.csproj: https://raw.githack.com/halheinrich/BgMoveGen/e8e8d06/BgMoveGen.Tests/BgMoveGen.Tests.csproj
+* Tests/MoveGeneratorTests.cs: https://raw.githack.com/halheinrich/BgMoveGen/e8e8d06/BgMoveGen.Tests/MoveGeneratorTests.cs
+* get_version() export added
 
 Key facts:
 
@@ -289,7 +290,7 @@ Key facts:
 * BgRLEngine depends on BgMoveGen
 * 3.4 μs/call, avoidance-based dedup, no HashSet
 * Three public entry points: GenerateStates, EnumerateStates, NextMove iterator
-* 59 tests green
+* 61 tests green
 * Pass returns flipped state; get_starting_position export added
 
 ---
