@@ -30,6 +30,8 @@ Current submodule pinned commits:
 | `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `fbfdf4a` |
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `b1367bf` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
+| `BgPositionRouter` | https://github.com/halheinrich/BgPositionRouter | TBD |
+| `BgInference` | https://github.com/halheinrich/BgInference | TBD |
 
 ## Naming convention
 
@@ -295,6 +297,44 @@ Key facts:
 
 ---
 
+### 8. BgPositionRouter
+
+**Repo:** https://github.com/halheinrich/BgPositionRouter
+**Branch:** main
+**Purpose:** Position classification and routing. Decides which specialist NN to invoke; provides race equity via lookup tables for short races.
+**Solution:** `BgPositionRouter\BgPositionRouter.slnx`
+**Depends on:** BgMoveGen
+**Current commit:** TBD
+
+Key facts:
+
+* Decision tree — heuristic rules first, learned classifier deferred
+* Race boundary: zero contact (existing is_race() rule)
+* Other boundaries: TBD per specialist sub-engine
+* Lookup tables for race equity (short races, exact answers)
+* Falls through to appropriate ONNX model for everything else
+* Starting positions are BgMoveGen's concern, not this library's
+
+### 9. BgInference
+
+**Repo:** https://github.com/halheinrich/BgInference
+**Branch:** main
+**Purpose:** C# inference library consuming trained BgRLEngine ONNX models. Produces ranked moves with equity (checker play) and double/take/pass decisions with equity (cube).
+**Solution:** `BgInference\BgInference.slnx`
+**Depends on:** BgRLEngine (ONNX export), BgMoveGen, BgPositionRouter
+**Current commit:** TBD
+
+Key facts:
+
+* Inputs: board position, cube context (value + owner), match score or money game flag
+* Outputs: checker play — ranked moves with equity; cube — double/take/pass with equity
+* Use cases: evaluation/analysis, online tournament play, human vs engine
+* ONNX runtime via Microsoft.ML.OnnxRuntime
+* Routing tree (race vs general, cube classification) lives here, not in BgRLEngine
+* BgRLEngine ONNX export currently deferred — BgInference blocked until then
+
+---
+
 ## Current status
 
 | Subproject | Status |
@@ -306,6 +346,9 @@ Key facts:
 | BackgammonDiagram\_Lib | 🔧 In progress — BoardLayout, DiagramRenderer geometry, test scaffold; PNG rendering, greyscale theme added |
 | BgRLEngine | 🔧 encode_board_batch added (7.5x speedup, 2.4x games/s); SPRT reset bug fixed; DMP long run in progress |
 | BgMoveGen | ✅ Complete — Pass returns flipped state; get_starting_position export added; 59 tests passing |
+| BgPositionRouter | ⬜ Not started |
+| BgInference | ⬜ Not started — blocked on BgRLEngine ONNX export |
+
 
 ### In progress
 
@@ -352,6 +395,7 @@ This project (Backgammon Umbrella) is the **coordination layer** only. Heads-dow
 | **XgAnalytics** | Ad-hoc analysis tools and queries against .xg/.xgp files |
 | **BackgammonDiagram\_Lib** | Rendering library — board diagrams as SVG, PNG, PDF, PowerPoint, Blazor component |
 | **BgRLEngine** | RL engine for backgammon and variants — Python/PyTorch training, ONNX export |
+| **BgPositionRouter** | Position classification, routing, race lookup tables |
 | **BgMoveGen** | C# move generation library for backgammon and all variants |
 
 ### Workflow
