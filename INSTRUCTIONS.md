@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `0938a91`
+**Current umbrella commit:** `deb6be9`
 
 ## Stack (all subprojects)
 
@@ -12,7 +12,6 @@ Python / PyTorch (BgRLEngine) — also in Visual Studio 2026
 ## Git submodules
 
 The umbrella repo tracks each subproject as a git submodule. After committing in any submodule, always update the umbrella:
-
 ```
 cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon"
 git add <SubmoduleFolderName>
@@ -23,15 +22,13 @@ Current submodule pinned commits:
 
 | Submodule folder | Repo | Pinned commit |
 | --- | --- | --- |
-| `ConvertXgToJson_Lib` | https://github.com/halheinrich/ConvertXgToJson_Lib | `f4433a3` |
-| `XgFilter_Lib` | https://github.com/halheinrich/XgFilter_Lib | `4af20df` |
+| `ConvertXgToJson_Lib` | https://github.com/halheinrich/ConvertXgToJson_Lib | `d5c3ed6` |
+| `XgFilter_Lib` | https://github.com/halheinrich/XgFilter_Lib | `3e26ce5` |
 | `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `132a723` |
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
 | `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `fbfdf4a` |
-| `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `b1367bf` |
+| `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `e14caa1` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
-| `BgPositionRouter` | https://github.com/halheinrich/BgPositionRouter | TBD |
-| `BgInference` | https://github.com/halheinrich/BgInference | TBD |
 
 ## Naming convention
 
@@ -52,31 +49,33 @@ Always specify which Program.cs is being modified:
 
 ## Subprojects
 
-### 1. ConvertXgToJson\_Lib
+### 1. ConvertXgToJson_Lib
 
 **Repo:** https://github.com/halheinrich/ConvertXgToJson_Lib
 **Branch:** main
 **Purpose:** Reads .xg and .xgp files; produces DecisionRow records.
 **Solution:** `ConvertXgToJson_Lib\ConvertXgToJson_Lib.slnx`
-**Current commit:** `f4433a3`
+**Current commit:** `d5c3ed6`
 
 Key files:
 
-* DecisionRow.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f4433a3/ConvertXgToJson_Lib/Models/DecisionRow.cs
-* XgDecisionIterator.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f4433a3/ConvertXgToJson_Lib/XgDecisionIterator.cs
-* XgMatchInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f4433a3/ConvertXgToJson_Lib/XgMatchInfo.cs
-* XgGameInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f4433a3/ConvertXgToJson_Lib/XgGameInfo.cs
-* XgFileReader.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f4433a3/ConvertXgToJson_Lib/XgFileReader.cs
-* BackgammonConstants.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f4433a3/ConvertXgToJson_Lib/BackgammonConstants.cs
-* ConvertXgToJson\_Lib.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f4433a3/ConvertXgToJson_Lib/ConvertXgToJson_Lib.csproj
-* Tests.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f4433a3/ConvertXgToJson_Lib.Tests/ConvertXgToJson_Lib.Tests.csproj
-* GlobalUsings.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/f4433a3/ConvertXgToJson_Lib.Tests/GlobalUsings.cs
+* DecisionRow.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/d5c3ed6/ConvertXgToJson_Lib/Models/DecisionRow.cs
+* XgDecisionIterator.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/d5c3ed6/ConvertXgToJson_Lib/XgDecisionIterator.cs
+* XgMatchInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/d5c3ed6/ConvertXgToJson_Lib/XgMatchInfo.cs
+* XgGameInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/d5c3ed6/ConvertXgToJson_Lib/XgGameInfo.cs
+* XgFileReader.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/d5c3ed6/ConvertXgToJson_Lib/XgFileReader.cs
+* BackgammonConstants.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/d5c3ed6/ConvertXgToJson_Lib/BackgammonConstants.cs
+* ConvertXgToJson_Lib.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/d5c3ed6/ConvertXgToJson_Lib/ConvertXgToJson_Lib.csproj
+* Tests.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/d5c3ed6/ConvertXgToJson_Lib.Tests/ConvertXgToJson_Lib.Tests.csproj
+* GlobalUsings.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/d5c3ed6/ConvertXgToJson_Lib.Tests/GlobalUsings.cs
 
 Key facts:
 
 * `DecisionRow.Board` is `int[]` (26 elements): `board[0]` = opponent bar (never positive), `board[1–24]` = points 1–24 from player on roll's perspective, `board[25]` = player bar (never negative). Positive = player on roll; negative = opponent.
 * `Board` is not exposed in CSV output.
-* `ToBoard` / `FlipBoard` in XgDecisionIterator handle player perspective normalization.
+* `ToBoard` / `FlipPosition` in XgDecisionIterator handle perspective normalization.
+* Taker cube row board is always doubler POV — no flip. `FlipBoard` removed as dead code.
+* `MatchScoreFor(int activePlayer)` — returns match score from active player's perspective.
 * XGID encoding always normalized to bottom-player perspective. All tests pass.
 * XgIteratorState early-exit mechanism in place.
 * XgMatchInfo populates match-level metadata before first row.
@@ -87,53 +86,53 @@ Key facts:
 
 ---
 
-### 2. XgFilter\_Lib
+### 2. XgFilter_Lib
 
 **Repo:** https://github.com/halheinrich/XgFilter_Lib
 **Branch:** main
 **Purpose:** Filtering and column projection for DecisionRow records. Used by ExtractFromXgToCsv.
 **Solution:** `XgFilter_Lib\XgFilter_Lib.slnx`
-**Depends on:** ConvertXgToJson\_Lib
-**Current commit:** `4af20df`
+**Depends on:** ConvertXgToJson_Lib
+**Current commit:** `3e26ce5`
 
 Key files:
 
-* XgFilter\_Lib.csproj: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/XgFilter_Lib.csproj
-* Tests.csproj: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/XgFilter_Lib.Tests.csproj
-* GlobalUsings.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/GlobalUsings.cs
-* Enums/PositionType.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Enums/PositionType.cs
-* Enums/PlayType.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Enums/PlayType.cs
-* Filtering/IDecisionFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/IDecisionFilter.cs
-* Filtering/IMatchFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/IMatchFilter.cs
-* Filtering/DecisionFilterSet.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/DecisionFilterSet.cs
-* Filtering/PlayerFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/PlayerFilter.cs
-* Filtering/DecisionTypeFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/DecisionTypeFilter.cs
-* Filtering/MatchScoreFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/MatchScoreFilter.cs
-* Filtering/ErrorRangeFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/ErrorRangeFilter.cs
-* Filtering/PositionTypeFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/PositionTypeFilter.cs
-* Filtering/PlayTypeFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Filtering/PlayTypeFilter.cs
-* Classification/IPositionClassifier.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/IPositionClassifier.cs
-* Classification/RaceClassifier.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/RaceClassifier.cs
-* Classification/ContactClassifier.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/ContactClassifier.cs
-* Classification/InnerBoard631Classifier.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Classification/InnerBoard631Classifier.cs
-* Projection/ColumnSelector.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/Projection/ColumnSelector.cs
-* FilteredDecisionIterator.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib/FilteredDecisionIterator.cs
-* Tests/Helpers/DecisionRowBuilder.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/Helpers/DecisionRowBuilder.cs
-* Tests/Classification/RaceClassifierTests.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/Classification/RaceClassifierTests.cs
-* Tests/FilteredDecisionIteratorTests.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/4af20df/XgFilter_Lib.Tests/FilteredDecisionIteratorTests.cs
+* XgFilter_Lib.csproj: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/XgFilter_Lib.csproj
+* Tests.csproj: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib.Tests/XgFilter_Lib.Tests.csproj
+* GlobalUsings.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib.Tests/GlobalUsings.cs
+* Enums/PositionType.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Enums/PositionType.cs
+* Enums/PlayType.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Enums/PlayType.cs
+* Filtering/IDecisionFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Filtering/IDecisionFilter.cs
+* Filtering/IMatchFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Filtering/IMatchFilter.cs
+* Filtering/DecisionFilterSet.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Filtering/DecisionFilterSet.cs
+* Filtering/PlayerFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Filtering/PlayerFilter.cs
+* Filtering/DecisionTypeFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Filtering/DecisionTypeFilter.cs
+* Filtering/MatchScoreFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Filtering/MatchScoreFilter.cs
+* Filtering/ErrorRangeFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Filtering/ErrorRangeFilter.cs
+* Filtering/PositionTypeFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Filtering/PositionTypeFilter.cs
+* Filtering/PlayTypeFilter.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Filtering/PlayTypeFilter.cs
+* Classification/IPositionClassifier.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Classification/IPositionClassifier.cs
+* Classification/RaceClassifier.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Classification/RaceClassifier.cs
+* Classification/ContactClassifier.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Classification/ContactClassifier.cs
+* Classification/InnerBoard631Classifier.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Classification/InnerBoard631Classifier.cs
+* Projection/ColumnSelector.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/Projection/ColumnSelector.cs
+* FilteredDecisionIterator.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib/FilteredDecisionIterator.cs
+* Tests/Helpers/DecisionRowBuilder.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib.Tests/Helpers/DecisionRowBuilder.cs
+* Tests/Classification/RaceClassifierTests.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib.Tests/Classification/RaceClassifierTests.cs
+* Tests/FilteredDecisionIteratorTests.cs: https://raw.githack.com/halheinrich/XgFilter_Lib/3e26ce5/XgFilter_Lib.Tests/FilteredDecisionIteratorTests.cs
 
 Key facts:
 
-* `IDecisionFilter`: single method `bool Matches(DecisionRow row)`
-* `IMatchFilter`: match-level early-exit filter interface
-* `DecisionFilterSet`: reworked — supports both IMatchFilter and IDecisionFilter, AND semantics
-* Filters: PlayerFilter, DecisionTypeFilter (uses `IsCube`), MatchScoreFilter, ErrorRangeFilter, PositionTypeFilter
+* `IDecisionFilter`: single method `bool Matches(DecisionRow row)`; default methods `ShouldAdvanceGame`, `ShouldAdvanceMatch` (both default false)
+* `IMatchFilter`: `bool ShouldSkipMatch(XgMatchInfo match)`; `bool ShouldSkipGame(XgGameInfo game)`
+* `DecisionFilterSet`: ordered list of IDecisionFilter, AND semantics; supports both IMatchFilter and IDecisionFilter
+* Filters: PlayerFilter, DecisionTypeFilter, MatchScoreFilter, ErrorRangeFilter, PositionTypeFilter
 * `PositionTypeFilter` uses `row.Board` via RaceClassifier / ContactClassifier — never parses Xgid
 * Contact = !Race (exhaustive and mutually exclusive for now)
 * Priming, Blitz, HoldingGame classifiers deferred
 * PlayTypeFilter deferred
 * `ColumnSelector`: explicit column registry, no reflection; drives CSV header and row serialization
-* `FilteredDecisionIterator`: reworked to support early-exit via IMatchFilter
+* `FilteredDecisionIterator`: owns XgIteratorState; supports early-exit via IMatchFilter
 
 ---
 
@@ -141,9 +140,9 @@ Key facts:
 
 **Repo:** https://github.com/halheinrich/ExtractFromXgToCsv
 **Branch:** main
-**Purpose:** Blazor web app. Extracts decisions from .xg/.xgp files, applies XgFilter\_Lib filters, exports CSV.
+**Purpose:** Blazor web app. Extracts decisions from .xg/.xgp files, applies XgFilter_Lib filters, exports CSV.
 **Solution:** `ExtractFromXgToCsv\ExtractFromXgToCsv.slnx`
-**Depends on:** ConvertXgToJson\_Lib, XgFilter\_Lib
+**Depends on:** ConvertXgToJson_Lib, XgFilter_Lib
 **Current commit:** `132a723`
 
 Key files:
@@ -175,14 +174,6 @@ Key facts:
 **Purpose:** Ad-hoc analysis tools and queries against .xg/.xgp files.
 **Current commit:** `a53089f`
 
-Key files:
-
-* XgAnalytics.slnx: https://raw.githack.com/halheinrich/XgAnalytics/a53089f/XgAnalytics.slnx
-* Analyses.cs: https://raw.githack.com/halheinrich/XgAnalytics/a53089f/XgAnalytics/Analyses.cs
-* XgAnalytics.csproj: https://raw.githack.com/halheinrich/XgAnalytics/a53089f/XgAnalytics/XgAnalytics.csproj
-* Tests/AnalysesTests.cs: https://raw.githack.com/halheinrich/XgAnalytics/a53089f/XgAnalytics.Tests/AnalysesTests.cs
-* Tests/XgAnalytics.Tests.csproj: https://raw.githack.com/halheinrich/XgAnalytics/a53089f/XgAnalytics.Tests/XgAnalytics.Tests.csproj
-
 Current analyses:
 
 * Player match count — scans .xg/.xgp files, outputs CSV of players and match counts
@@ -191,18 +182,18 @@ Current analyses:
 
 ---
 
-### 5. BackgammonDiagram\_Lib
+### 5. BackgammonDiagram_Lib
 
 **Repo:** https://github.com/halheinrich/BackgammonDiagram_Lib
 **Branch:** main
 **Purpose:** Pure rendering library — returns board diagrams as SVG, PNG, PDF, PowerPoint, or Blazor RenderFragment. No user interaction, no game state.
 **Solution:** `BackgammonDiagram_Lib\BackgammonDiagram_Lib.slnx`
-**Depends on:** ConvertXgToJson\_Lib
+**Depends on:** ConvertXgToJson_Lib
 **Current commit:** `fbfdf4a`
 
 Key files:
 
-* BackgammonDiagram\_Lib.csproj: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/BackgammonDiagram_Lib.csproj
+* BackgammonDiagram_Lib.csproj: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/BackgammonDiagram_Lib.csproj
 * Models/DiagramRequest.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Models/DiagramRequest.cs
 * Rendering/DiagramRenderer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Rendering/DiagramRenderer.cs
 * Rendering/BoardLayout.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/fbfdf4a/BackgammonDiagram_Lib/Rendering/BoardLayout.cs
@@ -231,23 +222,7 @@ Key decisions:
 **Repo:** https://github.com/halheinrich/BgRLEngine
 **Branch:** main
 **Purpose:** Reinforcement learning engine for backgammon and variants. Trained via self-play (tabula rasa). Portfolio of specialist sub-engines coordinated by a router.
-**Current commit:** `b1367bf`
-
-Key files:
-
-* main.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/main.py
-* engine/state.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/engine/state.py
-* engine/network.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/engine/network.py
-* engine/dice.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/engine/dice.py
-* engine/game.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/engine/game.py
-* engine/setup_generator.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/engine/setup_generator.py
-* training/td_trainer.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/training/td_trainer.py
-* utils/sprt.py: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/utils/sprt.py
-* configs/default.yaml: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/configs/default.yaml
-* configs/dmp.yaml: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/configs/dmp.yaml
-* configs/gammon_avoiding.yaml: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/configs/gammon_avoiding.yaml
-* configs/gammon_seeking.yaml: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/configs/gammon_seeking.yaml
-* configs/money.yaml: https://raw.githack.com/halheinrich/BgRLEngine/b1367bf/BgRLEngine/configs/money.yaml
+**Current commit:** `e14caa1`
 
 Key facts:
 
@@ -263,6 +238,7 @@ Key facts:
 * All five open design questions resolved: SPRT spec, plateau detection, state encoding, gammon classification, seam handling
 * 303-feature board state encoding
 * ~145K parameter network, smoke test passes on CUDA
+* Uncommitted planning work deferred
 
 ---
 
@@ -283,7 +259,6 @@ Key files:
 * Play.cs: https://raw.githack.com/halheinrich/BgMoveGen/e8e8d06/BgMoveGen/Play.cs
 * Tests.csproj: https://raw.githack.com/halheinrich/BgMoveGen/e8e8d06/BgMoveGen.Tests/BgMoveGen.Tests.csproj
 * Tests/MoveGeneratorTests.cs: https://raw.githack.com/halheinrich/BgMoveGen/e8e8d06/BgMoveGen.Tests/MoveGeneratorTests.cs
-* get_version() export added
 
 Key facts:
 
@@ -292,46 +267,7 @@ Key facts:
 * BgRLEngine depends on BgMoveGen
 * 3.4 μs/call, avoidance-based dedup, no HashSet
 * Three public entry points: GenerateStates, EnumerateStates, NextMove iterator
-* 61 tests green
-* Pass returns flipped state; get_starting_position export added
-
----
-
-### 8. BgPositionRouter
-
-**Repo:** https://github.com/halheinrich/BgPositionRouter
-**Branch:** main
-**Purpose:** Position classification and routing. Decides which specialist NN to invoke; provides race equity via lookup tables for short races.
-**Solution:** `BgPositionRouter\BgPositionRouter.slnx`
-**Depends on:** BgMoveGen
-**Current commit:** TBD
-
-Key facts:
-
-* Decision tree — heuristic rules first, learned classifier deferred
-* Race boundary: zero contact (existing is_race() rule)
-* Other boundaries: TBD per specialist sub-engine
-* Lookup tables for race equity (short races, exact answers)
-* Falls through to appropriate ONNX model for everything else
-* Starting positions are BgMoveGen's concern, not this library's
-
-### 9. BgInference
-
-**Repo:** https://github.com/halheinrich/BgInference
-**Branch:** main
-**Purpose:** C# inference library consuming trained BgRLEngine ONNX models. Produces ranked moves with equity (checker play) and double/take/pass decisions with equity (cube).
-**Solution:** `BgInference\BgInference.slnx`
-**Depends on:** BgRLEngine (ONNX export), BgMoveGen, BgPositionRouter
-**Current commit:** TBD
-
-Key facts:
-
-* Inputs: board position, cube context (value + owner), match score or money game flag
-* Outputs: checker play — ranked moves with equity; cube — double/take/pass with equity
-* Use cases: evaluation/analysis, online tournament play, human vs engine
-* ONNX runtime via Microsoft.ML.OnnxRuntime
-* Routing tree (race vs general, cube classification) lives here, not in BgRLEngine
-* BgRLEngine ONNX export currently deferred — BgInference blocked until then
+* 50 tests green
 
 ---
 
@@ -339,20 +275,13 @@ Key facts:
 
 | Subproject | Status |
 | --- | --- |
-| ConvertXgToJson\_Lib | ✅ Complete — XGID encoding always normalized to bottom-player perspective. XgIteratorState early-exit mechanism in place. XgMatchInfo and XgGameInfo added. XgFileReader.ReadMatchInfo and ReadGameHeaders added. All tests pass. |
-| XgFilter\_Lib | ✅ Complete — all filters, classifiers, ColumnSelector, FilteredDecisionIterator, full test suite passing; TestData path updated to shared location; IMatchFilter added; early-exit optimization in place; InnerBoard631Classifier added |
-| ExtractFromXgToCsv | 🔧 In progress — polling-based progress display working end-to-end; 951,973 rows from 6,660 files in 447s; exit button, InnerBoard631 filter added |
+| ConvertXgToJson_Lib | ✅ Complete — MatchScoreFor replaces MatchScore; taker row board always doubler POV; FlipBoard removed; all tests pass |
+| XgFilter_Lib | ✅ Complete — INSTRUCTIONS.md added; all filters, classifiers, ColumnSelector, FilteredDecisionIterator with early-exit; all tests pass |
+| ExtractFromXgToCsv | 🔧 In progress — polling-based progress display working end-to-end; 951,973 rows from 6,660 files in 447s |
 | XgAnalytics | 🔧 In progress — player match count, NonStandardStarts, MatchScoreDistribution complete |
-| BackgammonDiagram\_Lib | 🔧 In progress — BoardLayout, DiagramRenderer geometry, test scaffold; PNG rendering, greyscale theme added |
-| BgRLEngine | 🔧 encode_board_batch added (7.5x speedup, 2.4x games/s); SPRT reset bug fixed; DMP long run in progress |
-| BgMoveGen | ✅ Complete — Pass returns flipped state; get_starting_position export added; 59 tests passing |
-| BgPositionRouter | ⬜ Not started |
-| BgInference | ⬜ Not started — blocked on BgRLEngine ONNX export |
-
-
-### In progress
-
-* End-to-end testing and refinement (ExtractFromXgToCsv)
+| BackgammonDiagram_Lib | 🔧 In progress — BoardLayout, DiagramRenderer geometry, test scaffold; PNG rendering, greyscale theme added |
+| BgRLEngine | 🔧 In progress — DMP long run: level 4 in 100K games; uncommitted planning work deferred |
+| BgMoveGen | ✅ Complete — move generation library, all tests passing |
 
 ### Deferred
 
@@ -361,22 +290,22 @@ Key facts:
 * Priming, Blitz, HoldingGame classifiers
 * PlayTypeFilter
 * ExtractFromXgToCsv gets 0 rows after XGID fix — to be diagnosed from ExtractFromXgToCsv project
-* XgAnalytics — add key files section to INSTRUCTIONS.md
+* ShouldAdvanceGame / ShouldAdvanceMatch implementations in XgFilter_Lib (MoveNumberFilter will be first consumer)
 
 ### Key decisions
 
 * FilterPanel is a separate component under `ExtractFromXgToCsv/Components/`
-* All rendering is InteractiveServer — no WASM components yet
-* XgFilter\_Lib is server-side only
+* XgFilter_Lib is client-side (WASM refactor complete)
 * Board not exposed in CSV/ColumnSelector
 * Contact = !Race
-* FlipBoard kept for cube rows (responder perspective)
+* Taker cube row board is always doubler POV — no flip; FlipBoard removed
+* `MatchScoreFor(int activePlayer)` replaces `MatchScore` property
 * Always quote paths with spaces in PowerShell
 * FilterPanel.razor owns all filter UI state; raises `OnFiltersChanged EventCallback<DecisionFilterSet>`
 * Home.razor applies DecisionFilterSet to `_rows` before CSV output and displays filtered/total row count
 * WASM refactor: all .xg parsing, filtering, and CSV generation moved to client; server is thin host only
 * JobStore.cs added for polling-based progress display
-* raw.githack.com adopted as standard URL format for all source file fetches
+* raw.githack.com used for all source file URLs
 
 ---
 
@@ -388,21 +317,36 @@ This project (Backgammon Umbrella) is the **coordination layer** only. Heads-dow
 
 | Claude Project | Purpose |
 | --- | --- |
-| **Backgammon Umbrella** ← you are here | Architecture, status, decisions, commit hashes, cross-cutting work |
+| **Backgammon Umbrella** ← you are here | Architecture, status, decisions, commit hashes, cross-cutting work, generating updated instruction docs |
 | **ExtractFromXgToCsv** | All coding on the Blazor app |
-| **XgFilter\_Lib** | All coding on the filter/classifier library |
-| **ConvertXgToJson\_Lib** | All coding on the .xg/.xgp reader library |
+| **XgFilter_Lib** | All coding on the filter/classifier library |
+| **ConvertXgToJson_Lib** | All coding on the .xg/.xgp reader library |
 | **XgAnalytics** | Ad-hoc analysis tools and queries against .xg/.xgp files |
-| **BackgammonDiagram\_Lib** | Rendering library — board diagrams as SVG, PNG, PDF, PowerPoint, Blazor component |
+| **BackgammonDiagram_Lib** | Rendering library — board diagrams as SVG, PNG, PDF, PowerPoint, Blazor component |
 | **BgRLEngine** | RL engine for backgammon and variants — Python/PyTorch training, ONNX export |
-| **BgPositionRouter** | Position classification, routing, race lookup tables |
 | **BgMoveGen** | C# move generation library for backgammon and all variants |
 
 ### Workflow
 
 1. Start a coding session → go to the relevant subproject's Claude Project
 2. Finish, commit, push → return here (Umbrella)
-3. Update INSTRUCTIONS.md and push to GitHub
+3. Update this instructions doc → download updated MD
+4. Re-paste updated MD into Umbrella project instructions
+
+---
+
+## GitHub fetch workaround
+
+`raw.githubusercontent.com` and `api.github.com` are both DNS-blocked in Claude's container. Use `raw.githack.com` exclusively for all source file fetches.
+
+**Standard workaround — always follow this pattern:**
+
+1. Ask Claude: *"Give me the URLs I need to fetch"*
+2. Claude lists the raw githack URLs
+3. Paste those URLs back into the chat as a user message
+4. Claude calls `web_fetch` on each URL
+
+This applies in all subproject Claude Projects as well.
 
 ---
 
@@ -410,18 +354,12 @@ This project (Backgammon Umbrella) is the **coordination layer** only. Heads-dow
 
 After every GitHub commit:
 
-1. **Submodule commit** — run `git rev-parse --short HEAD` in the submodule dir; update the short hash in the subproject header and in every raw URL for that submodule
+1. **Submodule commit** — run `git rev-parse HEAD` in the submodule dir; update the short hash in the subproject header and in every raw URL for that submodule
 2. **Umbrella commit** — `cd` to umbrella dir, `git add <folder>`, commit, update **Current umbrella commit** and the submodule table
-3. **Key files** — add raw.githack.com URLs for any new files created this session
+3. **Key files** — add raw githack URLs for any new files created this session
 4. **Current status table** — update subproject status
 5. **In progress / Deferred** — move items as appropriate
 6. **Key decisions** — append any new decisions made this session
-7. **Push** — push updated INSTRUCTIONS.md to GitHub
+7. **Affected subproject instructions** — regenerate and re-paste into that subproject's Claude Project
 
 **Other subproject instructions** — update only when about to start a session in that project. Check URLs are current against the Umbrella's pinned commit before starting work.
-
----
-
-## GitHub fetch workaround
-
-See AGENTS.md. Use `raw.githack.com` URLs exclusively — raw.githubusercontent.com is blocked, blob URLs are flaky.
