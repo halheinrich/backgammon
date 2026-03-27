@@ -26,7 +26,7 @@ Current submodule pinned commits:
 | `XgFilter_Lib` | https://github.com/halheinrich/XgFilter_Lib | `acaabf5` |
 | `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `132a723` |
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
-| `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `803df76` |
+| `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `9a709cd` |
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `e14caa1` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
 
@@ -189,21 +189,21 @@ Current analyses:
 **Purpose:** Pure rendering library — returns board diagrams as SVG, PNG, PDF, PowerPoint, or Blazor RenderFragment. No user interaction, no game state.
 **Solution:** `BackgammonDiagram_Lib\BackgammonDiagram_Lib.slnx`
 **Depends on:** ConvertXgToJson_Lib
-**Current commit:** `803df76`
+**Current commit:** `9a709cd`
 
 Key files:
 
-* BackgammonDiagram_Lib.csproj: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/803df76/BackgammonDiagram_Lib/BackgammonDiagram_Lib.csproj
-* Models/DiagramRequest.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/803df76/BackgammonDiagram_Lib/Models/DiagramRequest.cs
-* Rendering/DiagramRenderer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/803df76/BackgammonDiagram_Lib/Rendering/DiagramRenderer.cs
-* Rendering/BoardLayout.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/803df76/BackgammonDiagram_Lib/Rendering/BoardLayout.cs
-* Rendering/ISvgRasterizer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/803df76/BackgammonDiagram_Lib/Rendering/ISvgRasterizer.cs
-* Rendering/SkiaSharpRasterizer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/803df76/BackgammonDiagram_Lib/Rendering/SkiaSharpRasterizer.cs
-* Themes/ThemeRegistry.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/803df76/BackgammonDiagram_Lib/Themes/ThemeRegistry.cs
-* Themes/GreyscaleTheme.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/803df76/BackgammonDiagram_Lib/Themes/GreyscaleTheme.cs
-* Tests.csproj: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/803df76/BackgammonDiagram_Lib.Tests/BackgammonDiagram_Lib.Tests.csproj
-* Tests/DiagramRendererTests.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/803df76/BackgammonDiagram_Lib.Tests/DiagramRendererTests.cs
-* Tests/TestPaths.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/803df76/BackgammonDiagram_Lib.Tests/TestPaths.cs
+* BackgammonDiagram_Lib.csproj: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/9a709cd/BackgammonDiagram_Lib/BackgammonDiagram_Lib.csproj
+* Models/DiagramRequest.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/9a709cd/BackgammonDiagram_Lib/Models/DiagramRequest.cs
+* Rendering/DiagramRenderer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/9a709cd/BackgammonDiagram_Lib/Rendering/DiagramRenderer.cs
+* Rendering/BoardLayout.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/9a709cd/BackgammonDiagram_Lib/Rendering/BoardLayout.cs
+* Rendering/ISvgRasterizer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/9a709cd/BackgammonDiagram_Lib/Rendering/ISvgRasterizer.cs
+* Rendering/SkiaSharpRasterizer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/9a709cd/BackgammonDiagram_Lib/Rendering/SkiaSharpRasterizer.cs
+* Themes/ThemeRegistry.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/9a709cd/BackgammonDiagram_Lib/Themes/ThemeRegistry.cs
+* Themes/GreyscaleTheme.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/9a709cd/BackgammonDiagram_Lib/Themes/GreyscaleTheme.cs
+* Tests.csproj: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/9a709cd/BackgammonDiagram_Lib.Tests/BackgammonDiagram_Lib.Tests.csproj
+* Tests/DiagramRendererTests.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/9a709cd/BackgammonDiagram_Lib.Tests/DiagramRendererTests.cs
+* Tests/TestPaths.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/9a709cd/BackgammonDiagram_Lib.Tests/TestPaths.cs
 
 Key decisions:
 
