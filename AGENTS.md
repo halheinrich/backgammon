@@ -19,6 +19,7 @@ Applies to all sub-projects in this repository.
 - Default to plan mode: propose before writing code or files, wait for explicit approval.
 - To proceed: say "go", "proceed", or "implement it".
 - To skip plan mode for a specific task: say "just do it" or "no plan needed".
+- At the end of each plan, list any unresolved questions that need answers before implementation.
 
 ## Profiling and benchmarks
 - Always use targeted microbenchmarks, never cProfile runs.
