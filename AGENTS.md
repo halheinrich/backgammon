@@ -42,6 +42,23 @@ After committing in any sub-project:
 - Avoid re-summarizing context already in the instructions doc.
 - Don't reprint large code blocks unless directly editing them.
 
+## Context management
+
+### Within a session
+- Before proposing a design or approach, check whether it was already discussed
+  and decided earlier in the conversation. Don't re-litigate settled decisions.
+- When the conversation gets long, re-read the INSTRUCTIONS.md mentally before
+  making claims about project state — don't rely on fading context.
+- If you're uncertain whether something was decided, say so — don't guess.
+
+### Between sessions
+- The INSTRUCTIONS.md is the single source of truth for project state.
+  If it wasn't captured there, it didn't happen.
+- At session end, identify anything decided or changed that isn't yet
+  reflected in INSTRUCTIONS.md. Flag it explicitly — don't let it evaporate.
+- When starting a new session, trust INSTRUCTIONS.md over memory summaries.
+  Memory is a convenience hint; the doc is canonical.
+  
 ## Fetching source files
 Standard URL format for all source file links:
 `https://raw.githack.com/halheinrich/{repo}/{hash}/{path}`
