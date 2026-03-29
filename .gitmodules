@@ -20,3 +20,6 @@
 [submodule "BgMoveGen"]
 	path = BgMoveGen
 	url = https://github.com/halheinrich/BgMoveGen
+[submodule "BgDiag_Razor"]
+	path = BgDiag_Razor
+	url = https://github.com/halheinrich/BgDiag_Razor.git
