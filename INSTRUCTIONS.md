@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `9853c66`
+**Current umbrella commit:** `321cf3b`
 
 ## Stack (all subprojects)
 
@@ -26,7 +26,8 @@ Current submodule pinned commits:
 | `XgFilter_Lib` | https://github.com/halheinrich/XgFilter_Lib | `acaabf5` |
 | `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `132a723` |
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
-| `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `670f767` |
+| `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `8edbef3` |
+| `BgDiag_Razor` | https://github.com/halheinrich/BgDiag_Razor | `1997156` |
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `e14caa1` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
 
@@ -189,7 +190,7 @@ Current analyses:
 **Purpose:** Pure rendering library — returns board diagrams as SVG, PNG, PDF, PowerPoint, or Blazor RenderFragment. No user interaction, no game state.
 **Solution:** `BackgammonDiagram_Lib\BackgammonDiagram_Lib.slnx`
 **Depends on:** ConvertXgToJson_Lib
-**Current commit:** `670f767`
+**Current commit:** `8edbef3`
 
 Key files:
 
@@ -231,7 +232,31 @@ Key decisions:
 
 ---
 
-### 6. BgRLEngine
+### 6. BgDiag_Razor
+
+**Repo:** https://github.com/halheinrich/BgDiag_Razor
+**Branch:** main
+**Purpose:** Thin Razor Class Library wrapper around BackgammonDiagram_Lib. Exposes a `BackgammonDiagram.razor` component that calls `DiagramRenderer.RenderSvg()` and injects the result as `MarkupString`. Kept separate so the core library has no Blazor dependency.
+**Depends on:** BackgammonDiagram_Lib
+**Current commit:** `1997156`
+
+Key files:
+
+* BackgammonDiagram.razor: https://raw.githack.com/halheinrich/BgDiag_Razor/0172180/BgDiag_Razor/Components/BackgammonDiagram.razor
+* BackgammonDiagram.razor.cs: https://raw.githack.com/halheinrich/BgDiag_Razor/0172180/BgDiag_Razor/Components/BackgammonDiagram.razor.cs
+* BackgammonDiagramTests.cs: https://raw.githack.com/halheinrich/BgDiag_Razor/0172180/BgDiag_Razor.Tests/BackgammonDiagramTests.cs
+
+Key facts:
+
+* Razor Class Library (`Microsoft.NET.Sdk.Razor`)
+* Parameters: `DiagramRequest? Request`, `DiagramOptions Options`
+* EventCallbacks stubbed (not yet wired): `OnPointClicked(int)`, `OnCubeActionClicked`
+* Renders SVG via `MarkupString`
+* bunit tests for component rendering
+
+---
+
+### 7. BgRLEngine
 
 **Repo:** https://github.com/halheinrich/BgRLEngine
 **Branch:** main
@@ -256,7 +281,7 @@ Key facts:
 
 ---
 
-### 7. BgMoveGen
+### 8. BgMoveGen
 
 **Repo:** https://github.com/halheinrich/BgMoveGen
 **Branch:** main
@@ -294,6 +319,7 @@ Key facts:
 | ExtractFromXgToCsv | 🔧 In progress — polling-based progress display working end-to-end; 951,973 rows from 6,660 files in 447s |
 | XgAnalytics | 🔧 In progress — player match count, NonStandardStarts, MatchScoreDistribution complete |
 | BackgammonDiagram_Lib | 🔧 In progress — all rendering outputs complete (SVG, PNG, PPTX, PDF); PPTX repair prompt fixed; six regression tests; PDF via QuestPDF |
+| BgDiag_Razor | 🔧 In progress — initial scaffold complete; BackgammonDiagram component renders SVG; bunit tests passing |
 | BgRLEngine | 🔧 In progress — DMP long run: level 4 in 100K games; uncommitted planning work deferred |
 | BgMoveGen | ✅ Complete — move generation library, all tests passing |
 
@@ -320,6 +346,7 @@ Key facts:
 * WASM refactor: all .xg parsing, filtering, and CSV generation moved to client; server is thin host only
 * JobStore.cs added for polling-based progress display
 * raw.githack.com used for all source file URLs
+* BgDiag_Razor is a separate Razor Class Library — keeps BackgammonDiagram_Lib free of Blazor dependencies
 
 ---
 
@@ -337,6 +364,7 @@ This project (Backgammon Umbrella) is the **coordination layer** only. Heads-dow
 | **ConvertXgToJson_Lib** | All coding on the .xg/.xgp reader library |
 | **XgAnalytics** | Ad-hoc analysis tools and queries against .xg/.xgp files |
 | **BackgammonDiagram_Lib** | Rendering library — board diagrams as SVG, PNG, PDF, PowerPoint, Blazor component |
+| **BgDiag_Razor** | Razor Class Library wrapper for BackgammonDiagram_Lib |
 | **BgRLEngine** | RL engine for backgammon and variants — Python/PyTorch training, ONNX export |
 | **BgMoveGen** | C# move generation library for backgammon and all variants |
 
