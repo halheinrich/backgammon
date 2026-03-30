@@ -23,3 +23,6 @@
 [submodule "BgDiag_Razor"]
 	path = BgDiag_Razor
 	url = https://github.com/halheinrich/BgDiag_Razor.git
+[submodule "BgQuiz_Blazor"]
+	path = BgQuiz_Blazor
+	url = https://github.com/halheinrich/BgQuiz_Blazor.git
