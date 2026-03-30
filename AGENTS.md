@@ -37,6 +37,8 @@ After committing in any sub-project:
 1. Note the short hash (`git rev-parse --short HEAD`)
 2. Update the commit hash and any raw URLs in that sub-project's instructions doc
 3. Return to the umbrella project and update hashes + umbrella INSTRUCTIONS.md
+The subproject session owns the commit. Never hand off to the umbrella with
+uncommitted work — commit, push, and include the new hash in the handoff message.
 
 ## Token hygiene
 - Avoid re-summarizing context already in the instructions doc.
