@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `a24121d`
+**Current umbrella commit:** `7a72a68`
 
 ## Stack (all subprojects)
 
@@ -30,6 +30,7 @@ Current submodule pinned commits:
 | `BgDiag_Razor` | https://github.com/halheinrich/BgDiag_Razor | `9f0350d` |
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `e14caa1` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
+| `BgQuiz_Blazor` | https://github.com/halheinrich/BgQuiz_Blazor | `b8ef2f2` |
 
 ## Naming convention
 
@@ -315,6 +316,17 @@ Key facts:
 
 ---
 
+### 9. BgQuiz_Blazor
+
+**Repo:** https://github.com/halheinrich/BgQuiz_Blazor
+**Branch:** main
+**Purpose:** Blazor app for quizzing backgammon decisions.
+**Solution:** `BgQuiz_Blazor\BgQuiz_Blazor.slnx`
+**Depends on:** BgDiag_Razor
+**Current commit:** `b8ef2f2`
+
+---
+
 ## Current status
 
 | Subproject | Status |
@@ -327,6 +339,7 @@ Key facts:
 | BgDiag_Razor | 🔧 In progress — click overlay wired; EventCallbacks for points, bar, cube, tray; pure Razor event model; bunit tests passing |
 | BgRLEngine | 🔧 In progress — DMP long run: level 4 in 100K games; uncommitted planning work deferred |
 | BgMoveGen | ✅ Complete — move generation library, all tests passing |
+| BgQuiz_Blazor | 🔧 In progress — initial scaffold committed |
 
 ### Deferred
 
@@ -373,6 +386,7 @@ This project (Backgammon Umbrella) is the **coordination layer** only. Heads-dow
 | **BgDiag_Razor** | Razor Class Library wrapper for BackgammonDiagram_Lib |
 | **BgRLEngine** | RL engine for backgammon and variants — Python/PyTorch training, ONNX export |
 | **BgMoveGen** | C# move generation library for backgammon and all variants |
+| **BgQuiz_Blazor** | Blazor quiz app for backgammon decisions |
 
 ### Workflow
 
