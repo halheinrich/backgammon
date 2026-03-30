@@ -69,3 +69,14 @@ Use the pinned commit hash from the submodule table — not `main`.
 - `cdn.githack.com` — CDN-cached, faster but may lag on fresh commits; avoid for session fetches
 
 `raw.githubusercontent.com` is blocked in Claude's container. `github.com` blob URLs are flaky (robots.txt + rate limiting). Use `raw.githack.com` exclusively.
+
+## Existing-file edits
+When modifying an existing file, verify the fetched version is current before
+delivering changes. If the commit hash in the URL doesn't match the pinned
+commit in INSTRUCTIONS.md, flag the mismatch — don't proceed with stale code.
+
+Prefer delivering only the new code (method, block, using directive) with clear
+insertion-point instructions over full-file replacements, as a defense against
+stale snapshots.
+
+Full-file delivery is fine for new files that don't exist yet.
