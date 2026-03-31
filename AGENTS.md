@@ -32,6 +32,58 @@ Applies to all sub-projects in this repository.
 - Console/log output from tools and scripts: surface what's needed to act, suppress noise.
 - Don't paste long log dumps into chat — describe what you need instead.
 
+## Stale repo disaster — and how to prevent it
+
+### What happened
+A session began with Claude fetching INSTRUCTIONS.md, which pointed to commit `eb61c10`.
+The repo had moved on — `DiagramOrientation` had been removed and `HomeBoardOnRight` added
+in a prior session that didn't update INSTRUCTIONS.md. Claude worked from the stale snapshot
+all session, copied dead field names into new code, and produced a cascade of build errors
+that took significant time to untangle.
+
+### Root cause
+INSTRUCTIONS.md was not updated at the end of the prior session. The commit hash and raw
+URLs pointed to old code. Claude had no way to detect the drift.
+
+### Prevention rules
+1. **INSTRUCTIONS.md is the source of truth for the next session.** If it doesn't match
+   HEAD, the next session starts with bad data. Updating it is not optional.
+2. **INSTRUCTIONS.md must be committed as the final act of every session** — after all
+   other commits, with the correct hash and correct raw URLs for every file.
+3. **The submodule pointer and INSTRUCTIONS.md must always be committed together** in the
+   same umbrella commit. Never commit one without the other.
+4. **At the start of every session, Claude must fetch INSTRUCTIONS.md first** and use only
+   the raw URLs listed there. Never construct URLs from memory or from a prior session's
+   context.
+5. **If INSTRUCTIONS.md hash does not match the actual HEAD**, Claude must stop, flag the
+   discrepancy, and ask for the correct URLs before touching any code.
+6. **Claude must ask for a URL rather than guess.** The fetch tool only accepts URLs
+   provided by the user or returned by prior fetches. Claude must ask the user to supply
+   any URL it needs rather than constructing one and failing silently.
+
+### Resolution
+If INSTRUCTIONS.md hash doesn't match actual HEAD:
+1. Run `git log --oneline -5` in the submodule dir to see what changed
+2. Fetch current INSTRUCTIONS.md from githack to assess how stale it is
+3. Reconstruct what changed between pinned hash and HEAD from git log or by fetching files at both hashes
+4. Update INSTRUCTIONS.md with correct hash and URLs
+5. Commit umbrella — submodule pointer + INSTRUCTIONS.md staged together
+
+## Best practice guidance
+
+When proposing or reviewing code, Claude must proactively flag any deviation from best
+practice — even if the deviation is minor or common. Specifically:
+
+1. **Flag it explicitly.** If a proposed approach is not best practice, say so clearly
+   rather than waiting to be asked.
+2. **State the best practice alternative.** Describe what the preferred approach would be.
+3. **Give the tradeoffs.** Explain what is gained and what is lost by deviating — e.g.
+   simplicity vs. correctness, short-term convenience vs. long-term maintainability.
+4. **Don't decide for the user.** Present the tradeoffs and let Hal make the call. Do not
+   silently proceed with a non-best-practice approach because it seems expedient.
+5. **This applies to all output** — code suggestions, architecture proposals, test
+   strategies, and commit/branching patterns.
+
 ## Commit protocol
 After committing in any sub-project:
 1. Note the short hash (`git rev-parse --short HEAD`)
