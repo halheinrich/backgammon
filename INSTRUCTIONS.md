@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `37d118c`
+**Current umbrella commit:** `49b82db`
 
 ## Stack (all subprojects)
 
@@ -26,11 +26,11 @@ Current submodule pinned commits:
 | `XgFilter_Lib` | https://github.com/halheinrich/XgFilter_Lib | `acaabf5` |
 | `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `132a723` |
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
-| `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `79bf0ce` |
-| `BgDiag_Razor` | https://github.com/halheinrich/BgDiag_Razor | `9f0350d` |
+| `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `5614855` |
+| `BgDiag_Razor` | https://github.com/halheinrich/BgDiag_Razor | `b412b58` |
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `e14caa1` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
-| `BgQuiz_Blazor` | https://github.com/halheinrich/BgQuiz_Blazor | `b8ef2f2` |
+| `BgQuiz_Blazor` | https://github.com/halheinrich/BgQuiz_Blazor | `347dcfd` |
 
 ## Naming convention
 
@@ -191,33 +191,33 @@ Current analyses:
 **Purpose:** Pure rendering library — returns board diagrams as SVG, PNG, PDF, PowerPoint, or Blazor RenderFragment. No user interaction, no game state.
 **Solution:** `BackgammonDiagram_Lib\BackgammonDiagram_Lib.slnx`
 **Depends on:** ConvertXgToJson_Lib
-**Current commit:** `79bf0ce`
+**Current commit:** `5614855`
 
 Key files:
 
-* BackgammonDiagram_Lib.csproj: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/BackgammonDiagram_Lib.csproj
-* Models/Enums.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Models/Enums.cs
-* Models/DiagramSize.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Models/DiagramSize.cs
-* Models/DiagramRequest.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Models/DiagramRequest.cs
-* Models/DiagramOptions.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Models/DiagramOptions.cs
-* Models/DiagramRequestExtensions.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Models/DiagramRequestExtensions.cs
-* Models/PlayCandidate.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Models/PlayCandidate.cs
-* Models/AnalysisDepthEntry.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Models/AnalysisDepthEntry.cs
-* Models/BoardHitRegions.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Models/BoardHitRegions.cs
-* Themes/ITheme.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Themes/ITheme.cs
-* Themes/DefaultTheme.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Themes/DefaultTheme.cs
-* Themes/GreyscaleTheme.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Themes/GreyscaleTheme.cs
-* Themes/ThemeRegistry.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Themes/ThemeRegistry.cs
-* Rendering/BoardLayout.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Rendering/BoardLayout.cs
-* Rendering/ISvgRasterizer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Rendering/ISvgRasterizer.cs
-* Rendering/SkiaSharpRasterizer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Rendering/SkiaSharpRasterizer.cs
-* Rendering/DiagramRenderer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Rendering/DiagramRenderer.cs
-* Rendering/PptxBuilder.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Rendering/PptxBuilder.cs
-* Rendering/PdfBuilder.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib/Rendering/PdfBuilder.cs
-* Tests/DiagramRendererTests.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib.Tests/DiagramRendererTests.cs
-* Tests/PptxConformanceTests.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib.Tests/PptxConformanceTests.cs
-* Tests/HitRegionsTests.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib.Tests/HitRegionsTests.cs
-* Tests/TestPaths.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/79bf0ce/BackgammonDiagram_Lib.Tests/TestPaths.cs
+* BackgammonDiagram_Lib.csproj: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/BackgammonDiagram_Lib.csproj
+* Models/Enums.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Models/Enums.cs
+* Models/DiagramSize.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Models/DiagramSize.cs
+* Models/DiagramRequest.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Models/DiagramRequest.cs
+* Models/DiagramOptions.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Models/DiagramOptions.cs
+* Models/DiagramRequestExtensions.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Models/DiagramRequestExtensions.cs
+* Models/PlayCandidate.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Models/PlayCandidate.cs
+* Models/AnalysisDepthEntry.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Models/AnalysisDepthEntry.cs
+* Models/BoardHitRegions.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Models/BoardHitRegions.cs
+* Themes/ITheme.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Themes/ITheme.cs
+* Themes/DefaultTheme.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Themes/DefaultTheme.cs
+* Themes/GreyscaleTheme.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Themes/GreyscaleTheme.cs
+* Themes/ThemeRegistry.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Themes/ThemeRegistry.cs
+* Rendering/BoardLayout.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Rendering/BoardLayout.cs
+* Rendering/ISvgRasterizer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Rendering/ISvgRasterizer.cs
+* Rendering/SkiaSharpRasterizer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Rendering/SkiaSharpRasterizer.cs
+* Rendering/DiagramRenderer.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Rendering/DiagramRenderer.cs
+* Rendering/PptxBuilder.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Rendering/PptxBuilder.cs
+* Rendering/PdfBuilder.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib/Rendering/PdfBuilder.cs
+* Tests/DiagramRendererTests.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib.Tests/DiagramRendererTests.cs
+* Tests/PptxConformanceTests.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib.Tests/PptxConformanceTests.cs
+* Tests/HitRegionsTests.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib.Tests/HitRegionsTests.cs
+* Tests/TestPaths.cs: https://raw.githack.com/halheinrich/BackgammonDiagram_Lib/5614855/BackgammonDiagram_Lib.Tests/TestPaths.cs
 
 Key decisions:
 
@@ -231,7 +231,9 @@ Key decisions:
 * PPTX post-processing fixes five OpenXml SDK quirks (Content_Types, relative .rels paths, namespace hoisting, sequential rIds, XML declarations); six regression tests in `PptxConformanceTests.cs`
 * PDF: each DiagramRequest → one page (PNG embedded via QuestPDF `FitArea()`); widescreen landscape 13.33" × 7.5" matching PPTX; optional title in page header
 * PDF: `PdfBuilder` is internal static — same pattern as `PptxBuilder`
-* Hit regions: `GetHitRegions(DiagramOptions)` — no `DiagramRequest` dependency; assumes no panel (Problem mode); cube covers full left rail; `OnRollTray` null until tray rendered; 10 tests
+* `HomeBoardOnRight` mirror is purely geometric reflection about playing area centre in `ColumnCentreX`; `effectivePt` in `AppendPoints` reverted — triangle direction follows raw `pt`
+* Hit regions: `GetHitRegions(DiagramRequest, DiagramOptions)` — `DiagramRequest` required so `HomeBoardOnRight` feeds into `ColumnCentreX`; 11 tests (10 existing + 1 orientation test)
+* `DiagramOrientation` enum removed — replaced by `bool HomeBoardOnRight { get; init; } = true` on `DiagramRequest`; breaking change for any callers referencing `Orientation`/`DiagramOrientation`
 * Spec expected to evolve during implementation
 
 ---
@@ -242,13 +244,13 @@ Key decisions:
 **Branch:** main
 **Purpose:** Thin Razor Class Library wrapper around BackgammonDiagram_Lib. Exposes a `BackgammonDiagram.razor` component that calls `DiagramRenderer.RenderSvg()` and injects the result as `MarkupString`. Kept separate so the core library has no Blazor dependency.
 **Depends on:** BackgammonDiagram_Lib
-**Current commit:** `9f0350d`
+**Current commit:** `b412b58`
 
 Key files:
 
-* BackgammonDiagram.razor: https://raw.githack.com/halheinrich/BgDiag_Razor/6b0a447/BgDiag_Razor/Components/BackgammonDiagram.razor
-* BackgammonDiagram.razor.cs: https://raw.githack.com/halheinrich/BgDiag_Razor/6b0a447/BgDiag_Razor/Components/BackgammonDiagram.razor.cs
-* BackgammonDiagramTests.cs: https://raw.githack.com/halheinrich/BgDiag_Razor/6b0a447/BgDiag_Razor.Tests/BackgammonDiagramTests.cs
+* BackgammonDiagram.razor: https://raw.githack.com/halheinrich/BgDiag_Razor/b412b58/BgDiag_Razor/Components/BackgammonDiagram.razor
+* BackgammonDiagram.razor.cs: https://raw.githack.com/halheinrich/BgDiag_Razor/b412b58/BgDiag_Razor/Components/BackgammonDiagram.razor.cs
+* BackgammonDiagramTests.cs: https://raw.githack.com/halheinrich/BgDiag_Razor/b412b58/BgDiag_Razor.Tests/BackgammonDiagramTests.cs
 
 Key facts:
 
@@ -256,7 +258,7 @@ Key facts:
 * Parameters: `DiagramRequest? Request`, `DiagramOptions Options`
 * Transparent SVG click overlay rendered on top of diagram SVG
 * EventCallbacks wired: `OnPointClicked(1–24)`, `OnBarClicked(25)`, `OnCubeClicked`, `OnTrayClicked`
-* Consumes `DiagramRenderer.GetHitRegions(DiagramOptions)` from BackgammonDiagram_Lib
+* Consumes `DiagramRenderer.GetHitRegions(DiagramRequest, DiagramOptions)` from BackgammonDiagram_Lib
 * Pure Razor event model — no JS interop needed
 * bunit tests cover overlay rendering and all click callbacks
 
@@ -323,7 +325,20 @@ Key facts:
 **Purpose:** Blazor app for quizzing backgammon decisions.
 **Solution:** `BgQuiz_Blazor\BgQuiz_Blazor.slnx`
 **Depends on:** BgDiag_Razor
-**Current commit:** `b8ef2f2`
+**Current commit:** `347dcfd`
+
+Key files:
+
+* BgQuiz_Blazor.csproj: https://raw.githack.com/halheinrich/BgQuiz_Blazor/347dcfd/BgQuiz_Blazor/BgQuiz_Blazor.csproj
+* Program.cs: https://raw.githack.com/halheinrich/BgQuiz_Blazor/347dcfd/BgQuiz_Blazor/Program.cs
+* Components/Pages/Home.razor: https://raw.githack.com/halheinrich/BgQuiz_Blazor/347dcfd/BgQuiz_Blazor/Components/Pages/Home.razor
+* Components/Pages/Home.razor.cs: https://raw.githack.com/halheinrich/BgQuiz_Blazor/347dcfd/BgQuiz_Blazor/Components/Pages/Home.razor.cs
+
+Key facts:
+
+* Milestone 1: `BackgammonDiagram` rendered with hardcoded opening position; click events reported as text; orientation toggle
+* Uses `HomeBoardOnRight` on `DiagramRequest` — `DiagramOrientation` enum removed upstream
+* 🔧 In progress — Milestone 1 complete
 
 ---
 
@@ -332,14 +347,14 @@ Key facts:
 | Subproject | Status |
 | --- | --- |
 | ConvertXgToJson_Lib | ✅ Complete — MatchScoreFor replaces MatchScore; taker row board always doubler POV; FlipBoard removed; all tests pass |
-| XgFilter_Lib | ✅ Complete — INSTRUCTIONS.md added; all filters, classifiers, ColumnSelector, FilteredDecisionIterator with early-exit; all tests pass |
+| XgFilter_Lib | ✅ Complete — all filters, classifiers, ColumnSelector, FilteredDecisionIterator with early-exit; all tests pass |
 | ExtractFromXgToCsv | 🔧 In progress — polling-based progress display working end-to-end; 951,973 rows from 6,660 files in 447s |
 | XgAnalytics | 🔧 In progress — player match count, NonStandardStarts, MatchScoreDistribution complete |
-| BackgammonDiagram_Lib | 🔧 In progress — all rendering outputs complete (SVG, PNG, PPTX, PDF); GetHitRegions API added; HomeBoardOnRight feature complete and visually verified |
-| BgDiag_Razor | 🔧 In progress — click overlay wired; EventCallbacks for points, bar, cube, tray; pure Razor event model; bunit tests passing |
+| BackgammonDiagram_Lib | 🔧 In progress — all rendering outputs complete (SVG, PNG, PPTX, PDF); HomeBoardOnRight complete; GetHitRegions takes DiagramRequest; 11 tests |
+| BgDiag_Razor | 🔧 In progress — click overlay wired; GetHitRegions updated to pass DiagramRequest; orientation regression test added; bunit tests passing |
 | BgRLEngine | 🔧 In progress — DMP long run: level 4 in 100K games; uncommitted planning work deferred |
 | BgMoveGen | ✅ Complete — move generation library, all tests passing |
-| BgQuiz_Blazor | 🔧 In progress — initial scaffold committed |
+| BgQuiz_Blazor | 🔧 In progress — Milestone 1 complete: hardcoded opening position, click reporting, orientation toggle |
 
 ### Deferred
 
@@ -366,8 +381,9 @@ Key facts:
 * raw.githack.com used for all source file URLs
 * BgDiag_Razor is a separate Razor Class Library — keeps BackgammonDiagram_Lib free of Blazor dependencies
 * BgDiag_Razor click handling uses transparent SVG overlay + pure Razor EventCallbacks — no JS interop
-* `DiagramOrientation` enum removed — replaced by `bool HomeBoardOnRight { get; init; } = true` on `DiagramRequest`; breaking change for any callers referencing `Orientation`/`DiagramOrientation`
-* `HomeBoardOnRight` mirror is purely geometric reflection about playing area centre in `ColumnCentreX`; `effectivePt` in `AppendPoints` reverted — triangle direction follows raw `pt`
+* `DiagramOrientation` enum removed — replaced by `bool HomeBoardOnRight { get; init; } = true` on `DiagramRequest`
+* `HomeBoardOnRight` mirror is purely geometric reflection about playing area centre in `ColumnCentreX`
+* `GetHitRegions` signature changed to `(DiagramRequest, DiagramOptions)` — `DiagramRequest` required for correct orientation mapping
 
 ---
 
