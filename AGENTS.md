@@ -112,6 +112,32 @@ all four of the following in order:
    - Session start URLs for the next session (AGENTS.md + subproject INSTRUCTIONS.md
      + any key source files needed)
 
+## Fetching source files — rules and failure protocol
+
+All source file URLs must come from INSTRUCTIONS.md or be pasted directly by the user.
+Claude must never construct or guess a URL. If a needed file is not listed in
+INSTRUCTIONS.md, Claude must ask the user to provide it — not attempt to infer the path.
+
+### When a fetch fails
+1. Do not retry with a guessed variant path.
+2. State clearly: "I don't have a URL for this file. It needs to be added to
+   INSTRUCTIONS.md. Please provide the URL or fetch it from the umbrella project."
+3. If the file is from a dependency (not the current subproject), the correct URL is in
+   the umbrella INSTRUCTIONS.md under that dependency's Key files section.
+4. Never ask the user to paste file contents directly — always fetch from the repo.
+
+### Dependency files in subproject INSTRUCTIONS.md
+Every subproject INSTRUCTIONS.md must include a **Dependency files** section listing raw
+githack URLs for all files from dependent subprojects likely to be needed during a coding
+session. Without this, Claude cannot fetch dependency source and will be forced to guess
+or stall.
+
+When starting a session in a subproject that depends on other subprojects:
+1. Fetch INSTRUCTIONS.md first (always).
+2. Verify the Dependency files section exists and URLs resolve.
+3. If Dependency files are missing or stale, flag it before touching any code and ask the
+   user to provide the correct URLs from the umbrella INSTRUCTIONS.md.
+
 ## Commit protocol
 After committing in any sub-project:
 1. Note the short hash (`git rev-parse --short HEAD`)
