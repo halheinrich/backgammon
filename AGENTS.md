@@ -127,16 +127,35 @@ INSTRUCTIONS.md, Claude must ask the user to provide it — not attempt to infer
 4. Never ask the user to paste file contents directly — always fetch from the repo.
 
 ### Dependency files in subproject INSTRUCTIONS.md
-Every subproject INSTRUCTIONS.md must include a **Dependency files** section listing raw
-githack URLs for all files from dependent subprojects likely to be needed during a coding
-session. Without this, Claude cannot fetch dependency source and will be forced to guess
-or stall.
+Every subproject INSTRUCTIONS.md must include a **Dependency files** section listing
+*which files* are needed from each dependency — but NOT hardcoded URLs. URLs go stale
+every time the dependency gets a new commit.
 
-When starting a session in a subproject that depends on other subprojects:
-1. Fetch INSTRUCTIONS.md first (always).
-2. Verify the Dependency files section exists and URLs resolve.
-3. If Dependency files are missing or stale, flag it before touching any code and ask the
-   user to provide the correct URLs from the umbrella INSTRUCTIONS.md.
+Instead, the correct URLs are always sourced from the umbrella INSTRUCTIONS.md at session
+start, using the hash currently pinned there.
+
+Example format:
+```
+## Dependency files
+
+### BackgammonDiagram_Lib
+Files needed from this dependency (fetch URLs from umbrella INSTRUCTIONS.md):
+* Models/DiagramRequest.cs
+* Models/DiagramOptions.cs
+* Models/Enums.cs
+* Models/BoardHitRegions.cs
+* Rendering/DiagramRenderer.cs
+
+### BgDiag_Razor
+Files needed from this dependency (fetch URLs from umbrella INSTRUCTIONS.md):
+* Components/BackgammonDiagram.razor
+* Components/BackgammonDiagram.razor.cs
+```
+
+### Session start URLs (subprojects with dependencies)
+The session close handoff must include ready-to-paste URLs for all dependency files,
+constructed from the umbrella's currently pinned hashes. The user pastes these into the
+new session so Claude can fetch them immediately without consulting the umbrella.
 
 ## Commit protocol
 After committing in any sub-project:
