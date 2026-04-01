@@ -84,6 +84,34 @@ practice — even if the deviation is minor or common. Specifically:
 5. **This applies to all output** — code suggestions, architecture proposals, test
    strategies, and commit/branching patterns.
 
+## Session close protocol (subprojects)
+
+At the end of every coding session, before declaring work complete, Claude must provide
+all four of the following in order:
+
+1. **PowerShell commands to commit and push code changes**, including the `cd` to the
+   subproject directory. Example:
+```powershell
+   cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\<SubprojectName>"
+   git add .
+   git commit -m "<message>"
+   git push
+   git rev-parse --short HEAD
+```
+
+2. **Diff for the subproject INSTRUCTIONS.md** — updated commit hash, updated raw URLs,
+   updated status, any new key facts or key decisions from this session.
+
+3. **PowerShell commands to commit and push INSTRUCTIONS.md**, staged together with any
+   other end-of-session changes. Never in a separate prior commit.
+
+4. **Handoff summary for the umbrella project**, including:
+   - Subproject name and new commit hash
+   - What changed this session (brief)
+   - Any decisions made that affect other subprojects
+   - Session start URLs for the next session (AGENTS.md + subproject INSTRUCTIONS.md
+     + any key source files needed)
+
 ## Commit protocol
 After committing in any sub-project:
 1. Note the short hash (`git rev-parse --short HEAD`)
