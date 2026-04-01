@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `99624de`
+**Current umbrella commit:** `8f1e471`
 
 ## Stack (all subprojects)
 
@@ -30,7 +30,7 @@ Current submodule pinned commits:
 | `BgDiag_Razor` | https://github.com/halheinrich/BgDiag_Razor | `cdb69aa` |
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `e14caa1` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
-| `BgQuiz_Blazor` | https://github.com/halheinrich/BgQuiz_Blazor | `347dcfd` |
+| `BgQuiz_Blazor` | https://github.com/halheinrich/BgQuiz_Blazor | `1d4f1bd` |
 
 ## Naming convention
 
@@ -325,14 +325,14 @@ Key facts:
 **Purpose:** Blazor app for quizzing backgammon decisions.
 **Solution:** `BgQuiz_Blazor\BgQuiz_Blazor.slnx`
 **Depends on:** BgDiag_Razor
-**Current commit:** `347dcfd`
+**Current commit:** `1d4f1bd`
 
 Key files:
 
-* BgQuiz_Blazor.csproj: https://raw.githack.com/halheinrich/BgQuiz_Blazor/347dcfd/BgQuiz_Blazor/BgQuiz_Blazor.csproj
-* Program.cs: https://raw.githack.com/halheinrich/BgQuiz_Blazor/347dcfd/BgQuiz_Blazor/Program.cs
-* Components/Pages/Home.razor: https://raw.githack.com/halheinrich/BgQuiz_Blazor/347dcfd/BgQuiz_Blazor/Components/Pages/Home.razor
-* Components/Pages/Home.razor.cs: https://raw.githack.com/halheinrich/BgQuiz_Blazor/347dcfd/BgQuiz_Blazor/Components/Pages/Home.razor.cs
+* BgQuiz_Blazor.csproj: https://raw.githack.com/halheinrich/BgQuiz_Blazor/1d4f1bd/BgQuiz_Blazor/BgQuiz_Blazor.csproj
+* Program.cs: https://raw.githack.com/halheinrich/BgQuiz_Blazor/1d4f1bd/BgQuiz_Blazor/Program.cs
+* Components/Pages/Home.razor: https://raw.githack.com/halheinrich/BgQuiz_Blazor/1d4f1bd/BgQuiz_Blazor/Components/Pages/Home.razor
+* Components/Pages/Home.razor.cs: https://raw.githack.com/halheinrich/BgQuiz_Blazor/1d4f1bd/BgQuiz_Blazor/Components/Pages/Home.razor.cs
 
 Key facts:
 
@@ -354,7 +354,7 @@ Key facts:
 | BgDiag_Razor | 🔧 In progress — DiagramRequest Builder pattern adopted in tests; all bunit tests passing |
 | BgRLEngine | 🔧 In progress — DMP long run: level 4 in 100K games; uncommitted planning work deferred |
 | BgMoveGen | ✅ Complete — move generation library, all tests passing |
-| BgQuiz_Blazor | 🔧 In progress — Milestone 1 complete: hardcoded opening position, click reporting, orientation toggle |
+| BgQuiz_Blazor | 🔧 In progress — builds clean; DiagramRequest Builder pattern adopted; Milestone 1 functional; CreateOpeningPosition() still TODO |
 
 ### Deferred
 
