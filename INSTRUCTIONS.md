@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `bb7fdc4`
+**Current umbrella commit:** `99624de`
 
 ## Stack (all subprojects)
 
@@ -27,7 +27,7 @@ Current submodule pinned commits:
 | `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `132a723` |
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
 | `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `4aee272` |
-| `BgDiag_Razor` | https://github.com/halheinrich/BgDiag_Razor | `b412b58` |
+| `BgDiag_Razor` | https://github.com/halheinrich/BgDiag_Razor | `cdb69aa` |
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `e14caa1` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
 | `BgQuiz_Blazor` | https://github.com/halheinrich/BgQuiz_Blazor | `347dcfd` |
@@ -244,13 +244,13 @@ Key decisions:
 **Branch:** main
 **Purpose:** Thin Razor Class Library wrapper around BackgammonDiagram_Lib. Exposes a `BackgammonDiagram.razor` component that calls `DiagramRenderer.RenderSvg()` and injects the result as `MarkupString`. Kept separate so the core library has no Blazor dependency.
 **Depends on:** BackgammonDiagram_Lib
-**Current commit:** `b412b58`
+**Current commit:** `cdb69aa`
 
 Key files:
 
-* BackgammonDiagram.razor: https://raw.githack.com/halheinrich/BgDiag_Razor/b412b58/BgDiag_Razor/Components/BackgammonDiagram.razor
-* BackgammonDiagram.razor.cs: https://raw.githack.com/halheinrich/BgDiag_Razor/b412b58/BgDiag_Razor/Components/BackgammonDiagram.razor.cs
-* BackgammonDiagramTests.cs: https://raw.githack.com/halheinrich/BgDiag_Razor/b412b58/BgDiag_Razor.Tests/BackgammonDiagramTests.cs
+* BackgammonDiagram.razor: https://raw.githack.com/halheinrich/BgDiag_Razor/cdb69aa/BgDiag_Razor/Components/BackgammonDiagram.razor
+* BackgammonDiagram.razor.cs: https://raw.githack.com/halheinrich/BgDiag_Razor/cdb69aa/BgDiag_Razor/Components/BackgammonDiagram.razor.cs
+* BackgammonDiagramTests.cs: https://raw.githack.com/halheinrich/BgDiag_Razor/cdb69aa/BgDiag_Razor.Tests/BackgammonDiagramTests.cs
 
 Key facts:
 
@@ -351,7 +351,7 @@ Key facts:
 | ExtractFromXgToCsv | 🔧 In progress — polling-based progress display working end-to-end; 951,973 rows from 6,660 files in 447s |
 | XgAnalytics | 🔧 In progress — player match count, NonStandardStarts, MatchScoreDistribution complete |
 | BackgammonDiagram_Lib | 🔧 In progress — DiagramRequest converted to immutable class with Builder and validation; ThemeRegistry simplified to static instances; all tests updated |
-| BgDiag_Razor | 🔧 In progress — click overlay wired; GetHitRegions updated to pass DiagramRequest; orientation regression test added; bunit tests passing |
+| BgDiag_Razor | 🔧 In progress — DiagramRequest Builder pattern adopted in tests; all bunit tests passing |
 | BgRLEngine | 🔧 In progress — DMP long run: level 4 in 100K games; uncommitted planning work deferred |
 | BgMoveGen | ✅ Complete — move generation library, all tests passing |
 | BgQuiz_Blazor | 🔧 In progress — Milestone 1 complete: hardcoded opening position, click reporting, orientation toggle |
