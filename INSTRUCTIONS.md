@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `8f1e471`
+**Current umbrella commit:** `0a406ab`
 
 ## Stack (all subprojects)
 
@@ -30,7 +30,7 @@ Current submodule pinned commits:
 | `BgDiag_Razor` | https://github.com/halheinrich/BgDiag_Razor | `cdb69aa` |
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `e14caa1` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
-| `BgQuiz_Blazor` | https://github.com/halheinrich/BgQuiz_Blazor | `1d4f1bd` |
+| `BgQuiz_Blazor` | https://github.com/halheinrich/BgQuiz_Blazor | `019c8de` |
 
 ## Naming convention
 
@@ -325,14 +325,14 @@ Key facts:
 **Purpose:** Blazor app for quizzing backgammon decisions.
 **Solution:** `BgQuiz_Blazor\BgQuiz_Blazor.slnx`
 **Depends on:** BgDiag_Razor
-**Current commit:** `1d4f1bd`
+**Current commit:** `019c8de`
 
 Key files:
 
-* BgQuiz_Blazor.csproj: https://raw.githack.com/halheinrich/BgQuiz_Blazor/1d4f1bd/BgQuiz_Blazor/BgQuiz_Blazor.csproj
-* Program.cs: https://raw.githack.com/halheinrich/BgQuiz_Blazor/1d4f1bd/BgQuiz_Blazor/Program.cs
-* Components/Pages/Home.razor: https://raw.githack.com/halheinrich/BgQuiz_Blazor/1d4f1bd/BgQuiz_Blazor/Components/Pages/Home.razor
-* Components/Pages/Home.razor.cs: https://raw.githack.com/halheinrich/BgQuiz_Blazor/1d4f1bd/BgQuiz_Blazor/Components/Pages/Home.razor.cs
+* BgQuiz_Blazor.csproj: https://raw.githack.com/halheinrich/BgQuiz_Blazor/019c8de/BgQuiz_Blazor/BgQuiz_Blazor.csproj
+* Program.cs: https://raw.githack.com/halheinrich/BgQuiz_Blazor/019c8de/BgQuiz_Blazor/Program.cs
+* Components/Pages/Home.razor: https://raw.githack.com/halheinrich/BgQuiz_Blazor/019c8de/BgQuiz_Blazor/Components/Pages/Home.razor
+* Components/Pages/Home.razor.cs: https://raw.githack.com/halheinrich/BgQuiz_Blazor/019c8de/BgQuiz_Blazor/Components/Pages/Home.razor.cs
 
 Key facts:
 
