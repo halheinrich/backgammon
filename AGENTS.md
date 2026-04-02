@@ -64,7 +64,7 @@ URLs pointed to old code. Claude had no way to detect the drift.
 ### Resolution
 If INSTRUCTIONS.md hash doesn't match actual HEAD:
 1. Run `git log --oneline -5` in the submodule dir to see what changed
-2. Fetch current INSTRUCTIONS.md from githack to assess how stale it is
+2. Fetch current INSTRUCTIONS.md from jsDelivr to assess how stale it is
 3. Reconstruct what changed between pinned hash and HEAD from git log or by fetching files at both hashes
 4. Update INSTRUCTIONS.md with correct hash and URLs
 5. Commit umbrella — submodule pointer + INSTRUCTIONS.md staged together
@@ -188,14 +188,11 @@ uncommitted work — commit, push, and include the new hash in the handoff messa
   
 ## Fetching source files
 Standard URL format for all source file links:
-`https://raw.githack.com/halheinrich/{repo}/{hash}/{path}`
+`https://cdn.jsdelivr.net/gh/halheinrich/{repo}@{hash}/{path}`
 
 Use the pinned commit hash from the submodule table — not `main`.
 
-- `raw.githack.com` — plain text, no CDN caching, always current for the hash
-- `cdn.githack.com` — CDN-cached, faster but may lag on fresh commits; avoid for session fetches
-
-`raw.githubusercontent.com` is blocked in Claude's container. `github.com` blob URLs are flaky (robots.txt + rate limiting). Use `raw.githack.com` exclusively.
+`raw.githubusercontent.com` is blocked in Claude's container. `raw.githack.com` rate-limits under repeated fetches. Use `cdn.jsdelivr.net/gh` exclusively.
 
 ## Existing-file edits
 When modifying an existing file, verify the fetched version is current before
