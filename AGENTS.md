@@ -126,6 +126,16 @@ INSTRUCTIONS.md, Claude must ask the user to provide it — not attempt to infer
    the umbrella INSTRUCTIONS.md under that dependency's Key files section.
 4. Never ask the user to paste file contents directly — always fetch from the repo.
 
+### jsDelivr propagation delay
+jsDelivr CDN may take minutes to hours to propagate a newly pushed commit hash.
+If a jsDelivr URL returns 404 for a file that is confirmed to exist in a public repo:
+1. Wait — do not switch CDNs, do not ask for pastes, do not declare the repo private.
+2. The fallback URL format is: `https://raw.githack.com/halheinrich/{repo}/{hash}/{path}`
+3. If githack also 404s on a confirmed public repo and confirmed correct hash, it is also
+   a propagation delay. Wait and retry — do not conclude the repo is private.
+4. Never ask the user to paste file contents as a workaround for a CDN propagation delay.
+5. Never conclude a repo is private based solely on CDN 404s.
+
 ### Dependency files in subproject INSTRUCTIONS.md
 Every subproject INSTRUCTIONS.md must include a **Dependency files** section listing
 *which files* are needed from each dependency — but NOT hardcoded URLs. URLs go stale
