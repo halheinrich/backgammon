@@ -8,11 +8,12 @@ Applies to all sub-projects in this repository.
 - Never move these files based on session advice
 - VS solution layout: `.slnx` at repo root, source files under `{ProjectName}/{path}`. All repo-relative source file paths require a `{ProjectName}/` prefix.
 
-
 ## Session start
 1. Fetch and apply the sub-project INSTRUCTIONS.md.
 2. Fetch and apply AGENTS.md (this file).
-3. INSTRUCTIONS.md: fetch if available; session-start message carries the critical summary and is sufficient if fetch fails.
+3. Fetch ALL URLs in the session-start manifest upfront — do not wait until a file
+   is needed mid-session. If any fetch fails, report it immediately before touching
+   any code.
 4. Wait for the user to state the task — do not propose work unprompted.
 
 ## Session defaults
@@ -113,14 +114,37 @@ all four of the following in order:
    - Subproject name and new commit hash
    - What changed this session (brief)
    - Any decisions made that affect other subprojects
-   - Session start URLs for the next session (AGENTS.md + subproject INSTRUCTIONS.md
-     + any key source files needed)
+   - **Complete URL manifest** for the next session: raw URLs for every source file
+     in the subproject that a coding session might touch — not just changed files,
+     the full working set. One URL per line, ready to paste. This eliminates
+     mid-session round-trips to discover file paths.
+   - Dependency file URLs from umbrella INSTRUCTIONS.md at currently pinned hashes
 
 ## Fetching source files — rules and failure protocol
 
 All source file URLs must come from INSTRUCTIONS.md or be pasted directly by the user.
 Claude must never construct or guess a URL. If a needed file is not listed in
 INSTRUCTIONS.md, Claude must ask the user to provide it — not attempt to infer the path.
+
+## Repo directory tree in INSTRUCTIONS.md
+Each subproject INSTRUCTIONS.md must include a directory tree showing the full repo
+structure under the project folder. This lets Claude construct correct file paths
+without browsing GitHub or guessing. Update the tree when files are added or moved.
+
+Example:
+```
+BgDiag_Razor/
+  BgDiag_Razor/
+    Components/
+      BackgammonDiagram.razor
+      BackgammonDiagram.razor.cs
+  BgDiag_Razor.Tests/
+    BackgammonDiagramTests.cs
+```
+
+The Key files section in INSTRUCTIONS.md must be exhaustive for the subproject's
+working set — every file a coding session might touch, not just the most important
+ones. Incomplete Key files lists force mid-session URL round-trips.
 
 ### When a fetch fails
 1. Do not retry with a guessed variant path.
