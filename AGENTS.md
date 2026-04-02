@@ -97,8 +97,12 @@ all four of the following in order:
    git commit -m "<message>"
    git push
    git rev-parse --short HEAD
+   git log --oneline -1 origin/main
 ```
-
+   The hash from `git rev-parse --short HEAD` must match the hash shown in
+   `git log --oneline -1 origin/main` before proceeding. If they don't match, the
+   push failed — resolve before continuing.
+   
 2. **Diff for the subproject INSTRUCTIONS.md** — updated commit hash, updated raw URLs,
    updated status, any new key facts or key decisions from this session.
 
