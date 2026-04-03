@@ -22,7 +22,7 @@ Current submodule pinned commits:
 
 | Submodule folder | Repo | Pinned commit |
 | --- | --- | --- |
-| `ConvertXgToJson_Lib` | https://github.com/halheinrich/ConvertXgToJson_Lib | `d5c3ed6` |
+| `ConvertXgToJson_Lib` | https://github.com/halheinrich/ConvertXgToJson_Lib | `c28ba4c` |
 | `XgFilter_Lib` | https://github.com/halheinrich/XgFilter_Lib | `ef7c7de` |
 | `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `132a723` |
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
@@ -57,19 +57,19 @@ Always specify which Program.cs is being modified:
 **Branch:** main
 **Purpose:** Reads .xg and .xgp files; produces DecisionRow records.
 **Solution:** `ConvertXgToJson_Lib\ConvertXgToJson_Lib.slnx`
-**Current commit:** `d5c3ed6`
+**Current commit:** `a160ed9`
 
 Key files:
 
-* DecisionRow.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@d5c3ed6/ConvertXgToJson_Lib/Models/DecisionRow.cs
-* XgDecisionIterator.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@d5c3ed6/ConvertXgToJson_Lib/XgDecisionIterator.cs
-* XgMatchInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@d5c3ed6/ConvertXgToJson_Lib/XgMatchInfo.cs
-* XgGameInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@d5c3ed6/ConvertXgToJson_Lib/XgGameInfo.cs
-* XgFileReader.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@d5c3ed6/ConvertXgToJson_Lib/XgFileReader.cs
-* BackgammonConstants.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@d5c3ed6/ConvertXgToJson_Lib/BackgammonConstants.cs
-* ConvertXgToJson_Lib.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@d5c3ed6/ConvertXgToJson_Lib/ConvertXgToJson_Lib.csproj
-* Tests.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@d5c3ed6/ConvertXgToJson_Lib.Tests/ConvertXgToJson_Lib.Tests.csproj
-* GlobalUsings.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@d5c3ed6/ConvertXgToJson_Lib.Tests/GlobalUsings.cs
+* DecisionRow.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@a160ed9/ConvertXgToJson_Lib/Models/DecisionRow.cs
+* XgDecisionIterator.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@a160ed9/ConvertXgToJson_Lib/XgDecisionIterator.cs
+* XgMatchInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@a160ed9/ConvertXgToJson_Lib/XgMatchInfo.cs
+* XgGameInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@a160ed9/ConvertXgToJson_Lib/XgGameInfo.cs
+* XgFileReader.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@a160ed9/ConvertXgToJson_Lib/XgFileReader.cs
+* BackgammonConstants.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@a160ed9/ConvertXgToJson_Lib/BackgammonConstants.cs
+* ConvertXgToJson_Lib.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@a160ed9/ConvertXgToJson_Lib/ConvertXgToJson_Lib.csproj
+* Tests.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@a160ed9/ConvertXgToJson_Lib.Tests/ConvertXgToJson_Lib.Tests.csproj
+* GlobalUsings.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@a160ed9/ConvertXgToJson_Lib.Tests/GlobalUsings.cs
 
 Key facts:
 
