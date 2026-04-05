@@ -22,6 +22,39 @@ Applies to all sub-projects in this repository.
 - To skip plan mode for a specific task: say "just do it" or "no plan needed".
 - At the end of each plan, list any unresolved questions that need answers before implementation.
 
+## Planning discipline
+
+Before writing any code, Claude must produce a plan that covers all of the following.
+The user must explicitly approve the plan before implementation begins.
+
+### Problem statement
+State what the code needs to accomplish in plain language — not how, just what.
+Include constraints (API compatibility, performance, testability) and any assumptions.
+
+### Approaches considered
+For any non-trivial implementation, present at least two approaches. For each:
+- Describe the approach briefly
+- State whether it follows best practice and if not, why not
+- List the tradeoffs (simplicity, correctness, maintainability, performance)
+- Give a clear recommendation with reasoning
+
+A single approach presented as the obvious choice is a planning failure — there is almost
+always more than one way, and the choice should be explicit.
+
+### Best practice alignment
+For the recommended approach, explicitly state:
+- Which C# / .NET best practices it follows
+- Any deviations from best practice and the justification for each deviation
+- Any patterns or idioms being used and why they're appropriate here
+
+### Open questions
+List any design decisions that need user input before implementation can proceed.
+Do not proceed past the plan until these are resolved.
+
+### Test strategy
+State how the implementation will be verified — what tests will be added or modified,
+what edge cases will be covered, and what the acceptance criterion is.
+
 ## Profiling and benchmarks
 - Always use targeted microbenchmarks, never cProfile runs.
 - Time phases in isolation (move gen, state construction, encoding, forward pass).
@@ -65,7 +98,7 @@ URLs pointed to old code. Claude had no way to detect the drift.
 ### Resolution
 If INSTRUCTIONS.md hash doesn't match actual HEAD:
 1. Run `git log --oneline -5` in the submodule dir to see what changed
-2. Fetch current INSTRUCTIONS.md from jsDelivr to assess how stale it is
+2. Fetch current INSTRUCTIONS.md from githack to assess how stale it is
 3. Reconstruct what changed between pinned hash and HEAD from git log or by fetching files at both hashes
 4. Update INSTRUCTIONS.md with correct hash and URLs
 5. Commit umbrella — submodule pointer + INSTRUCTIONS.md staged together
@@ -230,7 +263,7 @@ Standard URL format for all source file links:
 
 Use the pinned commit hash from the submodule table — not `main`.
 
-`raw.githubusercontent.com` is blocked in Claude's container. `raw.githack.com` rate-limits under repeated fetches. Use `cdn.jsdelivr.net/gh` exclusively.
+`raw.githubusercontent.com` is blocked in Claude's container. Use `raw.githack.com` as the primary CDN; fall back to `cdn.jsdelivr.net/gh` if githack rate-limits.
 
 ## Existing-file edits
 When modifying an existing file, verify the fetched version is current before
