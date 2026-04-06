@@ -387,6 +387,7 @@ Key facts:
 | BgRLEngine | 🔧 In progress — DMP long run: level 4 in 100K games; uncommitted planning work deferred |
 | BgMoveGen | ✅ Complete — move generation library, all tests passing |
 | BgQuiz_Blazor | 🔧 In progress — builds clean; Milestone 1 functional; CreateOpeningPosition() still TODO |
+| BgDataTypes_Lib | Shared type layer — BgDecisionData and constituent types |
 
 ### Deferred
 
@@ -457,6 +458,8 @@ This project (Backgammon Umbrella) is the **coordination layer** only. Heads-dow
 | **BgRLEngine** | RL engine for backgammon and variants — Python/PyTorch training, ONNX export |
 | **BgMoveGen** | C# move generation library for backgammon and all variants |
 | **BgQuiz_Blazor** | Blazor quiz app for backgammon decisions |
+| **BgDataTypes_Lib** | Shared type layer — BgDecisionData and constituent types |
+
 
 ### Workflow
 
