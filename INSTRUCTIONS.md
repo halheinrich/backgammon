@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `a7bcfb4`
+**Current umbrella commit:** `9b77873`
 
 ## Stack (all subprojects)
 
@@ -31,6 +31,7 @@ Current submodule pinned commits:
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `e14caa1` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
 | `BgQuiz_Blazor` | https://github.com/halheinrich/BgQuiz_Blazor | `019c8de` |
+| `BgDataTypes_Lib` | https://github.com/halheinrich/BgDataTypes_Lib | `025b1ef` |
 
 ## Naming convention
 
@@ -540,7 +541,7 @@ ConvertXgToJson  BackgammonDiagram  BgPositionRouter  BgInference
 * `BgDecisionData` serializes cleanly (pure data, no rendering concerns) — reference library of positions stored as JSON collections of `BgDecisionData`
 * `DecisionRow` will gain additional derived data in future — nothing foundational changes
 * `BgPositionRouter` routes positions to specialist NN sub-models for RL inference — consumes all Position data fields
-* `BgTypes` is a shared types library — no parsing or rendering logic; all subprojects that need position/decision types depend on it
+* `BgDataTypes_Lib` is the shared types library — no parsing or rendering logic; all subprojects that need position/decision types depend on it
 
 ## Pre-session umbrella verification
 
