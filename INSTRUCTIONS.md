@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `b24bffd`
+**Current umbrella commit:** `a7bcfb4`
 
 ## Stack (all subprojects)
 
@@ -429,6 +429,12 @@ Key facts:
 * `IterateDiagramRequests` yields one `DiagramRequest` per decision, mapping raw .xg parse records directly — not via `DecisionRow`
 * `CubeValueActual` extracted as `internal static` helper in `XgDecisionIterator`
 * `MatchScoreFor(int activePlayer)` replaces `MatchScore` property — perspective fix on taker cube row
+* `DiagramRequest` is not produced by ConvertXgToJson_Lib — it is constructed by clients (BgQuiz_Blazor, ExtractFromXgToCsv) from `BgDecisionData` plus client-supplied rendering options
+* Both `DecisionRow` and `BgDecisionData` are sibling outputs of ConvertXgToJson_Lib — neither is derived from the other
+* Descriptive data travels with `BgDecisionData` so DiagramRequest can display match/game context
+* `BgDecisionData` serializes cleanly (pure data, no rendering concerns) — reference library of positions stored as JSON collections of `BgDecisionData`
+* `DecisionRow` will gain additional derived data in future — nothing foundational changes
+* `BgPositionRouter` routes positions to specialist NN sub-models for RL inference — consumes all Position data fields
 
 ---
 
@@ -483,13 +489,58 @@ After every GitHub commit:
 
 1. **Submodule commit** — run `git rev-parse --short HEAD` in the submodule dir; update the short hash in the subproject header and in every URL for that submodule
 2. **Umbrella commit** — `cd` to umbrella dir, `git add <folder>`, commit, update **Current umbrella commit** and the submodule table
-3. **Key files** — add jsDelivr URLs for any new files created this session
+3. **Key files** — add raw githack URLs for any new files created this session
 4. **Current status table** — update subproject status
 5. **In progress / Deferred** — move items as appropriate
 6. **Key decisions** — append any new decisions made this session
 7. **Affected subproject instructions** — regenerate and re-paste into that subproject's Claude Project
 
 **Other subproject instructions** — update only when about to start a session in that project. Check URLs are current against the Umbrella's pinned commit before starting work.
+
+## Architecture — shared type layer
+
+### Data breakdown
+
+| Category | Fields |
+| --- | --- |
+| Position data | Mop, OnRollNeeds, OpponentNeeds, CubeSize, CubeOwner, IsCrawford |
+| Decision data | Dice, Plays, AnalysisDepths, IsCube, equity fields, error fields |
+| Descriptive data | MatchLength, Player names, Title, Date, Event |
+| Rendering data | HomeBoardOnRight, ITheme |
+
+### Composite types
+
+* `BgDecisionData` = Position + Decision + Descriptive — produced by ConvertXgToJson_Lib from raw .xg/.xgp data
+* `DiagramRequest` = BgDecisionData + Rendering — client supplies rendering options
+* `BgPositionRouter` consumes all Position data fields from `BgDecisionData`
+
+### Type ownership
+
+* `BgDecisionData` and Position/Decision/Descriptive types live in a shared types library (`BgTypes`) — no parsing or rendering logic
+* `DiagramRequest` lives in BackgammonDiagram_Lib — rendering concern
+* ConvertXgToJson_Lib depends on BgTypes; produces BgDecisionData
+* BackgammonDiagram_Lib depends on BgTypes; consumes BgDecisionData, adds rendering
+* BgPositionRouter depends on BgTypes; consumes Position data subset of BgDecisionData
+* BgInference depends on BgTypes
+
+### Dependency graph
+
+```
+BgTypes
+(BgDecisionData, Position/Decision/Descriptive types, Mop conversions)
+   ↓                  ↓                ↓              ↓
+ConvertXgToJson  BackgammonDiagram  BgPositionRouter  BgInference
+```
+
+### Key decisions
+
+* `DiagramRequest` is not produced by ConvertXgToJson_Lib — it is constructed by clients (BgQuiz_Blazor, ExtractFromXgToCsv) from `BgDecisionData` plus client-supplied rendering options
+* Both `DecisionRow` and `BgDecisionData` are sibling outputs of ConvertXgToJson_Lib — neither is derived from the other; both are produced directly from raw .xg/.xgp parse records
+* Descriptive data travels with `BgDecisionData` so DiagramRequest can display match/game context
+* `BgDecisionData` serializes cleanly (pure data, no rendering concerns) — reference library of positions stored as JSON collections of `BgDecisionData`
+* `DecisionRow` will gain additional derived data in future — nothing foundational changes
+* `BgPositionRouter` routes positions to specialist NN sub-models for RL inference — consumes all Position data fields
+* `BgTypes` is a shared types library — no parsing or rendering logic; all subprojects that need position/decision types depend on it
 
 ## Pre-session umbrella verification
 
