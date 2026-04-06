@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `17e0a3a`
+**Current umbrella commit:** `b24bffd`
 
 ## Stack (all subprojects)
 
@@ -22,7 +22,7 @@ Current submodule pinned commits:
 
 | Submodule folder | Repo | Pinned commit |
 | --- | --- | --- |
-| `ConvertXgToJson_Lib` | https://github.com/halheinrich/ConvertXgToJson_Lib | `22834c4` |
+| `ConvertXgToJson_Lib` | https://github.com/halheinrich/ConvertXgToJson_Lib | `688736f` |
 | `XgFilter_Lib` | https://github.com/halheinrich/XgFilter_Lib | `ef7c7de` |
 | `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `132a723` |
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
@@ -57,22 +57,40 @@ Always specify which Program.cs is being modified:
 **Branch:** main
 **Purpose:** Reads .xg and .xgp files; produces DecisionRow records.
 **Solution:** `ConvertXgToJson_Lib\ConvertXgToJson_Lib.slnx`
-**Current commit:** `22834c4`
+**Current commit:** `688736f`
 
 Key files:
 
-* DecisionRow.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@17e0a3a/ConvertXgToJson_Lib/Models/DecisionRow.cs
-* XgDecisionIterator.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@17e0a3a/ConvertXgToJson_Lib/XgDecisionIterator.cs
-* XgMatchInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@17e0a3a/ConvertXgToJson_Lib/XgMatchInfo.cs
-* XgGameInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@17e0a3a/ConvertXgToJson_Lib/XgGameInfo.cs
-* XgFileReader.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@17e0a3a/ConvertXgToJson_Lib/XgFileReader.cs
-* BackgammonConstants.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@17e0a3a/ConvertXgToJson_Lib/BackgammonConstants.cs
-* MatchContext.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/17e0a3a/ConvertXgToJson_Lib/MatchContext.cs
-* ConvertXgToJson_Lib.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@17e0a3a/ConvertXgToJson_Lib/ConvertXgToJson_Lib.csproj
-* Tests.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@17e0a3a/ConvertXgToJson_Lib.Tests/ConvertXgToJson_Lib.Tests.csproj
-* Tests/XgpIterateTests.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/17e0a3a/ConvertXgToJson_Lib.Tests/XgpIterateTests.cs
-* GlobalUsings.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib@17e0a3a/ConvertXgToJson_Lib.Tests/GlobalUsings.cs
-* CodeReview.md: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/17e0a3a/CodeReview.md
+* ConvertXgToJson_Lib.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/ConvertXgToJson_Lib.csproj
+* Models/DecisionRow.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/Models/DecisionRow.cs
+* Models/Models.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/Models/Models.cs
+* XgDecisionIterator.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/XgDecisionIterator.cs
+* MatchContext.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/MatchContext.cs
+* XgIteratorState.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/XgIteratorState.cs
+* XgMatchInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/XgMatchInfo.cs
+* XgGameInfo.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/XgGameInfo.cs
+* XgFileReader.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/XgFileReader.cs
+* BackgammonConstants.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/BackgammonConstants.cs
+* XgidEncoder.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/XgidEncoder.cs
+* Json/XgJsonOptions.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/Json/XgJsonOptions.cs
+* Parsing/SaveRecordParser.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/Parsing/SaveRecordParser.cs
+* Parsing/PascalBinaryReader.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/Parsing/PascalBinaryReader.cs
+* Parsing/RichGameHeaderParser.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/Parsing/RichGameHeaderParser.cs
+* Parsing/RolloutContextParser.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/Parsing/RolloutContextParser.cs
+* Parsing/XgDecompressor.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/Parsing/XgDecompressor.cs
+* Parsing/CommentParser.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib/Parsing/CommentParser.cs
+* CodeReview.md: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/CodeReview.md
+* Tests.csproj: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib.Tests/ConvertXgToJson_Lib.Tests.csproj
+* Tests/GlobalUsings.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib.Tests/GlobalUsings.cs
+* Tests/TestPaths.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib.Tests/TestPaths.cs
+* Tests/BoardTests.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib.Tests/BoardTests.cs
+* Tests/RealFileTests.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib.Tests/RealFileTests.cs
+* Tests/DecisionCsvTests.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib.Tests/DecisionCsvTests.cs
+* Tests/XgDecisionIteratorTests.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib.Tests/XgDecisionIteratorTests.cs
+* Tests/XgpIterateTests.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib.Tests/XgpIterateTests.cs
+* Tests/FileIOCollection.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib.Tests/FileIOCollection.cs
+* Tests/ReadMatchInfoBenchmarkTests.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib.Tests/ReadMatchInfoBenchmarkTests.cs
+* Tests/DiagramRequestIteratorTests.cs: https://raw.githack.com/halheinrich/ConvertXgToJson_Lib/c8813e5/ConvertXgToJson_Lib.Tests/DiagramRequestIteratorTests.cs
 
 Key facts:
 
@@ -359,7 +377,7 @@ Key facts:
 
 | Subproject | Status |
 | --- | --- |
-| ConvertXgToJson_Lib | ✅ Complete — MatchContext extracted; .xgp files fixed; xgp iterate tests added; all tests pass |
+| ConvertXgToJson_Lib | ✅ Complete — IterateDiagramRequests added; MatchScoreFor perspective fixed; all tests pass |
 | XgFilter_Lib | ✅ Complete — all filters, classifiers, ColumnSelector, FilteredDecisionIterator with early-exit; all tests pass |
 | ExtractFromXgToCsv | 🔧 In progress — polling-based progress display working end-to-end; 951,973 rows from 6,660 files in 447s |
 | XgAnalytics | 🔧 In progress — player match count, NonStandardStarts, MatchScoreDistribution complete |
@@ -408,6 +426,10 @@ Key facts:
 * `DiagramOptions` converted to `record`
 * `BoardHitRegions.Points` → `IReadOnlyDictionary`
 * Test files split: `BoardLayoutTests`, `SvgStructureTests`, `VisualOutputTests`; visual tests tagged `[Trait("Category", "Visual")]`
+* `IterateDiagramRequests` yields one `DiagramRequest` per decision, mapping raw .xg parse records directly — not via `DecisionRow`
+* `CubeValueActual` extracted as `internal static` helper in `XgDecisionIterator`
+* `MatchScoreFor(int activePlayer)` replaces `MatchScore` property — perspective fix on taker cube row
+
 ---
 
 ## Two-level Claude Project structure
@@ -440,14 +462,14 @@ This project (Backgammon Umbrella) is the **coordination layer** only. Heads-dow
 
 ## GitHub fetch workaround
 
-`raw.githubusercontent.com` is DNS-blocked in Claude's container. `raw.githack.com` rate-limits under repeated fetches. Use `raw.githack.com` exclusively for all source file fetches.
+`raw.githubusercontent.com` is DNS-blocked in Claude's container. Use `raw.githack.com` as the primary CDN; fall back to `cdn.jsdelivr.net/gh` if githack rate-limits.
 
-URL format: `https://raw.githack.com/halheinrich/{repo}@{hash}/{path}`
+URL format: `https://raw.githack.com/halheinrich/{repo}/{hash}/{path}`
 
 **Standard workaround — always follow this pattern:**
 
 1. Ask Claude: *"Give me the URLs I need to fetch"*
-2. Claude lists the jsDelivr URLs
+2. Claude lists the raw githack URLs
 3. Paste those URLs back into the chat as a user message
 4. Claude calls `web_fetch` on each URL
 
@@ -468,3 +490,19 @@ After every GitHub commit:
 7. **Affected subproject instructions** — regenerate and re-paste into that subproject's Claude Project
 
 **Other subproject instructions** — update only when about to start a session in that project. Check URLs are current against the Umbrella's pinned commit before starting work.
+
+## Pre-session umbrella verification
+
+Before starting any subproject session, run this from the umbrella root to verify
+all submodule HEADs match what the umbrella has pinned:
+```powershell
+cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon"
+git submodule foreach 'echo "$name $(git rev-parse --short HEAD) $(git log --oneline -1 origin/main)"'
+```
+
+Compare each line against the submodule table in umbrella INSTRUCTIONS.md.
+Any mismatch means either:
+- The submodule has unpushed commits (push them first)
+- The umbrella pointer is stale (update it before starting the session)
+
+Do not start a subproject session until all relevant submodule pointers are clean.

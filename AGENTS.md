@@ -11,10 +11,28 @@ Applies to all sub-projects in this repository.
 ## Session start
 1. Fetch and apply the sub-project INSTRUCTIONS.md.
 2. Fetch and apply AGENTS.md (this file).
-3. Fetch ALL URLs in the session-start manifest upfront — do not wait until a file
+3. Immediately verify the repo hash (see ## Session start hash verification below).
+4. Fetch ALL URLs in the session-start manifest upfront — do not wait until a file
    is needed mid-session. If any fetch fails, report it immediately before touching
    any code.
-4. Wait for the user to state the task — do not propose work unprompted.
+5. Wait for the user to state the task — do not propose work unprompted.
+
+## Session start hash verification (mandatory)
+
+After fetching INSTRUCTIONS.md, before fetching any source files or beginning work:
+1. Ask the user to run:
+   ```powershell
+   cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\<SubprojectName>"
+   git rev-parse --short HEAD
+   git log --oneline -1 origin/main
+   ```
+2. Compare the output against `**Current commit:**` in INSTRUCTIONS.md.
+3. If they do not match — STOP. Do not fetch any source files. Do not begin work.
+   Report the mismatch explicitly and wait for the user to resolve it before proceeding.
+4. Only proceed when HEAD matches the INSTRUCTIONS.md commit hash.
+
+This check is non-negotiable. A hash mismatch means source file URLs are stale.
+Working from stale URLs produces broken code and wastes the entire session.
 
 ## Session defaults
 - Default to plan mode: propose before writing code or files, wait for explicit approval.
@@ -125,18 +143,18 @@ all four of the following in order:
 
 1. **PowerShell commands to commit and push code changes**, including the `cd` to the
    subproject directory. Example:
-```powershell
+   ```powershell
    cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\<SubprojectName>"
    git add .
    git commit -m "<message>"
    git push
    git rev-parse --short HEAD
    git log --oneline -1 origin/main
-```
+   ```
    The hash from `git rev-parse --short HEAD` must match the hash shown in
    `git log --oneline -1 origin/main` before proceeding. If they don't match, the
    push failed — resolve before continuing.
-   
+
 2. **Diff for the subproject INSTRUCTIONS.md** — updated commit hash, updated raw URLs,
    updated status, any new key facts or key decisions from this session.
 
@@ -155,29 +173,17 @@ all four of the following in order:
 
 ## Fetching source files — rules and failure protocol
 
+Standard URL format for all source file links:
+`https://raw.githack.com/halheinrich/{repo}/{hash}/{path}`
+
+Use the pinned commit hash — not `main`. `raw.githubusercontent.com` is blocked in
+Claude's container. Use `raw.githack.com` as the primary CDN; fall back to
+`cdn.jsdelivr.net/gh` (format: `cdn.jsdelivr.net/gh/halheinrich/{repo}@{hash}/{path}`)
+if githack rate-limits.
+
 All source file URLs must come from INSTRUCTIONS.md or be pasted directly by the user.
 Claude must never construct or guess a URL. If a needed file is not listed in
 INSTRUCTIONS.md, Claude must ask the user to provide it — not attempt to infer the path.
-
-## Repo directory tree in INSTRUCTIONS.md
-Each subproject INSTRUCTIONS.md must include a directory tree showing the full repo
-structure under the project folder. This lets Claude construct correct file paths
-without browsing GitHub or guessing. Update the tree when files are added or moved.
-
-Example:
-```
-BgDiag_Razor/
-  BgDiag_Razor/
-    Components/
-      BackgammonDiagram.razor
-      BackgammonDiagram.razor.cs
-  BgDiag_Razor.Tests/
-    BackgammonDiagramTests.cs
-```
-
-The Key files section in INSTRUCTIONS.md must be exhaustive for the subproject's
-working set — every file a coding session might touch, not just the most important
-ones. Incomplete Key files lists force mid-session URL round-trips.
 
 ### When a fetch fails
 1. Do not retry with a guessed variant path.
@@ -228,6 +234,26 @@ The session close handoff must include ready-to-paste URLs for all dependency fi
 constructed from the umbrella's currently pinned hashes. The user pastes these into the
 new session so Claude can fetch them immediately without consulting the umbrella.
 
+## Repo directory tree in INSTRUCTIONS.md
+Each subproject INSTRUCTIONS.md must include a directory tree showing the full repo
+structure under the project folder. This lets Claude construct correct file paths
+without browsing GitHub or guessing. Update the tree when files are added or moved.
+
+Example:
+```
+BgDiag_Razor/
+  BgDiag_Razor/
+    Components/
+      BackgammonDiagram.razor
+      BackgammonDiagram.razor.cs
+  BgDiag_Razor.Tests/
+    BackgammonDiagramTests.cs
+```
+
+The Key files section in INSTRUCTIONS.md must be exhaustive for the subproject's
+working set — every file a coding session might touch, not just the most important
+ones. Incomplete Key files lists force mid-session URL round-trips.
+
 ## Commit protocol
 After committing in any sub-project:
 1. Note the short hash (`git rev-parse --short HEAD`)
@@ -256,14 +282,6 @@ uncommitted work — commit, push, and include the new hash in the handoff messa
   reflected in INSTRUCTIONS.md. Flag it explicitly — don't let it evaporate.
 - When starting a new session, trust INSTRUCTIONS.md over memory summaries.
   Memory is a convenience hint; the doc is canonical.
-  
-## Fetching source files
-Standard URL format for all source file links:
-`https://cdn.jsdelivr.net/gh/halheinrich/{repo}@{hash}/{path}`
-
-Use the pinned commit hash from the submodule table — not `main`.
-
-`raw.githubusercontent.com` is blocked in Claude's container. Use `raw.githack.com` as the primary CDN; fall back to `cdn.jsdelivr.net/gh` if githack rate-limits.
 
 ## Existing-file edits
 When modifying an existing file, verify the fetched version is current before
