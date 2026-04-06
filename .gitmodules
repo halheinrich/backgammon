@@ -26,3 +26,6 @@
 [submodule "BgQuiz_Blazor"]
 	path = BgQuiz_Blazor
 	url = https://github.com/halheinrich/BgQuiz_Blazor.git
+[submodule "BgDataTypes_Lib"]
+	path = BgDataTypes_Lib
+	url = https://github.com/halheinrich/BgDataTypes_Lib.git
