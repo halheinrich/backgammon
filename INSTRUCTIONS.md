@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `d02731a`
+**Current umbrella commit:** `c6a2c99`
 
 ## Stack (all subprojects)
 
@@ -117,7 +117,7 @@ Key facts:
 **Purpose:** Filtering and column projection for DecisionRow records. Used by ExtractFromXgToCsv.
 **Solution:** `XgFilter_Lib\XgFilter_Lib.slnx`
 **Depends on:** ConvertXgToJson_Lib
-**Current commit:** `f134d90`
+**Current commit:** `ef7c7de`
 
 Key files:
 
@@ -343,7 +343,7 @@ Key facts:
 * BgRLEngine depends on BgMoveGen
 * 3.4 μs/call, avoidance-based dedup, no HashSet
 * Three public entry points: GenerateStates, EnumerateStates, NextMove iterator
-* 50 tests green
+* 61 tests green
 
 ---
 
@@ -548,12 +548,12 @@ After every GitHub commit:
 
 ### Type ownership
 
-* `BgDecisionData` and Position/Decision/Descriptive types live in a shared types library (`BgTypes`) — no parsing or rendering logic
+* `BgDecisionData` and Position/Decision/Descriptive types live in `BgDataTypes_Lib` — no parsing or rendering logic
 * `DiagramRequest` lives in BackgammonDiagram_Lib — rendering concern
-* ConvertXgToJson_Lib depends on BgTypes; produces BgDecisionData
-* BackgammonDiagram_Lib depends on BgTypes; consumes BgDecisionData, adds rendering
-* BgPositionRouter depends on BgTypes; consumes Position data subset of BgDecisionData
-* BgInference depends on BgTypes
+* ConvertXgToJson_Lib depends on BgDataTypes_Lib; produces BgDecisionData
+* BackgammonDiagram_Lib depends on BgDataTypes_Lib; consumes BgDecisionData, adds rendering
+* BgPositionRouter depends on BgDataTypes_Lib; consumes Position data subset of BgDecisionData
+* BgInference depends on BgDataTypes_Lib
 
 ### Dependency graph
 
