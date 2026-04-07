@@ -31,7 +31,7 @@ Current submodule pinned commits:
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `e14caa1` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
 | `BgQuiz_Blazor` | https://github.com/halheinrich/BgQuiz_Blazor | `019c8de` |
-| `BgDataTypes_Lib` | https://github.com/halheinrich/BgDataTypes_Lib | `025b1ef` |
+| `BgDataTypes_Lib` | https://github.com/halheinrich/BgDataTypes_Lib | `5bd4d81` |
 
 ## Naming convention
 
@@ -374,6 +374,34 @@ Key facts:
 
 ---
 
+### 10. BgDataTypes_Lib
+
+**Repo:** https://github.com/halheinrich/BgDataTypes_Lib
+**Branch:** main
+**Purpose:** Shared type layer — defines BgDecisionData and constituent types (PositionData, DecisionData, DescriptiveData). No parsing or rendering logic. All subprojects that need position/decision types depend on this library.
+**Solution:** `BgDataTypes_Lib\BgDataTypes_Lib.slnx`
+**Current commit:** `5bd4d81`
+
+Key files:
+
+* BgDataTypes_Lib.csproj: https://raw.githack.com/halheinrich/BgDataTypes_Lib/16c26c6/BgDataTypes_Lib/BgDataTypes_Lib.csproj
+* BgDataTypes_Lib/PositionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/16c26c6/BgDataTypes_Lib/PositionData.cs
+* BgDataTypes_Lib/DecisionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/16c26c6/BgDataTypes_Lib/DecisionData.cs
+* BgDataTypes_Lib/DescriptiveData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/16c26c6/BgDataTypes_Lib/DescriptiveData.cs
+* BgDataTypes_Lib/BgDecisionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/16c26c6/BgDataTypes_Lib/BgDecisionData.cs
+* BgDataTypes_Lib/PlayCandidate.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/16c26c6/BgDataTypes_Lib/PlayCandidate.cs
+* BgDataTypes_Lib/AnalysisDepthEntry.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/16c26c6/BgDataTypes_Lib/AnalysisDepthEntry.cs
+* BgDataTypes_Lib/CubeOwner.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/16c26c6/BgDataTypes_Lib/CubeOwner.cs
+* BgDataTypes_Lib.Tests/BgDataTypes_Lib.Tests.csproj: https://raw.githack.com/halheinrich/BgDataTypes_Lib/16c26c6/BgDataTypes_Lib.Tests/BgDataTypes_Lib.Tests.csproj
+* BgDataTypes_Lib.Tests/BgDecisionDataSerializationTests.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/16c26c6/BgDataTypes_Lib.Tests/BgDecisionDataSerializationTests.cs
+
+Key facts:
+
+* All types are `class` with `init`-only properties — consistent with BackgammonDiagram_Lib
+* `CubeOwner` enum serializes as string via `JsonStringEnumConverter`
+* `PlayCandidate` and `AnalysisDepthEntry` live here; BackgammonDiagram_Lib will reference this lib after refactor
+* `OnRollPipCount` / `OpponentPipCount` are computed — stay in `DiagramRequest`, not `PositionData`
+
 ## Current status
 
 | Subproject | Status |
@@ -387,7 +415,7 @@ Key facts:
 | BgRLEngine | 🔧 In progress — DMP long run: level 4 in 100K games; uncommitted planning work deferred |
 | BgMoveGen | ✅ Complete — move generation library, all tests passing |
 | BgQuiz_Blazor | 🔧 In progress — builds clean; Milestone 1 functional; CreateOpeningPosition() still TODO |
-| BgDataTypes_Lib | Shared type layer — BgDecisionData and constituent types |
+| BgDataTypes_Lib | 🔧 In progress — core types defined (PositionData, DecisionData, DescriptiveData, BgDecisionData); serialization tests passing |
 
 ### Deferred
 
@@ -437,6 +465,10 @@ Key facts:
 * `BgDecisionData` serializes cleanly (pure data, no rendering concerns) — reference library of positions stored as JSON collections of `BgDecisionData`
 * `DecisionRow` will gain additional derived data in future — nothing foundational changes
 * `BgPositionRouter` routes positions to specialist NN sub-models for RL inference — consumes all Position data fields
+* `BgDataTypes_Lib` types are `class` with `init`-only properties — consistent with BackgammonDiagram_Lib
+* `CubeOwner` enum lives in BgDataTypes_Lib; serializes as string via `JsonStringEnumConverter`
+* `PlayCandidate` and `AnalysisDepthEntry` live in BgDataTypes_Lib; BackgammonDiagram_Lib will reference this lib after refactor
+* `OnRollPipCount` / `OpponentPipCount` are computed — stay in `DiagramRequest`, not `PositionData`
 
 ---
 
