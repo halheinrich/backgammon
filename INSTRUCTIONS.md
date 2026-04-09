@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `504c52e`
+**Current umbrella commit:** `d47cafa`
 
 ## Stack (all subprojects)
 
@@ -24,7 +24,7 @@ Current submodule pinned commits:
 | --- | --- | --- |
 | `ConvertXgToJson_Lib` | https://github.com/halheinrich/ConvertXgToJson_Lib | `398999f` |
 | `XgFilter_Lib` | https://github.com/halheinrich/XgFilter_Lib | `ef7c7de` |
-| `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `132a723` |
+| `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `4a55648` |
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
 | `BackgammonDiagram_Lib` | https://github.com/halheinrich/BackgammonDiagram_Lib | `f4aa558` |
 | `BgDiag_Razor` | https://github.com/halheinrich/BgDiag_Razor | `cdb69aa` |
@@ -171,26 +171,35 @@ Key facts:
 **Purpose:** Blazor web app. Extracts decisions from .xg/.xgp files, applies XgFilter_Lib filters, exports CSV.
 **Solution:** `ExtractFromXgToCsv\ExtractFromXgToCsv.slnx`
 **Depends on:** ConvertXgToJson_Lib, XgFilter_Lib
-**Current commit:** `132a723`
+**Current commit:** `4a55648`
 
 Key files:
 
+* INSTRUCTIONS.md: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/4a55648/INSTRUCTIONS.md
 * ExtractFromXgToCsv.csproj: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/ExtractFromXgToCsv.csproj
 * Program.cs (server): https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Program.cs
 * Program.cs (client): https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv.Client/Program.cs
 * Services/XgProcessingService.cs: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Services/XgProcessingService.cs
+* Services/LocalFolderProcessor.cs: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Services/LocalFolderProcessor.cs
 * Services/JobStore.cs: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Services/JobStore.cs
+* Controllers/ProcessController.cs: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Controllers/ProcessController.cs
+* Controllers/AppModeController.cs: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Controllers/AppModeController.cs
 * Controllers/ShutdownController.cs: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Controllers/ShutdownController.cs
-* Components/Pages/Home.razor: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Components/Pages/Home.razor
-* Components/FilterPanel.razor: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv/Components/FilterPanel.razor
+* Components/Pages/Home.razor: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv.Client/Components/Pages/Home.razor
+* Components/FilterPanel.razor: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv.Client/Components/FilterPanel.razor
+* Shared/FilterConfig.cs: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv.Client/Shared/FilterConfig.cs
+* Shared/ProcessingProgress.cs: https://raw.githack.com/halheinrich/ExtractFromXgToCsv/132a723/ExtractFromXgToCsv.Client/Shared/ProcessingProgress.cs
 
 Key facts:
 
-* WASM refactor complete — all .xg parsing, filtering, and CSV generation runs in the client
-* Server is a thin host only
-* Home.razor: owns file input, raw row list, output path/filename; localStorage persists input/output folder and CSV filename
-* FilterPanel.razor: separate component under `Components/`; owns filter state; raises `OnFiltersChanged` EventCallback returning `DecisionFilterSet`; Home.razor applies the filter set to rows before building CSV
-* Local mode: scans folder for .xg/.xgp, writes CSV to disk
+* Server is a thin host only — all .xg parsing, filtering, and CSV generation runs in the client (WASM)
+* Razor pages and components live in `ExtractFromXgToCsv.Client`, not `ExtractFromXgToCsv`
+* Home.razor: owns file input, raw row list, output path/filename; localStorage persists input/output folder and CSV filename; polling loop for local mode progress
+* FilterPanel.razor: separate component; owns filter state; raises `OnFiltersChanged` EventCallback<DecisionFilterSet> and `OnFilterConfigChanged` EventCallback<FilterConfig>
+* Local mode: server processes files in background Task.Run, writes CSV to disk; client polls `/api/process/{jobId}/status` every second
+* Exit button wired to ShutdownController
+* Run button disabled when filter is dirty
+* InnerBoard631 position filter implemented
 * Azure/browser mode: file upload, CSV download (download button not yet implemented)
 
 ---
@@ -411,7 +420,7 @@ Key facts:
 | --- | --- |
 | ConvertXgToJson_Lib | ✅ Complete — BgDataTypes_Lib dependency replaces BackgammonDiagram_Lib; IterateDiagramRequests returns BgDecisionData; VersionInfo.cs added; all tests pass |
 | XgFilter_Lib | ✅ Complete — all filters, classifiers, ColumnSelector, FilteredDecisionIterator with early-exit; all tests pass |
-| ExtractFromXgToCsv | 🔧 In progress — polling-based progress display working end-to-end; 951,973 rows from 6,660 files in 447s |
+| ExtractFromXgToCsv | 🔧 In progress — polling-based progress display working end-to-end; 951,973 rows from 6,660 files in 447s; INSTRUCTIONS.md corrected |
 | XgAnalytics | 🔧 In progress — player match count, NonStandardStarts, MatchScoreDistribution complete |
 | BackgammonDiagram_Lib | 🔧 In progress — BgDataTypes_Lib refactor complete; duplicate types removed; DiagramRequest uses PositionData/DecisionData/DescriptiveData |
 | BgDiag_Razor | 🔧 In progress — DiagramRequest Builder pattern adopted in tests; all bunit tests passing |
@@ -442,7 +451,7 @@ Key facts:
 * Home.razor applies DecisionFilterSet to `_rows` before CSV output and displays filtered/total row count
 * WASM refactor: all .xg parsing, filtering, and CSV generation moved to client; server is thin host only
 * JobStore.cs added for polling-based progress display
-* raw.githack.com used for all source file URLs (raw.githack.com rate-limits; raw.githubusercontent.com is DNS-blocked)
+* raw.githack.com used for all source file URLs; never use `main` in fetch URLs — always pinned hash
 * BgDiag_Razor is a separate Razor Class Library — keeps BackgammonDiagram_Lib free of Blazor dependencies
 * BgDiag_Razor click handling uses transparent SVG overlay + pure Razor EventCallbacks — no JS interop
 * `DiagramOrientation` enum removed — replaced by `bool HomeBoardOnRight { get; init; } = true` on `DiagramRequest`
@@ -471,6 +480,7 @@ Key facts:
 * ConvertXgToJson_Lib depends on BgDataTypes_Lib, not BackgammonDiagram_Lib — BackgammonDiagram_Lib dependency removed
 * `LibraryVersion.Version` in `VersionInfo.cs` — manually maintained version constant; checked at every subproject session start
 * `dice == 0` null-return guard added to `BuildMoveDiagramRequest`
+* ExtractFromXgToCsv razor files live in `ExtractFromXgToCsv.Client`, not `ExtractFromXgToCsv`
 
 ---
 
@@ -509,12 +519,11 @@ This project (Backgammon Umbrella) is the **coordination layer** only. Heads-dow
 
 URL format: `https://raw.githack.com/halheinrich/{repo}/{hash}/{path}`
 
-**Standard workaround — always follow this pattern:**
-
-1. Ask Claude: *"Give me the URLs I need to fetch"*
-2. Claude lists the raw githack URLs
-3. Paste those URLs back into the chat as a user message
-4. Claude calls `web_fetch` on each URL
+**Never use `main` in a fetch URL — always use a pinned commit hash.**
+To find the correct hash for INSTRUCTIONS.md or AGENTS.md:
+```powershell
+git log --oneline -3 -- <filename>
+```
 
 This applies in all subproject Claude Projects as well.
 
@@ -526,7 +535,7 @@ After every GitHub commit:
 
 1. **Submodule commit** — run `git rev-parse --short HEAD` in the submodule dir; update the short hash in the subproject header and in every URL for that submodule
 2. **Umbrella commit** — `cd` to umbrella dir, `git add <folder>`, commit, update **Current umbrella commit** and the submodule table
-3. **Key files** — add jsDelivr URLs for any new files created this session
+3. **Key files** — add raw githack URLs for any new files created this session
 4. **Current status table** — update subproject status
 5. **In progress / Deferred** — move items as appropriate
 6. **Key decisions** — append any new decisions made this session
