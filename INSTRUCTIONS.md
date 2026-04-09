@@ -2,7 +2,7 @@
 
 Main repo: https://github.com/halheinrich/backgammon
 Local root: `D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\`
-**Current umbrella commit:** `d47cafa`
+**Current umbrella commit:** `e7205f2`
 
 ## Stack (all subprojects)
 
@@ -31,7 +31,7 @@ Current submodule pinned commits:
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `e14caa1` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
 | `BgQuiz_Blazor` | https://github.com/halheinrich/BgQuiz_Blazor | `019c8de` |
-| `BgDataTypes_Lib` | https://github.com/halheinrich/BgDataTypes_Lib | `4fd5f6e` |
+| `BgDataTypes_Lib` | https://github.com/halheinrich/BgDataTypes_Lib | `93aa482` |
 
 ## Naming convention
 
@@ -109,6 +109,7 @@ Key facts:
 * BackgammonConstants — shared constants extracted from XgFileReader.
 * `IterateDiagramRequests` now returns `IEnumerable<BgDecisionData>`; depends on BgDataTypes_Lib, not BackgammonDiagram_Lib.
 * `LibraryVersion.Version` = `"2.0"` in `VersionInfo.cs` — manually maintained; checked at every session start.
+* `ConvertXgToJson_Lib` will need to populate `UserPlayError`, `UserDoubleError`, `UserTakeError` when parsing XG output — deferred.
 
 ---
 
@@ -389,20 +390,20 @@ Key facts:
 **Branch:** main
 **Purpose:** Shared type layer — defines BgDecisionData and constituent types (PositionData, DecisionData, DescriptiveData). No parsing or rendering logic. All subprojects that need position/decision types depend on this library.
 **Solution:** `BgDataTypes_Lib\BgDataTypes_Lib.slnx`
-**Current commit:** `4fd5f6e`
+**Current commit:** `93aa482`
 
 Key files:
 
-* BgDataTypes_Lib.csproj: https://raw.githack.com/halheinrich/BgDataTypes_Lib/bcffabf/BgDataTypes_Lib/BgDataTypes_Lib.csproj
-* BgDataTypes_Lib/PositionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/bcffabf/BgDataTypes_Lib/PositionData.cs
-* BgDataTypes_Lib/DecisionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/bcffabf/BgDataTypes_Lib/DecisionData.cs
-* BgDataTypes_Lib/DescriptiveData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/bcffabf/BgDataTypes_Lib/DescriptiveData.cs
-* BgDataTypes_Lib/BgDecisionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/bcffabf/BgDataTypes_Lib/BgDecisionData.cs
-* BgDataTypes_Lib/PlayCandidate.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/bcffabf/BgDataTypes_Lib/PlayCandidate.cs
-* BgDataTypes_Lib/AnalysisDepthEntry.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/bcffabf/BgDataTypes_Lib/AnalysisDepthEntry.cs
-* BgDataTypes_Lib/CubeOwner.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/bcffabf/BgDataTypes_Lib/CubeOwner.cs
-* BgDataTypes_Lib.Tests/BgDataTypes_Lib.Tests.csproj: https://raw.githack.com/halheinrich/BgDataTypes_Lib/bcffabf/BgDataTypes_Lib.Tests/BgDataTypes_Lib.Tests.csproj
-* BgDataTypes_Lib.Tests/BgDecisionDataSerializationTests.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/bcffabf/BgDataTypes_Lib.Tests/BgDecisionDataSerializationTests.cs
+* BgDataTypes_Lib.csproj: https://raw.githack.com/halheinrich/BgDataTypes_Lib/42778d7/BgDataTypes_Lib/BgDataTypes_Lib.csproj
+* BgDataTypes_Lib/PositionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/42778d7/BgDataTypes_Lib/PositionData.cs
+* BgDataTypes_Lib/DecisionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/42778d7/BgDataTypes_Lib/DecisionData.cs
+* BgDataTypes_Lib/DescriptiveData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/42778d7/BgDataTypes_Lib/DescriptiveData.cs
+* BgDataTypes_Lib/BgDecisionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/42778d7/BgDataTypes_Lib/BgDecisionData.cs
+* BgDataTypes_Lib/PlayCandidate.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/42778d7/BgDataTypes_Lib/PlayCandidate.cs
+* BgDataTypes_Lib/AnalysisDepthEntry.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/42778d7/BgDataTypes_Lib/AnalysisDepthEntry.cs
+* BgDataTypes_Lib/CubeOwner.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/42778d7/BgDataTypes_Lib/CubeOwner.cs
+* BgDataTypes_Lib.Tests/BgDataTypes_Lib.Tests.csproj: https://raw.githack.com/halheinrich/BgDataTypes_Lib/42778d7/BgDataTypes_Lib.Tests/BgDataTypes_Lib.Tests.csproj
+* BgDataTypes_Lib.Tests/BgDecisionDataSerializationTests.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/42778d7/BgDataTypes_Lib.Tests/BgDecisionDataSerializationTests.cs
 
 Key facts:
 
@@ -411,6 +412,7 @@ Key facts:
 * `PlayCandidate` and `AnalysisDepthEntry` live here; BackgammonDiagram_Lib now references BgDataTypes_Lib
 * `OnRollPipCount` and `OpponentPipCount` in `PositionData`
 * `BestPlayIndex` and `UserPlayIndex` in `DecisionData`
+* `UserPlayError`, `UserDoubleError`, `UserTakeError` — all `double?`, non-negative, null when not applicable — in `DecisionData`
 
 ---
 
@@ -427,7 +429,7 @@ Key facts:
 | BgRLEngine | 🔧 In progress — DMP long run: level 4 in 100K games; uncommitted planning work deferred |
 | BgMoveGen | ✅ Complete — move generation library, all tests passing |
 | BgQuiz_Blazor | 🔧 In progress — builds clean; Milestone 1 functional; CreateOpeningPosition() still TODO |
-| BgDataTypes_Lib | 🔧 In progress — OnRollPipCount/OpponentPipCount added to PositionData; BestPlayIndex/UserPlayIndex added to DecisionData; BackgammonDiagram_Lib now references this lib |
+| BgDataTypes_Lib | ✅ Complete — UserPlayError/UserDoubleError/UserTakeError added to DecisionData; all serialization tests pass |
 
 ### Deferred
 
@@ -437,6 +439,7 @@ Key facts:
 * PlayTypeFilter
 * ExtractFromXgToCsv gets 0 rows after XGID fix — to be diagnosed from ExtractFromXgToCsv project
 * ShouldAdvanceGame / ShouldAdvanceMatch implementations in XgFilter_Lib (MoveNumberFilter will be first consumer)
+* ConvertXgToJson_Lib populate UserPlayError, UserDoubleError, UserTakeError from XG parse output
 
 ### Key decisions
 
@@ -481,6 +484,8 @@ Key facts:
 * `LibraryVersion.Version` in `VersionInfo.cs` — manually maintained version constant; checked at every subproject session start
 * `dice == 0` null-return guard added to `BuildMoveDiagramRequest`
 * ExtractFromXgToCsv razor files live in `ExtractFromXgToCsv.Client`, not `ExtractFromXgToCsv`
+* `UserPlayError`, `UserDoubleError`, `UserTakeError` are `double?` in `DecisionData` — non-negative, null when not applicable; `UserPlayError` applies to checker play, `UserDoubleError`/`UserTakeError` apply to cube decisions
+* INSTRUCTIONS.md `Current commit` field renamed to `Source files commit` in BgDataTypes_Lib — clarifies that the pinned hash refers to source file URLs, not the INSTRUCTIONS.md commit itself
 
 ---
 
@@ -550,7 +555,7 @@ After every GitHub commit:
 | Category | Fields |
 | --- | --- |
 | Position data | Mop, OnRollNeeds, OpponentNeeds, CubeSize, CubeOwner, IsCrawford |
-| Decision data | Dice, Plays, AnalysisDepths, IsCube, equity fields, error fields |
+| Decision data | Dice, Plays, AnalysisDepths, IsCube, equity fields, error fields, UserPlayError, UserDoubleError, UserTakeError |
 | Descriptive data | MatchLength, Player names, Title, Date, Event |
 | Rendering data | HomeBoardOnRight, ITheme |
 
