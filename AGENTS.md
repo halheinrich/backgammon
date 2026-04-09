@@ -185,6 +185,20 @@ All source file URLs must come from INSTRUCTIONS.md or be pasted directly by the
 Claude must never construct or guess a URL. If a needed file is not listed in
 INSTRUCTIONS.md, Claude must ask the user to provide it — not attempt to infer the path.
 
+### Never use `main` in any fetch URL — ever
+
+`main` is CDN-cached on githack and may return a stale version that does not match the
+actual repo HEAD. This has caused session disasters where Claude worked from the wrong
+codebase.
+
+**The rule is absolute: every fetch URL must use a pinned commit hash. `main` is never
+permitted in any URL passed to the fetch tool — not for INSTRUCTIONS.md, not for
+AGENTS.md, not for any source file.**
+
+To fetch INSTRUCTIONS.md or AGENTS.md, use `git log --oneline -3 -- <filename>` to
+find the last commit that touched the file, then use that hash in the URL. Never
+assume the umbrella HEAD hash is the correct hash for a specific file.
+
 ### When a fetch fails
 1. Do not retry with a guessed variant path.
 2. State clearly: "I don't have a URL for this file. It needs to be added to
