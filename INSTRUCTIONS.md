@@ -22,7 +22,7 @@ Current submodule pinned commits:
 
 | Submodule folder | Repo | Pinned commit |
 | --- | --- | --- |
-| `ConvertXgToJson_Lib` | https://github.com/halheinrich/ConvertXgToJson_Lib | `398999f` |
+| `ConvertXgToJson_Lib` | https://github.com/halheinrich/ConvertXgToJson_Lib | `414796b` |
 | `XgFilter_Lib` | https://github.com/halheinrich/XgFilter_Lib | `ef7c7de` |
 | `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `4a55648` |
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
@@ -58,7 +58,7 @@ Always specify which Program.cs is being modified:
 **Branch:** main
 **Purpose:** Reads .xg and .xgp files; produces DecisionRow and BgDecisionData records.
 **Solution:** `ConvertXgToJson_Lib\ConvertXgToJson_Lib.slnx`
-**Current commit:** `398999f`
+**Current commit:** `414796b`
 
 Key files:
 
@@ -108,8 +108,9 @@ Key facts:
 * XgFileReader.ReadGameHeaders — fast game-header extraction without full file parse.
 * BackgammonConstants — shared constants extracted from XgFileReader.
 * `IterateDiagramRequests` now returns `IEnumerable<BgDecisionData>`; depends on BgDataTypes_Lib, not BackgammonDiagram_Lib.
-* `LibraryVersion.Version` = `"2.0"` in `VersionInfo.cs` — manually maintained; checked at every session start.
-* `ConvertXgToJson_Lib` will need to populate `UserPlayError`, `UserDoubleError`, `UserTakeError` and `PlayCandidate` win/lose pct fields when parsing XG output — deferred.
+* `UserPlayError`, `UserDoubleError`, `UserTakeError` populated on `BgDecisionData.Decision` from raw XG sentinel-guarded error fields.
+* `PlayCandidate` populated with six win/gammon/bg probabilities from `EvalResult`.
+* `VersionInfo.cs` removed.
 
 ---
 
@@ -421,7 +422,7 @@ Key facts:
 
 | Subproject | Status |
 | --- | --- |
-| ConvertXgToJson_Lib | ✅ Complete — BgDataTypes_Lib dependency replaces BackgammonDiagram_Lib; IterateDiagramRequests returns BgDecisionData; VersionInfo.cs added; all tests pass |
+| ConvertXgToJson_Lib | ✅ Complete — UserPlayError/UserDoubleError/UserTakeError and PlayCandidate win/gammon/bg probs populated; 184 tests green |
 | XgFilter_Lib | ✅ Complete — all filters, classifiers, ColumnSelector, FilteredDecisionIterator with early-exit; all tests pass |
 | ExtractFromXgToCsv | 🔧 In progress — polling-based progress display working end-to-end; 951,973 rows from 6,660 files in 447s; INSTRUCTIONS.md corrected |
 | XgAnalytics | 🔧 In progress — player match count, NonStandardStarts, MatchScoreDistribution complete |
@@ -440,8 +441,6 @@ Key facts:
 * PlayTypeFilter
 * ExtractFromXgToCsv gets 0 rows after XGID fix — to be diagnosed from ExtractFromXgToCsv project
 * ShouldAdvanceGame / ShouldAdvanceMatch implementations in XgFilter_Lib (MoveNumberFilter will be first consumer)
-* ConvertXgToJson_Lib populate UserPlayError, UserDoubleError, UserTakeError from XG parse output
-* ConvertXgToJson_Lib populate WinPct/WinGammonPct/WinBgPct/LosePct/LoseGammonPct/LoseBgPct in PlayCandidate from XG parse output
 
 ### Key decisions
 
@@ -489,6 +488,10 @@ Key facts:
 * `UserPlayError`, `UserDoubleError`, `UserTakeError` are `double?` in `DecisionData` — non-negative, null when not applicable
 * `WinPct`, `WinGammonPct`, `WinBgPct`, `LosePct`, `LoseGammonPct`, `LoseBgPct` are `double?` in `PlayCandidate` — null when not populated from XG parse output
 * INSTRUCTIONS.md `Current commit` field renamed to `Source files commit` in BgDataTypes_Lib — clarifies that the pinned hash refers to source file URLs, not the INSTRUCTIONS.md commit itself
+* `UserPlayError`/`UserDoubleError`/`UserTakeError` populated from sentinel-guarded raw XG error fields — null when sentinel (-1000)
+* `PlayCandidate` win/gammon/bg probabilities populated from `EvalResult` in `IterateDiagramRequests`
+* `VersionInfo.cs` removed from ConvertXgToJson_Lib
+* `BgDecisionData_WriteSampleJson` test writes sample JSON to `TestData/BgDecisionData/`
 
 ---
 
