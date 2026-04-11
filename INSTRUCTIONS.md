@@ -22,7 +22,7 @@ Current submodule pinned commits:
 
 | Submodule folder | Repo | Pinned commit |
 | --- | --- | --- |
-| `ConvertXgToJson_Lib` | https://github.com/halheinrich/ConvertXgToJson_Lib | `414796b` |
+| `ConvertXgToJson_Lib` | https://github.com/halheinrich/ConvertXgToJson_Lib | `0220b54` |
 | `XgFilter_Lib` | https://github.com/halheinrich/XgFilter_Lib | `ef7c7de` |
 | `ExtractFromXgToCsv` | https://github.com/halheinrich/ExtractFromXgToCsv | `4a55648` |
 | `XgAnalytics` | https://github.com/halheinrich/XgAnalytics | `a53089f` |
@@ -58,7 +58,7 @@ Always specify which Program.cs is being modified:
 **Branch:** main
 **Purpose:** Reads .xg and .xgp files; produces DecisionRow and BgDecisionData records.
 **Solution:** `ConvertXgToJson_Lib\ConvertXgToJson_Lib.slnx`
-**Current commit:** `414796b`
+**Current commit:** `0220b54`
 
 Key files:
 
