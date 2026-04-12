@@ -243,13 +243,52 @@ all four of the following in order:
 3. **PowerShell commands to commit and push INSTRUCTIONS.md**, staged together with any
    other end-of-session changes. Never in a separate prior commit.
 
-4. **Handoff summary for the umbrella project**, including:
-   - Subproject name and new commit hash
-   - What changed this session (brief)
-   - Any decisions made that affect other subprojects
-   - **Dependency hashes at time of handoff** — for reference only. The receiving session
-     must always verify via git (see ## Session start hash verification). These are never
-     used directly to construct URLs.
+4. **Handoff summary for the next session.** The handoff MUST start with PowerShell
+   commands — nothing else comes first. No fetching, no searching, no planning.
+   The very first thing the receiving session sees is "run these and paste the results."
+
+   Use this exact template, filled in for the specific subproject:
+
+   ```
+   ## <SubprojectName> Handoff
+
+   Run these commands and paste the results before doing anything else:
+
+   ```powershell
+   cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon"
+   git log --oneline -1 -- AGENTS.md
+
+   cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\<SubprojectName>"
+   git rev-parse --short HEAD
+   git log --oneline -1 origin/main
+   git log --oneline -1 -- INSTRUCTIONS.md
+
+   cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\<Dep1>"
+   git rev-parse --short HEAD
+
+   cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\<Dep2>"
+   git rev-parse --short HEAD
+   ```
+
+   Use the AGENTS.md hash to fetch:
+   `https://raw.githubusercontent.com/halheinrich/backgammon/{hash}/AGENTS.md`
+   Use the INSTRUCTIONS.md hash to fetch:
+   `https://raw.githubusercontent.com/halheinrich/<SubprojectRepo>/{hash}/INSTRUCTIONS.md`
+   Use the dependency hashes to construct fetch URLs per the Dependency files
+   section in INSTRUCTIONS.md.
+
+   Do NOT fetch anything using `main` — CDN caching returns stale content.
+
+   **What changed upstream:**
+   - <description of upstream changes>
+
+   **Tasks:**
+   1. <task>
+   ```
+
+   Include one `cd` + `git rev-parse --short HEAD` block per dependency listed in
+   the subproject's INSTRUCTIONS.md. Omit the dependency blocks if the subproject
+   has no dependencies.
 
 ## Session close protocol (umbrella)
 
