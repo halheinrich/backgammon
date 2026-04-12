@@ -31,7 +31,7 @@ Current submodule pinned commits:
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine | `e14caa1` |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen | `e8e8d06` |
 | `BgQuiz_Blazor` | https://github.com/halheinrich/BgQuiz_Blazor | `019c8de` |
-| `BgDataTypes_Lib` | https://github.com/halheinrich/BgDataTypes_Lib | `b94f762` |
+| `BgDataTypes_Lib` | https://github.com/halheinrich/BgDataTypes_Lib | `ae06120` |
 
 ## Naming convention
 
@@ -95,7 +95,6 @@ Key files:
 
 Key facts:
 
-* `DecisionRow.Board` is `int[]` (26 elements): `board[0]` = opponent bar (never positive), `board[1–24]` = points 1–24 from player on roll's perspective, `board[25]` = player bar (never negative). Positive = player on roll; negative = opponent.
 * `Board` is not exposed in CSV output.
 * `ToBoard` / `FlipPosition` in XgDecisionIterator handle perspective normalization.
 * Taker cube row board is always doubler POV — no flip. `FlipBoard` removed as dead code.
@@ -111,6 +110,8 @@ Key facts:
 * `UserPlayError`, `UserDoubleError`, `UserTakeError` populated on `BgDecisionData.Decision` from raw XG sentinel-guarded error fields.
 * `PlayCandidate` populated with six win/gammon/bg probabilities from `EvalResult`.
 * `VersionInfo.cs` removed.
+* Add: `DecisionRow.Board` is `IReadOnlyList<int>`
+* Add: `ConvertXgToJson_Lib` next session must replace `MatchScore` string construction with `OnRollNeeds`, `OpponentNeeds`, `IsCrawford`, `MatchLength` fields; update Board read sites from `int[]` to `IReadOnlyList<int>`
 
 ---
 
@@ -391,21 +392,23 @@ Key facts:
 **Branch:** main
 **Purpose:** Shared type layer — defines BgDecisionData and constituent types (PositionData, DecisionData, DescriptiveData). No parsing or rendering logic. All subprojects that need position/decision types depend on this library.
 **Solution:** `BgDataTypes_Lib\BgDataTypes_Lib.slnx`
-**Current commit:** `b94f762`
+**Current commit:** `ae06120`
 
 Key files:
 
-* BgDataTypes_Lib.csproj: https://raw.githack.com/halheinrich/BgDataTypes_Lib/b94f762/BgDataTypes_Lib/BgDataTypes_Lib.csproj
-* BgDataTypes_Lib/PositionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/b94f762/BgDataTypes_Lib/PositionData.cs
-* BgDataTypes_Lib/DecisionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/b94f762/BgDataTypes_Lib/DecisionData.cs
-* BgDataTypes_Lib/DescriptiveData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/b94f762/BgDataTypes_Lib/DescriptiveData.cs
-* BgDataTypes_Lib/BgDecisionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/b94f762/BgDataTypes_Lib/BgDecisionData.cs
-* DecisionRow.cs | https://raw.githack.com/halheinrich/BgDataTypes_Lib/b94f762/BgDataTypes_Lib/DecisionRow.cs |
-* BgDataTypes_Lib/PlayCandidate.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/b94f762/BgDataTypes_Lib/PlayCandidate.cs
-* BgDataTypes_Lib/AnalysisDepthEntry.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/b94f762/BgDataTypes_Lib/AnalysisDepthEntry.cs
-* BgDataTypes_Lib/CubeOwner.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/b94f762/BgDataTypes_Lib/CubeOwner.cs
-* BgDataTypes_Lib.Tests/BgDataTypes_Lib.Tests.csproj: https://raw.githack.com/halheinrich/BgDataTypes_Lib/b94f762/BgDataTypes_Lib.Tests/BgDataTypes_Lib.Tests.csproj
-* BgDataTypes_Lib.Tests/BgDecisionDataSerializationTests.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/b94f762/BgDataTypes_Lib.Tests/BgDecisionDataSerializationTests.cs
+* BgDataTypes_Lib.csproj: https://raw.githack.com/halheinrich/BgDataTypes_Lib/ae06120/BgDataTypes_Lib/BgDataTypes_Lib.csproj
+* BgDataTypes_Lib/PositionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/ae06120/BgDataTypes_Lib/PositionData.cs
+* BgDataTypes_Lib/DecisionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/ae06120/BgDataTypes_Lib/DecisionData.cs
+* BgDataTypes_Lib/DescriptiveData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/ae06120/BgDataTypes_Lib/DescriptiveData.cs
+* BgDataTypes_Lib/BgDecisionData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/ae06120/BgDataTypes_Lib/BgDecisionData.cs
+* BgDataTypes_Lib/DecisionRow.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/ae06120/BgDataTypes_Lib/DecisionRow.cs
+* BgDataTypes_Lib/PlayCandidate.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/ae06120/BgDataTypes_Lib/PlayCandidate.cs
+* BgDataTypes_Lib/AnalysisDepthEntry.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/ae06120/BgDataTypes_Lib/AnalysisDepthEntry.cs
+* BgDataTypes_Lib/CubeOwner.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/ae06120/BgDataTypes_Lib/CubeOwner.cs
+* BgDataTypes_Lib/IDecisionFilterData.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/ae06120/BgDataTypes_Lib/IDecisionFilterData.cs
+* BgDataTypes_Lib.Tests.csproj: https://raw.githack.com/halheinrich/BgDataTypes_Lib/ae06120/BgDataTypes_Lib.Tests/BgDataTypes_Lib.Tests.csproj
+* BgDataTypes_Lib.Tests/BgDecisionDataSerializationTests.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/ae06120/BgDataTypes_Lib.Tests/BgDecisionDataSerializationTests.cs
+* BgDataTypes_Lib.Tests/DecisionRowSerializationTests.cs: https://raw.githack.com/halheinrich/BgDataTypes_Lib/ae06120/BgDataTypes_Lib.Tests/DecisionRowSerializationTests.cs
 
 Key facts:
 
@@ -417,6 +420,9 @@ Key facts:
 * `UserPlayError`, `UserDoubleError`, `UserTakeError` — all `double?`, non-negative, null when not applicable — in `DecisionData`
 * `WinPct`, `WinGammonPct`, `WinBgPct`, `LosePct`, `LoseGammonPct`, `LoseBgPct` — all `double?` — in `PlayCandidate`
 * `DecisionRow` migrated from `ConvertXgToJson_Lib.Models` — namespace is now `BgDataTypes_Lib`; CSV logic moved as-is
+* `IDecisionFilterData` interface added; implemented by both `DecisionRow` and `BgDecisionData`
+* `MatchScore` in `DecisionRow` now computed from `OnRollNeeds`, `OpponentNeeds`, `IsCrawford`, `MatchLength` — not a stored string
+* `DecisionRow.Board` changed from `int[]` to `IReadOnlyList<int>`
 
 ---
 
@@ -433,7 +439,7 @@ Key facts:
 | BgRLEngine | 🔧 In progress — DMP long run: level 4 in 100K games; uncommitted planning work deferred |
 | BgMoveGen | ✅ Complete — move generation library, all tests passing |
 | BgQuiz_Blazor | 🔧 In progress — builds clean; Milestone 1 functional; CreateOpeningPosition() still TODO |
-| BgDataTypes_Lib | ✅ Complete — DecisionRow migrated from ConvertXgToJson_Lib; 9 new DecisionRow serialization/CSV tests; all tests pass |
+| BgDataTypes_Lib | ✅ Complete — IDecisionFilterData added; DecisionRow.Board → IReadOnlyList<int>; MatchScore computed; all tests pass |
 
 ### Deferred
 
@@ -496,6 +502,10 @@ Key facts:
 * `BgDecisionData_WriteSampleJson` test writes sample JSON to `TestData/BgDecisionData/`
 * `DecisionRow` lives in `BgDataTypes_Lib` (namespace `BgDataTypes_Lib`) — migrated from `ConvertXgToJson_Lib.Models`; CSV methods (`ToCsvLine`, `CsvHeader`, `CsvEscape`) moved as-is — accepted deviation from pure-data principle for pragmatic reasons
 * `ConvertXgToJson_Lib` next session: delete `Models/DecisionRow.cs`, add `ProjectReference` to `BgDataTypes_Lib`, add `using BgDataTypes_Lib` at all `DecisionRow` callsites
+* `IDecisionFilterData` interface lives in `BgDataTypes_Lib` — implemented by both `DecisionRow` and `BgDecisionData`; enables XgFilter_Lib to filter either type uniformly
+* `DecisionRow.MatchScore` is now computed from `OnRollNeeds`, `OpponentNeeds`, `IsCrawford`, `MatchLength` — not a stored string
+* `DecisionRow.Board` changed from `int[]` to `IReadOnlyList<int>` — consistent with `Mop` on `PositionData`
+* `[JsonIgnore]` on `DecisionRow.IsCube` — deferred
 
 ---
 
