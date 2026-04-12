@@ -243,16 +243,18 @@ all four of the following in order:
 3. **PowerShell commands to commit and push INSTRUCTIONS.md**, staged together with any
    other end-of-session changes. Never in a separate prior commit.
 
-4. **Handoff summary for the next session.** The handoff MUST start with PowerShell
-   commands — nothing else comes first. No fetching, no searching, no planning.
-   The very first thing the receiving session sees is "run these and paste the results."
+4. **Handoff for the next session — two messages.** The handoff is split into two
+   separate messages to prevent the receiving Claude from fetching files before
+   hashes are verified.
 
-   Use this exact template, filled in for the specific subproject:
+   **Message 1** — paste this into the new session first. It contains ONLY the
+   PowerShell commands. No context, no URLs, no task description.
 
    ```
-   ## <SubprojectName> Handoff
-
-   Run these commands and paste the results before doing anything else:
+   I need you to give me the output of these PowerShell commands. Please paste
+   the results — I'll wait. I will then send a SECOND MESSAGE with instructions
+   on what to fetch and what to do. Do not fetch or search for anything until
+   you receive that second message.
 
    ```powershell
    cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon"
@@ -270,14 +272,40 @@ all four of the following in order:
    git rev-parse --short HEAD
    ```
 
-   Use the AGENTS.md hash to fetch:
-   `https://raw.githubusercontent.com/halheinrich/backgammon/{hash}/AGENTS.md`
-   Use the INSTRUCTIONS.md hash to fetch:
-   `https://raw.githubusercontent.com/halheinrich/<SubprojectRepo>/{hash}/INSTRUCTIONS.md`
-   Use the dependency hashes to construct fetch URLs per the Dependency files
-   section in INSTRUCTIONS.md.
+   Do not search the web. Do not fetch any files. Do not use any tools.
+   Wait for the second message.
+   ```
+
+   Include one `cd` + `git rev-parse --short HEAD` block per dependency listed in
+   the subproject's INSTRUCTIONS.md. Omit the dependency blocks if the subproject
+   has no dependencies.
+
+   **Message 2** — paste this AFTER the user has run the commands and pasted the
+   results back. The user pastes the PowerShell output into the indicated spot,
+   then sends.
+
+   ```
+   Here are the results:
+
+   {paste PowerShell output here}
+
+   Now fetch these files using the hashes from the output above:
+
+   1. AGENTS.md — use the hash from the first git log command:
+      https://raw.githubusercontent.com/halheinrich/backgammon/{hash}/AGENTS.md
+
+   2. INSTRUCTIONS.md — use the hash from "git log --oneline -1 -- INSTRUCTIONS.md":
+      https://raw.githubusercontent.com/halheinrich/<SubprojectRepo>/{hash}/INSTRUCTIONS.md
+
+   3. Dependency files — INSTRUCTIONS.md lists file paths under "Dependency files".
+      For each dependency, use the hash from the git rev-parse output above to
+      construct URLs:
+      https://raw.githack.com/halheinrich/{repo}/{hash}/{path}
 
    Do NOT fetch anything using `main` — CDN caching returns stale content.
+
+   After reading AGENTS.md and INSTRUCTIONS.md, follow the session start protocol
+   in AGENTS.md. Then wait for me to state the task.
 
    **What changed upstream:**
    - <description of upstream changes>
@@ -285,10 +313,6 @@ all four of the following in order:
    **Tasks:**
    1. <task>
    ```
-
-   Include one `cd` + `git rev-parse --short HEAD` block per dependency listed in
-   the subproject's INSTRUCTIONS.md. Omit the dependency blocks if the subproject
-   has no dependencies.
 
 ## Session close protocol (umbrella)
 
