@@ -21,36 +21,38 @@ Applies to all sub-projects in this repository.
 ## Session start hash verification (mandatory)
 
 After fetching INSTRUCTIONS.md, before fetching any source files or beginning work:
-1. Ask the user to run:
+1. Ask the user to run **one combined block** that verifies the subproject AND all its
+   dependencies:
    ```powershell
    cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\<SubprojectName>"
    git rev-parse --short HEAD
    git log --oneline -1 origin/main
    ```
-2. Report both results to the user and wait for explicit confirmation before proceeding.
+   Plus, for each dependency listed in the subproject's INSTRUCTIONS.md:
+   ```powershell
+   cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\<DependencyFolder>"
+   git rev-parse --short HEAD
+   ```
+2. Report all results to the user and wait for explicit confirmation before proceeding.
 3. If the user confirms a mismatch — STOP. Do not fetch any source files. Do not begin work.
    Wait for the user to resolve it before proceeding.
 4. Never compare hashes yourself — Claude's hash knowledge is unreliable. The user confirms.
+5. Use the verified dependency hashes to construct fetch URLs (see ## Dependency files
+   at session start below).
 
 This check is non-negotiable. A hash mismatch means source file URLs are stale.
 Working from stale URLs produces broken code and wastes the entire session.
 
 ## Dependency files at session start
 
-Each subproject INSTRUCTIONS.md lists dependency file **paths** (not URLs). At session
-start, get the current hash for each dependency directly from git:
+Each subproject INSTRUCTIONS.md lists dependency file **paths** (not URLs). The dependency
+hashes come from the session start hash verification above — they were just verified via git.
 
-```powershell
-cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\<DependencyFolder>"
-git rev-parse --short HEAD
-```
-
-Use that hash to construct fetch URLs for the files listed in the subproject's
-Dependency files section:
+Construct fetch URLs from the verified hash and the paths:
 `https://raw.githack.com/halheinrich/{repo}/{hash}/{path}`
 
-This ensures dependency URLs are always current — no stale hashes from INSTRUCTIONS.md
-or the umbrella.
+**Never guess or reuse hashes from a prior session, from memory, from handoff summaries,
+or from conversation context.** The only valid source is git output from this session.
 
 ### Dependency files section format
 
@@ -245,8 +247,9 @@ all four of the following in order:
    - Subproject name and new commit hash
    - What changed this session (brief)
    - Any decisions made that affect other subprojects
-   - Do NOT include dependency file URLs in the handoff — they go stale. The next session
-     gets dependency hashes from git directly (see ## Dependency files at session start).
+   - **Dependency hashes at time of handoff** — for reference only. The receiving session
+     must always verify via git (see ## Session start hash verification). These are never
+     used directly to construct URLs.
 
 ## Session close protocol (umbrella)
 
