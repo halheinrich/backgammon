@@ -12,10 +12,11 @@ Applies to all sub-projects in this repository.
 1. Fetch and apply the sub-project INSTRUCTIONS.md.
 2. Fetch and apply AGENTS.md (this file).
 3. Immediately verify the repo hash (see ## Session start hash verification below).
-4. Fetch ALL URLs in the session-start manifest upfront — do not wait until a file
+4. Fetch dependency file URLs (see ## Dependency files at session start below).
+5. Fetch ALL URLs in the session-start manifest upfront — do not wait until a file
    is needed mid-session. If any fetch fails, report it immediately before touching
    any code.
-5. Wait for the user to state the task — do not propose work unprompted.
+6. Wait for the user to state the task — do not propose work unprompted.
 
 ## Session start hash verification (mandatory)
 
@@ -33,6 +34,41 @@ After fetching INSTRUCTIONS.md, before fetching any source files or beginning wo
 
 This check is non-negotiable. A hash mismatch means source file URLs are stale.
 Working from stale URLs produces broken code and wastes the entire session.
+
+## Dependency files at session start
+
+Each subproject INSTRUCTIONS.md lists dependency file **paths** (not URLs). At session
+start, get the current hash for each dependency directly from git:
+
+```powershell
+cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon\<DependencyFolder>"
+git rev-parse --short HEAD
+```
+
+Use that hash to construct fetch URLs for the files listed in the subproject's
+Dependency files section:
+`https://raw.githack.com/halheinrich/{repo}/{hash}/{path}`
+
+This ensures dependency URLs are always current — no stale hashes from INSTRUCTIONS.md
+or the umbrella.
+
+### Dependency files section format
+
+Each subproject INSTRUCTIONS.md must include a **Dependency files** section listing
+which files are needed from each dependency — paths only, no URLs.
+
+Example:
+```
+## Dependency files
+
+### BgDataTypes_Lib
+* BgDataTypes_Lib/IDecisionFilterData.cs
+* BgDataTypes_Lib/DecisionRow.cs
+* BgDataTypes_Lib/BgDecisionData.cs
+
+### ConvertXgToJson_Lib
+* ConvertXgToJson_Lib/XgDecisionIterator.cs
+```
 
 ## Session defaults
 - Default to plan mode: propose before writing code or files, wait for explicit approval.
@@ -83,6 +119,50 @@ what edge cases will be covered, and what the acceptance criterion is.
 - Code output: prefer focused diffs over full-file reprints when changing existing files.
 - Console/log output from tools and scripts: surface what's needed to act, suppress noise.
 - Don't paste long log dumps into chat — describe what you need instead.
+
+## Fetching source files
+
+Standard URL format for all source file links:
+`https://raw.githack.com/halheinrich/{repo}/{hash}/{path}`
+
+Use the pinned commit hash — not `main`. `raw.githubusercontent.com` is blocked in
+Claude's container. Use `raw.githack.com` as the primary CDN; fall back to
+`cdn.jsdelivr.net/gh` (format: `cdn.jsdelivr.net/gh/halheinrich/{repo}@{hash}/{path}`)
+if githack rate-limits.
+
+All source file URLs must come from INSTRUCTIONS.md or be pasted directly by the user.
+Claude must never construct or guess a URL. If a needed file is not listed in
+INSTRUCTIONS.md, Claude must ask the user to provide it — not attempt to infer the path.
+
+### Never use `main` in any fetch URL — ever
+
+`main` is CDN-cached on githack and may return a stale version that does not match the
+actual repo HEAD. This has caused session disasters where Claude worked from the wrong
+codebase.
+
+**The rule is absolute: every fetch URL must use a pinned commit hash. `main` is never
+permitted in any URL passed to the fetch tool — not for INSTRUCTIONS.md, not for
+AGENTS.md, not for any source file.**
+
+To fetch INSTRUCTIONS.md or AGENTS.md, use `git log --oneline -3 -- <filename>` to
+find the last commit that touched the file, then use that hash in the URL. Never
+assume the umbrella HEAD hash is the correct hash for a specific file.
+
+### When a fetch fails
+1. Do not retry with a guessed variant path.
+2. State clearly: "I don't have a URL for this file. It needs to be added to
+   INSTRUCTIONS.md. Please provide the URL or fetch it from the umbrella project."
+3. Never ask the user to paste file contents directly — always fetch from the repo.
+
+### jsDelivr propagation delay
+jsDelivr CDN may take minutes to hours to propagate a newly pushed commit hash.
+If a jsDelivr URL returns 404 for a file that is confirmed to exist in a public repo:
+1. Wait — do not switch CDNs, do not ask for pastes, do not declare the repo private.
+2. The fallback URL format is: `https://raw.githack.com/halheinrich/{repo}/{hash}/{path}`
+3. If githack also 404s on a confirmed public repo and confirmed correct hash, it is also
+   a propagation delay. Wait and retry — do not conclude the repo is private.
+4. Never ask the user to paste file contents as a workaround for a CDN propagation delay.
+5. Never conclude a repo is private based solely on CDN 404s.
 
 ## Stale repo disaster — and how to prevent it
 
@@ -165,117 +245,29 @@ all four of the following in order:
    - Subproject name and new commit hash
    - What changed this session (brief)
    - Any decisions made that affect other subprojects
-   - **Complete URL manifest** for the next session: raw URLs for every source file
-     in the subproject that a coding session might touch — not just changed files,
-     the full working set. One URL per line, ready to paste. This eliminates
-     mid-session round-trips to discover file paths.
-   - Do NOT include dependency file URLs in the handoff — these go stale. Instead instruct
-     the next session to fetch dependency URLs from the umbrella INSTRUCTIONS.md directly.
+   - Do NOT include dependency file URLs in the handoff — they go stale. The next session
+     gets dependency hashes from git directly (see ## Dependency files at session start).
 
-## Fetching source files — rules and failure protocol
+## Session close protocol (umbrella)
 
-Standard URL format for all source file links:
-`https://raw.githack.com/halheinrich/{repo}/{hash}/{path}`
+After updating the umbrella (submodule pointer, INSTRUCTIONS.md, etc.):
 
-Use the pinned commit hash — not `main`. `raw.githubusercontent.com` is blocked in
-Claude's container. Use `raw.githack.com` as the primary CDN; fall back to
-`cdn.jsdelivr.net/gh` (format: `cdn.jsdelivr.net/gh/halheinrich/{repo}@{hash}/{path}`)
-if githack rate-limits.
-
-All source file URLs must come from INSTRUCTIONS.md or be pasted directly by the user.
-Claude must never construct or guess a URL. If a needed file is not listed in
-INSTRUCTIONS.md, Claude must ask the user to provide it — not attempt to infer the path.
-
-### Never use `main` in any fetch URL — ever
-
-`main` is CDN-cached on githack and may return a stale version that does not match the
-actual repo HEAD. This has caused session disasters where Claude worked from the wrong
-codebase.
-
-**The rule is absolute: every fetch URL must use a pinned commit hash. `main` is never
-permitted in any URL passed to the fetch tool — not for INSTRUCTIONS.md, not for
-AGENTS.md, not for any source file.**
-
-To fetch INSTRUCTIONS.md or AGENTS.md, use `git log --oneline -3 -- <filename>` to
-find the last commit that touched the file, then use that hash in the URL. Never
-assume the umbrella HEAD hash is the correct hash for a specific file.
-
-### When a fetch fails
-1. Do not retry with a guessed variant path.
-2. State clearly: "I don't have a URL for this file. It needs to be added to
-   INSTRUCTIONS.md. Please provide the URL or fetch it from the umbrella project."
-3. If the file is from a dependency (not the current subproject), the correct URL is in
-   the umbrella INSTRUCTIONS.md under that dependency's Key files section.
-4. Never ask the user to paste file contents directly — always fetch from the repo.
-
-### jsDelivr propagation delay
-jsDelivr CDN may take minutes to hours to propagate a newly pushed commit hash.
-If a jsDelivr URL returns 404 for a file that is confirmed to exist in a public repo:
-1. Wait — do not switch CDNs, do not ask for pastes, do not declare the repo private.
-2. The fallback URL format is: `https://raw.githack.com/halheinrich/{repo}/{hash}/{path}`
-3. If githack also 404s on a confirmed public repo and confirmed correct hash, it is also
-   a propagation delay. Wait and retry — do not conclude the repo is private.
-4. Never ask the user to paste file contents as a workaround for a CDN propagation delay.
-5. Never conclude a repo is private based solely on CDN 404s.
-
-### Dependency files in subproject INSTRUCTIONS.md
-Every subproject INSTRUCTIONS.md must include a **Dependency files** section listing
-*which files* are needed from each dependency — but NOT hardcoded URLs. URLs go stale
-every time the dependency gets a new commit.
-
-Instead, the correct URLs are always sourced from the umbrella INSTRUCTIONS.md at session
-start, using the hash currently pinned there.
-
-Example format:
-```
-## Dependency files
-
-### BackgammonDiagram_Lib
-Files needed from this dependency (fetch URLs from umbrella INSTRUCTIONS.md):
-* Models/DiagramRequest.cs
-* Models/DiagramOptions.cs
-* Models/Enums.cs
-* Models/BoardHitRegions.cs
-* Rendering/DiagramRenderer.cs
-
-### BgDiag_Razor
-Files needed from this dependency (fetch URLs from umbrella INSTRUCTIONS.md):
-* Components/BackgammonDiagram.razor
-* Components/BackgammonDiagram.razor.cs
-```
-
-### Session start URLs (subprojects with dependencies)
-Do NOT include hardcoded dependency file URLs in handoffs — they go stale and cause
-session disasters. Instead, the handoff must instruct the subproject Claude to:
-1. Fetch the umbrella INSTRUCTIONS.md
-2. Extract dependency file URLs from the umbrella's Key files section for each dependency
-The umbrella INSTRUCTIONS.md is the single authoritative source for dependency URLs.
-
-## Repo directory tree in INSTRUCTIONS.md
-Each subproject INSTRUCTIONS.md must include a directory tree showing the full repo
-structure under the project folder. This lets Claude construct correct file paths
-without browsing GitHub or guessing. Update the tree when files are added or moved.
-
-Example:
-```
-BgDiag_Razor/
-  BgDiag_Razor/
-    Components/
-      BackgammonDiagram.razor
-      BackgammonDiagram.razor.cs
-  BgDiag_Razor.Tests/
-    BackgammonDiagramTests.cs
-```
-
-The Key files section in INSTRUCTIONS.md must be exhaustive for the subproject's
-working set — every file a coding session might touch, not just the most important
-ones. Incomplete Key files lists force mid-session URL round-trips.
+1. **Stage submodule pointer and INSTRUCTIONS.md together** — never one without the other.
+2. **Commit and push:**
+   ```powershell
+   cd "D:\Users\Hal\Documents\Visual Studio 2026\Projects\backgammon"
+   git add <SubmoduleFolder> INSTRUCTIONS.md
+   git commit -m "Update <SubmoduleName> to <hash> (<reason>)"
+   git push
+   git log --oneline -1 origin/main
+   ```
+3. Verify push succeeded (local HEAD matches origin/main).
 
 ## Commit protocol
 After committing in any sub-project:
 1. Note the short hash (`git rev-parse --short HEAD`)
 2. Update the commit hash and any raw URLs in that sub-project's instructions doc
-3. Return to the umbrella project and update hashes + umbrella INSTRUCTIONS.md
+3. Return to the umbrella project and update the submodule pointer + umbrella INSTRUCTIONS.md
 The subproject session owns the commit. Never hand off to the umbrella with
 uncommitted work — commit, push, and include the new hash in the handoff message.
 
@@ -310,3 +302,19 @@ insertion-point instructions over full-file replacements, as a defense against
 stale snapshots.
 
 Full-file delivery is fine for new files that don't exist yet.
+
+## Repo directory tree in INSTRUCTIONS.md
+Each subproject INSTRUCTIONS.md must include a directory tree showing the full repo
+structure under the project folder. This lets Claude construct correct file paths
+without browsing GitHub or guessing. Update the tree when files are added or moved.
+
+Example:
+```
+BgDiag_Razor/
+  BgDiag_Razor/
+    Components/
+      BackgammonDiagram.razor
+      BackgammonDiagram.razor.cs
+  BgDiag_Razor.Tests/
+    BackgammonDiagramTests.cs
+```
