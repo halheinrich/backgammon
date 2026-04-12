@@ -26,10 +26,10 @@ After fetching INSTRUCTIONS.md, before fetching any source files or beginning wo
    git rev-parse --short HEAD
    git log --oneline -1 origin/main
    ```
-2. Compare the output against `**Current commit:**` in INSTRUCTIONS.md.
-3. If they do not match — STOP. Do not fetch any source files. Do not begin work.
-   Report the mismatch explicitly and wait for the user to resolve it before proceeding.
-4. Only proceed when HEAD matches the INSTRUCTIONS.md commit hash.
+2. Report both results to the user and wait for explicit confirmation before proceeding.
+3. If the user confirms a mismatch — STOP. Do not fetch any source files. Do not begin work.
+   Wait for the user to resolve it before proceeding.
+4. Never compare hashes yourself — Claude's hash knowledge is unreliable. The user confirms.
 
 This check is non-negotiable. A hash mismatch means source file URLs are stale.
 Working from stale URLs produces broken code and wastes the entire session.
@@ -169,7 +169,8 @@ all four of the following in order:
      in the subproject that a coding session might touch — not just changed files,
      the full working set. One URL per line, ready to paste. This eliminates
      mid-session round-trips to discover file paths.
-   - Dependency file URLs from umbrella INSTRUCTIONS.md at currently pinned hashes
+   - Do NOT include dependency file URLs in the handoff — these go stale. Instead instruct
+     the next session to fetch dependency URLs from the umbrella INSTRUCTIONS.md directly.
 
 ## Fetching source files — rules and failure protocol
 
@@ -244,9 +245,11 @@ Files needed from this dependency (fetch URLs from umbrella INSTRUCTIONS.md):
 ```
 
 ### Session start URLs (subprojects with dependencies)
-The session close handoff must include ready-to-paste URLs for all dependency files,
-constructed from the umbrella's currently pinned hashes. The user pastes these into the
-new session so Claude can fetch them immediately without consulting the umbrella.
+Do NOT include hardcoded dependency file URLs in handoffs — they go stale and cause
+session disasters. Instead, the handoff must instruct the subproject Claude to:
+1. Fetch the umbrella INSTRUCTIONS.md
+2. Extract dependency file URLs from the umbrella's Key files section for each dependency
+The umbrella INSTRUCTIONS.md is the single authoritative source for dependency URLs.
 
 ## Repo directory tree in INSTRUCTIONS.md
 Each subproject INSTRUCTIONS.md must include a directory tree showing the full repo
