@@ -189,6 +189,12 @@ Key facts:
 | BgRLEngine | 🔧 In progress |
 | BgQuiz_Blazor | 🔧 In progress — Milestone 1 done |
 
+### Next up
+
+- **BackgammonDiagram_Lib** — more rendering work to get diagrams looking
+  right (continuation of analysis panel / title / rail text / ITheme work
+  landed in `b243000`).
+
 ### Deferred
 
 * CSV download button for Azure/browser mode
