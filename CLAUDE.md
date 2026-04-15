@@ -163,7 +163,8 @@ that subproject. It complements the umbrella docs without duplicating them:
 1. **Header breadcrumb** — links to `../CLAUDE.md`, `../INSTRUCTIONS.md`,
    `../VISION.md`. One line each, blockquote.
 2. **Stack** — one-line summary.
-3. **Solution** — absolute `.slnx` path.
+3. **Solution** — absolute `.slnx` path. Non-.NET subprojects substitute
+   an equivalent (e.g., `pyproject.toml` for Python).
 4. **Repo** — GitHub URL and branch.
 5. **Depends on** — bullets; each dependency names what it provides this
    subproject. Write "Standalone" if none.
