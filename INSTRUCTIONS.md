@@ -191,9 +191,17 @@ Key facts:
 
 ### Next up
 
-- **BackgammonDiagram_Lib** — more rendering work to get diagrams looking
-  right (continuation of analysis panel / title / rail text / ITheme work
-  landed in `b243000`).
+- **Subproject INSTRUCTIONS.md reboot** — slim each subproject's
+  `INSTRUCTIONS.md` to the standard defined in `CLAUDE.md`. Progress:
+  2/10 complete (BgMoveGen, BackgammonDiagram_Lib). Remaining 8:
+  BgDataTypes_Lib, XgFilter_Lib, ConvertXgToJson_Lib, BgDiag_Razor,
+  ExtractFromXgToCsv, XgAnalytics, BgQuiz_Blazor, BgRLEngine. Run each
+  as a dedicated subproject session; umbrella session bumps the pointer
+  after each.
+
+- **BackgammonDiagram_Lib code review + new rendering work** — queued
+  behind its own slim-pass, which is now done. Review target:
+  `bb0b91f..fed24af`. Then resume getting diagrams looking right.
 
 ### Deferred
 
