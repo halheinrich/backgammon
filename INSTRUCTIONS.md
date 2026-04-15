@@ -193,8 +193,8 @@ Key facts:
 
 - **Subproject INSTRUCTIONS.md reboot** — slim each subproject's
   `INSTRUCTIONS.md` to the standard defined in `CLAUDE.md`. Progress:
-  4/10 complete (BgMoveGen, BackgammonDiagram_Lib, BgDataTypes_Lib,
-  ConvertXgToJson_Lib). Remaining 6: XgFilter_Lib, BgDiag_Razor,
+  5/10 complete (BgMoveGen, BackgammonDiagram_Lib, BgDataTypes_Lib,
+  ConvertXgToJson_Lib, XgFilter_Lib). Remaining 5: BgDiag_Razor,
   ExtractFromXgToCsv, XgAnalytics, BgQuiz_Blazor, BgRLEngine. Run each
   as a dedicated subproject session; umbrella session bumps the pointer
   after each.
