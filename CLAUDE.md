@@ -146,6 +146,54 @@ handoff document.
 5. Commit with a message naming the submodule and the gist of the change.
 6. Push (after user confirmation).
 
+## Subproject INSTRUCTIONS.md standard
+
+Each subproject's `INSTRUCTIONS.md` is the deep reference for working in
+that subproject. It complements the umbrella docs without duplicating them:
+
+- `VISION.md` owns mission, principles, repo conventions.
+- Umbrella `INSTRUCTIONS.md` owns cross-cutting status, dependency graph,
+  and per-subproject one-paragraph summaries.
+- Umbrella `CLAUDE.md` (this file) owns session conventions.
+- Subproject `INSTRUCTIONS.md` owns everything else specific to working
+  in that subproject.
+
+**Required sections, in this order:**
+
+1. **Header breadcrumb** — links to `../CLAUDE.md`, `../INSTRUCTIONS.md`,
+   `../VISION.md`. One line each, blockquote.
+2. **Stack** — one-line summary.
+3. **Solution** — absolute `.slnx` path.
+4. **Repo** — GitHub URL and branch.
+5. **Depends on** — bullets; each dependency names what it provides this
+   subproject. Write "Standalone" if none.
+6. **Directory tree** — actual layout, kept current.
+7. **Architecture** — the substance. Types, invariants, design decisions,
+   hot-path rules, internal patterns. Detail too long for the umbrella's
+   per-subproject summary lives here.
+8. **Public API** — concrete signatures and contracts consumers depend on.
+9. **Pitfalls** — things easy to get wrong when modifying this subproject.
+10. **Subproject-internal next steps** — work bounded by this subproject.
+    Cross-cutting items go in umbrella `INSTRUCTIONS.md` "Next up", not here.
+
+**Forbidden content** (drift-prone, duplicative, or Claude.ai-web artifact):
+
+- Commit hashes anywhere — git tracks them
+- Raw `githubusercontent.com` URLs to source files — Claude Code reads
+  from disk
+- "GitHub fetch workaround" sections — irrelevant under Claude Code
+- "Session handoff" with hash-bumping instructions — drift trap
+- Test counts (e.g. "61 tests pass") — drift trap
+- "Current commit" lines — drift trap
+- Mission, principles, target framework, repo conventions — owned by
+  `VISION.md`
+- Per-subproject Purpose / Status / dependency graph — owned by umbrella
+  `INSTRUCTIONS.md`
+
+When slimming a subproject doc to this standard, default to deletion of
+any forbidden content rather than updating it. The point of the standard
+is to make stale facts impossible to introduce.
+
 ## Existing-file edits
 
 When modifying an existing file, read the current version from disk first.
