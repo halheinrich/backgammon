@@ -1,3 +1,6 @@
 TestData/**
 !TestData/**/
 !TestData/**/.gitkeep
+
+# Claude Code working area (worktrees, session state)
+.claude/
