@@ -191,12 +191,11 @@ Key facts:
 
 ### Next up
 
-- **BackgammonDiagram_Lib code review + new rendering work** — the
-  subproject INSTRUCTIONS.md reboot is complete across all ten
-  subprojects; this is now the active priority. Review target:
-  `bb0b91f..fed24af` — five rendering commits that landed before the
-  reboot and haven't had independent eyes. Then resume getting
-  diagrams looking right.
+- **BackgammonDiagram_Lib rendering work** — code review of
+  `bb0b91f..fed24af` is complete; follow-up commits landed via the
+  coordinated BackgammonDiagram_Lib / BgDiag_Razor bump that closed
+  it. Next: resume getting diagrams looking right. Specific
+  acceptance criteria to be defined per subproject session.
 
 ### Deferred
 
