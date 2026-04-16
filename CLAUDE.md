@@ -99,8 +99,32 @@ practice — even minor or common. Specifically:
 4. **Don't decide.** Present the tradeoffs; let the user make the call. Do not
    silently proceed with a non-best-practice approach because it seems
    expedient.
-5. **All output.** Applies to code suggestions, architecture proposals, test
+5. **Present options with a recommendation.** When offering the user a choice
+   between alternatives, identify which one is best practice and why. Neutral
+   enumeration is a failure mode — it hides the recommendation behind
+   diplomacy and pushes design decisions onto the user who asked for guidance.
+   "Don't decide" means accept the user's final call; it does not mean
+   withhold the recommendation.
+6. **All output.** Applies to code suggestions, architecture proposals, test
    strategies, and commit/branching patterns.
+
+## API breakage bias
+
+The ecosystem has no external consumers yet. All callers live in this repo.
+That makes breakage cheap — update callers as part of the same coordinated
+change.
+
+Bias toward fixing the API when it's wrong. Do not preserve an awkward
+signature, a misleading name, or a legacy helper just because existing code
+depends on it. "Existing caller" is not a reason to keep bad API; it's a
+thing to update.
+
+When a break crosses subprojects, the pattern is: break in the producer's
+session, adapt each consumer in its own session, close with one coordinated
+umbrella pointer-bump that moves all affected submodules at once.
+
+Re-evaluate when external consumers appear. Until then, aesthetic and
+correctness win over source compatibility.
 
 ## Commit protocol
 
