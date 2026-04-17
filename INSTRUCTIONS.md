@@ -90,10 +90,10 @@ Key facts:
 
 ### ExtractFromXgToCsv
 
-**Purpose:** Blazor web app — extracts decisions from .xg/.xgp files, applies filters, exports CSV.
+**Purpose:** Blazor web app — extracts decisions from .xg/.xgp files, applies filters, exports CSV or PPTX.
 **Branch:** main
 **Solution:** `ExtractFromXgToCsv\ExtractFromXgToCsv.slnx`
-**Depends on:** ConvertXgToJson_Lib, XgFilter_Lib
+**Depends on:** ConvertXgToJson_Lib, XgFilter_Lib, BackgammonDiagram_Lib (server-side only, for PPTX)
 
 Key facts:
 
@@ -102,6 +102,7 @@ Key facts:
 * FilterPanel.razor owns filter UI state; raises `OnFiltersChanged EventCallback<DecisionFilterSet>`
 * Local mode: server processes in background, client polls status
 * Azure/browser mode: file upload works, CSV download button not yet implemented
+* PPTX output: Local mode only — BackgammonDiagram_Lib is referenced from the server csproj so SkiaSharp stays out of the WASM payload. Web/Azure PPTX deferred.
 
 ### XgAnalytics
 
@@ -182,7 +183,7 @@ Key facts:
 | ConvertXgToJson_Lib | ✅ Complete |
 | XgFilter_Lib | ✅ Complete — IDecisionFilterData migration done |
 | BgMoveGen | ✅ Complete |
-| ExtractFromXgToCsv | 🔧 In progress — CSV download button, ColumnSelector UI deferred |
+| ExtractFromXgToCsv | 🔧 In progress — Web/Azure PPTX, CSV download, ColumnSelector UI all deferred |
 | XgAnalytics | 🔧 In progress |
 | BackgammonDiagram_Lib | 🔧 In progress |
 | BgDiag_Razor | 🔧 In progress |
@@ -200,19 +201,10 @@ Key facts:
   white themes, dead `WatermarkText` property, cube-face-64 bug when
   `CubeSize == 1`, pct-table column distribution at 16:9.
 
-- **ExtractFromXgToCsv: PPTX export** — newly unlocked by
-  `DiagramRequest.FromDecisionData` landing in BackgammonDiagram_Lib
-  (subproject commit `b68e536`). ExtractFromXgToCsv already produces
-  `BgDecisionData` from filtered `.xg`/`.xgp` input; adding PPTX as a
-  parallel output format alongside CSV is a natural extension.
-  Remaining work: output-format selection, PPTX generation call,
-  download interop (local mode and Azure/browser mode have different
-  plumbing — note that Azure/browser CSV download is still in
-  Deferred).
-
 ### Deferred
 
 * CSV download button for Azure/browser mode
+* PPTX download for Azure/browser mode (SkiaSharp native isn't available under Blazor WASM)
 * ColumnSelector wired into UI
 * Priming, Blitz, HoldingGame classifiers
 * PlayTypeFilter
