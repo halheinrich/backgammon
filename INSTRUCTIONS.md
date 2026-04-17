@@ -191,11 +191,13 @@ Key facts:
 
 ### Next up
 
-- **BackgammonDiagram_Lib rendering work** — code review of
-  `bb0b91f..fed24af` is complete; follow-up commits landed via the
-  coordinated BackgammonDiagram_Lib / BgDiag_Razor bump that closed
-  it. Next: resume getting diagrams looking right. Specific
-  acceptance criteria to be defined per subproject session.
+- **BackgammonDiagram_Lib rendering work** — ongoing. Cube panel
+  redesign and 16:9 aspect preset landed this cycle (subproject
+  commits `a4ca8de`, `34f8f04`, `5b65575`, `4e7caba`). Follow-up
+  candidates live in the subproject's own INSTRUCTIONS.md:
+  `Builder.CopyFrom` refactor, play-panel highlight visibility on
+  white themes, dead `WatermarkText` property, cube-face-64 bug when
+  `CubeSize == 1`, pct-table column distribution at 16:9.
 
 ### Deferred
 
@@ -205,6 +207,7 @@ Key facts:
 * PlayTypeFilter
 * ShouldAdvanceGame / ShouldAdvanceMatch implementations
 * ExtractFromXgToCsv 0-rows bug diagnosis (regression after XGID perspective fix)
+* BgDiag_Razor: verify Blazor component layout under new 16:9 aspect default; adapt or pass `AspectPreset.Natural` if needed
 
 ---
 
