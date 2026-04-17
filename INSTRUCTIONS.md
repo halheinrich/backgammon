@@ -191,13 +191,20 @@ Key facts:
 
 ### Next up
 
-- **BackgammonDiagram_Lib rendering work** — ongoing. Cube panel
-  redesign and 16:9 aspect preset landed this cycle (subproject
-  commits `a4ca8de`, `34f8f04`, `5b65575`, `4e7caba`). Follow-up
-  candidates live in the subproject's own INSTRUCTIONS.md:
-  `Builder.CopyFrom` refactor, play-panel highlight visibility on
+- **BackgammonDiagram_Lib rendering work** — ongoing. Landed so far:
+  cube panel redesign, 16:9 aspect preset, and drift-free Builder
+  cloning via `DiagramRequest.FromDecisionData` / `Builder.From`
+  (the latter resolves the `Builder.CopyFrom` candidate previously
+  listed here). Follow-up candidates in the subproject's own
+  INSTRUCTIONS.md: play-panel best-play highlight visibility on
   white themes, dead `WatermarkText` property, cube-face-64 bug when
   `CubeSize == 1`, pct-table column distribution at 16:9.
+
+- **BgQuiz_Blazor: PPTX export** — newly unlocked by
+  `DiagramRequest.FromDecisionData` landing in BackgammonDiagram_Lib
+  (subproject commit `b68e536`). BgQuiz_Blazor can now produce a
+  PPTX from its existing JSON output in ~4 lines. Remaining work:
+  UI button + browser download interop.
 
 ### Deferred
 
