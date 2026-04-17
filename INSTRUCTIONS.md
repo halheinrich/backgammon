@@ -200,11 +200,15 @@ Key facts:
   white themes, dead `WatermarkText` property, cube-face-64 bug when
   `CubeSize == 1`, pct-table column distribution at 16:9.
 
-- **BgQuiz_Blazor: PPTX export** — newly unlocked by
+- **ExtractFromXgToCsv: PPTX export** — newly unlocked by
   `DiagramRequest.FromDecisionData` landing in BackgammonDiagram_Lib
-  (subproject commit `b68e536`). BgQuiz_Blazor can now produce a
-  PPTX from its existing JSON output in ~4 lines. Remaining work:
-  UI button + browser download interop.
+  (subproject commit `b68e536`). ExtractFromXgToCsv already produces
+  `BgDecisionData` from filtered `.xg`/`.xgp` input; adding PPTX as a
+  parallel output format alongside CSV is a natural extension.
+  Remaining work: output-format selection, PPTX generation call,
+  download interop (local mode and Azure/browser mode have different
+  plumbing — note that Azure/browser CSV download is still in
+  Deferred).
 
 ### Deferred
 
