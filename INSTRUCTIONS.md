@@ -202,14 +202,6 @@ Key facts:
   the cube pass). Still on the subproject's own list: R4 dead
   `WatermarkText` property, R5 cube-face-64 bug when `CubeSize == 1`.
 
-- **ConvertXgToJson_Lib: populate `PlayCandidate.MoveNotation`** —
-  currently unpopulated; blocks Solution-slide move text in
-  BackgammonDiagram_Lib's visual tests. A parallel subproject session
-  is addressing it. BackgammonDiagram_Lib commit `6704564` (the
-  visual test harness) is held local-only until the MoveNotation
-  work lands, then both can bump together in a coordinated umbrella
-  commit.
-
 ### Deferred
 
 * CSV download button for Azure/browser mode
