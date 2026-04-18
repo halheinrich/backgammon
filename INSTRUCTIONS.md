@@ -192,14 +192,23 @@ Key facts:
 
 ### Next up
 
-- **BackgammonDiagram_Lib rendering work** — ongoing. Landed so far:
-  cube panel redesign, 16:9 aspect preset, and drift-free Builder
-  cloning via `DiagramRequest.FromDecisionData` / `Builder.From`
-  (the latter resolves the `Builder.CopyFrom` candidate previously
-  listed here). Follow-up candidates in the subproject's own
-  INSTRUCTIONS.md: play-panel best-play highlight visibility on
-  white themes, dead `WatermarkText` property, cube-face-64 bug when
-  `CubeSize == 1`, pct-table column distribution at 16:9.
+- **BackgammonDiagram_Lib rendering work** — ongoing. This cycle
+  landed cube-panel UX polish (title, Best/Actual suppression,
+  numeric column anchoring that resolves the 16:9 wide-gap, enlarged
+  cube-panel text) and a new bear-off tray feature (vertical edge-on
+  checker stack; cube pins to rail edge to give tray room). In
+  flight in the next subproject session: play-panel polish (R2
+  highlight visibility, theme accents, text enlargement mirroring
+  the cube pass). Still on the subproject's own list: R4 dead
+  `WatermarkText` property, R5 cube-face-64 bug when `CubeSize == 1`.
+
+- **ConvertXgToJson_Lib: populate `PlayCandidate.MoveNotation`** —
+  currently unpopulated; blocks Solution-slide move text in
+  BackgammonDiagram_Lib's visual tests. A parallel subproject session
+  is addressing it. BackgammonDiagram_Lib commit `6704564` (the
+  visual test harness) is held local-only until the MoveNotation
+  work lands, then both can bump together in a coordinated umbrella
+  commit.
 
 ### Deferred
 
