@@ -116,7 +116,7 @@ Analyses: player match count, NonStandardStarts, MatchScoreDistribution
 **Purpose:** Pure rendering library — board diagrams as SVG, PNG, PDF, PowerPoint. No user interaction, no game state.
 **Branch:** main
 **Solution:** `BackgammonDiagram_Lib\BackgammonDiagram_Lib.slnx`
-**Depends on:** BgDataTypes_Lib
+**Depends on:** BgDataTypes_Lib; ConvertXgToJson_Lib (test-only, for fixture-driven visual tests)
 
 Key facts:
 
@@ -193,14 +193,16 @@ Key facts:
 ### Next up
 
 - **BackgammonDiagram_Lib rendering work** — ongoing. This cycle
-  landed cube-panel UX polish (title, Best/Actual suppression,
-  numeric column anchoring that resolves the 16:9 wide-gap, enlarged
-  cube-panel text) and a new bear-off tray feature (vertical edge-on
-  checker stack; cube pins to rail edge to give tray room). In
-  flight in the next subproject session: play-panel polish (R2
-  highlight visibility, theme accents, text enlargement mirroring
-  the cube pass). Still on the subproject's own list: R4 dead
-  `WatermarkText` property, R5 cube-face-64 bug when `CubeSize == 1`.
+  landed the play-panel redesign (one-line-per-candidate with equity
+  columns, numeric block anchored to move text, 14pt ramp matching
+  cube panel), a title-strip composition overhaul (context-composed
+  rather than `Descriptive.Title`-driven, with new additive
+  `DiagramRequest.PositionNumber` field), and dice now take the
+  on-roll colour with auto-contrast pips. New visual-test fixtures
+  (`bg_checker_decisions.pptx`, `bg_cube_decisions.pptx`) exercise
+  real-data rendering end-to-end. Remaining on the subproject's own
+  list: R4 dead `WatermarkText` property, R5 cube-face-64 bug when
+  `CubeSize == 1`.
 
 ### Deferred
 
@@ -249,6 +251,11 @@ BgMoveGen (standalone)
 
 XgAnalytics (standalone)
 ```
+
+Cross-edges not shown in the tree:
+
+- ExtractFromXgToCsv also consumes BackgammonDiagram_Lib server-side for PPTX output.
+- BackgammonDiagram_Lib's test project references ConvertXgToJson_Lib for fixture-driven visual tests.
 
 ## Pre-session verification
 
