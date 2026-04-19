@@ -193,16 +193,12 @@ Key facts:
 ### Next up
 
 - **BackgammonDiagram_Lib rendering work** — ongoing. This cycle
-  landed the play-panel redesign (one-line-per-candidate with equity
-  columns, numeric block anchored to move text, 14pt ramp matching
-  cube panel), a title-strip composition overhaul (context-composed
-  rather than `Descriptive.Title`-driven, with new additive
-  `DiagramRequest.PositionNumber` field), and dice now take the
-  on-roll colour with auto-contrast pips. New visual-test fixtures
-  (`bg_checker_decisions.pptx`, `bg_cube_decisions.pptx`) exercise
-  real-data rendering end-to-end. Remaining on the subproject's own
-  list: R4 dead `WatermarkText` property, R5 cube-face-64 bug when
-  `CubeSize == 1`.
+  closed the ecosystem-wide SourceFile addition (five coordinated
+  submodule changes: BgDataTypes_Lib, ConvertXgToJson_Lib,
+  XgFilter_Lib, BackgammonDiagram_Lib, ExtractFromXgToCsv) and
+  rendered the filename stem in title strip col 2; Position N moved
+  to col 3. Remaining on the subproject's own list: R4 dead
+  `WatermarkText` property, R5 cube-face-64 bug when `CubeSize == 1`.
 
 ### Deferred
 
