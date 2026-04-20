@@ -84,6 +84,7 @@ Key facts:
 * `DecisionFilterSet`: ordered list, AND semantics
 * Filters: PlayerFilter, DecisionTypeFilter, MatchScoreFilter, ErrorRangeFilter, PositionTypeFilter
 * Classifiers: RaceClassifier, ContactClassifier, InnerBoard631Classifier, InnerBoard54321Classifier. Multi-membership — a position can satisfy several classifiers at once.
+* PlayType classifiers via `IPlayTypeClassifier`: Make20PtClassifier (only PlayType currently implemented).
 * `IPositionClassifier.Matches` accepts `IReadOnlyList<int>`
 * `ColumnSelector`: explicit column registry, no reflection
 * `FilteredDecisionIterator`: owns XgIteratorState; supports early-exit via IMatchFilter
@@ -192,24 +193,35 @@ Key facts:
 
 ### Next up
 
-- **BackgammonDiagram_Lib rendering work** — ongoing. This cycle
-  closed the ecosystem-wide SourceFile addition (five coordinated
-  submodule changes: BgDataTypes_Lib, ConvertXgToJson_Lib,
-  XgFilter_Lib, BackgammonDiagram_Lib, ExtractFromXgToCsv) and
-  rendered the filename stem in title strip col 2; Position N moved
-  to col 3. Remaining on the subproject's own list: R4 dead
-  `WatermarkText` property, R5 cube-face-64 bug when `CubeSize == 1`.
+- **BackgammonDiagram_Lib rendering work** — ongoing. Remaining on
+  the subproject's own list: R4 dead `WatermarkText` property, R5
+  cube-face-64 bug when `CubeSize == 1`.
+
+- **XgFilter_Lib Session B2** — ShouldAdvance/ShouldSkip API
+  reconciliation (grep + survey to confirm whether they're synonyms
+  or distinct semantics) followed by MatchScoreFilter early-exit
+  opt-in. Plumbing exists end-to-end; no filter currently uses it.
+  MatchScoreFilter is the natural first consumer — when the filter's
+  included scores become unreachable from a game's/match's current
+  score, skip the rest.
+
+- **BgDataTypes_Lib: three-board substrate for `IDecisionFilterData`** —
+  play-type classifiers need before/after/opponent board views to
+  classify plays properly. XgFilter_Lib's Make20PtClassifier works
+  around this locally; the correct fix is to expand `IDecisionFilterData`
+  (or an adjacent abstraction) to expose the boards, with downstream
+  ConvertXgToJson_Lib / BackgammonDiagram_Lib / ExtractFromXgToCsv
+  adaptation. Multi-subproject cycle — producer grep before the
+  first handoff is drafted.
 
 ### Deferred
 
 * CSV download button for Azure/browser mode
 * PPTX download for Azure/browser mode (SkiaSharp native isn't available under Blazor WASM)
 * ColumnSelector wired into UI
-* Priming, Blitz, HoldingGame classifiers
-* PlayTypeFilter
-* ShouldAdvanceGame / ShouldAdvanceMatch implementations
 * ExtractFromXgToCsv 0-rows bug diagnosis (regression after XGID perspective fix)
 * BgDiag_Razor: verify Blazor component layout under new 16:9 aspect default; adapt or pass `AspectPreset.Natural` if needed
+* XgFilter_Lib: `[Description]`-based display labels for `PositionType` / `PlayType` enum members, with a small reflection helper. Cosmetic; consumer-coordinated via ExtractFromXgToCsv.
 
 ---
 
