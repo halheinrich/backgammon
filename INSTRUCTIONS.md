@@ -83,7 +83,7 @@ Key facts:
 * `IDecisionFilter.Matches(IDecisionFilterData)`; `IMatchFilter` for match/game-level early-exit
 * `DecisionFilterSet`: ordered list, AND semantics
 * Filters: PlayerFilter, DecisionTypeFilter, MatchScoreFilter, ErrorRangeFilter, PositionTypeFilter
-* Classifiers: RaceClassifier, ContactClassifier (= !Race), InnerBoard631Classifier, InnerBoard54321Classifier
+* Classifiers: RaceClassifier, ContactClassifier, InnerBoard631Classifier, InnerBoard54321Classifier. Multi-membership — a position can satisfy several classifiers at once.
 * `IPositionClassifier.Matches` accepts `IReadOnlyList<int>`
 * `ColumnSelector`: explicit column registry, no reflection
 * `FilteredDecisionIterator`: owns XgIteratorState; supports early-exit via IMatchFilter
