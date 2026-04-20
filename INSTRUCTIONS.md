@@ -197,22 +197,20 @@ Key facts:
   the subproject's own list: R4 dead `WatermarkText` property, R5
   cube-face-64 bug when `CubeSize == 1`.
 
-- **XgFilter_Lib Session B2** — ShouldAdvance/ShouldSkip API
-  reconciliation (grep + survey to confirm whether they're synonyms
-  or distinct semantics) followed by MatchScoreFilter early-exit
-  opt-in. Plumbing exists end-to-end; no filter currently uses it.
-  MatchScoreFilter is the natural first consumer — when the filter's
-  included scores become unreachable from a game's/match's current
-  score, skip the rest.
-
-- **BgDataTypes_Lib: three-board substrate for `IDecisionFilterData`** —
-  play-type classifiers need before/after/opponent board views to
-  classify plays properly. XgFilter_Lib's Make20PtClassifier works
-  around this locally; the correct fix is to expand `IDecisionFilterData`
-  (or an adjacent abstraction) to expose the boards, with downstream
-  ConvertXgToJson_Lib / BackgammonDiagram_Lib / ExtractFromXgToCsv
-  adaptation. Multi-subproject cycle — producer grep before the
-  first handoff is drafted.
+- **BgDataTypes_Lib: after-board substrate for `IDecisionFilterData`** —
+  play-type classifiers need the after-play board to classify moves
+  (Make20PtClassifier currently works around this locally). Concrete
+  contract specified in XgFilter_Lib's `INSTRUCTIONS.md` (landed
+  in subproject commit `25243e1`): add `AfterBestBoard` and
+  `AfterPlayerBoard` to `IDecisionFilterData`. Producer grep before
+  the first handoff. Multi-subproject sequence:
+    1. BgDataTypes_Lib adds the members.
+    2. ConvertXgToJson_Lib populates them in the parse pipeline.
+    3. XgFilter_Lib reinstates `PlayTypeFilter` against the
+       substrate (replaces B1's stub removal and absorbs what was
+       originally queued for B2 Task 3).
+    4. ExtractFromXgToCsv wires the reinstated filter into its UI.
+    5. Coordinated umbrella pointer-bump across all four.
 
 ### Deferred
 
