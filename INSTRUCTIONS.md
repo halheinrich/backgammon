@@ -82,7 +82,7 @@ Key facts:
 * All filters accept `IDecisionFilterData` — works with both DecisionRow and BgDecisionData
 * `IDecisionFilter.Matches(IDecisionFilterData)`; `IMatchFilter` for match/game-level early-exit
 * `DecisionFilterSet`: ordered list, AND semantics
-* Filters: PlayerFilter, DecisionTypeFilter, MatchScoreFilter, ErrorRangeFilter, PositionTypeFilter
+* Filters: PlayerFilter, DecisionTypeFilter, MatchScoreFilter, ErrorRangeFilter, PositionTypeFilter, PlayTypeFilter
 * Classifiers: RaceClassifier, ContactClassifier, InnerBoard631Classifier, InnerBoard54321Classifier. Multi-membership — a position can satisfy several classifiers at once.
 * PlayType classifiers via `IPlayTypeClassifier`: Make20PtClassifier (only PlayType currently implemented).
 * `IPositionClassifier.Matches` accepts `IReadOnlyList<int>`
