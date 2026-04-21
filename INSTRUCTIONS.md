@@ -219,7 +219,6 @@ Key facts:
 * ColumnSelector wired into UI
 * ExtractFromXgToCsv 0-rows bug diagnosis (regression after XGID perspective fix)
 * BgDiag_Razor: verify Blazor component layout under new 16:9 aspect default; adapt or pass `AspectPreset.Natural` if needed
-* XgFilter_Lib: `[Description]`-based display labels for `PositionType` / `PlayType` enum members, with a small reflection helper. Cosmetic; consumer-coordinated via ExtractFromXgToCsv.
 
 ---
 
