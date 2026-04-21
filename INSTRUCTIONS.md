@@ -197,21 +197,6 @@ Key facts:
   the subproject's own list: R4 dead `WatermarkText` property, R5
   cube-face-64 bug when `CubeSize == 1`.
 
-- **BgDataTypes_Lib: after-board substrate for `IDecisionFilterData`** —
-  play-type classifiers need the after-play board to classify moves
-  (Make20PtClassifier currently works around this locally). Concrete
-  contract specified in XgFilter_Lib's `INSTRUCTIONS.md` (landed
-  in subproject commit `25243e1`): add `AfterBestBoard` and
-  `AfterPlayerBoard` to `IDecisionFilterData`. Producer grep before
-  the first handoff. Multi-subproject sequence:
-    1. BgDataTypes_Lib adds the members.
-    2. ConvertXgToJson_Lib populates them in the parse pipeline.
-    3. XgFilter_Lib reinstates `PlayTypeFilter` against the
-       substrate (replaces B1's stub removal and absorbs what was
-       originally queued for B2 Task 3).
-    4. ExtractFromXgToCsv wires the reinstated filter into its UI.
-    5. Coordinated umbrella pointer-bump across all four.
-
 ### Deferred
 
 * CSV download button for Azure/browser mode
@@ -221,6 +206,7 @@ Key facts:
 * BgDiag_Razor: verify Blazor component layout under new 16:9 aspect default; adapt or pass `AspectPreset.Natural` if needed
 * BgDataTypes_Lib: reinstate 2 cube-error adapter tests (`UsesDoubleError`, `FallsBackToTakeError`) dropped from XgFilter_Lib in `d8fac0d` when the filter-test suite was consolidated onto `DecisionFilterAsserts`. The fallback logic being tested lives in `BgDataTypes_Lib.BgDecisionData.FilterError`, not in the filter, so the tests belong with the type.
 * XgFilter_Lib: `FilteredDecisionIterator` exception-swallowing. Catch block discards exceptions silently; either handle something real or delete the catch. Correctness concern masquerading as style.
+* ExtractFromXgToCsv: two encapsulation leaks in `FilterPanel.razor` — PositionType checkbox label renders `@pt` (bare identifier) instead of `@pt.ToLabel()` around line 97; local `DecisionTypeLabel` switch around lines 253-259 should use `value.ToLabel()`. Same pattern Session 4 fixed for PlayType. Small single-session cleanup whenever the subproject next opens.
 
 ---
 
