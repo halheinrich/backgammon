@@ -126,6 +126,33 @@ umbrella pointer-bump that moves all affected submodules at once.
 Re-evaluate when external consumers appear. Until then, aesthetic and
 correctness win over source compatibility.
 
+## Best-practice bias
+
+When writing new code, default toward robust over minimal. YAGNI applies
+to speculative *features* — not to correctness, completeness, or defensive
+handling of the contracts you're writing.
+
+Practical tilts:
+
+- **Edge-case inputs.** Empty / single-element / boundary inputs: define
+  the contract and test it, even if no current caller exercises it. Silent
+  wrong-answer bugs live here.
+- **Extensible shapes.** Filter / classifier / helper classes with only one
+  implementation today: build them as extensible abstractions parallel to
+  sibling patterns already in the codebase, not one-off specialised classes.
+- **Stubs with imminent callers.** A stub without callers is a YAGNI
+  candidate. A stub whose caller lands next session is not — don't remove
+  it.
+
+Cost asymmetry: in this ecosystem (no external consumers, all callers
+in-tree), too-robust is a small one-time up-front investment; too-YAGNI
+surfaces later as phantom bugs, missed edge cases, or cross-subproject
+cleanup cycles.
+
+Complementary to "API breakage bias": that one governs *removing* awkward
+existing API; this one governs *building* new code. Both lean quality
+over expedience.
+
 ## Commit protocol
 
 1. Prefer new commits over amending.
