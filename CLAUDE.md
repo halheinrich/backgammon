@@ -159,6 +159,38 @@ Complementary to "API breakage bias": that one governs *removing* awkward
 existing API; this one governs *building* new code. Both lean quality
 over expedience.
 
+## Encapsulation discipline
+
+A library's consumers should never need to know its internal implementation
+details to use it correctly. When a consumer implements logic that *mirrors*
+or *maps* to the library's internal representation, that's a boundary leak —
+the mapping belongs inside the library.
+
+Apply this as a review lens at planning time, not after wiring exposes the
+leak. (Recent example: `PlayTypeFilter` shipped in Session 3 of the
+Make20Pt-filter cycle with a constructor taking
+`IEnumerable<IPlayTypeClassifier>`, forcing UI consumers to know the
+enum→classifier correspondence. Session 4 caught it in planning; Session 3
+should have.)
+
+Practical tilts:
+
+- **Constructors take user-level selectors.** Enum values, names, IDs — not
+  internal instances the caller had to construct and thereby learn about.
+- **Expose intent, hide structure.** Consumers should see what a type does,
+  not how it stores or dispatches.
+- **Shared test helpers live with the type.** If every filter's tests
+  re-implement "exercise this against both shapes of `IDecisionFilterData`,"
+  that's copy-paste leakage; the helper belongs in the library's test
+  support.
+- **Repeated consumer glue is a library gap.** If two consumers write the
+  same small adapter to use a library type, the adapter's logic belongs
+  inside the library (as a convenience constructor, factory, or helper).
+
+Complementary to "Best-practice bias": that one governs correctness and
+completeness of what you write; this one governs *where* logic lives across
+library/consumer boundaries.
+
 ## Commit protocol
 
 1. Prefer new commits over amending.
