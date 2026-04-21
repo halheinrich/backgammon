@@ -66,9 +66,15 @@ for a specific trivial task: "just do it" or "no plan needed".
 
 **Checkpoint discipline.** Non-trivial plans are broken into checkpoint-sized
 steps. At natural boundaries (plan approved, first chunk done, build green,
-about to commit), stop and let the user react. Checkpoints are relaxed — fine
-to complete multiple related edits before pausing, but never finish an entire
-multi-step task without an intermediate nod.
+about to commit), stop and let the user react.
+
+**For multi-task sessions, execute tasks one at a time.** Produce the full
+plan up front and get it approved. Then: implement Task 1 → commit → report
+a diff summary → wait for explicit user approval before starting Task 2.
+Repeat per task. Do not batch multiple tasks into one commit or offer to
+"do them all" after the plan is approved. User digest capacity is the review
+bottleneck; task-by-task commits let each change be read and approved before
+the next lands on top.
 
 **Uncertainty signaling.** When making a factual claim about the codebase, a
 git hash, an API, a tool version, or a behavior not verified in the current
