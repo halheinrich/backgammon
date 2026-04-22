@@ -193,18 +193,6 @@ Key facts:
 
 ### Next up
 
-- **ConvertXgToJson_Lib: finish the rank-0 sweep in
-  `BuildMoveDiagramRequest`.** After subproject `6c249b7` the three
-  "best play" surfaces (`BgDecisionData.Plays[0]`,
-  `DecisionRow.Equity`, `PlayOutcomeData.AfterBestBoard`) agree on
-  best-by-equity, but `BuildMoveDiagramRequest` still reads
-  `analysis.EvalLevels[0]` directly for the depth label
-  ([XgDecisionIterator.cs:293](ConvertXgToJson_Lib/ConvertXgToJson_Lib/XgDecisionIterator.cs:293)).
-  Parallel to the `BuildMoveRow` depth-label judgment call in
-  subproject `dea3eb4`: the depth should describe the ply at which
-  the reported equity was evaluated. Use the method's already-
-  computed `sortedIdx[0]` (no need for the helper). Small single-
-  commit session.
 - **XgFilter_Lib: verify/refresh fixtures after `AfterBestBoard`
   shift.** Subproject `6c249b7` changed `PlayOutcomeData.AfterBestBoard`
   on the subset of decisions where XG-native rank 0 ≠ best-by-equity.
