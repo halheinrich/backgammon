@@ -193,9 +193,21 @@ Key facts:
 
 ### Next up
 
-- **BackgammonDiagram_Lib rendering work** — ongoing. Remaining on
-  the subproject's own list: R4 dead `WatermarkText` property, R5
-  cube-face-64 bug when `CubeSize == 1`.
+- **ConvertXgToJson_Lib: set IsCrawford on BgDecisionData branches.**
+  `BuildMoveDiagramRequest` (~line 330) and `BuildCubeDiagramRequest`
+  (~line 449) construct `PositionData` without setting `IsCrawford`,
+  so it defaults to false on every real-file diagram. `DecisionRow`
+  paths (lines 265, 409) already set `IsCrawford = ctx.CrawfordJacoby == 1`
+  — mirror that pattern. Surfaced when match35041658 game 4 move 6
+  rendered "64" on the cube face instead of "Cr".
+- **ConvertXgToJson_Lib / BgDataTypes_Lib: play-list ordering
+  anomaly.** Renderer verified innocent (BackgammonDiagram_Lib
+  `f68e6e1` locks in caller-order preservation and Eq-Loss display
+  invariants). Plays arrive in XG's native "recommended → played →
+  sorted rest" order rather than strict descending-by-equity, with
+  null EquityLoss on entries that should carry a value. Diagnose in
+  ConvertXgToJson_Lib; decide whether the sort invariant belongs in
+  `BgDecisionData` construction or upstream of it.
 
 ### Deferred
 
