@@ -193,17 +193,27 @@ Key facts:
 
 ### Next up
 
-- **ConvertXgToJson_Lib: unify XG-native-rank-0 vs best-by-equity
-  in parallel data paths.** Task 2 of the ConvertXgToJson_Lib
-  session (subproject `3f1920d`) sorted `BgDecisionData.Plays` by
-  equity descending, but two sibling paths still use XG-native rank
-  0. `BuildMoveRow` sets `DecisionRow.Equity = analysis.Evals[0].Equity`
-  — CSV output is off by a small amount on decisions where
-  XG-native rank ≠ equity rank. `PlayOutcomeData.AfterBestBoard`
-  mirrors `analysis.Moves[0]`, which can now disagree with sorted
-  `Plays[0]`. Existing after-boards corpus test asserts against
-  `PositionsPlayed[0]` (XG-native rank 0), so unifying requires
-  test regeneration. Single coordinated session.
+- **ConvertXgToJson_Lib: finish the rank-0 sweep in
+  `BuildMoveDiagramRequest`.** After subproject `6c249b7` the three
+  "best play" surfaces (`BgDecisionData.Plays[0]`,
+  `DecisionRow.Equity`, `PlayOutcomeData.AfterBestBoard`) agree on
+  best-by-equity, but `BuildMoveDiagramRequest` still reads
+  `analysis.EvalLevels[0]` directly for the depth label
+  ([XgDecisionIterator.cs:293](ConvertXgToJson_Lib/ConvertXgToJson_Lib/XgDecisionIterator.cs:293)).
+  Parallel to the `BuildMoveRow` depth-label judgment call in
+  subproject `dea3eb4`: the depth should describe the ply at which
+  the reported equity was evaluated. Use the method's already-
+  computed `sortedIdx[0]` (no need for the helper). Small single-
+  commit session.
+- **XgFilter_Lib: verify/refresh fixtures after `AfterBestBoard`
+  shift.** Subproject `6c249b7` changed `PlayOutcomeData.AfterBestBoard`
+  on the subset of decisions where XG-native rank 0 ≠ best-by-equity.
+  `PlayTypeFilter` (Make20Pt today, other classifiers later) reads
+  `AfterBestBoard` via `IDecisionFilterData`, so classifications on
+  those decisions may flip — intentional, but existing fixtures or
+  expected outcomes may need refresh. First step: run the
+  XgFilter_Lib test suite against real-XG fixtures and see what
+  breaks. May be a no-op if no fixture hits the affected subset.
 
 ### Deferred
 
