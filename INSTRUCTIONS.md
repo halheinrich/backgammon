@@ -193,21 +193,17 @@ Key facts:
 
 ### Next up
 
-- **ConvertXgToJson_Lib: set IsCrawford on BgDecisionData branches.**
-  `BuildMoveDiagramRequest` (~line 330) and `BuildCubeDiagramRequest`
-  (~line 449) construct `PositionData` without setting `IsCrawford`,
-  so it defaults to false on every real-file diagram. `DecisionRow`
-  paths (lines 265, 409) already set `IsCrawford = ctx.CrawfordJacoby == 1`
-  — mirror that pattern. Surfaced when match35041658 game 4 move 6
-  rendered "64" on the cube face instead of "Cr".
-- **ConvertXgToJson_Lib / BgDataTypes_Lib: play-list ordering
-  anomaly.** Renderer verified innocent (BackgammonDiagram_Lib
-  `f68e6e1` locks in caller-order preservation and Eq-Loss display
-  invariants). Plays arrive in XG's native "recommended → played →
-  sorted rest" order rather than strict descending-by-equity, with
-  null EquityLoss on entries that should carry a value. Diagnose in
-  ConvertXgToJson_Lib; decide whether the sort invariant belongs in
-  `BgDecisionData` construction or upstream of it.
+- **ConvertXgToJson_Lib: unify XG-native-rank-0 vs best-by-equity
+  in parallel data paths.** Task 2 of the ConvertXgToJson_Lib
+  session (subproject `3f1920d`) sorted `BgDecisionData.Plays` by
+  equity descending, but two sibling paths still use XG-native rank
+  0. `BuildMoveRow` sets `DecisionRow.Equity = analysis.Evals[0].Equity`
+  — CSV output is off by a small amount on decisions where
+  XG-native rank ≠ equity rank. `PlayOutcomeData.AfterBestBoard`
+  mirrors `analysis.Moves[0]`, which can now disagree with sorted
+  `Plays[0]`. Existing after-boards corpus test asserts against
+  `PositionsPlayed[0]` (XG-native rank 0), so unifying requires
+  test regeneration. Single coordinated session.
 
 ### Deferred
 
