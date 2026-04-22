@@ -193,15 +193,7 @@ Key facts:
 
 ### Next up
 
-- **XgFilter_Lib: verify/refresh fixtures after `AfterBestBoard`
-  shift.** Subproject `6c249b7` changed `PlayOutcomeData.AfterBestBoard`
-  on the subset of decisions where XG-native rank 0 ≠ best-by-equity.
-  `PlayTypeFilter` (Make20Pt today, other classifiers later) reads
-  `AfterBestBoard` via `IDecisionFilterData`, so classifications on
-  those decisions may flip — intentional, but existing fixtures or
-  expected outcomes may need refresh. First step: run the
-  XgFilter_Lib test suite against real-XG fixtures and see what
-  breaks. May be a no-op if no fixture hits the affected subset.
+(empty — pick from Deferred or surface a new item)
 
 ### Deferred
 
