@@ -199,7 +199,6 @@ Key facts:
 
 * CSV download button for Azure/browser mode
 * PPTX download for Azure/browser mode (SkiaSharp native isn't available under Blazor WASM)
-* BackgammonDiagram_Lib: wire watermark image asset. User has a JPG. `DiagramOptions.WatermarkText` is currently text-only and unwired; introduce a `WatermarkImage` property (path or bytes) and remove `WatermarkText` (image replaces text). Render one per board-half, centred between opposing point tips, facing each other, alpha 0.15. Needs a proper home for non-test data files — shared asset directory distinct from `TestData/`; umbrella may add an `Assets/` tree.
 * ColumnSelector wired into UI
 * ExtractFromXgToCsv 0-rows bug diagnosis (regression after XGID perspective fix)
 * BgDiag_Razor: verify Blazor component layout under new 16:9 aspect default; adapt or pass `AspectPreset.Natural` if needed
