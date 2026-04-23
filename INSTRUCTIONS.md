@@ -193,21 +193,24 @@ Key facts:
 
 ### Next up
 
-- **BackgammonDiagram_Lib: wire watermark image asset.** User has
-  a JPG for board watermark. `DiagramOptions.WatermarkText` is
-  currently text-only and unwired; introduce a `WatermarkImage`
-  property (path or bytes) and remove `WatermarkText` (user
-  direction: image replaces text). Render one watermark per board-
-  half, centred between opposing point tips, facing each other,
-  alpha 0.15. Also needs a proper home for non-test data files —
-  a shared asset directory distinct from `TestData/`. Single
-  BackgammonDiagram_Lib session; umbrella may add an `Assets/` tree
-  if that's where the JPG lands.
+- **ExtractFromXgToCsv: add PDF output (Local mode).**
+  `BackgammonDiagram_Lib.DiagramRenderer.RenderPdf` already exists
+  (QuestPDF-backed, widescreen 13.33" × 7.5" per diagram, multi-page
+  for `IEnumerable<DiagramRequest>`). Add a PDF download alongside
+  the existing PPTX export in Local mode — server-side generation,
+  client-side download. QuestPDF license must be configured at
+  server startup (caller's responsibility per BackgammonDiagram_Lib
+  contract); use `DiagramRenderer.IsPdfSupported()` to probe before
+  invoking `RenderPdf` so a missing license surfaces cleanly rather
+  than as an exception. Azure/browser mode defers alongside PPTX
+  (same SkiaSharp-native constraint on the rasterization path).
+  Single ExtractFromXgToCsv session.
 
 ### Deferred
 
 * CSV download button for Azure/browser mode
 * PPTX download for Azure/browser mode (SkiaSharp native isn't available under Blazor WASM)
+* BackgammonDiagram_Lib: wire watermark image asset. User has a JPG. `DiagramOptions.WatermarkText` is currently text-only and unwired; introduce a `WatermarkImage` property (path or bytes) and remove `WatermarkText` (image replaces text). Render one per board-half, centred between opposing point tips, facing each other, alpha 0.15. Needs a proper home for non-test data files — shared asset directory distinct from `TestData/`; umbrella may add an `Assets/` tree.
 * ColumnSelector wired into UI
 * ExtractFromXgToCsv 0-rows bug diagnosis (regression after XGID perspective fix)
 * BgDiag_Razor: verify Blazor component layout under new 16:9 aspect default; adapt or pass `AspectPreset.Natural` if needed
