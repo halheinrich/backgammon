@@ -193,18 +193,7 @@ Key facts:
 
 ### Next up
 
-- **ExtractFromXgToCsv: add PDF output (Local mode).**
-  `BackgammonDiagram_Lib.DiagramRenderer.RenderPdf` already exists
-  (QuestPDF-backed, widescreen 13.33" × 7.5" per diagram, multi-page
-  for `IEnumerable<DiagramRequest>`). Add a PDF download alongside
-  the existing PPTX export in Local mode — server-side generation,
-  client-side download. QuestPDF license must be configured at
-  server startup (caller's responsibility per BackgammonDiagram_Lib
-  contract); use `DiagramRenderer.IsPdfSupported()` to probe before
-  invoking `RenderPdf` so a missing license surfaces cleanly rather
-  than as an exception. Azure/browser mode defers alongside PPTX
-  (same SkiaSharp-native constraint on the rasterization path).
-  Single ExtractFromXgToCsv session.
+(empty — pick from Deferred or surface a new item)
 
 ### Deferred
 
