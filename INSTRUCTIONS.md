@@ -193,7 +193,16 @@ Key facts:
 
 ### Next up
 
-(empty — pick from Deferred or surface a new item)
+- **BackgammonDiagram_Lib: wire watermark image asset.** User has
+  a JPG for board watermark. `DiagramOptions.WatermarkText` is
+  currently text-only and unwired; introduce a `WatermarkImage`
+  property (path or bytes) and remove `WatermarkText` (user
+  direction: image replaces text). Render one watermark per board-
+  half, centred between opposing point tips, facing each other,
+  alpha 0.15. Also needs a proper home for non-test data files —
+  a shared asset directory distinct from `TestData/`. Single
+  BackgammonDiagram_Lib session; umbrella may add an `Assets/` tree
+  if that's where the JPG lands.
 
 ### Deferred
 
