@@ -159,7 +159,8 @@ Key facts:
 Key facts:
 
 * 3.4 μs/call, avoidance-based dedup
-* Three entry points: GenerateStates, EnumerateStates, NextMove
+* Move generation: GenerateStates, EnumerateStates, NextMove
+* Move formatting: MoveNotationFormatter.Format(Play) — standard notation
 * BgRLEngine depends on this
 
 ### BgQuiz_Blazor
