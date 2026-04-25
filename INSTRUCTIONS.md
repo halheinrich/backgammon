@@ -206,6 +206,7 @@ Key facts:
 * BgDataTypes_Lib: reinstate 2 cube-error adapter tests (`UsesDoubleError`, `FallsBackToTakeError`) dropped from XgFilter_Lib in `d8fac0d` when the filter-test suite was consolidated onto `DecisionFilterAsserts`. The fallback logic being tested lives in `BgDataTypes_Lib.BgDecisionData.FilterError`, not in the filter, so the tests belong with the type.
 * XgFilter_Lib: `FilteredDecisionIterator` exception-swallowing. Catch block discards exceptions silently; either handle something real or delete the catch. Correctness concern masquerading as style.
 * ExtractFromXgToCsv: two encapsulation leaks in `FilterPanel.razor` — PositionType checkbox label renders `@pt` (bare identifier) instead of `@pt.ToLabel()` around line 97; local `DecisionTypeLabel` switch around lines 253-259 should use `value.ToLabel()`. Same pattern Session 4 fixed for PlayType. Small single-session cleanup whenever the subproject next opens.
+* ConvertXgToJson_Lib: dance-sentinel notation glitch. XG's no-move sentinel for a "dance" (closed-out roll) reaches the formatter and renders as `"1/1"`. Latent pre-existing bug surfaced during the BgMoveGen migration. Documented in subproject INSTRUCTIONS.md Pitfalls. Likely fix sites: `XgMoveTranslator` (filter sentinel before constructing `Play`) or upstream in `BuildMoveDiagramRequest`. Single-session ConvertXgToJson_Lib follow-up.
 
 ---
 
@@ -238,7 +239,7 @@ BgDataTypes_Lib (shared types)
 ├── BgPositionRouter (planned — position routing)
 └── BgInference (planned — ONNX inference)
 
-BgMoveGen (standalone)
+BgMoveGen (move generation + notation)
 └── BgRLEngine (standalone, Python)
 
 XgAnalytics (standalone)
@@ -248,6 +249,7 @@ Cross-edges not shown in the tree:
 
 - ExtractFromXgToCsv also consumes BackgammonDiagram_Lib server-side for PPTX output.
 - BackgammonDiagram_Lib's test project references ConvertXgToJson_Lib for fixture-driven visual tests.
+- ConvertXgToJson_Lib consumes BgMoveGen for move-notation formatting (`MoveNotationFormatter.Format(Play)`).
 
 ## Pre-session verification
 
