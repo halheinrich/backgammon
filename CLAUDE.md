@@ -300,6 +300,16 @@ test project.
   `.gitkeep`.
 - When a new structural subdirectory is introduced, add a `.gitkeep` to
   preserve it through clones.
+- **`TestData/xg/` is fixture-agnostic.** Tests that iterate this directory
+  must not depend on any specific file being present or any specific file's
+  contents. Use it for "iterate whatever .xg files are here and assert
+  shape-level invariants" tests (e.g., `FilterByRace_ListsDecisions`,
+  corpus-wide assertions over the row stream).
+- **`TestData/FixtureFiles/` is the home for hardcoded references.** Tests
+  that need a specific file (player name, position, depth label, etc.) read
+  from this directory and may name files explicitly. The two conventions
+  exist precisely to keep fixture-agnostic tests resilient against rotating
+  the contents of `TestData/xg/`.
 
 ## Output discipline
 
