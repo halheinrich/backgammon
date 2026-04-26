@@ -194,13 +194,7 @@ Key facts:
 
 ### Next up
 
-- **BgDataTypes_Lib: doc fix — `SourceFile` missing from
-  DescriptiveData field table.** Subproject INSTRUCTIONS.md's
-  DescriptiveData field table doesn't list `SourceFile` even
-  though the property exists on the type. Pre-existing drift
-  surfaced during the move-number-filter arc; user opted to track
-  it as a standalone 5-minute doc-only session rather than
-  slipstream into another session. Single-line edit.
+(empty — pick from Deferred or surface a new item)
 
 ### Deferred
 
