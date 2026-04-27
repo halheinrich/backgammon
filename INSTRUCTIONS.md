@@ -199,26 +199,37 @@ review complete (read-only subproject session, 2026-04-27).
 Substrate location decided: new `BgGame_Lib` subproject (not
 BgQuiz_Blazor-internal), so the four eventual modes (scored quiz,
 user-vs-user, user-vs-bot, bot-vs-bot tournament) share
-scaffolding from day one. Concrete sessions, rank-ordered:
+scaffolding from day one.
 
-1. **BgDiag_Razor / BackgammonDiagram_Lib — orientation-flip
-   respects hit regions.** `GetHitRegions` / `BoardHitRegions`
-   must honour `HomeBoardOnRight` so the click overlay aligns
-   with the rendered SVG after flip. Already documented as a
-   known pitfall in `BgQuiz_Blazor/INSTRUCTIONS.md`. Lower-layer
-   fix preferred (in `DiagramRenderer.GetHitRegions` / the
-   `BoardHitRegions` model), so any future consumer of hit
-   regions inherits the fix. Unblocks every click-driven feature
-   past Milestone 1.
+Queue amended 2026-04-27 after empirical click-test in
+BgQuiz_Blazor: clicks misfire in *both* orientations (not just
+after flip), and the originally-queued `DiagramRequest.FromDecision`
+factory turned out to already exist as `FromDecisionData`
+(`BackgammonDiagram_Lib/Models/DiagramRequest.cs:38`). Phase 0
+review missed both. Item 1 re-scoped to the real root cause; old
+item 2 dropped; remaining items renumbered.
 
-2. **BackgammonDiagram_Lib — `DiagramRequest.FromDecision`
-   factory.** Adapter from `BgDecisionData` + rendering options
-   to `DiagramRequest`. Sibling to the already-planned
-   `FromBoard` / `FromXgid` factories on the subproject's own
-   next-steps list. Eliminates the consumer adapter Phase 1
-   would otherwise grow.
+Concrete sessions, rank-ordered:
 
-3. **BgMoveGen — `BoardState.FromMop` / `ToMop` bridge.** Bridge
+1. **BackgammonDiagram_Lib — `GetHitRegions` / `RenderSvg`
+   coordinate-space mismatch.** `GetHitRegions` hardcodes
+   `panelOnLeft = false`
+   (`DiagramRenderer.cs:123`) and uses `TotalWidth(withPanel:
+   false)` for its ViewBox (`DiagramRenderer.cs:131`); `RenderSvg`
+   derives `panelOnLeft` from `request.AnalysisPanelPosition`
+   (default `Left` → `true`) and uses `withPanel: true`. Hit
+   rectangles end up in a different coordinate system than the
+   rendered SVG — clicks land on the wrong points (or miss
+   entirely) regardless of `HomeBoardOnRight`. Fix is to mirror
+   `RenderSvg`'s choices in `GetHitRegions`. Also update the
+   misleading pitfall at `BgQuiz_Blazor/INSTRUCTIONS.md:137-140`
+   (currently fingers BgDiag_Razor — wrong location); that update
+   happens in a follow-up BgQuiz_Blazor session per umbrella
+   one-session-one-repo rule, or folds into item 7 (Phase 1
+   integration) which already touches the file. Unblocks every
+   click-driven feature past Milestone 1.
+
+2. **BgMoveGen — `BoardState.FromMop` / `ToMop` bridge.** Bridge
    between `BoardState.Points` (`int[26]`) and
    `IReadOnlyList<int>` (the shape used by `IDecisionFilterData`
    and `BgDecisionData.Position.Mop`). Both layouts already
@@ -226,14 +237,14 @@ scaffolding from day one. Concrete sessions, rank-ordered:
    `[25]` player bar. Tiny; precondition for any quiz-side
    legal-move generation against XG-sourced positions.
 
-4. **XgFilter_Lib — `FilteredDecisionIterator` diagram-shape
+3. **XgFilter_Lib — `FilteredDecisionIterator` diagram-shape
    variant.** Add `IterateXgDirectoryDiagrams` /
    `IterateJsonDirectoryDiagrams` yielding `BgDecisionData`
    (already supported on the parser side via
    `XgDecisionIterator.IterateDiagramRequests`; not yet exposed
    through the filter wrapper). Phase 1 problem-set source.
 
-5. **New subproject `BgGame_Lib` — scaffold + substrate.** Set up
+4. **New subproject `BgGame_Lib` — scaffold + substrate.** Set up
    csproj / slnx / INSTRUCTIONS.md / test project; register as
    umbrella submodule; add to umbrella status table and
    dependency graph. Add `GameState` (board + match + cube
@@ -245,7 +256,7 @@ scaffolding from day one. Concrete sessions, rank-ordered:
    CLAUDE.md "Best-practice bias" (extensible shapes when
    multi-mode is the known target).
 
-6. **BgMoveGen — `MoveEntryState` for click-driven Play
+5. **BgMoveGen — `MoveEntryState` for click-driven Play
    assembly.** Incremental-click state machine against
    `MoveGenerator.GeneratePlays(state, d1, d2)`: tracks partial
    from/to clicks, exposes current partial play, legal-next-
@@ -253,25 +264,28 @@ scaffolding from day one. Concrete sessions, rank-ordered:
    Handles doubles ordering ambiguity and undo of partial
    entries. Consumed by every quiz mode that takes human input.
 
-7. **BgDataTypes_Lib — `SubmittedPlay` + `QuizScore`.** Init-only
+6. **BgDataTypes_Lib — `SubmittedPlay` + `QuizScore`.** Init-only
    records: chosen `Play` + matched candidate index + equity
    loss + correctness flag; running-total record. (`CubeAction`
-   lives in `BgGame_Lib` per #5.)
+   lives in `BgGame_Lib` per #4.)
 
-8. **BgQuiz_Blazor — Phase 1 implementation.** Wires #1–#7 into
+7. **BgQuiz_Blazor — Phase 1 implementation.** Wires #1–#6 into
    problem-set selection, click-to-Play, submit-and-score,
    running total. Uses `BgGame_Lib`'s substrate (single-position
    game with the quiz-grader as the second agent) so Phase 2+
-   modes reuse the scaffolding without rewrite.
+   modes reuse the scaffolding without rewrite. Also clears the
+   stale BgDiag_Razor-fingering pitfall in
+   `BgQuiz_Blazor/INSTRUCTIONS.md:137-140` if item 1's session
+   didn't queue a separate housekeeping pass for it.
 
-**Parallelism.** Items 2 and 3 are independent of item 1 and can
-run in any order. Item 4 depends only on XgFilter_Lib itself.
-Items 5–8 form the chain that delivers Phase 1 — 5 before 6
-because `MoveEntryState` may want `IPlayAgent`-shaped hooks; 6
-before 8; 7 anywhere before 8.
+**Parallelism.** Item 2 is independent of item 1 and can run
+in either order. Item 3 depends only on XgFilter_Lib itself.
+Items 4–7 form the chain that delivers Phase 1 — 4 before 5
+because `MoveEntryState` may want `IPlayAgent`-shaped hooks; 5
+before 7; 6 anywhere before 7.
 
 **Phase 2+** (answer tracking with weighted re-recurrence on
-wrong answers, the three two-agent modes) builds on items 1–8
+wrong answers, the three two-agent modes) builds on items 1–7
 and gets queued after Phase 1 ships.
 
 ### Deferred
