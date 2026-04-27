@@ -194,17 +194,85 @@ Key facts:
 
 ### Next up
 
-- **BgQuiz_Blazor: implement quiz functionality (multi-phase build-out).**
-  Phase 0 — code review of BgQuiz_Blazor for best practices and
-  encapsulation, especially with an eye toward the multi-mode
-  reusability that follows (user-vs-user, user-vs-bot, bot-vs-bot
-  tournament). Phase 1 — problem-set selection (sets produced by
-  XgFilter_Lib); user enters play via mouse; BgMoveGen converts
-  clicked points to a legal move; solution presented after; user's
-  play scored; running total maintained. Phase 2+ — answer tracking
-  with weighted re-recurrence on wrong answers; user-vs-user mode;
-  user-vs-bot; bot-vs-bot tournament. Reusability is a first-class
-  design concern from Phase 0 onward.
+**BgQuiz_Blazor multi-phase build-out** — Phase 0 architectural
+review complete (read-only subproject session, 2026-04-27).
+Substrate location decided: new `BgGame_Lib` subproject (not
+BgQuiz_Blazor-internal), so the four eventual modes (scored quiz,
+user-vs-user, user-vs-bot, bot-vs-bot tournament) share
+scaffolding from day one. Concrete sessions, rank-ordered:
+
+1. **BgDiag_Razor / BackgammonDiagram_Lib — orientation-flip
+   respects hit regions.** `GetHitRegions` / `BoardHitRegions`
+   must honour `HomeBoardOnRight` so the click overlay aligns
+   with the rendered SVG after flip. Already documented as a
+   known pitfall in `BgQuiz_Blazor/INSTRUCTIONS.md`. Lower-layer
+   fix preferred (in `DiagramRenderer.GetHitRegions` / the
+   `BoardHitRegions` model), so any future consumer of hit
+   regions inherits the fix. Unblocks every click-driven feature
+   past Milestone 1.
+
+2. **BackgammonDiagram_Lib — `DiagramRequest.FromDecision`
+   factory.** Adapter from `BgDecisionData` + rendering options
+   to `DiagramRequest`. Sibling to the already-planned
+   `FromBoard` / `FromXgid` factories on the subproject's own
+   next-steps list. Eliminates the consumer adapter Phase 1
+   would otherwise grow.
+
+3. **BgMoveGen — `BoardState.FromMop` / `ToMop` bridge.** Bridge
+   between `BoardState.Points` (`int[26]`) and
+   `IReadOnlyList<int>` (the shape used by `IDecisionFilterData`
+   and `BgDecisionData.Position.Mop`). Both layouts already
+   match — 26 elements, on-roll-relative, `[0]` opponent bar,
+   `[25]` player bar. Tiny; precondition for any quiz-side
+   legal-move generation against XG-sourced positions.
+
+4. **XgFilter_Lib — `FilteredDecisionIterator` diagram-shape
+   variant.** Add `IterateXgDirectoryDiagrams` /
+   `IterateJsonDirectoryDiagrams` yielding `BgDecisionData`
+   (already supported on the parser side via
+   `XgDecisionIterator.IterateDiagramRequests`; not yet exposed
+   through the filter wrapper). Phase 1 problem-set source.
+
+5. **New subproject `BgGame_Lib` — scaffold + substrate.** Set up
+   csproj / slnx / INSTRUCTIONS.md / test project; register as
+   umbrella submodule; add to umbrella status table and
+   dependency graph. Add `GameState` (board + match + cube
+   state), `IPlayAgent`, `ICubeAgent`, `CubeAction` enum,
+   skeletal `Referee` (turn sequencing, end-of-game),
+   `Transcript` (state / decision / outcome tuples). The
+   substrate scored-quiz, user-vs-user, user-vs-bot, and
+   bot-vs-bot all share — built ahead of the modes per
+   CLAUDE.md "Best-practice bias" (extensible shapes when
+   multi-mode is the known target).
+
+6. **BgMoveGen — `MoveEntryState` for click-driven Play
+   assembly.** Incremental-click state machine against
+   `MoveGenerator.GeneratePlays(state, d1, d2)`: tracks partial
+   from/to clicks, exposes current partial play, legal-next-
+   clicks, and completed `Play` once dice are exhausted.
+   Handles doubles ordering ambiguity and undo of partial
+   entries. Consumed by every quiz mode that takes human input.
+
+7. **BgDataTypes_Lib — `SubmittedPlay` + `QuizScore`.** Init-only
+   records: chosen `Play` + matched candidate index + equity
+   loss + correctness flag; running-total record. (`CubeAction`
+   lives in `BgGame_Lib` per #5.)
+
+8. **BgQuiz_Blazor — Phase 1 implementation.** Wires #1–#7 into
+   problem-set selection, click-to-Play, submit-and-score,
+   running total. Uses `BgGame_Lib`'s substrate (single-position
+   game with the quiz-grader as the second agent) so Phase 2+
+   modes reuse the scaffolding without rewrite.
+
+**Parallelism.** Items 2 and 3 are independent of item 1 and can
+run in any order. Item 4 depends only on XgFilter_Lib itself.
+Items 5–8 form the chain that delivers Phase 1 — 5 before 6
+because `MoveEntryState` may want `IPlayAgent`-shaped hooks; 6
+before 8; 7 anywhere before 8.
+
+**Phase 2+** (answer tracking with weighted re-recurrence on
+wrong answers, the three two-agent modes) builds on items 1–8
+and gets queued after Phase 1 ships.
 
 ### Deferred
 
