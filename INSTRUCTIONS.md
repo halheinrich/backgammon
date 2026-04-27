@@ -194,7 +194,17 @@ Key facts:
 
 ### Next up
 
-(empty — pick from Deferred or surface a new item)
+- **BgQuiz_Blazor: implement quiz functionality (multi-phase build-out).**
+  Phase 0 — code review of BgQuiz_Blazor for best practices and
+  encapsulation, especially with an eye toward the multi-mode
+  reusability that follows (user-vs-user, user-vs-bot, bot-vs-bot
+  tournament). Phase 1 — problem-set selection (sets produced by
+  XgFilter_Lib); user enters play via mouse; BgMoveGen converts
+  clicked points to a legal move; solution presented after; user's
+  play scored; running total maintained. Phase 2+ — answer tracking
+  with weighted re-recurrence on wrong answers; user-vs-user mode;
+  user-vs-bot; bot-vs-bot tournament. Reusability is a first-class
+  design concern from Phase 0 onward.
 
 ### Deferred
 
