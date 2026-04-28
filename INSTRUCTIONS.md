@@ -230,32 +230,55 @@ Concrete sessions, rank-ordered:
    CLAUDE.md "Best-practice bias" (extensible shapes when
    multi-mode is the known target).
 
-4. **BgMoveGen — `MoveEntryState` for click-driven Play
-   assembly.** Incremental-click state machine against
-   `MoveGenerator.GeneratePlays(state, d1, d2)`: tracks partial
-   from/to clicks, exposes current partial play, legal-next-
-   clicks, and completed `Play` once dice are exhausted.
-   Handles doubles ordering ambiguity and undo of partial
-   entries. Consumed by every quiz mode that takes human input.
+4. **BgMoveGen — `MoveEntryState` class for click-driven Play
+   assembly.** Stateful class (vs a stateless function —
+   encapsulates the partial-play / intermediate-state invariant
+   and gives `LegalNextClicks`, undo, and completion-checking a
+   natural home together; per CLAUDE.md "Encapsulation
+   discipline"). Construction takes `initialState +
+   (die1, die2)`. Surface includes incremental click handling
+   against `MoveGenerator.GeneratePlays`, undo-last / undo-all,
+   `LegalNextClicks` for UI hover hints, and
+   `IsComplete` / `CompletedPlay`. Doubles ordering ambiguity
+   resolved canonically via `GeneratePlays`. Consumed by item 6
+   (`BackgammonPlayEntry`).
 
 5. **BgDataTypes_Lib — `SubmittedPlay` + `QuizScore`.** Init-only
    records: chosen `Play` + matched candidate index + equity
    loss + correctness flag; running-total record. (`CubeAction`
    lives in `BgGame_Lib` per #3.)
 
-6. **BgQuiz_Blazor — Phase 1 implementation.** Wires #1–#5 into
-   problem-set selection, click-to-Play, submit-and-score,
-   running total. Uses `BgGame_Lib`'s substrate (single-position
-   game with the quiz-grader as the second agent) so Phase 2+
-   modes reuse the scaffolding without rewrite.
+6. **BgDiag_Razor — `BackgammonPlayEntry` component.** New
+   stateful Razor component wrapping the existing
+   `BackgammonDiagram` and holding a `BgMoveGen.MoveEntryState`
+   (#4). Hooks the inner diagram's click events to the state
+   machine; derives the displayed `Mop` from `state.Current`
+   after each click; optionally overlays `state.LegalNextClicks`
+   as hover hints. Exposes `OnPlayCompleted` (fires when
+   `IsComplete` flips true), `OnPlayProgress` (per legal click),
+   and `UndoLast` / `UndoAll` methods/callbacks so the consumer
+   wires its own buttons. The existing `BackgammonDiagram` stays
+   view-only — used directly by replay viewers, bot-vs-bot,
+   analytics. Adds BgMoveGen as a new BgDiag_Razor dependency;
+   the implementing session updates the umbrella dependency
+   graph.
 
-**Parallelism.** Items 1 and 2 are independent and can run in
-any order. Items 3–6 form the chain that delivers Phase 1 —
-3 before 4 because `MoveEntryState` may want `IPlayAgent`-shaped
-hooks; 4 before 6; 5 anywhere before 6.
+7. **BgQuiz_Blazor — Phase 1 implementation.** Wires #1–#6 into
+   problem-set selection, click-to-Play (via
+   `BackgammonPlayEntry`), submit-and-score, running total.
+   Uses `BgGame_Lib`'s substrate (single-position game with the
+   quiz-grader as the second agent) so Phase 2+ modes reuse the
+   scaffolding without rewrite.
+
+**Parallelism.** Items 1, 2, 4, and 5 are each small,
+self-contained steps in their own subprojects and are
+independent of each other. Item 3 (BgGame_Lib scaffold) is the
+architectural commitment and gates item 7. Item 6
+(`BackgammonPlayEntry`) depends on item 4. Item 7 (Phase 1)
+pulls in everything else.
 
 **Phase 2+** (answer tracking with weighted re-recurrence on
-wrong answers, the three two-agent modes) builds on items 1–6
+wrong answers, the three two-agent modes) builds on items 1–7
 and gets queued after Phase 1 ships.
 
 ### Deferred
