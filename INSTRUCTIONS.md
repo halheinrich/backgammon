@@ -203,22 +203,14 @@ scaffolding from day one.
 
 Concrete sessions, rank-ordered:
 
-1. **BgMoveGen — `BoardState.FromMop` / `ToMop` bridge.** Bridge
-   between `BoardState.Points` (`int[26]`) and
-   `IReadOnlyList<int>` (the shape used by `IDecisionFilterData`
-   and `BgDecisionData.Position.Mop`). Both layouts already
-   match — 26 elements, on-roll-relative, `[0]` opponent bar,
-   `[25]` player bar. Tiny; precondition for any quiz-side
-   legal-move generation against XG-sourced positions.
-
-2. **XgFilter_Lib — `FilteredDecisionIterator` diagram-shape
+1. **XgFilter_Lib — `FilteredDecisionIterator` diagram-shape
    variant.** Add `IterateXgDirectoryDiagrams` /
    `IterateJsonDirectoryDiagrams` yielding `BgDecisionData`
    (already supported on the parser side via
    `XgDecisionIterator.IterateDiagramRequests`; not yet exposed
    through the filter wrapper). Phase 1 problem-set source.
 
-3. **New subproject `BgGame_Lib` — scaffold + substrate.** Set up
+2. **New subproject `BgGame_Lib` — scaffold + substrate.** Set up
    csproj / slnx / INSTRUCTIONS.md / test project; register as
    umbrella submodule; add to umbrella status table and
    dependency graph. Add `GameState` (board + match + cube
@@ -230,55 +222,40 @@ Concrete sessions, rank-ordered:
    CLAUDE.md "Best-practice bias" (extensible shapes when
    multi-mode is the known target).
 
-4. **BgMoveGen — `MoveEntryState` class for click-driven Play
-   assembly.** Stateful class (vs a stateless function —
-   encapsulates the partial-play / intermediate-state invariant
-   and gives `LegalNextClicks`, undo, and completion-checking a
-   natural home together; per CLAUDE.md "Encapsulation
-   discipline"). Construction takes `initialState +
-   (die1, die2)`. Surface includes incremental click handling
-   against `MoveGenerator.GeneratePlays`, undo-last / undo-all,
-   `LegalNextClicks` for UI hover hints, and
-   `IsComplete` / `CompletedPlay`. Doubles ordering ambiguity
-   resolved canonically via `GeneratePlays`. Consumed by item 6
-   (`BackgammonPlayEntry`).
-
-5. **BgDataTypes_Lib — `SubmittedPlay` + `QuizScore`.** Init-only
+3. **BgDataTypes_Lib — `SubmittedPlay` + `QuizScore`.** Init-only
    records: chosen `Play` + matched candidate index + equity
    loss + correctness flag; running-total record. (`CubeAction`
-   lives in `BgGame_Lib` per #3.)
+   lives in `BgGame_Lib` per #2.)
 
-6. **BgDiag_Razor — `BackgammonPlayEntry` component.** New
+4. **BgDiag_Razor — `BackgammonPlayEntry` component.** New
    stateful Razor component wrapping the existing
-   `BackgammonDiagram` and holding a `BgMoveGen.MoveEntryState`
-   (#4). Hooks the inner diagram's click events to the state
-   machine; derives the displayed `Mop` from `state.Current`
-   after each click; optionally overlays `state.LegalNextClicks`
-   as hover hints. Exposes `OnPlayCompleted` (fires when
-   `IsComplete` flips true), `OnPlayProgress` (per legal click),
-   and `UndoLast` / `UndoAll` methods/callbacks so the consumer
+   `BackgammonDiagram` and holding a `BgMoveGen.MoveEntryState`.
+   Hooks the inner diagram's click events to the state machine;
+   derives the displayed `Mop` from `state.Current` after each
+   click; optionally overlays `state.LegalNextClicks` as hover
+   hints. Exposes `OnPlayCompleted` (fires when `IsComplete`
+   flips true), `OnPlayProgress` (per legal click), and
+   `UndoLast` / `UndoAll` methods/callbacks so the consumer
    wires its own buttons. The existing `BackgammonDiagram` stays
    view-only — used directly by replay viewers, bot-vs-bot,
    analytics. Adds BgMoveGen as a new BgDiag_Razor dependency;
    the implementing session updates the umbrella dependency
    graph.
 
-7. **BgQuiz_Blazor — Phase 1 implementation.** Wires #1–#6 into
+5. **BgQuiz_Blazor — Phase 1 implementation.** Wires #1–#4 into
    problem-set selection, click-to-Play (via
    `BackgammonPlayEntry`), submit-and-score, running total.
    Uses `BgGame_Lib`'s substrate (single-position game with the
    quiz-grader as the second agent) so Phase 2+ modes reuse the
    scaffolding without rewrite.
 
-**Parallelism.** Items 1, 2, 4, and 5 are each small,
-self-contained steps in their own subprojects and are
-independent of each other. Item 3 (BgGame_Lib scaffold) is the
-architectural commitment and gates item 7. Item 6
-(`BackgammonPlayEntry`) depends on item 4. Item 7 (Phase 1)
-pulls in everything else.
+**Parallelism.** Items 1, 3, and 4 are small, self-contained
+steps in their own subprojects and are independent of each
+other. Item 2 (BgGame_Lib scaffold) is the architectural
+commitment. Item 5 (Phase 1) pulls in everything else.
 
 **Phase 2+** (answer tracking with weighted re-recurrence on
-wrong answers, the three two-agent modes) builds on items 1–7
+wrong answers, the three two-agent modes) builds on items 1–5
 and gets queued after Phase 1 ships.
 
 ### Deferred
@@ -293,6 +270,7 @@ and gets queued after Phase 1 ships.
 * ExtractFromXgToCsv: two encapsulation leaks in `FilterPanel.razor` — PositionType checkbox label renders `@pt` (bare identifier) instead of `@pt.ToLabel()` around line 97; local `DecisionTypeLabel` switch around lines 253-259 should use `value.ToLabel()`. Same pattern Session 4 fixed for PlayType. Small single-session cleanup whenever the subproject next opens.
 * ConvertXgToJson_Lib: dance-sentinel notation glitch. XG's no-move sentinel for a "dance" (closed-out roll) reaches the formatter and renders as `"1/1"`. Latent pre-existing bug surfaced during the BgMoveGen migration. Documented in subproject INSTRUCTIONS.md Pitfalls. Likely fix sites: `XgMoveTranslator` (filter sentinel before constructing `Play`) or upstream in `BuildMoveDiagramRequest`. Single-session ConvertXgToJson_Lib follow-up.
 * BgQuiz_Blazor: clear stale BgDiag_Razor-fingering pitfall at `INSTRUCTIONS.md:137-140`. The click-handling bug it describes was fixed upstream in `BackgammonDiagram_Lib.DiagramRenderer.GetHitRegions` (coordinate-system alignment with `RenderSvg`); the pitfall text should reflect that the fix shipped in the lib, not the Razor wrapper. Single-session BgQuiz_Blazor INSTRUCTIONS.md edit.
+* BgMoveGen `MoveEntryState`: revisit click-semantics contract after Phase 1 ships. The α two-click model (source-then-destination, intermediate `ClickOutcome.SourceSelected`) is a first-pass commit without real UX feedback; xmldoc in `MoveEntryState.cs` documents current behaviour. Once items 4–5 land and BgQuiz_Blazor has been click-tested in earnest, evaluate whether refinements (e.g., destination-only with inferred source for unambiguous cases) better fit observed UX.
 
 ---
 
