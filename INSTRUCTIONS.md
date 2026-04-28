@@ -97,13 +97,14 @@ Key facts:
 **Purpose:** Blazor web app — extracts decisions from .xg/.xgp files, applies filters, exports CSV or PPTX.
 **Branch:** main
 **Solution:** `ExtractFromXgToCsv\ExtractFromXgToCsv.slnx`
-**Depends on:** ConvertXgToJson_Lib, XgFilter_Lib, BackgammonDiagram_Lib (server-side only, for PPTX)
+**Depends on:** ConvertXgToJson_Lib, XgFilter_Lib, XgFilter_Razor (Client — for FilterPanel + FilterConfig), BackgammonDiagram_Lib (server-side only, for PPTX)
 
 Key facts:
 
 * WASM — all .xg parsing, filtering, CSV generation runs client-side; server is thin host
 * Razor pages/components live in `ExtractFromXgToCsv.Client`
-* FilterPanel.razor owns filter UI state; raises `OnFiltersChanged EventCallback<DecisionFilterSet>`
+* `FilterPanel` UI is consumed from `XgFilter_Razor` (was in-tree until this swap); component contract unchanged — owns filter UI state, raises `OnFiltersChanged EventCallback<DecisionFilterSet>`
+* `FilterConfig` (JSON DTO) is also consumed from `XgFilter_Razor`; `ProcessRequest` (host-app-specific, wraps `OutputFormat`) stays in `Client/Shared/`
 * Local mode: server processes in background, client polls status
 * Azure/browser mode: file upload works, CSV download button not yet implemented
 * PPTX output: Local mode only — BackgammonDiagram_Lib is referenced from the server csproj so SkiaSharp stays out of the WASM payload. Web/Azure PPTX deferred.
@@ -204,7 +205,7 @@ Key facts:
 * Three bUnit smoke tests for FilterPanel; the `ToLabel()` extension methods FilterPanel uses are owned by `XgFilter_Lib.Enums.EnumLabel` (with their own tests there).
 * `IJSRuntime` localStorage coupling — FilterPanel persists filter state via JS interop. Consumers must provide an `IJSRuntime` registration; Blazor Server / WASM defaults handle this, non-Blazor consumers would need adapters.
 * `Shared/FilterConfig.cs` placement is provisional — JSON DTO, not Razor-specific. Future-cleanup candidate to move to `XgFilter_Lib` (or `BgDataTypes_Lib`); tracked on Deferred.
-* Consumers: `ExtractFromXgToCsv.Client` (pending — follow-up session removes the original `FilterPanel.razor` and `FilterConfig` class, adds the ProjectReference) and `BgQuiz_Blazor` (pending — Phase 1).
+* Consumers: `ExtractFromXgToCsv.Client` (current — references this lib for `FilterPanel` + `FilterConfig`; the host's server csproj picks up the dep transitively through `Client → XgFilter_Razor`, which is "hidden" rather than ideal but resolves cleanly when `FilterConfig` moves out per the Deferred entry below) and `BgQuiz_Blazor` (pending — Phase 1).
 
 ---
 
@@ -223,7 +224,7 @@ Key facts:
 | BgRLEngine | 🔧 In progress |
 | BgQuiz_Blazor | 🔧 In progress — Milestone 1 done |
 | BgGame_Lib | 🔧 In progress — scaffold only |
-| XgFilter_Razor | 🔧 In progress — FilterPanel extracted; ExtractFromXgToCsv-side ProjectReference swap pending |
+| XgFilter_Razor | 🔧 In progress — in use by ExtractFromXgToCsv; awaiting BgQuiz_Blazor consumer (Phase 1) |
 
 ### Next up
 
@@ -326,8 +327,8 @@ and gets queued after Phase 1 ships and item 4 lands.
 * BgQuiz_Blazor: clear stale BgDiag_Razor-fingering pitfall at `INSTRUCTIONS.md:137-140`. The click-handling bug it describes was fixed upstream in `BackgammonDiagram_Lib.DiagramRenderer.GetHitRegions` (coordinate-system alignment with `RenderSvg`); the pitfall text should reflect that the fix shipped in the lib, not the Razor wrapper. Single-session BgQuiz_Blazor INSTRUCTIONS.md edit.
 * BgMoveGen `MoveEntryState`: revisit click-semantics contract after Phase 1 ships. The α two-click model (source-then-destination, intermediate `ClickOutcome.SourceSelected`) is a first-pass commit without real UX feedback; xmldoc in `MoveEntryState.cs` documents current behaviour. Once Phase 1 ships and BgQuiz_Blazor has been click-tested in earnest, evaluate whether refinements (e.g., destination-only with inferred source for unambiguous cases) better fit observed UX.
 * XgFilter_Lib: directory iteration enumerates `*.xg` only; the parser side (`XgDecisionIterator.IterateXgDirectory`) enumerates both `*.xg` and `*.xgp` via a private `EnumerateXgFormatFiles` helper. Filter-side iteration silently drops `.xgp` (XG position-file) inputs that unfiltered parser iteration would surface. Real concern for Phase 1 quiz problem-set production — `.xgp` is a likely problem-set source. Small fix; folds naturally into the next XgFilter_Lib touch (or the same session that addresses the existing exception-swallowing entry above).
-* XgFilter_Razor: `Shared/FilterConfig.cs` is a JSON-serialisable filter DTO, not a Razor-specific type. Currently lives in the Razor library because that's where its only consumer (FilterPanel) lives, and moving it during the extraction would have stretched scope. Better long-term home: `XgFilter_Lib` (where the filter classes it mirrors live) or `BgDataTypes_Lib` (per the shared-data-layer charter). Future cleanup; not blocking.
-* ExtractFromXgToCsv: remove the now-extracted `FilterPanel.razor` and the `FilterConfig` class from `Shared/FilterConfig.cs` (leaving `ProcessRequest` behind — host-app-specific). Add a ProjectReference to `XgFilter_Razor`. Without this, `FilterPanel` exists in two copies (host's and the new subproject's) and any future change risks drift between them. Single-session ExtractFromXgToCsv subproject session.
+* XgFilter_Razor: `Shared/FilterConfig.cs` is a JSON-serialisable filter DTO, not a Razor-specific type. Currently lives in the Razor library because that's where its only consumer (FilterPanel) was when extraction landed; moving it then would have stretched scope. Better long-term home: `XgFilter_Lib` (where the filter classes it mirrors live) or `BgDataTypes_Lib` (per the shared-data-layer charter). Mildly more urgent now: `ExtractFromXgToCsv`'s server csproj picks up `XgFilter_Razor` transitively through `Client → XgFilter_Razor` to reach `FilterConfig` — a hidden dependency that dissolves once `FilterConfig` moves to a non-Razor home. Future cleanup; not blocking.
+* ExtractFromXgToCsv: rename `Client/Shared/FilterConfig.cs` → `Client/Shared/ProcessRequest.cs`. After the FilterPanel/FilterConfig extraction landed, the file holds only the `ProcessRequest` class (host-app-specific, wraps `OutputFormat` etc.). One-line rename + reference updates; folds naturally into the next ExtractFromXgToCsv touch.
 
 ---
 
@@ -355,8 +356,9 @@ and gets queued after Phase 1 ships and item 4 lands.
 BgDataTypes_Lib (shared types)
 ├── ConvertXgToJson_Lib (parsing)
 │   └── XgFilter_Lib (filtering)
-│       ├── ExtractFromXgToCsv (app)
-│       └── XgFilter_Razor (Razor wrapper for filter UI)
+│       ├── XgFilter_Razor (Razor wrapper for filter UI)
+│       │   └── ExtractFromXgToCsv.Client (app)
+│       └── ExtractFromXgToCsv (app — also consumes XgFilter_Lib directly)
 ├── BackgammonDiagram_Lib (rendering)
 │   └── BgDiag_Razor (Razor wrapper for diagram)
 │       └── BgQuiz_Blazor (app)
@@ -376,7 +378,7 @@ Cross-edges not shown in the tree:
 - BackgammonDiagram_Lib's test project references ConvertXgToJson_Lib for fixture-driven visual tests.
 - ConvertXgToJson_Lib consumes BgMoveGen for move-notation formatting (`MoveNotationFormatter.Format(Play)`).
 - BgGame_Lib will consume BgMoveGen for `Play`, `BoardState`, `MoveEntryState` once substrate types ship (currently scaffold only — csproj reference lands with the substrate types).
-- XgFilter_Razor will be consumed by `ExtractFromXgToCsv.Client` once a follow-up ExtractFromXgToCsv session removes the original `FilterPanel.razor` and adds a project reference (currently `.Client` still owns the original).
+- ExtractFromXgToCsv's server project picks up XgFilter_Razor transitively through `Client → XgFilter_Razor` (it actually needs `FilterConfig` for HTTP API contract). "Hidden" rather than explicit; resolves cleanly when `FilterConfig` moves out of XgFilter_Razor per the Deferred entry.
 
 ## Pre-session verification
 
