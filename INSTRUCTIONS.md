@@ -53,6 +53,7 @@ Key facts:
 * `DecisionRow` migrated from ConvertXgToJson_Lib — CSV methods kept for pragmatic reasons
 * `DecisionRow.Board` is `IReadOnlyList<int>` (26 elements); `MatchScore` computed from needs/Crawford/length
 * All properties `init`-only; `CubeOwner` serializes as string
+* Charter scope: types and pure data-shape translations between data types or to primitives. A translation whose result type comes from another subproject is a true cross-subproject dependency and lives in the consumer, not here. Game-mode-specific records (e.g., `SubmittedPlay`, `QuizScore`) live in BgGame_Lib.
 
 ### ConvertXgToJson_Lib
 
