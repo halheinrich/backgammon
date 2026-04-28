@@ -195,13 +195,16 @@ Key facts:
 **Purpose:** Razor Class Library for shared filter UI — `FilterPanel.razor` and supporting types. Razor-side counterpart to `XgFilter_Lib`, paralleling `BgDiag_Razor`'s relationship with `BackgammonDiagram_Lib`.
 **Branch:** main
 **Solution:** `XgFilter_Razor\XgFilter_Razor.slnx`
-**Depends on:** XgFilter_Lib, BgDataTypes_Lib (planned — extraction follows the scaffold)
+**Depends on:** XgFilter_Lib, BgDataTypes_Lib
 
 Key facts:
 
-* Initial commit ships scaffold only (Razor Class Library + xUnit/bUnit test project, mirroring BgDiag_Razor); `FilterPanel.razor` + supporting types extraction from `ExtractFromXgToCsv.Client` follows in the next commit
-* `Microsoft.AspNetCore.Components.Web` pinned at 10.0.7 (newer than BgDiag_Razor's 10.0.5; intentional — kept on the latest)
-* Eventual consumers: `ExtractFromXgToCsv.Client` (after a follow-up ExtractFromXgToCsv session removes the originals and adds a project reference) and `BgQuiz_Blazor` (Phase 1)
+* Hosts `Components/FilterPanel.razor` (filter-building UI) and `Shared/FilterConfig.cs` (JSON-serialisable filter DTO). Pure relocation from `ExtractFromXgToCsv.Client`; preserves existing behaviour including two known encapsulation leaks tracked on the umbrella Deferred list.
+* `Microsoft.AspNetCore.Components.Web` pinned at 10.0.7 (newer than BgDiag_Razor's 10.0.5; intentional — kept on the latest).
+* Three bUnit smoke tests for FilterPanel; the `ToLabel()` extension methods FilterPanel uses are owned by `XgFilter_Lib.Enums.EnumLabel` (with their own tests there).
+* `IJSRuntime` localStorage coupling — FilterPanel persists filter state via JS interop. Consumers must provide an `IJSRuntime` registration; Blazor Server / WASM defaults handle this, non-Blazor consumers would need adapters.
+* `Shared/FilterConfig.cs` placement is provisional — JSON DTO, not Razor-specific. Future-cleanup candidate to move to `XgFilter_Lib` (or `BgDataTypes_Lib`); tracked on Deferred.
+* Consumers: `ExtractFromXgToCsv.Client` (pending — follow-up session removes the original `FilterPanel.razor` and `FilterConfig` class, adds the ProjectReference) and `BgQuiz_Blazor` (pending — Phase 1).
 
 ---
 
@@ -220,7 +223,7 @@ Key facts:
 | BgRLEngine | 🔧 In progress |
 | BgQuiz_Blazor | 🔧 In progress — Milestone 1 done |
 | BgGame_Lib | 🔧 In progress — scaffold only |
-| XgFilter_Razor | 🔧 In progress — scaffold only |
+| XgFilter_Razor | 🔧 In progress — FilterPanel extracted; ExtractFromXgToCsv-side ProjectReference swap pending |
 
 ### Next up
 
@@ -268,34 +271,20 @@ Concrete sessions, rank-ordered:
    the implementing session updates the umbrella dependency
    graph.
 
-3. **XgFilter_Razor — extract `FilterPanel.razor` and supporting
-   types from `ExtractFromXgToCsv.Client`.** Now that the
-   scaffold is registered, populate it: read the existing
-   `FilterPanel.razor`, code-behind partial class, supporting
-   types (enum-label extension methods like `PlayType.ToLabel()`,
-   `PositionType.ToLabel()`, etc.), small DTOs / state types,
-   scoped CSS from `../ExtractFromXgToCsv/ExtractFromXgToCsv.Client/`
-   (cross-boundary read is allowed), and recreate the equivalents
-   inside `XgFilter_Razor/`. Adds `XgFilter_Lib` and
-   `BgDataTypes_Lib` ProjectReferences. Don't modify
-   `ExtractFromXgToCsv.Client` — that's a separate
-   `ExtractFromXgToCsv` subproject session that follows. Preserve
-   existing behaviour — don't fold in the encapsulation-leak fix
-   on the umbrella Deferred list.
+3. **BgQuiz_Blazor — Phase 1 implementation.** Wires items #1
+   and #2 plus the already-shipped `XgFilter_Razor` into
+   problem-set selection (filter UI from `XgFilter_Razor` + a
+   server-disk `IProblemSetSource` implementation against the
+   diagram-shape iterator), click-to-Play (via
+   `BackgammonPlayEntry`), submit-and-score, running total.
+   Uses `BgGame_Lib`'s substrate (single-position game with the
+   quiz-grader as the second agent) so Phase 2+ modes reuse the
+   scaffolding without rewrite. Server-disk source is one of
+   several `IProblemSetSource` implementations anticipated;
+   alternatives (upload, deployed sets, curated library) plug in
+   via the same interface.
 
-4. **BgQuiz_Blazor — Phase 1 implementation.** Wires #1–#3 into
-   problem-set selection (filter UI from #3 + a server-disk
-   `IProblemSetSource` implementation against the diagram-shape
-   iterator), click-to-Play (via `BackgammonPlayEntry`),
-   submit-and-score, running total. Uses `BgGame_Lib`'s
-   substrate (single-position game with the quiz-grader as the
-   second agent) so Phase 2+ modes reuse the scaffolding without
-   rewrite. Server-disk source is one of several
-   `IProblemSetSource` implementations anticipated; alternatives
-   (upload, deployed sets, curated library) plug in via the
-   same interface.
-
-5. **Decision identification scheme.** No stable way today to
+4. **Decision identification scheme.** No stable way today to
    reference a specific decision within an `.xg`/`.xgp` file.
    Phase 2+ requires it — answer tracking with weighted
    re-recurrence on wrong answers; resume / skip / re-do with
@@ -309,21 +298,19 @@ Concrete sessions, rank-ordered:
    XgFilter_Lib (passes through), and Phase 2+ consumers.
    Decide and ship before Phase 2+ work begins.
 
-**Parallelism.** Items 1, 2, and 3 are independent of each
-other and can run in any order. `BackgammonPlayEntry` (item 2)
-consumes only the already-shipped `BgMoveGen.MoveEntryState`;
-the filter-UI library (item 3) depends on the existing
-`XgFilter_Lib` + `BgDataTypes_Lib` only; the substrate (item 1)
-doesn't depend on either since the "human via clicks"
-`IPlayAgent` implementation lives in BgQuiz_Blazor (item 4),
-keeping BgGame_Lib Razor-free. Item 4 (Phase 1) pulls in all
-three. Item 5 (decision IDs) is logically pre-Phase-2+; can
-run in parallel with the Phase 1 chain or after, but before
-any Phase 2+ work.
+**Parallelism.** Items 1 and 2 are independent of each other.
+`BackgammonPlayEntry` (item 2) consumes only the already-shipped
+`BgMoveGen.MoveEntryState`; the substrate (item 1) doesn't
+depend on it since the "human via clicks" `IPlayAgent`
+implementation lives in BgQuiz_Blazor (item 3), keeping
+`BgGame_Lib` Razor-free. Item 3 (Phase 1) consumes both #1 and
+#2 plus the already-shipped `XgFilter_Razor`. Item 4 (decision
+IDs) is logically pre-Phase-2+; can run in parallel with the
+Phase 1 chain or after, but before any Phase 2+ work.
 
 **Phase 2+** (answer tracking with weighted re-recurrence on
-wrong answers, the three two-agent modes) builds on items 1–5
-and gets queued after Phase 1 ships and item 5 lands.
+wrong answers, the three two-agent modes) builds on items 1–4
+and gets queued after Phase 1 ships and item 4 lands.
 
 ### Deferred
 
@@ -334,11 +321,13 @@ and gets queued after Phase 1 ships and item 5 lands.
 * BgDiag_Razor: verify Blazor component layout under new 16:9 aspect default; adapt or pass `AspectPreset.Natural` if needed
 * BgDataTypes_Lib: reinstate 2 cube-error adapter tests (`UsesDoubleError`, `FallsBackToTakeError`) dropped from XgFilter_Lib in `d8fac0d` when the filter-test suite was consolidated onto `DecisionFilterAsserts`. The fallback logic being tested lives in `BgDataTypes_Lib.BgDecisionData.FilterError`, not in the filter, so the tests belong with the type.
 * XgFilter_Lib: `FilteredDecisionIterator` exception-swallowing. Catch block discards exceptions silently; either handle something real or delete the catch. Correctness concern masquerading as style.
-* ExtractFromXgToCsv: two encapsulation leaks in `FilterPanel.razor` — PositionType checkbox label renders `@pt` (bare identifier) instead of `@pt.ToLabel()` around line 97; local `DecisionTypeLabel` switch around lines 253-259 should use `value.ToLabel()`. Same pattern Session 4 fixed for PlayType. Small single-session cleanup whenever the subproject next opens.
+* XgFilter_Razor: two encapsulation leaks in `Components/FilterPanel.razor` — PositionType checkbox label renders `@pt` (bare identifier) instead of `@pt.ToLabel()` at line 116; local `DecisionTypeLabel` switch at lines 288-294 should use `value.ToLabel()`. Same pattern Session 4 fixed for PlayType. Preserved as-is during the extraction from `ExtractFromXgToCsv.Client` (pure relocation kept the diff reviewable as such); small single-session cleanup whenever the subproject next opens.
 * ConvertXgToJson_Lib: dance-sentinel notation glitch. XG's no-move sentinel for a "dance" (closed-out roll) reaches the formatter and renders as `"1/1"`. Latent pre-existing bug surfaced during the BgMoveGen migration. Documented in subproject INSTRUCTIONS.md Pitfalls. Likely fix sites: `XgMoveTranslator` (filter sentinel before constructing `Play`) or upstream in `BuildMoveDiagramRequest`. Single-session ConvertXgToJson_Lib follow-up.
 * BgQuiz_Blazor: clear stale BgDiag_Razor-fingering pitfall at `INSTRUCTIONS.md:137-140`. The click-handling bug it describes was fixed upstream in `BackgammonDiagram_Lib.DiagramRenderer.GetHitRegions` (coordinate-system alignment with `RenderSvg`); the pitfall text should reflect that the fix shipped in the lib, not the Razor wrapper. Single-session BgQuiz_Blazor INSTRUCTIONS.md edit.
 * BgMoveGen `MoveEntryState`: revisit click-semantics contract after Phase 1 ships. The α two-click model (source-then-destination, intermediate `ClickOutcome.SourceSelected`) is a first-pass commit without real UX feedback; xmldoc in `MoveEntryState.cs` documents current behaviour. Once Phase 1 ships and BgQuiz_Blazor has been click-tested in earnest, evaluate whether refinements (e.g., destination-only with inferred source for unambiguous cases) better fit observed UX.
 * XgFilter_Lib: directory iteration enumerates `*.xg` only; the parser side (`XgDecisionIterator.IterateXgDirectory`) enumerates both `*.xg` and `*.xgp` via a private `EnumerateXgFormatFiles` helper. Filter-side iteration silently drops `.xgp` (XG position-file) inputs that unfiltered parser iteration would surface. Real concern for Phase 1 quiz problem-set production — `.xgp` is a likely problem-set source. Small fix; folds naturally into the next XgFilter_Lib touch (or the same session that addresses the existing exception-swallowing entry above).
+* XgFilter_Razor: `Shared/FilterConfig.cs` is a JSON-serialisable filter DTO, not a Razor-specific type. Currently lives in the Razor library because that's where its only consumer (FilterPanel) lives, and moving it during the extraction would have stretched scope. Better long-term home: `XgFilter_Lib` (where the filter classes it mirrors live) or `BgDataTypes_Lib` (per the shared-data-layer charter). Future cleanup; not blocking.
+* ExtractFromXgToCsv: remove the now-extracted `FilterPanel.razor` and the `FilterConfig` class from `Shared/FilterConfig.cs` (leaving `ProcessRequest` behind — host-app-specific). Add a ProjectReference to `XgFilter_Razor`. Without this, `FilterPanel` exists in two copies (host's and the new subproject's) and any future change risks drift between them. Single-session ExtractFromXgToCsv subproject session.
 
 ---
 
