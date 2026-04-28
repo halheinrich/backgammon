@@ -207,18 +207,21 @@ Concrete sessions, rank-ordered:
 1. **New subproject `BgGame_Lib` — scaffold + substrate.** Set up
    csproj / slnx / INSTRUCTIONS.md / test project; register as
    umbrella submodule; add to umbrella status table and
-   dependency graph. Add the multi-mode play substrate —
-   `GameState` (board + match + cube state), `IPlayAgent`,
-   `ICubeAgent`, `CubeAction` enum, skeletal `Referee` (turn
-   sequencing, end-of-game), `Transcript` (state / decision /
-   outcome tuples) — plus the quiz-result records `SubmittedPlay`
+   dependency graph. Initial type set: multi-mode play primitives
+   (`GameState`, `IPlayAgent`, `ICubeAgent`, `CubeAction` enum,
+   skeletal `Referee` for turn sequencing / end-of-game,
+   `Transcript` of state / decision / outcome tuples); the
+   problem-set abstraction `IProblemSetSource` — iterable of
+   `BgDecisionData` for any quiz / replay loop, keeping Phase 1's
+   source choice (server-disk now; upload, deployed sets,
+   curated library later) replaceable as alternative
+   implementations; and the quiz-result records `SubmittedPlay`
    (chosen `Play` + matched candidate index + equity loss +
    correctness flag) and `QuizScore` (running-total). The
-   substrate scored-quiz, user-vs-user, user-vs-bot, and
-   bot-vs-bot all share, built ahead of the modes per
-   CLAUDE.md "Best-practice bias". `SubmittedPlay` / `QuizScore`
-   live here rather than BgDataTypes_Lib because they're
-   game-mode-specific records, not shared-data-layer types.
+   substrate is built ahead of the modes per CLAUDE.md
+   "Best-practice bias". `SubmittedPlay` / `QuizScore` live here
+   rather than BgDataTypes_Lib because they're game-mode-specific
+   records, not shared-data-layer types.
 
 2. **BgDiag_Razor — `BackgammonPlayEntry` component.** New
    stateful Razor component wrapping the existing
@@ -235,23 +238,60 @@ Concrete sessions, rank-ordered:
    the implementing session updates the umbrella dependency
    graph.
 
-3. **BgQuiz_Blazor — Phase 1 implementation.** Wires #1–#2 into
-   problem-set selection, click-to-Play (via
-   `BackgammonPlayEntry`), submit-and-score, running total.
-   Uses `BgGame_Lib`'s substrate (single-position game with the
-   quiz-grader as the second agent) so Phase 2+ modes reuse the
-   scaffolding without rewrite.
+3. **New subproject `XgFilter_Razor` — shared filter UI.**
+   Extract `FilterPanel.razor` and supporting types from
+   `ExtractFromXgToCsv.Client` into a new Razor Class Library,
+   paralleling `BgDiag_Razor`'s relationship with
+   `BackgammonDiagram_Lib`. Both `ExtractFromXgToCsv.Client` and
+   `BgQuiz_Blazor` (item 4) reference the new home. Depends on
+   `XgFilter_Lib` (for `DecisionFilterSet`) and `BgDataTypes_Lib`
+   (for the underlying types). Updates the umbrella status
+   table, dependency graph, and Claude-project-structure table.
+   Naming `XgFilter_Razor` to follow the abbreviated-prefix
+   pattern of `BgDiag_Razor`; implementing session can adjust if
+   a better name emerges.
 
-**Parallelism.** Items 1 and 2 are independent of each other —
-`BackgammonPlayEntry` consumes only the already-shipped
-`BgMoveGen.MoveEntryState`, and the "human via clicks"
-implementation of `IPlayAgent` lives in BgQuiz_Blazor (item 3),
-not in BgGame_Lib, so BgGame_Lib doesn't depend on
-BackgammonPlayEntry either. Item 3 (Phase 1) pulls in both.
+4. **BgQuiz_Blazor — Phase 1 implementation.** Wires #1–#3 into
+   problem-set selection (filter UI from #3 + a server-disk
+   `IProblemSetSource` implementation against the diagram-shape
+   iterator), click-to-Play (via `BackgammonPlayEntry`),
+   submit-and-score, running total. Uses `BgGame_Lib`'s
+   substrate (single-position game with the quiz-grader as the
+   second agent) so Phase 2+ modes reuse the scaffolding without
+   rewrite. Server-disk source is one of several
+   `IProblemSetSource` implementations anticipated; alternatives
+   (upload, deployed sets, curated library) plug in via the
+   same interface.
+
+5. **Decision identification scheme.** No stable way today to
+   reference a specific decision within an `.xg`/`.xgp` file.
+   Phase 2+ requires it — answer tracking with weighted
+   re-recurrence on wrong answers; resume / skip / re-do with
+   persistent reference. Candidate ID schemes for the
+   implementing session to weigh: XGID (XG's canonical
+   position+state form, already in the data; needs dice
+   extension for play decisions); a logical address tuple
+   (file stem, match index, game index, move number, IsCube);
+   or a content hash. Affects BgDataTypes_Lib (where the ID type
+   lives), ConvertXgToJson_Lib (emits the ID per decision),
+   XgFilter_Lib (passes through), and Phase 2+ consumers.
+   Decide and ship before Phase 2+ work begins.
+
+**Parallelism.** Items 1, 2, and 3 are independent of each
+other and can run in any order. `BackgammonPlayEntry` (item 2)
+consumes only the already-shipped `BgMoveGen.MoveEntryState`;
+the filter-UI library (item 3) depends on the existing
+`XgFilter_Lib` + `BgDataTypes_Lib` only; the substrate (item 1)
+doesn't depend on either since the "human via clicks"
+`IPlayAgent` implementation lives in BgQuiz_Blazor (item 4),
+keeping BgGame_Lib Razor-free. Item 4 (Phase 1) pulls in all
+three. Item 5 (decision IDs) is logically pre-Phase-2+; can
+run in parallel with the Phase 1 chain or after, but before
+any Phase 2+ work.
 
 **Phase 2+** (answer tracking with weighted re-recurrence on
-wrong answers, the three two-agent modes) builds on items 1–3
-and gets queued after Phase 1 ships.
+wrong answers, the three two-agent modes) builds on items 1–5
+and gets queued after Phase 1 ships and item 5 lands.
 
 ### Deferred
 
@@ -265,7 +305,7 @@ and gets queued after Phase 1 ships.
 * ExtractFromXgToCsv: two encapsulation leaks in `FilterPanel.razor` — PositionType checkbox label renders `@pt` (bare identifier) instead of `@pt.ToLabel()` around line 97; local `DecisionTypeLabel` switch around lines 253-259 should use `value.ToLabel()`. Same pattern Session 4 fixed for PlayType. Small single-session cleanup whenever the subproject next opens.
 * ConvertXgToJson_Lib: dance-sentinel notation glitch. XG's no-move sentinel for a "dance" (closed-out roll) reaches the formatter and renders as `"1/1"`. Latent pre-existing bug surfaced during the BgMoveGen migration. Documented in subproject INSTRUCTIONS.md Pitfalls. Likely fix sites: `XgMoveTranslator` (filter sentinel before constructing `Play`) or upstream in `BuildMoveDiagramRequest`. Single-session ConvertXgToJson_Lib follow-up.
 * BgQuiz_Blazor: clear stale BgDiag_Razor-fingering pitfall at `INSTRUCTIONS.md:137-140`. The click-handling bug it describes was fixed upstream in `BackgammonDiagram_Lib.DiagramRenderer.GetHitRegions` (coordinate-system alignment with `RenderSvg`); the pitfall text should reflect that the fix shipped in the lib, not the Razor wrapper. Single-session BgQuiz_Blazor INSTRUCTIONS.md edit.
-* BgMoveGen `MoveEntryState`: revisit click-semantics contract after Phase 1 ships. The α two-click model (source-then-destination, intermediate `ClickOutcome.SourceSelected`) is a first-pass commit without real UX feedback; xmldoc in `MoveEntryState.cs` documents current behaviour. Once items 2–3 land and BgQuiz_Blazor has been click-tested in earnest, evaluate whether refinements (e.g., destination-only with inferred source for unambiguous cases) better fit observed UX.
+* BgMoveGen `MoveEntryState`: revisit click-semantics contract after Phase 1 ships. The α two-click model (source-then-destination, intermediate `ClickOutcome.SourceSelected`) is a first-pass commit without real UX feedback; xmldoc in `MoveEntryState.cs` documents current behaviour. Once Phase 1 ships and BgQuiz_Blazor has been click-tested in earnest, evaluate whether refinements (e.g., destination-only with inferred source for unambiguous cases) better fit observed UX.
 * XgFilter_Lib: directory iteration enumerates `*.xg` only; the parser side (`XgDecisionIterator.IterateXgDirectory`) enumerates both `*.xg` and `*.xgp` via a private `EnumerateXgFormatFiles` helper. Filter-side iteration silently drops `.xgp` (XG position-file) inputs that unfiltered parser iteration would surface. Real concern for Phase 1 quiz problem-set production — `.xgp` is a likely problem-set source. Small fix; folds naturally into the next XgFilter_Lib touch (or the same session that addresses the existing exception-swallowing entry above).
 
 ---
