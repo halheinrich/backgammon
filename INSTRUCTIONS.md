@@ -201,35 +201,9 @@ BgQuiz_Blazor-internal), so the four eventual modes (scored quiz,
 user-vs-user, user-vs-bot, bot-vs-bot tournament) share
 scaffolding from day one.
 
-Queue amended 2026-04-27 after empirical click-test in
-BgQuiz_Blazor: clicks misfire in *both* orientations (not just
-after flip), and the originally-queued `DiagramRequest.FromDecision`
-factory turned out to already exist as `FromDecisionData`
-(`BackgammonDiagram_Lib/Models/DiagramRequest.cs:38`). Phase 0
-review missed both. Item 1 re-scoped to the real root cause; old
-item 2 dropped; remaining items renumbered.
-
 Concrete sessions, rank-ordered:
 
-1. **BackgammonDiagram_Lib — `GetHitRegions` / `RenderSvg`
-   coordinate-space mismatch.** `GetHitRegions` hardcodes
-   `panelOnLeft = false`
-   (`DiagramRenderer.cs:123`) and uses `TotalWidth(withPanel:
-   false)` for its ViewBox (`DiagramRenderer.cs:131`); `RenderSvg`
-   derives `panelOnLeft` from `request.AnalysisPanelPosition`
-   (default `Left` → `true`) and uses `withPanel: true`. Hit
-   rectangles end up in a different coordinate system than the
-   rendered SVG — clicks land on the wrong points (or miss
-   entirely) regardless of `HomeBoardOnRight`. Fix is to mirror
-   `RenderSvg`'s choices in `GetHitRegions`. Also update the
-   misleading pitfall at `BgQuiz_Blazor/INSTRUCTIONS.md:137-140`
-   (currently fingers BgDiag_Razor — wrong location); that update
-   happens in a follow-up BgQuiz_Blazor session per umbrella
-   one-session-one-repo rule, or folds into item 7 (Phase 1
-   integration) which already touches the file. Unblocks every
-   click-driven feature past Milestone 1.
-
-2. **BgMoveGen — `BoardState.FromMop` / `ToMop` bridge.** Bridge
+1. **BgMoveGen — `BoardState.FromMop` / `ToMop` bridge.** Bridge
    between `BoardState.Points` (`int[26]`) and
    `IReadOnlyList<int>` (the shape used by `IDecisionFilterData`
    and `BgDecisionData.Position.Mop`). Both layouts already
@@ -237,14 +211,14 @@ Concrete sessions, rank-ordered:
    `[25]` player bar. Tiny; precondition for any quiz-side
    legal-move generation against XG-sourced positions.
 
-3. **XgFilter_Lib — `FilteredDecisionIterator` diagram-shape
+2. **XgFilter_Lib — `FilteredDecisionIterator` diagram-shape
    variant.** Add `IterateXgDirectoryDiagrams` /
    `IterateJsonDirectoryDiagrams` yielding `BgDecisionData`
    (already supported on the parser side via
    `XgDecisionIterator.IterateDiagramRequests`; not yet exposed
    through the filter wrapper). Phase 1 problem-set source.
 
-4. **New subproject `BgGame_Lib` — scaffold + substrate.** Set up
+3. **New subproject `BgGame_Lib` — scaffold + substrate.** Set up
    csproj / slnx / INSTRUCTIONS.md / test project; register as
    umbrella submodule; add to umbrella status table and
    dependency graph. Add `GameState` (board + match + cube
@@ -256,7 +230,7 @@ Concrete sessions, rank-ordered:
    CLAUDE.md "Best-practice bias" (extensible shapes when
    multi-mode is the known target).
 
-5. **BgMoveGen — `MoveEntryState` for click-driven Play
+4. **BgMoveGen — `MoveEntryState` for click-driven Play
    assembly.** Incremental-click state machine against
    `MoveGenerator.GeneratePlays(state, d1, d2)`: tracks partial
    from/to clicks, exposes current partial play, legal-next-
@@ -264,28 +238,24 @@ Concrete sessions, rank-ordered:
    Handles doubles ordering ambiguity and undo of partial
    entries. Consumed by every quiz mode that takes human input.
 
-6. **BgDataTypes_Lib — `SubmittedPlay` + `QuizScore`.** Init-only
+5. **BgDataTypes_Lib — `SubmittedPlay` + `QuizScore`.** Init-only
    records: chosen `Play` + matched candidate index + equity
    loss + correctness flag; running-total record. (`CubeAction`
-   lives in `BgGame_Lib` per #4.)
+   lives in `BgGame_Lib` per #3.)
 
-7. **BgQuiz_Blazor — Phase 1 implementation.** Wires #1–#6 into
+6. **BgQuiz_Blazor — Phase 1 implementation.** Wires #1–#5 into
    problem-set selection, click-to-Play, submit-and-score,
    running total. Uses `BgGame_Lib`'s substrate (single-position
    game with the quiz-grader as the second agent) so Phase 2+
-   modes reuse the scaffolding without rewrite. Also clears the
-   stale BgDiag_Razor-fingering pitfall in
-   `BgQuiz_Blazor/INSTRUCTIONS.md:137-140` if item 1's session
-   didn't queue a separate housekeeping pass for it.
+   modes reuse the scaffolding without rewrite.
 
-**Parallelism.** Item 2 is independent of item 1 and can run
-in either order. Item 3 depends only on XgFilter_Lib itself.
-Items 4–7 form the chain that delivers Phase 1 — 4 before 5
-because `MoveEntryState` may want `IPlayAgent`-shaped hooks; 5
-before 7; 6 anywhere before 7.
+**Parallelism.** Items 1 and 2 are independent and can run in
+any order. Items 3–6 form the chain that delivers Phase 1 —
+3 before 4 because `MoveEntryState` may want `IPlayAgent`-shaped
+hooks; 4 before 6; 5 anywhere before 6.
 
 **Phase 2+** (answer tracking with weighted re-recurrence on
-wrong answers, the three two-agent modes) builds on items 1–7
+wrong answers, the three two-agent modes) builds on items 1–6
 and gets queued after Phase 1 ships.
 
 ### Deferred
@@ -299,6 +269,7 @@ and gets queued after Phase 1 ships.
 * XgFilter_Lib: `FilteredDecisionIterator` exception-swallowing. Catch block discards exceptions silently; either handle something real or delete the catch. Correctness concern masquerading as style.
 * ExtractFromXgToCsv: two encapsulation leaks in `FilterPanel.razor` — PositionType checkbox label renders `@pt` (bare identifier) instead of `@pt.ToLabel()` around line 97; local `DecisionTypeLabel` switch around lines 253-259 should use `value.ToLabel()`. Same pattern Session 4 fixed for PlayType. Small single-session cleanup whenever the subproject next opens.
 * ConvertXgToJson_Lib: dance-sentinel notation glitch. XG's no-move sentinel for a "dance" (closed-out roll) reaches the formatter and renders as `"1/1"`. Latent pre-existing bug surfaced during the BgMoveGen migration. Documented in subproject INSTRUCTIONS.md Pitfalls. Likely fix sites: `XgMoveTranslator` (filter sentinel before constructing `Play`) or upstream in `BuildMoveDiagramRequest`. Single-session ConvertXgToJson_Lib follow-up.
+* BgQuiz_Blazor: clear stale BgDiag_Razor-fingering pitfall at `INSTRUCTIONS.md:137-140`. The click-handling bug it describes was fixed upstream in `BackgammonDiagram_Lib.DiagramRenderer.GetHitRegions` (coordinate-system alignment with `RenderSvg`); the pitfall text should reflect that the fix shipped in the lib, not the Razor wrapper. Single-session BgQuiz_Blazor INSTRUCTIONS.md edit.
 
 ---
 
