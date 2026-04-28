@@ -29,3 +29,9 @@
 [submodule "BgDataTypes_Lib"]
 	path = BgDataTypes_Lib
 	url = https://github.com/halheinrich/BgDataTypes_Lib.git
+[submodule "BgGame_Lib"]
+	path = BgGame_Lib
+	url = https://github.com/halheinrich/BgGame_Lib
+[submodule "XgFilter_Razor"]
+	path = XgFilter_Razor
+	url = https://github.com/halheinrich/XgFilter_Razor

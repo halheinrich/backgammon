@@ -22,6 +22,8 @@ Python / PyTorch (BgRLEngine only)
 | `BgRLEngine` | https://github.com/halheinrich/BgRLEngine |
 | `BgMoveGen` | https://github.com/halheinrich/BgMoveGen |
 | `BgQuiz_Blazor` | https://github.com/halheinrich/BgQuiz_Blazor |
+| `BgGame_Lib` | https://github.com/halheinrich/BgGame_Lib |
+| `XgFilter_Razor` | https://github.com/halheinrich/XgFilter_Razor |
 
 ## Naming convention
 
@@ -176,6 +178,31 @@ Key facts:
 * Milestone 1 functional — diagram renders, orientation toggle, click reporting
 * `CreateOpeningPosition()` still TODO
 
+### BgGame_Lib
+
+**Purpose:** Game/play substrate — `GameState`, `IPlayAgent`, `ICubeAgent`, `IProblemSetSource`, skeletal `Referee`, `Transcript`, plus quiz-result records `SubmittedPlay` and `QuizScore`. Multi-mode scaffolding shared by scored quiz, user-vs-user, user-vs-bot, and bot-vs-bot tournament.
+**Branch:** main
+**Solution:** `BgGame_Lib\BgGame_Lib.slnx`
+**Depends on:** BgDataTypes_Lib, BgMoveGen (planned — substrate types follow the scaffold)
+
+Key facts:
+
+* Initial commit ships scaffold only (Class Library + xUnit test project, mirroring BgMoveGen's layout); substrate types come in follow-up commits
+* Razor-free — the "human via clicks" `IPlayAgent` implementation lives in `BgQuiz_Blazor`, not here, keeping the substrate Blazor-free for non-UI consumers (future bot-vs-bot loops, replay analytics, etc.)
+
+### XgFilter_Razor
+
+**Purpose:** Razor Class Library for shared filter UI — `FilterPanel.razor` and supporting types. Razor-side counterpart to `XgFilter_Lib`, paralleling `BgDiag_Razor`'s relationship with `BackgammonDiagram_Lib`.
+**Branch:** main
+**Solution:** `XgFilter_Razor\XgFilter_Razor.slnx`
+**Depends on:** XgFilter_Lib, BgDataTypes_Lib (planned — extraction follows the scaffold)
+
+Key facts:
+
+* Initial commit ships scaffold only (Razor Class Library + xUnit/bUnit test project, mirroring BgDiag_Razor); `FilterPanel.razor` + supporting types extraction from `ExtractFromXgToCsv.Client` follows in the next commit
+* `Microsoft.AspNetCore.Components.Web` pinned at 10.0.7 (newer than BgDiag_Razor's 10.0.5; intentional — kept on the latest)
+* Eventual consumers: `ExtractFromXgToCsv.Client` (after a follow-up ExtractFromXgToCsv session removes the originals and adds a project reference) and `BgQuiz_Blazor` (Phase 1)
+
 ---
 
 ## Current status
@@ -192,6 +219,8 @@ Key facts:
 | BgDiag_Razor | 🔧 In progress |
 | BgRLEngine | 🔧 In progress |
 | BgQuiz_Blazor | 🔧 In progress — Milestone 1 done |
+| BgGame_Lib | 🔧 In progress — scaffold only |
+| XgFilter_Razor | 🔧 In progress — scaffold only |
 
 ### Next up
 
@@ -204,21 +233,22 @@ scaffolding from day one.
 
 Concrete sessions, rank-ordered:
 
-1. **New subproject `BgGame_Lib` — scaffold + substrate.** Set up
-   csproj / slnx / INSTRUCTIONS.md / test project; register as
-   umbrella submodule; add to umbrella status table and
-   dependency graph. Initial type set: multi-mode play primitives
-   (`GameState`, `IPlayAgent`, `ICubeAgent`, `CubeAction` enum,
-   skeletal `Referee` for turn sequencing / end-of-game,
-   `Transcript` of state / decision / outcome tuples); the
-   problem-set abstraction `IProblemSetSource` — iterable of
-   `BgDecisionData` for any quiz / replay loop, keeping Phase 1's
-   source choice (server-disk now; upload, deployed sets,
-   curated library later) replaceable as alternative
-   implementations; and the quiz-result records `SubmittedPlay`
-   (chosen `Play` + matched candidate index + equity loss +
-   correctness flag) and `QuizScore` (running-total). The
-   substrate is built ahead of the modes per CLAUDE.md
+1. **BgGame_Lib — substrate types.** Now that the scaffold is
+   registered, populate the initial type set: multi-mode play
+   primitives (`GameState`, `IPlayAgent`, `ICubeAgent`,
+   `CubeAction` enum, skeletal `Referee` for turn sequencing /
+   end-of-game, `Transcript` of state / decision / outcome
+   tuples); the problem-set abstraction `IProblemSetSource` —
+   iterable of `BgDecisionData` for any quiz / replay loop,
+   keeping Phase 1's source choice (server-disk now; upload,
+   deployed sets, curated library later) replaceable as
+   alternative implementations; and the quiz-result records
+   `SubmittedPlay` (chosen `Play` + matched candidate index +
+   equity loss + correctness flag) and `QuizScore`
+   (running-total). Adds `BgMoveGen` and `BgDataTypes_Lib`
+   ProjectReferences. `INSTRUCTIONS.md` for the subproject lands
+   in this commit (or its own follow-up if too much for one
+   session). Built ahead of the modes per CLAUDE.md
    "Best-practice bias". `SubmittedPlay` / `QuizScore` live here
    rather than BgDataTypes_Lib because they're game-mode-specific
    records, not shared-data-layer types.
@@ -238,18 +268,20 @@ Concrete sessions, rank-ordered:
    the implementing session updates the umbrella dependency
    graph.
 
-3. **New subproject `XgFilter_Razor` — shared filter UI.**
-   Extract `FilterPanel.razor` and supporting types from
-   `ExtractFromXgToCsv.Client` into a new Razor Class Library,
-   paralleling `BgDiag_Razor`'s relationship with
-   `BackgammonDiagram_Lib`. Both `ExtractFromXgToCsv.Client` and
-   `BgQuiz_Blazor` (item 4) reference the new home. Depends on
-   `XgFilter_Lib` (for `DecisionFilterSet`) and `BgDataTypes_Lib`
-   (for the underlying types). Updates the umbrella status
-   table, dependency graph, and Claude-project-structure table.
-   Naming `XgFilter_Razor` to follow the abbreviated-prefix
-   pattern of `BgDiag_Razor`; implementing session can adjust if
-   a better name emerges.
+3. **XgFilter_Razor — extract `FilterPanel.razor` and supporting
+   types from `ExtractFromXgToCsv.Client`.** Now that the
+   scaffold is registered, populate it: read the existing
+   `FilterPanel.razor`, code-behind partial class, supporting
+   types (enum-label extension methods like `PlayType.ToLabel()`,
+   `PositionType.ToLabel()`, etc.), small DTOs / state types,
+   scoped CSS from `../ExtractFromXgToCsv/ExtractFromXgToCsv.Client/`
+   (cross-boundary read is allowed), and recreate the equivalents
+   inside `XgFilter_Razor/`. Adds `XgFilter_Lib` and
+   `BgDataTypes_Lib` ProjectReferences. Don't modify
+   `ExtractFromXgToCsv.Client` — that's a separate
+   `ExtractFromXgToCsv` subproject session that follows. Preserve
+   existing behaviour — don't fold in the encapsulation-leak fix
+   on the umbrella Deferred list.
 
 4. **BgQuiz_Blazor — Phase 1 implementation.** Wires #1–#3 into
    problem-set selection (filter UI from #3 + a server-disk
@@ -325,6 +357,8 @@ and gets queued after Phase 1 ships and item 5 lands.
 | **BgRLEngine** | RL training engine |
 | **BgMoveGen** | Move generation library |
 | **BgQuiz_Blazor** | Blazor quiz app |
+| **BgGame_Lib** | Game/play substrate |
+| **XgFilter_Razor** | Razor wrapper for filter UI |
 
 ## Architecture — dependency graph
 
@@ -332,10 +366,12 @@ and gets queued after Phase 1 ships and item 5 lands.
 BgDataTypes_Lib (shared types)
 ├── ConvertXgToJson_Lib (parsing)
 │   └── XgFilter_Lib (filtering)
-│       └── ExtractFromXgToCsv (app)
+│       ├── ExtractFromXgToCsv (app)
+│       └── XgFilter_Razor (Razor wrapper for filter UI)
 ├── BackgammonDiagram_Lib (rendering)
-│   └── BgDiag_Razor (Blazor wrapper)
+│   └── BgDiag_Razor (Razor wrapper for diagram)
 │       └── BgQuiz_Blazor (app)
+├── BgGame_Lib (game/play substrate)
 ├── BgPositionRouter (planned — position routing)
 └── BgInference (planned — ONNX inference)
 
@@ -350,6 +386,8 @@ Cross-edges not shown in the tree:
 - ExtractFromXgToCsv also consumes BackgammonDiagram_Lib server-side for PPTX output.
 - BackgammonDiagram_Lib's test project references ConvertXgToJson_Lib for fixture-driven visual tests.
 - ConvertXgToJson_Lib consumes BgMoveGen for move-notation formatting (`MoveNotationFormatter.Format(Play)`).
+- BgGame_Lib will consume BgMoveGen for `Play`, `BoardState`, `MoveEntryState` once substrate types ship (currently scaffold only — csproj reference lands with the substrate types).
+- XgFilter_Razor will be consumed by `ExtractFromXgToCsv.Client` once a follow-up ExtractFromXgToCsv session removes the original `FilterPanel.razor` and adds a project reference (currently `.Client` still owns the original).
 
 ## Pre-session verification
 
