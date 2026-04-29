@@ -133,14 +133,17 @@ Key facts:
 
 ### BgDiag_Razor
 
-**Purpose:** Thin Razor Class Library wrapper — exposes `BackgammonDiagram.razor` component. Keeps BackgammonDiagram_Lib free of Blazor dependencies.
+**Purpose:** Razor Class Library hosting backgammon UI components — view-only `BackgammonDiagram` plus the stateful `BackgammonPlayEntry` for click-by-click play assembly. Keeps BackgammonDiagram_Lib free of Blazor dependencies.
 **Branch:** main
-**Depends on:** BackgammonDiagram_Lib
+**Depends on:** BackgammonDiagram_Lib, BgMoveGen
 
 Key facts:
 
-* Click handling via transparent SVG overlay + pure Razor EventCallbacks — no JS interop
-* EventCallbacks: OnPointClicked(1–24), OnBarClicked(25), OnCubeClicked, OnTrayClicked
+* Two components, smart-vs-dumb split:
+  * `BackgammonDiagram` — view-only. Click handling via transparent SVG overlay + pure Razor EventCallbacks (`OnPointClicked` 1–24, `OnBarClicked` 25, `OnCubeClicked`, `OnTrayClicked`); no JS interop. Used by replay viewers, bot-vs-bot, analytics, anything not taking human input.
+  * `BackgammonPlayEntry` — stateful. Wraps `BackgammonDiagram` and holds an internal `BgMoveGen.MoveEntryState`. Public surface kept minimal: `Request`, `Options`, `AdditionalAttributes`, `OnPlayCompleted`, `UndoLast()`, `UndoAll()`. No `OnPlayProgress`, `OnUndo`, `ShowLegalHints`, or read-only state-query properties — those were considered and deferred (track in Deferred for the legal-hints overlay).
+* `BackgammonPlayEntry` reset key is value-equality on `(Mop, Dice)` — swapping in a structurally different `Request` resets the internal state machine; identical request shape preserves it.
+* Cube decisions are out of scope for `BackgammonPlayEntry` — `Decision.IsCube == true` rejected with `NotImplementedException`. A future cube-entry sibling component owns that path (Deferred).
 
 ### BgRLEngine
 
@@ -222,7 +225,7 @@ Key facts:
 | ExtractFromXgToCsv | 🔧 In progress — Web/Azure PPTX, CSV download, ColumnSelector UI all deferred |
 | XgAnalytics | 🔧 In progress |
 | BackgammonDiagram_Lib | 🔧 In progress |
-| BgDiag_Razor | 🔧 In progress |
+| BgDiag_Razor | 🔧 In progress — `BackgammonPlayEntry` shipped; cube-entry sibling deferred |
 | BgRLEngine | 🔧 In progress |
 | BgQuiz_Blazor | 🔧 In progress — Milestone 1 done |
 | BgGame_Lib | 🔧 In progress — substrate types in; awaiting BgQuiz_Blazor consumer (Phase 1) |
@@ -239,24 +242,9 @@ scaffolding from day one.
 
 Concrete sessions, rank-ordered:
 
-1. **BgDiag_Razor — `BackgammonPlayEntry` component.** New
-   stateful Razor component wrapping the existing
-   `BackgammonDiagram` and holding a `BgMoveGen.MoveEntryState`.
-   Hooks the inner diagram's click events to the state machine;
-   derives the displayed `Mop` from `state.Current` after each
-   click; optionally overlays `state.LegalNextClicks` as hover
-   hints. Exposes `OnPlayCompleted` (fires when `IsComplete`
-   flips true), `OnPlayProgress` (per legal click), and
-   `UndoLast` / `UndoAll` methods/callbacks so the consumer
-   wires its own buttons. The existing `BackgammonDiagram` stays
-   view-only — used directly by replay viewers, bot-vs-bot,
-   analytics. Adds BgMoveGen as a new BgDiag_Razor dependency;
-   the implementing session updates the umbrella dependency
-   graph.
-
-2. **BgQuiz_Blazor — Phase 1 implementation.** Wires the
+1. **BgQuiz_Blazor — Phase 1 implementation.** Wires the
    already-shipped `BgGame_Lib` substrate, `XgFilter_Razor`
-   filter UI, and item #1's `BackgammonPlayEntry` into
+   filter UI, and `BgDiag_Razor`'s `BackgammonPlayEntry` into
    problem-set selection (filter UI from `XgFilter_Razor` + a
    server-disk `IProblemSetSource` implementation against the
    diagram-shape iterator), click-to-Play (via
@@ -268,7 +256,7 @@ Concrete sessions, rank-ordered:
    alternatives (upload, deployed sets, curated library) plug in
    via the same interface.
 
-3. **Decision identification scheme.** No stable way today to
+2. **Decision identification scheme.** No stable way today to
    reference a specific decision within an `.xg`/`.xgp` file.
    Phase 2+ requires it — answer tracking with weighted
    re-recurrence on wrong answers; resume / skip / re-do with
@@ -282,17 +270,15 @@ Concrete sessions, rank-ordered:
    XgFilter_Lib (passes through), and Phase 2+ consumers.
    Decide and ship before Phase 2+ work begins.
 
-**Parallelism.** Item 1 (`BackgammonPlayEntry`) is independent
-of items 2 and 3 — it consumes only the already-shipped
-`BgMoveGen.MoveEntryState`. Item 2 (Phase 1) consumes item 1
-plus the already-shipped `BgGame_Lib` and `XgFilter_Razor`.
-Item 3 (decision IDs) is logically pre-Phase-2+; can run in
-parallel with the Phase 1 chain or after, but before any Phase
-2+ work.
+**Parallelism.** Item 1 (Phase 1) is the integration session —
+it consumes the already-shipped `BgGame_Lib`, `XgFilter_Razor`,
+and `BgDiag_Razor.BackgammonPlayEntry`. Item 2 (decision IDs)
+is logically pre-Phase-2+; can run in parallel with Phase 1 or
+after, but before any Phase 2+ work.
 
 **Phase 2+** (answer tracking with weighted re-recurrence on
-wrong answers, the three two-agent modes) builds on items 1–3
-and gets queued after Phase 1 ships and item 3 lands.
+wrong answers, the three two-agent modes) builds on items 1–2
+and gets queued after Phase 1 ships and item 2 lands.
 
 ### Deferred
 
@@ -311,6 +297,8 @@ and gets queued after Phase 1 ships and item 3 lands.
 * XgFilter_Razor: `Shared/FilterConfig.cs` is a JSON-serialisable filter DTO, not a Razor-specific type. Currently lives in the Razor library because that's where its only consumer (FilterPanel) was when extraction landed; moving it then would have stretched scope. Better long-term home: `XgFilter_Lib` (where the filter classes it mirrors live) or `BgDataTypes_Lib` (per the shared-data-layer charter). Mildly more urgent now: `ExtractFromXgToCsv`'s server csproj picks up `XgFilter_Razor` transitively through `Client → XgFilter_Razor` to reach `FilterConfig` — a hidden dependency that dissolves once `FilterConfig` moves to a non-Razor home. Future cleanup; not blocking.
 * ExtractFromXgToCsv: rename `Client/Shared/FilterConfig.cs` → `Client/Shared/ProcessRequest.cs`. After the FilterPanel/FilterConfig extraction landed, the file holds only the `ProcessRequest` class (host-app-specific, wraps `OutputFormat` etc.). One-line rename + reference updates; folds naturally into the next ExtractFromXgToCsv touch.
 * BgMoveGen: add a public `BoardState.Flip()` helper for swapping perspective. BgGame_Lib's `Referee.ApplyPlay` currently does the perspective flip via internal helpers on `MatchState` / `GameState`, which works but means the underlying board-flip logic isn't reusable from outside BgGame_Lib. A public surface in BgMoveGen (closer to where `BoardState` lives) is the natural home for the bare flip operation. Cross-submodule change; folds into the next BgMoveGen touch.
+* BgDiag_Razor: cube-entry sibling component to `BackgammonPlayEntry`. The current play-entry component rejects `Decision.IsCube == true` with `NotImplementedException`. A future cube-entry component owns that path — collects double / take / pass / beaver / raccoon clicks (via dice-area / cube-area or a separate decision panel), exposes `OnCubeActionCompleted(CubeAction)`. Needed when Phase 1 extends to cube decisions or whenever a multi-mode flow spans both checker and cube agents.
+* BgDiag_Razor: optional `LegalNextClicks` hover-hint overlay on `BackgammonPlayEntry`. The original component design included a `ShowLegalHints` parameter that would render a translucent highlight over each point in `state.LegalNextClicks`; the implementing session minimised the public surface and dropped the parameter. Easy to re-add when consumer demand surfaces. Adds the parameter, an overlay layer in the markup, and tests for the hint visibility toggle.
 
 ---
 
@@ -360,6 +348,7 @@ Cross-edges not shown in the tree:
 - BackgammonDiagram_Lib's test project references ConvertXgToJson_Lib for fixture-driven visual tests.
 - ConvertXgToJson_Lib consumes BgMoveGen for move-notation formatting (`MoveNotationFormatter.Format(Play)`).
 - BgGame_Lib consumes BgMoveGen for `Play`, `BoardState`, `MoveEntryState` (csproj reference is current).
+- BgDiag_Razor consumes BgMoveGen for `MoveEntryState` (used inside `BackgammonPlayEntry`).
 - ExtractFromXgToCsv's server project picks up XgFilter_Razor transitively through `Client → XgFilter_Razor` (it actually needs `FilterConfig` for HTTP API contract). "Hidden" rather than explicit; resolves cleanly when `FilterConfig` moves out of XgFilter_Razor per the Deferred entry.
 
 ## Pre-session verification
