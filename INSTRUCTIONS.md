@@ -181,15 +181,17 @@ Key facts:
 
 ### BgGame_Lib
 
-**Purpose:** Game/play substrate — `GameState`, `IPlayAgent`, `ICubeAgent`, `IProblemSetSource`, skeletal `Referee`, `Transcript`, plus quiz-result records `SubmittedPlay` and `QuizScore`. Multi-mode scaffolding shared by scored quiz, user-vs-user, user-vs-bot, and bot-vs-bot tournament.
+**Purpose:** Game/play substrate — multi-mode scaffolding shared by scored quiz, user-vs-user, user-vs-bot, and bot-vs-bot tournament.
 **Branch:** main
 **Solution:** `BgGame_Lib\BgGame_Lib.slnx`
-**Depends on:** BgDataTypes_Lib, BgMoveGen (planned — substrate types follow the scaffold)
+**Depends on:** BgDataTypes_Lib, BgMoveGen
 
 Key facts:
 
-* Initial commit ships scaffold only (Class Library + xUnit test project, mirroring BgMoveGen's layout); substrate types come in follow-up commits
-* Razor-free — the "human via clicks" `IPlayAgent` implementation lives in `BgQuiz_Blazor`, not here, keeping the substrate Blazor-free for non-UI consumers (future bot-vs-bot loops, replay analytics, etc.)
+* Substrate types in flat `BgGame_Lib` namespace: `MatchState` / `GameState` (separated rather than fused — match-level vs game-level state have distinct lifecycles), `MatchSnapshot` / `GameSnapshot` (immutable views for transcript / replay), `GameResult` + `GameResultKind`, `CubeAction` enum, skeletal `Referee` (turn sequencing, end-of-game), `Transcript` plus a 3-subtype `TranscriptEntry` hierarchy, `IPlayAgent`, `ICubeAgent` (two-method offer / response shape), `IProblemSetSource` (re-iterable `IAsyncEnumerable`), `SubmittedPlay`, `QuizScore`.
+* Razor-free — the "human via clicks" `IPlayAgent` implementation lives in `BgQuiz_Blazor`, not here, keeping the substrate Blazor-free for non-UI consumers (future bot-vs-bot loops, replay analytics, etc.).
+* Perspective flip lives inside `Referee.ApplyPlay` via internal helpers on `MatchState` / `GameState`; no public `SwapPerspective` surface. Future home for the board-flip itself is a public `BoardState.Flip()` in `BgMoveGen` (cross-submodule deferred).
+* Consumers: `BgQuiz_Blazor` (pending — Phase 1, queue item 2).
 
 ### XgFilter_Razor
 
@@ -223,7 +225,7 @@ Key facts:
 | BgDiag_Razor | 🔧 In progress |
 | BgRLEngine | 🔧 In progress |
 | BgQuiz_Blazor | 🔧 In progress — Milestone 1 done |
-| BgGame_Lib | 🔧 In progress — scaffold only |
+| BgGame_Lib | 🔧 In progress — substrate types in; awaiting BgQuiz_Blazor consumer (Phase 1) |
 | XgFilter_Razor | 🔧 In progress — in use by ExtractFromXgToCsv; awaiting BgQuiz_Blazor consumer (Phase 1) |
 
 ### Next up
@@ -237,27 +239,7 @@ scaffolding from day one.
 
 Concrete sessions, rank-ordered:
 
-1. **BgGame_Lib — substrate types.** Now that the scaffold is
-   registered, populate the initial type set: multi-mode play
-   primitives (`GameState`, `IPlayAgent`, `ICubeAgent`,
-   `CubeAction` enum, skeletal `Referee` for turn sequencing /
-   end-of-game, `Transcript` of state / decision / outcome
-   tuples); the problem-set abstraction `IProblemSetSource` —
-   iterable of `BgDecisionData` for any quiz / replay loop,
-   keeping Phase 1's source choice (server-disk now; upload,
-   deployed sets, curated library later) replaceable as
-   alternative implementations; and the quiz-result records
-   `SubmittedPlay` (chosen `Play` + matched candidate index +
-   equity loss + correctness flag) and `QuizScore`
-   (running-total). Adds `BgMoveGen` and `BgDataTypes_Lib`
-   ProjectReferences. `INSTRUCTIONS.md` for the subproject lands
-   in this commit (or its own follow-up if too much for one
-   session). Built ahead of the modes per CLAUDE.md
-   "Best-practice bias". `SubmittedPlay` / `QuizScore` live here
-   rather than BgDataTypes_Lib because they're game-mode-specific
-   records, not shared-data-layer types.
-
-2. **BgDiag_Razor — `BackgammonPlayEntry` component.** New
+1. **BgDiag_Razor — `BackgammonPlayEntry` component.** New
    stateful Razor component wrapping the existing
    `BackgammonDiagram` and holding a `BgMoveGen.MoveEntryState`.
    Hooks the inner diagram's click events to the state machine;
@@ -272,8 +254,9 @@ Concrete sessions, rank-ordered:
    the implementing session updates the umbrella dependency
    graph.
 
-3. **BgQuiz_Blazor — Phase 1 implementation.** Wires items #1
-   and #2 plus the already-shipped `XgFilter_Razor` into
+2. **BgQuiz_Blazor — Phase 1 implementation.** Wires the
+   already-shipped `BgGame_Lib` substrate, `XgFilter_Razor`
+   filter UI, and item #1's `BackgammonPlayEntry` into
    problem-set selection (filter UI from `XgFilter_Razor` + a
    server-disk `IProblemSetSource` implementation against the
    diagram-shape iterator), click-to-Play (via
@@ -285,7 +268,7 @@ Concrete sessions, rank-ordered:
    alternatives (upload, deployed sets, curated library) plug in
    via the same interface.
 
-4. **Decision identification scheme.** No stable way today to
+3. **Decision identification scheme.** No stable way today to
    reference a specific decision within an `.xg`/`.xgp` file.
    Phase 2+ requires it — answer tracking with weighted
    re-recurrence on wrong answers; resume / skip / re-do with
@@ -299,19 +282,17 @@ Concrete sessions, rank-ordered:
    XgFilter_Lib (passes through), and Phase 2+ consumers.
    Decide and ship before Phase 2+ work begins.
 
-**Parallelism.** Items 1 and 2 are independent of each other.
-`BackgammonPlayEntry` (item 2) consumes only the already-shipped
-`BgMoveGen.MoveEntryState`; the substrate (item 1) doesn't
-depend on it since the "human via clicks" `IPlayAgent`
-implementation lives in BgQuiz_Blazor (item 3), keeping
-`BgGame_Lib` Razor-free. Item 3 (Phase 1) consumes both #1 and
-#2 plus the already-shipped `XgFilter_Razor`. Item 4 (decision
-IDs) is logically pre-Phase-2+; can run in parallel with the
-Phase 1 chain or after, but before any Phase 2+ work.
+**Parallelism.** Item 1 (`BackgammonPlayEntry`) is independent
+of items 2 and 3 — it consumes only the already-shipped
+`BgMoveGen.MoveEntryState`. Item 2 (Phase 1) consumes item 1
+plus the already-shipped `BgGame_Lib` and `XgFilter_Razor`.
+Item 3 (decision IDs) is logically pre-Phase-2+; can run in
+parallel with the Phase 1 chain or after, but before any Phase
+2+ work.
 
 **Phase 2+** (answer tracking with weighted re-recurrence on
-wrong answers, the three two-agent modes) builds on items 1–4
-and gets queued after Phase 1 ships and item 4 lands.
+wrong answers, the three two-agent modes) builds on items 1–3
+and gets queued after Phase 1 ships and item 3 lands.
 
 ### Deferred
 
@@ -329,6 +310,7 @@ and gets queued after Phase 1 ships and item 4 lands.
 * XgFilter_Lib: directory iteration enumerates `*.xg` only; the parser side (`XgDecisionIterator.IterateXgDirectory`) enumerates both `*.xg` and `*.xgp` via a private `EnumerateXgFormatFiles` helper. Filter-side iteration silently drops `.xgp` (XG position-file) inputs that unfiltered parser iteration would surface. Real concern for Phase 1 quiz problem-set production — `.xgp` is a likely problem-set source. Small fix; folds naturally into the next XgFilter_Lib touch (or the same session that addresses the existing exception-swallowing entry above).
 * XgFilter_Razor: `Shared/FilterConfig.cs` is a JSON-serialisable filter DTO, not a Razor-specific type. Currently lives in the Razor library because that's where its only consumer (FilterPanel) was when extraction landed; moving it then would have stretched scope. Better long-term home: `XgFilter_Lib` (where the filter classes it mirrors live) or `BgDataTypes_Lib` (per the shared-data-layer charter). Mildly more urgent now: `ExtractFromXgToCsv`'s server csproj picks up `XgFilter_Razor` transitively through `Client → XgFilter_Razor` to reach `FilterConfig` — a hidden dependency that dissolves once `FilterConfig` moves to a non-Razor home. Future cleanup; not blocking.
 * ExtractFromXgToCsv: rename `Client/Shared/FilterConfig.cs` → `Client/Shared/ProcessRequest.cs`. After the FilterPanel/FilterConfig extraction landed, the file holds only the `ProcessRequest` class (host-app-specific, wraps `OutputFormat` etc.). One-line rename + reference updates; folds naturally into the next ExtractFromXgToCsv touch.
+* BgMoveGen: add a public `BoardState.Flip()` helper for swapping perspective. BgGame_Lib's `Referee.ApplyPlay` currently does the perspective flip via internal helpers on `MatchState` / `GameState`, which works but means the underlying board-flip logic isn't reusable from outside BgGame_Lib. A public surface in BgMoveGen (closer to where `BoardState` lives) is the natural home for the bare flip operation. Cross-submodule change; folds into the next BgMoveGen touch.
 
 ---
 
@@ -377,7 +359,7 @@ Cross-edges not shown in the tree:
 - ExtractFromXgToCsv also consumes BackgammonDiagram_Lib server-side for PPTX output.
 - BackgammonDiagram_Lib's test project references ConvertXgToJson_Lib for fixture-driven visual tests.
 - ConvertXgToJson_Lib consumes BgMoveGen for move-notation formatting (`MoveNotationFormatter.Format(Play)`).
-- BgGame_Lib will consume BgMoveGen for `Play`, `BoardState`, `MoveEntryState` once substrate types ship (currently scaffold only — csproj reference lands with the substrate types).
+- BgGame_Lib consumes BgMoveGen for `Play`, `BoardState`, `MoveEntryState` (csproj reference is current).
 - ExtractFromXgToCsv's server project picks up XgFilter_Razor transitively through `Client → XgFilter_Razor` (it actually needs `FilterConfig` for HTTP API contract). "Hidden" rather than explicit; resolves cleanly when `FilterConfig` moves out of XgFilter_Razor per the Deferred entry.
 
 ## Pre-session verification
