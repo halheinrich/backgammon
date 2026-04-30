@@ -44,17 +44,21 @@ Always specify which Program.cs is being modified:
 
 ### BgDataTypes_Lib
 
-**Purpose:** Shared type layer — BgDecisionData, DecisionRow, and constituent types. No parsing or rendering logic.
+**Purpose:** Shared-data foundation — atomic by design. Hosts the data types and primitive operations every other in-tree library rests on. No subproject dependencies and must never gain any.
 **Branch:** main
 **Solution:** `BgDataTypes_Lib\BgDataTypes_Lib.slnx`
 
 Key facts:
 
-* Types: BgDecisionData (= PositionData + DecisionData + DescriptiveData), DecisionRow, PlayCandidate, AnalysisDepthEntry, CubeOwner enum
-* `IDecisionFilterData` interface — implemented by both DecisionRow and BgDecisionData; enables XgFilter_Lib to filter either type
-* `DecisionRow` migrated from ConvertXgToJson_Lib — CSV methods kept for pragmatic reasons
-* `DecisionRow.Board` is `IReadOnlyList<int>` (26 elements); `MatchScore` computed from needs/Crawford/length
-* All properties `init`-only; `CubeOwner` serializes as string
+* **Atomic by design.** BgDataTypes_Lib has no subproject dependencies, by architectural invariant — not just current state. Adding one would either create a circular reference or force the dependency on every consumer transitively. `System.Text.Json` (+ `JsonStringEnumConverter`) is the only runtime dependency.
+* Data types: BgDecisionData (= PositionData + DecisionData + DescriptiveData + PlayOutcomeData), DecisionRow, PlayCandidate, AnalysisDepthEntry, CubeOwner enum.
+* Move/Play/BoardState — primitive types with full instance API. `Move` and `Play` are value types; `BoardState` is mutable with `HighPointOccupied` tracking maintained inside the type via instance `ApplyMove`/`UndoMove`/`ApplyPlay`. `ApplyPlay` is the public turn-boundary primitive (applies all moves, then flips perspective internally — `Flip()` is private). Derived properties: `PipCount`, `OpponentPipCount`, `IsRace`. Factories: `Standard()`, `Nackgammon()`, `Bg960(seed?)`. Bridges: `FromMop()`, `ToMop()`.
+* **Mutability exception.** All types are init-only **except `BoardState`**, which is mutable for hot-path move-generation efficiency. The type encapsulates its own state-management; external mutation of `Points` is supported but `HighPointOccupied` will desync if mutated outside the apply/undo helpers. Hot-path consumers (BgMoveGen) use the apply/undo primitives; non-hot-path consumers should treat `BoardState` as advancing only via `ApplyPlay`.
+* `IDecisionFilterData` interface — implemented by both DecisionRow and BgDecisionData; enables XgFilter_Lib to filter either type.
+* `DecisionRow` migrated from ConvertXgToJson_Lib — CSV methods kept for pragmatic reasons.
+* `DecisionRow.Board` is `IReadOnlyList<int>` (26 elements); `MatchScore` computed from needs/Crawford/length.
+* `PlayCandidate.Play` field carries the structural play (populated by ConvertXgToJson_Lib); `PlayCandidate.EquityLoss` is non-nullable `double` — `0.0` means "this candidate is itself a best play"; multiple candidates may share zero loss. `DecisionData.BestPlayIndex` is the canonical-best signal when one representative is needed.
+* `CubeOwner` serializes as string; `Play` serializes via `PlayJsonConverter` (custom converter — fixed-buffer struct doesn't round-trip via default System.Text.Json).
 * Charter scope: types and pure data-shape translations between data types or to primitives. A translation whose result type comes from another subproject is a true cross-subproject dependency and lives in the consumer, not here. Game-mode-specific records (e.g., `SubmittedPlay`, `QuizScore`) live in BgGame_Lib.
 
 ### ConvertXgToJson_Lib
@@ -62,16 +66,18 @@ Key facts:
 **Purpose:** Reads .xg and .xgp files; produces DecisionRow and BgDecisionData records.
 **Branch:** main
 **Solution:** `ConvertXgToJson_Lib\ConvertXgToJson_Lib.slnx`
-**Depends on:** BgDataTypes_Lib
+**Depends on:** BgDataTypes_Lib (data types incl. Move/Play/BoardState), BgMoveGen (MoveNotationFormatter only — algorithm)
 
 Key facts:
 
-* `XgDecisionIterator` yields DecisionRow; `IterateDiagramRequests` yields BgDecisionData
+* `XgDecisionIterator` yields DecisionRow; `IterateDiagramRequests` yields BgDecisionData.
+* Populates `PlayCandidate.Play` from a single hoisted `XgMoveTranslator.Translate` call so the same `Play` value drives both `MoveNotation` (via `MoveNotationFormatter.Format`) and the structural `Play` field — single producer, no risk of drift.
+* `EquityLoss` producer convention: emit `bestEquity - equity` unconditionally — best plays produce `0.0`, ties for best naturally share zero. Replaces the old `null = best` sentinel; matches `PlayCandidate`'s "multiple may share zero" contract.
 * Board: `board[0]` = opponent bar, `board[1–24]` = points, `board[25]` = player bar. Positive = player on roll; negative = opponent.
-* XGID always normalized to bottom-player perspective
-* Taker cube row board is always doubler POV — no flip
-* XgIteratorState early-exit mechanism for match/game-level filtering
-* XgFileReader.ReadMatchInfo / ReadGameHeaders — fast extraction without full parse
+* XGID always normalized to bottom-player perspective.
+* Taker cube row board is always doubler POV — no flip.
+* XgIteratorState early-exit mechanism for match/game-level filtering.
+* XgFileReader.ReadMatchInfo / ReadGameHeaders — fast extraction without full parse.
 
 ### XgFilter_Lib
 
@@ -130,12 +136,13 @@ Key facts:
 * `HomeBoardOnRight` (bool, default true) — geometric reflection in ColumnCentreX
 * `DiagramOptions` is a record; `ITheme Theme` direct reference (no string lookup)
 * `ThemeRegistry`: static instances Default and Greyscale
+* Play panel "Eq Loss" column renders blank for `EquityLoss == 0.0` (any best play in the equivalence class) and numeric for non-best — matches `PlayCandidate`'s "multiple may share zero" contract; preserves existing user-facing rendering after the EquityLoss-flip arc.
 
 ### BgDiag_Razor
 
 **Purpose:** Razor Class Library hosting backgammon UI components — view-only `BackgammonDiagram` plus the stateful `BackgammonPlayEntry` for click-by-click play assembly. Keeps BackgammonDiagram_Lib free of Blazor dependencies.
 **Branch:** main
-**Depends on:** BackgammonDiagram_Lib, BgMoveGen
+**Depends on:** BackgammonDiagram_Lib, BgMoveGen (for `MoveEntryState`), BgDataTypes_Lib (explicit reference for Move/Play/BoardState)
 
 Key facts:
 
@@ -159,16 +166,19 @@ Key facts:
 
 ### BgMoveGen
 
-**Purpose:** C# move generation library for backgammon and all variants.
+**Purpose:** Move-generation algorithms over BgDataTypes_Lib's primitive types. C# library for backgammon and all variants.
 **Branch:** main
 **Solution:** `BgMoveGen\BgMoveGen.slnx`
+**Depends on:** BgDataTypes_Lib (Move, Play, BoardState — primitive types and their instance API)
 
 Key facts:
 
-* 3.4 μs/call, avoidance-based dedup
-* Move generation: GenerateStates, EnumerateStates, NextMove
-* Move formatting: MoveNotationFormatter.Format(Play) — standard notation
-* BgRLEngine depends on this
+* 3.4 μs/call, avoidance-based dedup.
+* Move-generation algorithms: `GeneratePlays`, `GenerateStates`, `EnumerateStates`, `NextMove`. Operate on `BoardState` (in BgDataTypes_Lib) via its instance `ApplyMove`/`UndoMove` primitives.
+* Public turn-boundary apply: `MoveGenerator.ApplyPlay(state, play, die1, die2)` validates legality (re-enumerates via `GeneratePlays` + `DeduplicationKey` match) then delegates to `state.ApplyPlay(play)` (which applies all moves and flips perspective internally). `MoveGenerator.IsLegalPlay` exposes the validation alone for callers that want to validate without applying. Throw-before-mutate semantics — illegal play leaves state untouched.
+* Move formatting: `MoveNotationFormatter.Format(Play)` — standard notation. Same shape as before; `Play` now lives in BgDataTypes_Lib but the formatter's algorithm stays here.
+* `MoveEntryState` (click-driven Play assembly) lives here — algorithm-side state machine over BoardState.
+* BgRLEngine consumes via NativeAOT interop (`BgBoardState` blittable layout, separate from BgDataTypes_Lib's BoardState).
 
 ### BgQuiz_Blazor
 
@@ -191,10 +201,11 @@ Key facts:
 
 Key facts:
 
-* Substrate types in flat `BgGame_Lib` namespace: `MatchState` / `GameState` (separated rather than fused — match-level vs game-level state have distinct lifecycles), `MatchSnapshot` / `GameSnapshot` (immutable views for transcript / replay), `GameResult` + `GameResultKind`, `CubeAction` enum, skeletal `Referee` (turn sequencing, end-of-game), `Transcript` plus a 3-subtype `TranscriptEntry` hierarchy, `IPlayAgent`, `ICubeAgent` (two-method offer / response shape), `IProblemSetSource` (re-iterable `IAsyncEnumerable`), `SubmittedPlay`, `QuizScore`.
+* Substrate types in flat `BgGame_Lib` namespace: `MatchState` / `GameState` (separated rather than fused — match-level vs game-level state have distinct lifecycles), `MatchSnapshot` / `GameSnapshot` (immutable views for transcript / replay), `GameResult` + `GameResultKind`, `CubeAction` enum, skeletal `Referee` (end-of-game detection, cube-response application), `Transcript` plus a 3-subtype `TranscriptEntry` hierarchy, `IPlayAgent`, `ICubeAgent` (two-method offer / response shape), `IProblemSetSource` (re-iterable `IAsyncEnumerable`), `SubmittedPlay`, `QuizScore`.
 * Razor-free — the "human via clicks" `IPlayAgent` implementation lives in `BgQuiz_Blazor`, not here, keeping the substrate Blazor-free for non-UI consumers (future bot-vs-bot loops, replay analytics, etc.).
-* Perspective flip lives inside `Referee.ApplyPlay` via internal helpers on `MatchState` / `GameState`; no public `SwapPerspective` surface. Future home for the board-flip itself is a public `BoardState.Flip()` in `BgMoveGen` (cross-submodule deferred).
-* Consumers: `BgQuiz_Blazor` (pending — Phase 1, queue item 2).
+* `GameState.ApplyPlay(play, die1, die2)` is the public unified turn-transition primitive — validates legality (delegates to `MoveGenerator.ApplyPlay`), applies the play to the board (which flips board perspective internally via `BoardState.ApplyPlay`), and re-expresses match labels and cube ownership under the new on-roll perspective. **No public swap/flip surface anywhere on the substrate.** Match-label re-expression is internal to MatchState (reachable from GameState in-assembly); cube-owner flip is inline in GameState.ApplyPlay's body. Skipping `GameState.ApplyPlay` (e.g., calling `Board.ApplyPlay` directly) leaves match labels and cube ownership unflipped — half-flipped substrate.
+* `Referee` retains end-of-game detection (`IsGameOver`) and cube-response application (`ApplyCubeResponse`) only. Play application moved to `GameState.ApplyPlay` per the encapsulation principle that perspective transitions are atomic operations on the data, not external orchestration.
+* Consumers: `BgQuiz_Blazor` (pending — Phase 1, queue item 1).
 
 ### XgFilter_Razor
 
@@ -296,7 +307,8 @@ and gets queued after Phase 1 ships and item 2 lands.
 * XgFilter_Lib: directory iteration enumerates `*.xg` only; the parser side (`XgDecisionIterator.IterateXgDirectory`) enumerates both `*.xg` and `*.xgp` via a private `EnumerateXgFormatFiles` helper. Filter-side iteration silently drops `.xgp` (XG position-file) inputs that unfiltered parser iteration would surface. Real concern for Phase 1 quiz problem-set production — `.xgp` is a likely problem-set source. Small fix; folds naturally into the next XgFilter_Lib touch (or the same session that addresses the existing exception-swallowing entry above).
 * XgFilter_Razor: `Shared/FilterConfig.cs` is a JSON-serialisable filter DTO, not a Razor-specific type. Currently lives in the Razor library because that's where its only consumer (FilterPanel) was when extraction landed; moving it then would have stretched scope. Better long-term home: `XgFilter_Lib` (where the filter classes it mirrors live) or `BgDataTypes_Lib` (per the shared-data-layer charter). Mildly more urgent now: `ExtractFromXgToCsv`'s server csproj picks up `XgFilter_Razor` transitively through `Client → XgFilter_Razor` to reach `FilterConfig` — a hidden dependency that dissolves once `FilterConfig` moves to a non-Razor home. Future cleanup; not blocking.
 * ExtractFromXgToCsv: rename `Client/Shared/FilterConfig.cs` → `Client/Shared/ProcessRequest.cs`. After the FilterPanel/FilterConfig extraction landed, the file holds only the `ProcessRequest` class (host-app-specific, wraps `OutputFormat` etc.). One-line rename + reference updates; folds naturally into the next ExtractFromXgToCsv touch.
-* BgMoveGen: add a public `BoardState.Flip()` helper for swapping perspective. BgGame_Lib's `Referee.ApplyPlay` currently does the perspective flip via internal helpers on `MatchState` / `GameState`, which works but means the underlying board-flip logic isn't reusable from outside BgGame_Lib. A public surface in BgMoveGen (closer to where `BoardState` lives) is the natural home for the bare flip operation. Cross-submodule change; folds into the next BgMoveGen touch.
+* BgDataTypes_Lib: port four unique cases from BgMoveGen.Tests' deleted `BoardStateBridgeTests` into `BgDataTypes_Lib.Tests.BoardStateTests` — Bg960 Mop round-trip, mid-game hand-built position, bar-as-highest, all-zero pseudoboard. Tests followed BoardState to its new home; coverage gap until porting lands.
+* Heads-up for downstream JSON consumers: post-EquityLoss-flip, `BgDecisionData` JSON output emits `"EquityLoss": 0` for best plays (was `"EquityLoss": null`). No code change needed under the new `double` (non-nullable) shape; new producers and tooling absorb cleanly. Pre-flip JSON archives — if any exist with `"EquityLoss": null` for best — won't deserialise under the new convention without a custom converter or migration. Concrete instance observed: gitignored fixture files at `BackgammonDiagram_Lib/TestData/DiagramRequest/*.json`. Resolution there is to regenerate fixtures from a post-arc ConvertXgToJson_Lib run; for any other archive, deal with it when it surfaces.
 * BgDiag_Razor: cube-entry sibling component to `BackgammonPlayEntry`. The current play-entry component rejects `Decision.IsCube == true` with `NotImplementedException`. A future cube-entry component owns that path — collects double / take / pass / beaver / raccoon clicks (via dice-area / cube-area or a separate decision panel), exposes `OnCubeActionCompleted(CubeAction)`. Needed when Phase 1 extends to cube decisions or whenever a multi-mode flow spans both checker and cube agents.
 * BgDiag_Razor: optional `LegalNextClicks` hover-hint overlay on `BackgammonPlayEntry`. The original component design included a `ShowLegalHints` parameter that would render a translucent highlight over each point in `state.LegalNextClicks`; the implementing session minimised the public surface and dropped the parameter. Easy to re-add when consumer demand surfaces. Adds the parameter, an overlay layer in the markup, and tests for the hint visibility toggle.
 
@@ -323,32 +335,33 @@ and gets queued after Phase 1 ships and item 2 lands.
 ## Architecture — dependency graph
 
 ```
-BgDataTypes_Lib (shared types)
+BgDataTypes_Lib (atomic — no subproject deps; shared data + primitive ops)
 ├── ConvertXgToJson_Lib (parsing)
 │   └── XgFilter_Lib (filtering)
 │       ├── XgFilter_Razor (Razor wrapper for filter UI)
 │       │   └── ExtractFromXgToCsv.Client (app)
 │       └── ExtractFromXgToCsv (app — also consumes XgFilter_Lib directly)
 ├── BackgammonDiagram_Lib (rendering)
-│   └── BgDiag_Razor (Razor wrapper for diagram)
+│   └── BgDiag_Razor (Razor wrapper for diagram + click-driven play entry)
 │       └── BgQuiz_Blazor (app)
+├── BgMoveGen (move-generation algorithms over BgDataTypes_Lib's Move/Play/BoardState)
+│   └── BgRLEngine (standalone, Python; via NativeAOT)
 ├── BgGame_Lib (game/play substrate)
 ├── BgPositionRouter (planned — position routing)
 └── BgInference (planned — ONNX inference)
 
-BgMoveGen (move generation + notation)
-└── BgRLEngine (standalone, Python)
-
 XgAnalytics (standalone)
 ```
+
+`BgDataTypes_Lib` is the atomic foundation — by design, never gains a subproject dependency. Hosts Move/Play/BoardState (with full instance API: factories, bridges, apply/undo, ApplyPlay, derived PipCount/IsRace) plus the BgDecisionData / DecisionRow / PlayCandidate type set. All other in-tree libraries depend on it directly or transitively.
 
 Cross-edges not shown in the tree:
 
 - ExtractFromXgToCsv also consumes BackgammonDiagram_Lib server-side for PPTX output.
 - BackgammonDiagram_Lib's test project references ConvertXgToJson_Lib for fixture-driven visual tests.
 - ConvertXgToJson_Lib consumes BgMoveGen for move-notation formatting (`MoveNotationFormatter.Format(Play)`).
-- BgGame_Lib consumes BgMoveGen for `Play`, `BoardState`, `MoveEntryState` (csproj reference is current).
-- BgDiag_Razor consumes BgMoveGen for `MoveEntryState` (used inside `BackgammonPlayEntry`).
+- BgGame_Lib consumes BgMoveGen for `MoveGenerator` (algorithms) — substrate types come from BgDataTypes_Lib.
+- BgDiag_Razor consumes BgMoveGen for `MoveEntryState` (used inside `BackgammonPlayEntry`); also explicit BgDataTypes_Lib reference for `Move`/`Play`/`BoardState`.
 - ExtractFromXgToCsv's server project picks up XgFilter_Razor transitively through `Client → XgFilter_Razor` (it actually needs `FilterConfig` for HTTP API contract). "Hidden" rather than explicit; resolves cleanly when `FilterConfig` moves out of XgFilter_Razor per the Deferred entry.
 
 ## Pre-session verification
