@@ -182,15 +182,19 @@ Key facts:
 
 ### BgQuiz_Blazor
 
-**Purpose:** Blazor quiz app for backgammon decisions.
+**Purpose:** Blazor quiz app for backgammon decisions. Phase 1 ships scored-quiz mode against a server-disk problem-set source; multi-mode (user-vs-user, user-vs-bot, bot-vs-bot tournament) lands in Phase 2+.
 **Branch:** main
 **Solution:** `BgQuiz_Blazor\BgQuiz_Blazor.slnx`
-**Depends on:** BgDiag_Razor
+**Depends on:** BgGame_Lib (substrate), XgFilter_Razor (FilterPanel UI), XgFilter_Lib (DecisionFilterSet), BgDiag_Razor (BackgammonDiagram + BackgammonPlayEntry), BgMoveGen (Play / DeduplicationKey), BgDataTypes_Lib (BgDecisionData / PlayCandidate), ConvertXgToJson_Lib (transitively via XgFilter_Lib)
 
 Key facts:
 
-* Milestone 1 functional — diagram renders, orientation toggle, click reporting
-* `CreateOpeningPosition()` still TODO
+* Phase 1 flow: filter selection on `/`, problem stream from `ServerDiskProblemSetSource` (factory-injected `IProblemSetSource` implementation over `FilteredDecisionIterator.IterateXgDirectoryDiagrams`), click-to-Play via `BackgammonPlayEntry`, structural matching in `QuizController.SubmitPlayAsync` via `Play.DeduplicationKey()`, scoring against `PlayCandidate.EquityLoss` (`0.0 = best`).
+* `QuizController` is scoped per circuit (Interactive Server render mode); state lost on reload — pre-Azure-deployment session will revisit render mode and persistence.
+* Cube policy: Phase 1 is checker-plays-only. `QuizController.StartAsync` appends `DecisionTypeFilter(CheckerPlaysOnly)` to the user's filter set; `Home.razor` shows a permanent banner. Cube-only filter selection produces an empty quiz (banner sets the expectation).
+* Off-list submission semantics: a user play whose `DeduplicationKey()` matches no candidate counts as a skip (excluded from history and score), not a low-scoring entry.
+* `IProblemSetSource` is factory-injected (`Func<DecisionFilterSet, IProblemSetSource>`); Program.cs registers a closure that captures the configured `Quiz:ProblemSetDirectory`. Keeps the controller decoupled from the concrete source implementation; tests inject a fake.
+* Routes: `/` (filter selection), `/quiz` (in-progress), `/done` (final summary, restart options).
 
 ### BgGame_Lib
 
@@ -238,7 +242,7 @@ Key facts:
 | BackgammonDiagram_Lib | 🔧 In progress |
 | BgDiag_Razor | 🔧 In progress — `BackgammonPlayEntry` shipped; cube-entry sibling deferred |
 | BgRLEngine | 🔧 In progress |
-| BgQuiz_Blazor | 🔧 In progress — Milestone 1 done |
+| BgQuiz_Blazor | 🔧 In progress — Phase 1 (scored quiz) shipped; filter-narrowing bug deferred |
 | BgGame_Lib | 🔧 In progress — substrate types in; awaiting BgQuiz_Blazor consumer (Phase 1) |
 | XgFilter_Razor | 🔧 In progress — in use by ExtractFromXgToCsv; awaiting BgQuiz_Blazor consumer (Phase 1) |
 
@@ -246,28 +250,15 @@ Key facts:
 
 **BgQuiz_Blazor multi-phase build-out** — Phase 0 architectural
 review complete (read-only subproject session, 2026-04-27).
-Substrate location decided: new `BgGame_Lib` subproject (not
-BgQuiz_Blazor-internal), so the four eventual modes (scored quiz,
-user-vs-user, user-vs-bot, bot-vs-bot tournament) share
-scaffolding from day one.
+Encapsulation arc closed in Session E. **Phase 1 (scored quiz
+mode) shipped.** Substrate location decided: new `BgGame_Lib`
+subproject (not BgQuiz_Blazor-internal), so the four eventual
+modes (scored quiz, user-vs-user, user-vs-bot, bot-vs-bot
+tournament) share scaffolding from day one.
 
 Concrete sessions, rank-ordered:
 
-1. **BgQuiz_Blazor — Phase 1 implementation.** Wires the
-   already-shipped `BgGame_Lib` substrate, `XgFilter_Razor`
-   filter UI, and `BgDiag_Razor`'s `BackgammonPlayEntry` into
-   problem-set selection (filter UI from `XgFilter_Razor` + a
-   server-disk `IProblemSetSource` implementation against the
-   diagram-shape iterator), click-to-Play (via
-   `BackgammonPlayEntry`), submit-and-score, running total.
-   Uses `BgGame_Lib`'s substrate (single-position game with the
-   quiz-grader as the second agent) so Phase 2+ modes reuse the
-   scaffolding without rewrite. Server-disk source is one of
-   several `IProblemSetSource` implementations anticipated;
-   alternatives (upload, deployed sets, curated library) plug in
-   via the same interface.
-
-2. **Decision identification scheme.** No stable way today to
+1. **Decision identification scheme.** No stable way today to
    reference a specific decision within an `.xg`/`.xgp` file.
    Phase 2+ requires it — answer tracking with weighted
    re-recurrence on wrong answers; resume / skip / re-do with
@@ -279,17 +270,11 @@ Concrete sessions, rank-ordered:
    or a content hash. Affects BgDataTypes_Lib (where the ID type
    lives), ConvertXgToJson_Lib (emits the ID per decision),
    XgFilter_Lib (passes through), and Phase 2+ consumers.
-   Decide and ship before Phase 2+ work begins.
-
-**Parallelism.** Item 1 (Phase 1) is the integration session —
-it consumes the already-shipped `BgGame_Lib`, `XgFilter_Razor`,
-and `BgDiag_Razor.BackgammonPlayEntry`. Item 2 (decision IDs)
-is logically pre-Phase-2+; can run in parallel with Phase 1 or
-after, but before any Phase 2+ work.
+   Pre-Phase-2+.
 
 **Phase 2+** (answer tracking with weighted re-recurrence on
-wrong answers, the three two-agent modes) builds on items 1–2
-and gets queued after Phase 1 ships and item 2 lands.
+wrong answers, the three two-agent modes) builds on item 1 and
+gets queued after item 1 lands.
 
 ### Deferred
 
@@ -303,7 +288,9 @@ and gets queued after Phase 1 ships and item 2 lands.
 * XgFilter_Razor: two encapsulation leaks in `Components/FilterPanel.razor` — PositionType checkbox label renders `@pt` (bare identifier) instead of `@pt.ToLabel()` at line 116; local `DecisionTypeLabel` switch at lines 288-294 should use `value.ToLabel()`. Same pattern Session 4 fixed for PlayType. Preserved as-is during the extraction from `ExtractFromXgToCsv.Client` (pure relocation kept the diff reviewable as such); small single-session cleanup whenever the subproject next opens.
 * ConvertXgToJson_Lib: dance-sentinel notation glitch. XG's no-move sentinel for a "dance" (closed-out roll) reaches the formatter and renders as `"1/1"`. Latent pre-existing bug surfaced during the BgMoveGen migration. Documented in subproject INSTRUCTIONS.md Pitfalls. Likely fix sites: `XgMoveTranslator` (filter sentinel before constructing `Play`) or upstream in `BuildMoveDiagramRequest`. Single-session ConvertXgToJson_Lib follow-up.
 * BgQuiz_Blazor: clear stale BgDiag_Razor-fingering pitfall at `INSTRUCTIONS.md:137-140`. The click-handling bug it describes was fixed upstream in `BackgammonDiagram_Lib.DiagramRenderer.GetHitRegions` (coordinate-system alignment with `RenderSvg`); the pitfall text should reflect that the fix shipped in the lib, not the Razor wrapper. Single-session BgQuiz_Blazor INSTRUCTIONS.md edit.
-* BgMoveGen `MoveEntryState`: revisit click-semantics contract after Phase 1 ships. The α two-click model (source-then-destination, intermediate `ClickOutcome.SourceSelected`) is a first-pass commit without real UX feedback; xmldoc in `MoveEntryState.cs` documents current behaviour. Once Phase 1 ships and BgQuiz_Blazor has been click-tested in earnest, evaluate whether refinements (e.g., destination-only with inferred source for unambiguous cases) better fit observed UX.
+* BgMoveGen `MoveEntryState`: rejects hit on second move — concrete bug surfaced during Phase 1's browser-verification walk. Repro: from a position where `B/20 20/16*` is legal (bar-entry on 20 then a hit on 16), `MoveEntryState.TryAddClick` rejects the second-move click despite the play being in `MoveGenerator.GeneratePlays`'s legal-set output. Specific to the click-semantics state machine, not the legal-play enumerator. Concrete repro recorded for the next BgMoveGen session; correctness fix.
+* BgMoveGen `MoveEntryState`: broader click-semantics review (separate from the rejects-hit bug above, though related). The α two-click model (source-then-destination, intermediate `ClickOutcome.SourceSelected`) was a first-pass commit; Phase 1 has been click-tested in earnest now, so the precondition is met. Evaluate whether refinements (e.g., destination-only with inferred source for unambiguous cases) better fit observed UX.
+* BgQuiz_Blazor: filter UI not narrowing the decision stream — every decision is presented regardless of filter state. Phase 1 shipped with this limitation; the FilterPanel's `OnFiltersChanged` event surfaces a `DecisionFilterSet` to the controller but the in-quiz consumption path doesn't honour it. Subproject-internal correctness fix; logged in BgQuiz_Blazor's INSTRUCTIONS as a next step but tracked here for umbrella visibility since it's user-facing.
 * XgFilter_Lib: directory iteration enumerates `*.xg` only; the parser side (`XgDecisionIterator.IterateXgDirectory`) enumerates both `*.xg` and `*.xgp` via a private `EnumerateXgFormatFiles` helper. Filter-side iteration silently drops `.xgp` (XG position-file) inputs that unfiltered parser iteration would surface. Real concern for Phase 1 quiz problem-set production — `.xgp` is a likely problem-set source. Small fix; folds naturally into the next XgFilter_Lib touch (or the same session that addresses the existing exception-swallowing entry above).
 * XgFilter_Razor: `Shared/FilterConfig.cs` is a JSON-serialisable filter DTO, not a Razor-specific type. Currently lives in the Razor library because that's where its only consumer (FilterPanel) was when extraction landed; moving it then would have stretched scope. Better long-term home: `XgFilter_Lib` (where the filter classes it mirrors live) or `BgDataTypes_Lib` (per the shared-data-layer charter). Mildly more urgent now: `ExtractFromXgToCsv`'s server csproj picks up `XgFilter_Razor` transitively through `Client → XgFilter_Razor` to reach `FilterConfig` — a hidden dependency that dissolves once `FilterConfig` moves to a non-Razor home. Future cleanup; not blocking.
 * ExtractFromXgToCsv: rename `Client/Shared/FilterConfig.cs` → `Client/Shared/ProcessRequest.cs`. After the FilterPanel/FilterConfig extraction landed, the file holds only the `ProcessRequest` class (host-app-specific, wraps `OutputFormat` etc.). One-line rename + reference updates; folds naturally into the next ExtractFromXgToCsv touch.
